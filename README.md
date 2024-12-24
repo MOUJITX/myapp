@@ -5,36 +5,29 @@ This is a React Native project by MOUJITX.
 - React Native
 - Redux
 
-# Getting Started
+# Version
 
-**Step 1: Start Metro Server**
+- 0.0.1 init project
+- 0.1.20241224 add first page
+
+# Todo
+
+- [ ] INIT main page
+- [ ] RECORD train ticket
+- [ ] RECORD id/credit/... card
+- [ ] RECORD food shelf life
+- [ ] RECORD medicine shelf life
+
+# Start
 
 ```bash
-# using npm
-npm start
+# Step 0: Install dependencies
+yarn install
 
-# OR using Yarn
+# Step 1: Start Metro Server
 yarn start
-```
 
-**Step 2: Start Application**
-
-For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+# Step 2: Start Application
+yarn android # For Android
+yarn ios     # For iOS
 ```
