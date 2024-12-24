@@ -1,5 +1,10 @@
 This is a React Native project by MOUJITX.
 
+# Tech
+
+- React Native
+- Redux
+
 # Getting Started
 
 **Step 1: Start Metro Server**
