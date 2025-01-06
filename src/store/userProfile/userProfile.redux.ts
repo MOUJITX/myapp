@@ -3,6 +3,7 @@ import {UserInfo, UserProfileState} from './userProfile.type';
 
 const initialState: UserProfileState = {
   isLogin: false,
+  loginUser: undefined,
   userInfo: [],
 };
 
