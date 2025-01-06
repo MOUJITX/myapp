@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {UserInfo, UserProfile} from './userProfile.type';
+import {UserInfo, UserProfileState} from './userProfile.type';
 
-const initialState: UserProfile = {
+const initialState: UserProfileState = {
   isLogin: false,
   userInfo: [],
 };

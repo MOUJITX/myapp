@@ -3,7 +3,7 @@ export interface UserInfo {
   username: string;
 }
 
-export interface UserProfile {
+export interface UserProfileState {
   isLogin: boolean;
   loginUser?: string;
   userInfo: UserInfo[];
