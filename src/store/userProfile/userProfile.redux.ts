@@ -37,5 +37,3 @@ export const userProfileRedux = createSlice({
 
 export const {userLogin, userLoginSuccess, userLoginFailure, userAddInfo} =
   userProfileRedux.actions;
-
-export default userProfileRedux.reducer;

@@ -1,3 +1,5 @@
-import store from './store';
+import {UserProfileState} from './userProfile/userProfile.type';
 
-export type RootState = ReturnType<typeof store.getState>;
+export interface RootState {
+  userProfile: UserProfileState;
+}
