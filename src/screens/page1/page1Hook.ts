@@ -1,13 +1,14 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  userLoginFailure,
-  userLoginSuccess,
-} from '../store/userProfile/userProfile.redux';
-import {randomUUID} from '../utils/utils';
+
+import {randomUUID} from '../../utils/utils';
 import {
   selectIsUserLogin,
   selectLoginUser,
-} from '../store/userProfile/userProfile.selectors';
+} from '../../store/userProfile/userProfile.selectors';
+import {
+  userLoginFailure,
+  userLoginSuccess,
+} from '../../store/userProfile/userProfile.redux';
 
 type Input = {
   isLogin: boolean;

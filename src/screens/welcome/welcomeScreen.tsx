@@ -1,19 +1,15 @@
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import {AppNavigationList} from './navigation/AppNavigationList';
+import {useWelcomeHook} from './welcomeHook';
 
 export const WelcomeScreen = () => {
-  const navigation = useNavigation<StackNavigationProp<AppNavigationList>>();
-
-  const goToPageA = () => navigation.replace('PageA');
-
-  const gotoPageB = () => navigation.replace('PageB');
+  const {
+    input: {isLogin},
+    output: {gotoPageA, gotoPageB},
+  } = useWelcomeHook();
 
   useEffect(() => {
-    const isLogin = true;
-    isLogin ? goToPageA() : gotoPageB();
+    isLogin ? gotoPageA() : gotoPageB();
     // const timer = setInterval(() => (isLogin ? goToPageA() : gotoPageB()), 0);
     // return () => clearInterval(timer);
   });
@@ -21,7 +17,7 @@ export const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>hello world</Text>
-      <Button title="go to pageA" onPress={goToPageA} />
+      <Button title="go to pageA" onPress={gotoPageA} />
     </View>
   );
 };
