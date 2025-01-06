@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStaticNavigation} from '@react-navigation/native';
-import {PageA} from '../page1';
+import {PageA} from '../page1/page1Screen';
 import {PageB} from '../page2';
 import {PageC} from '../page3';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';

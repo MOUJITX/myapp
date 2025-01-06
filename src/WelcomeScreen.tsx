@@ -13,8 +13,9 @@ export const WelcomeScreen = () => {
 
   useEffect(() => {
     const isLogin = true;
-    const timer = setInterval(() => (isLogin ? goToPageA() : gotoPageB()), 0);
-    return () => clearInterval(timer);
+    isLogin ? goToPageA() : gotoPageB();
+    // const timer = setInterval(() => (isLogin ? goToPageA() : gotoPageB()), 0);
+    // return () => clearInterval(timer);
   });
 
   return (
