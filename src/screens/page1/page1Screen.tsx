@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { usePage1Hook } from './page1Hook';
 import { useTranslation } from 'react-i18next';
-import * as RNLocalize from 'react-native-localize';
 
 export const PageA = () => {
   const { t } = useTranslation();
@@ -10,9 +9,6 @@ export const PageA = () => {
     input: { isLogin, loginUser },
     output: { login, logout },
   } = usePage1Hook();
-
-  const lang = RNLocalize.getLocales();
-  console.warn('lang', JSON.stringify(lang));
 
   return (
     <View>
