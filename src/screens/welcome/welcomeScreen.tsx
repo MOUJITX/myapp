@@ -9,7 +9,8 @@ export const WelcomeScreen = () => {
   } = useWelcomeHook();
 
   useEffect(() => {
-    isLogin ? gotoPageA() : gotoPageB();
+    // isLogin ? gotoPageA() : gotoPageB();
+    gotoPageA();
     // const timer = setInterval(() => (isLogin ? goToPageA() : gotoPageB()), 0);
     // return () => clearInterval(timer);
   });

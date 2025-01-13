@@ -1,0 +1,9 @@
+{
+  "welcome": "Welcome",
+  "description": "This is a description",
+  "del": {
+    "del": "Secondary deletion",
+    "title": "delete"
+  },
+  "add": "add to"
+}
