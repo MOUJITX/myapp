@@ -6,8 +6,12 @@ import { PageC } from '../page3';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppNavigationList } from './AppNavigationList';
 import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
+import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
+import { useTranslation } from 'react-i18next';
 
 export const AppNavigation = () => {
+  const { t } = useTranslation();
+
   const RootStack = createNativeStackNavigator<AppNavigationList>({
     initialRouteName: 'WelcomeScreen',
     screens: {
@@ -15,6 +19,12 @@ export const AppNavigation = () => {
         screen: WelcomeScreen,
         options: {
           headerShown: false,
+        },
+      },
+      LoginScreen: {
+        screen: LoginScreen,
+        options: {
+          title: t('userProfile.login.title'),
         },
       },
       PageA: {

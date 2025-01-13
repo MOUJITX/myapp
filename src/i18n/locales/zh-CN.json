@@ -1,9 +1,7 @@
 {
-  "welcome": "欢迎",
-  "description": "这是一个描述",
-  "add": "添加",
-  "del": {
-    "title": "删除",
-    "del": "二次删除"
+  "userProfile": {
+    "login": {
+      "title": "登录"
+    }
   }
 }

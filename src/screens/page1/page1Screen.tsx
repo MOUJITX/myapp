@@ -27,9 +27,7 @@ export const PageA = () => {
       <Text>page 1</Text>
       <Text>page 1</Text>
       <Text>local language: {}</Text>
-      <Text>{t('welcome')}</Text>
-      <Text>{t('description')}</Text>
-      <Text>{t('del.del')}</Text>
+      <Text>{t('userProfile.login.title')}</Text>
     </View>
   );
 };

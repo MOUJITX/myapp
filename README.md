@@ -18,6 +18,25 @@ This is a React Native project by MOUJITX.
 - [ ] RECORD food shelf life
 - [ ] RECORD medicine shelf life
 
+# Folder Structure
+
+```
+App
+├── userProfile
+    ├── loginScreen
+    └── userInfoScreen
+├── expireReminder
+    ├── reminderAddScreen
+    ├── reminderListScreen
+        ├── totalList
+        └── filterList
+    └── reminderDetailScreen
+├── travelTicket
+    ├── ticketListScreen
+    └── ticketDetailScreen
+└── ...
+```
+
 # Start
 
 ```bash

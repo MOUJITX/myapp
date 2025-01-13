@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useWelcomeHook } from './welcomeHook';
 
 export const WelcomeScreen = () => {
   const {
     input: { isLogin },
-    output: { gotoPageA, gotoPageB },
+    output: { gotoLoginScreen, gotoDefaultScreen },
   } = useWelcomeHook();
+  // const WELCOME_TIMER = 3000;
 
   useEffect(() => {
-    // isLogin ? gotoPageA() : gotoPageB();
-    gotoPageA();
-    // const timer = setInterval(() => (isLogin ? goToPageA() : gotoPageB()), 0);
+    isLogin ? gotoDefaultScreen() : gotoLoginScreen();
+    // const timer = setInterval(
+    //   () => (isLogin ? gotoDefaultScreen() : gotoLoginScreen()),
+    //   WELCOME_TIMER
+    // );
     // return () => clearInterval(timer);
   });
 
   return (
     <View style={styles.container}>
       <Text>hello world</Text>
-      <Button title="go to pageA" onPress={gotoPageA} />
     </View>
   );
 };

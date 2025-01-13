@@ -1,5 +1,6 @@
 export type AppNavigationList = {
-  WelcomeScreen: {};
+  WelcomeScreen: undefined;
+  LoginScreen: undefined;
   PageA: undefined;
   PageB: undefined;
   PageC: {

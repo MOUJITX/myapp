@@ -9,8 +9,8 @@ type Input = {
 };
 
 type Output = {
-  gotoPageA: () => void;
-  gotoPageB: () => void;
+  gotoLoginScreen: () => void;
+  gotoDefaultScreen: () => void;
 };
 
 type WelcomeHook = {
@@ -26,8 +26,8 @@ export const useWelcomeHook = (): WelcomeHook => {
   const navigation = useNavigation<StackNavigationProp<AppNavigationList>>();
 
   const output: Output = {
-    gotoPageA: () => navigation.replace('PageA'),
-    gotoPageB: () => navigation.replace('PageB'),
+    gotoLoginScreen: () => navigation.replace('LoginScreen'),
+    gotoDefaultScreen: () => navigation.replace('PageA'),
   };
 
   return {
