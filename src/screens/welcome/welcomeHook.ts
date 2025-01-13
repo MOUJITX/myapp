@@ -1,8 +1,8 @@
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {AppNavigationList} from '../../navigation/AppNavigationList';
-import {useSelector} from 'react-redux';
-import {selectIsUserLogin} from '../../store/userProfile/userProfile.selectors';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppNavigationList } from '../../navigation/AppNavigationList';
+import { useSelector } from 'react-redux';
+import { selectIsUserLogin } from '../../store/userProfile/userProfile.selectors';
 
 type Input = {
   isLogin: boolean;

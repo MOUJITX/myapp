@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
-import {usePage1Hook} from './page1Hook';
+import { View, Text, Button } from 'react-native';
+import { usePage1Hook } from './page1Hook';
 
 export const PageA = () => {
   const {
-    input: {isLogin, loginUser},
-    output: {login, logout},
+    input: { isLogin, loginUser },
+    output: { login, logout },
   } = usePage1Hook();
 
   return (

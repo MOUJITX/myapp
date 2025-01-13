@@ -1,4 +1,4 @@
-import {RootState} from '../type';
+import { RootState } from '../type';
 
 export const selectIsUserLogin = (state: RootState) =>
   state.userProfile.isLogin;

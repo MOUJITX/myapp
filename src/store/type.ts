@@ -1,4 +1,4 @@
-import {UserProfileState} from './userProfile/userProfile.type';
+import { UserProfileState } from './userProfile/userProfile.type';
 
 export interface RootState {
   userProfile: UserProfileState;

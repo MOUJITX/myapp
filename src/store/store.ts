@@ -1,7 +1,7 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import {userProfileRedux} from './userProfile/userProfile.redux';
-import {PersistConfig, persistReducer, persistStore} from 'redux-persist';
-import {RootState} from './type';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { userProfileRedux } from './userProfile/userProfile.redux';
+import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
+import { RootState } from './type';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const rootReducer = combineReducers({

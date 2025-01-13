@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {UserInfo, UserProfileState} from './userProfile.type';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserInfo, UserProfileState } from './userProfile.type';
 
 const initialState: UserProfileState = {
   isLogin: false,
@@ -9,7 +9,7 @@ const initialState: UserProfileState = {
 
 const filterUserInfo = (
   userList: UserInfo[],
-  uuid: string,
+  uuid: string
 ): UserInfo | undefined => userList.find(userInfo => userInfo.uuid === uuid);
 
 export const userProfileRedux = createSlice({
@@ -35,5 +35,5 @@ export const userProfileRedux = createSlice({
   },
 });
 
-export const {userLogin, userLoginSuccess, userLoginFailure, userAddInfo} =
+export const { userLogin, userLoginSuccess, userLoginFailure, userAddInfo } =
   userProfileRedux.actions;

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {AppNavigationList} from './navigation/AppNavigationList';
-import {StackScreenProps} from '@react-navigation/stack';
+import { View, Text } from 'react-native';
+import { AppNavigationList } from './navigation/AppNavigationList';
+import { StackScreenProps } from '@react-navigation/stack';
 
 type Props = StackScreenProps<AppNavigationList, 'PageC'>;
 

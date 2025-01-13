@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {useWelcomeHook} from './welcomeHook';
+import React, { useEffect } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { useWelcomeHook } from './welcomeHook';
 
 export const WelcomeScreen = () => {
   const {
-    input: {isLogin},
-    output: {gotoPageA, gotoPageB},
+    input: { isLogin },
+    output: { gotoPageA, gotoPageB },
   } = useWelcomeHook();
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {randomUUID} from '../../utils/utils';
+import { randomUUID } from '../../utils/utils';
 import {
   selectIsUserLogin,
   selectLoginUser,
