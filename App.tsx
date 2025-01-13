@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {AppNavigation} from './src/navigation/AppNavigation';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {StatusBar} from 'react-native';
+import { AppNavigation } from './src/navigation/AppNavigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
