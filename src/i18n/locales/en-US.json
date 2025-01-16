@@ -3,5 +3,10 @@
     "login": {
       "title": "Sign in"
     }
+  },
+  "component": {
+    "textInput": {
+      "placeholder": "Please enter"
+    }
   }
 }

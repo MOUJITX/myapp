@@ -3,5 +3,10 @@
     "login": {
       "title": "登录"
     }
+  },
+  "component": {
+    "textInput": {
+      "placeholder": "请输入"
+    }
   }
 }

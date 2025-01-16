@@ -1,0 +1,61 @@
+const color = {
+  white: '#ffffff',
+  black: '#000000',
+  gray1: '#f7f8fa',
+  gray2: '#f2f3f5',
+  gray3: '#ebedf0',
+  gray4: '#dcdee0',
+  gray5: '#c8c9cc',
+  gray6: '#969799',
+  gray7: '#646566',
+  gray8: '#323233',
+  red: '#ee0a24',
+  blue: '#1989fa',
+  orange: '#ff976a',
+  orangeDark: '#ed6a0c',
+  orangeLight: '#fffbe8',
+  green: '#07c160',
+};
+
+const statusColor = {
+  primary: color.blue,
+  success: color.green,
+  danger: color.red,
+  warning: color.orange,
+};
+
+const fontSize = {
+  smallXX: 8,
+  smallX: 10,
+  small: 12,
+  medium: 14,
+  large: 16,
+  largeX: 18,
+  largeXX: 20,
+};
+
+const spacings = {
+  small2X: 4,
+  smallX: 8,
+  small: 12,
+  medium: 16,
+  large: 20,
+  largeX: 24,
+  large2X: 32,
+};
+
+const lineHeight = {
+  smallX: 14,
+  small: 18,
+  medium: 20,
+  large: 22,
+  largeX: 24,
+};
+
+export const commonStyles = {
+  color,
+  statusColor,
+  fontSize,
+  spacings,
+  lineHeight,
+};
