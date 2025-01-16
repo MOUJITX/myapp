@@ -10,7 +10,6 @@ import { languageTag } from '../../i18n/i18n';
 
 interface Props extends CellProps {
   value?: Date;
-  placeholder?: string;
   mode?: 'date' | 'time';
   onValueChange: (value: Date) => void;
 }

@@ -7,6 +7,7 @@ import CellGroup from '../../../components/basic/CellGroup';
 import DatetimePicker from '../../../components/basic/DatetimePicker';
 import TextLabel from '../../../components/basic/TextLabel';
 import { languageCode, languageTag } from '../../../i18n/i18n';
+import Switch from '../../../components/basic/Switch';
 
 export const LoginScreen = () => {
   const { t } = useTranslation();
@@ -56,6 +57,18 @@ export const LoginScreen = () => {
           <TextLabel label="文本标签" value="文本标签" />
           <TextLabel label="languageTag" value={languageTag} inline />
           <TextLabel label="languageCode" value={languageCode} inline />
+          <Switch
+            label="switch"
+            value={true}
+            inline
+            onValueChange={v => console.log(v)}
+          />
+          <Switch
+            label="switch"
+            value={false}
+            inline
+            onValueChange={v => console.log(v)}
+          />
         </CellGroup>
       </ScrollView>
     </View>
