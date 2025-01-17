@@ -17,11 +17,17 @@ const color = {
   green: '#07c160',
 };
 
-const statusColor = {
+const textColor = {
+  info: color.gray6,
+  default: color.gray8,
   primary: color.blue,
   success: color.green,
   danger: color.red,
   warning: color.orange,
+};
+
+const statusColor = {
+  ...textColor,
 };
 
 const fontSize = {
@@ -52,10 +58,16 @@ const lineHeight = {
   largeX: 24,
 };
 
+const radius = {
+  medium: 10,
+};
+
 export const commonStyles = {
   color,
+  textColor,
   statusColor,
   fontSize,
   spacings,
   lineHeight,
+  radius,
 };

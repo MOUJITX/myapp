@@ -1,27 +1,40 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { commonStyles } from '../../screens/styles';
+import { commonStyles } from '../../styles';
+import { statusType } from '../../types';
 
 export interface Props {
   label?: string;
   inline?: boolean;
   required?: boolean;
   children?: ReactNode;
+  info?: string;
+  infoType?: statusType;
 }
 
 export default (props: Props) => {
   return (
-    <View style={styles.container}>
-      <View style={props.inline ? styles.containerInline : undefined}>
-        <View style={styles.label}>
-          {props.label && <Text style={styles.labelText}>{props.label}</Text>}
-          {props.required && <Text style={styles.required}>*</Text>}
-        </View>
-        <View style={props.inline ? undefined : styles.cellChildren}>
-          {props.children}
+    <>
+      <View style={styles.container}>
+        <View style={props.inline ? styles.containerInline : undefined}>
+          <View style={styles.label}>
+            {props.label && <Text style={styles.labelText}>{props.label}</Text>}
+            {props.required && <Text style={styles.required}>*</Text>}
+          </View>
+          <View style={props.inline ? undefined : styles.cellChildren}>
+            {props.children}
+          </View>
         </View>
       </View>
-    </View>
+      <Text
+        style={[
+          styles.infoText,
+          { color: commonStyles.textColor[props.infoType ?? 'info'] },
+        ]}
+      >
+        {props.info}
+      </Text>
+    </>
   );
 };
 
@@ -49,9 +62,13 @@ const styles = StyleSheet.create({
   },
   labelText: {
     fontSize: commonStyles.fontSize.medium,
-    color: commonStyles.color.gray8,
+    color: commonStyles.textColor.default,
   },
   cellChildren: {
     paddingBottom: commonStyles.spacings.smallX,
+  },
+  infoText: {
+    marginTop: commonStyles.spacings.small2X,
+    fontSize: commonStyles.fontSize.small,
   },
 });

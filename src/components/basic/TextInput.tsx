@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Props as CellProps } from './Cell';
-import { StyleSheet, TextInput } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 import Cell from './Cell';
+import { t } from 'i18next';
 
-interface Props extends CellProps {
+interface Props extends CellProps, TextInputProps {
   value?: string;
   textLines?: number;
   placeholder?: string;
+  type?: 'text' | 'number' | 'password';
   onValueChange: (value: string) => void;
 }
 
 export default (props: Props) => {
-  const { t } = useTranslation();
+  const [textValue, setTextValue] = useState(props.value);
+
+  const handleTextInput = (value: string) => {
+    if (props.type === 'number') {
+      const numberFormat = value.replace(/[^0-9]/g, '');
+      setTextValue(numberFormat);
+    }
+
+    props.onValueChange(value);
+  };
+
   return (
     <Cell {...props}>
       <TextInput
@@ -20,8 +31,11 @@ export default (props: Props) => {
         multiline={!!props.textLines && props.textLines > 1}
         numberOfLines={props.textLines}
         placeholder={props.placeholder ?? t('component.textInput.placeholder')}
-        value={props.value}
-        onChangeText={props.onValueChange}
+        value={textValue}
+        onChangeText={handleTextInput}
+        keyboardType={props.type === 'number' ? 'numeric' : 'default'}
+        secureTextEntry={props.type === 'password'}
+        {...props}
       />
     </Cell>
   );

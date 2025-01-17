@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { commonStyles } from '../../screens/styles';
+import { commonStyles } from '../../styles';
 
 interface Props {
   children?: ReactNode;
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     paddingVertical: commonStyles.spacings.small,
   },
   card: {
-    borderRadius: 10,
+    borderRadius: commonStyles.radius.medium,
     margin: commonStyles.spacings.small,
   },
 });

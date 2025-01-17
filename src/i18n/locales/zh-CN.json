@@ -1,12 +1,29 @@
 {
   "userProfile": {
     "login": {
-      "title": "登录"
+      "title": "登录",
+      "username": {
+        "label": "用户名",
+        "placeholder": "请输入用户名",
+        "info": {
+          "empty": "用户名不允许为空"
+        }
+      },
+      "password": {
+        "label": "密码",
+        "placeholder": "请输入密码",
+        "info": {
+          "empty": "密码不允许为空"
+        }
+      }
     }
   },
   "component": {
     "textInput": {
       "placeholder": "请输入"
+    },
+    "button": {
+      "label": "按钮"
     }
   }
 }

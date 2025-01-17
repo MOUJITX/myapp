@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { usePage1Hook } from './page1Hook';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 export const PageA = () => {
-  const { t } = useTranslation();
   const {
     input: { isLogin, loginUser },
     output: { login, logout },

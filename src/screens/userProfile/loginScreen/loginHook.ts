@@ -1,6 +1,10 @@
+import { LoginPayload } from '../../../store/userProfile/userProfile.type';
+
 type Input = {};
 
-type Output = {};
+type Output = {
+  handleLogin: (loginPayload: LoginPayload) => void;
+};
 
 type LoginHook = {
   input: Input;
@@ -10,7 +14,12 @@ type LoginHook = {
 export const useLoginHook = (): LoginHook => {
   const input: Input = {};
 
-  const output: Output = {};
+  const output: Output = {
+    handleLogin: loginPayload => {
+      console.log('loginPayload', loginPayload);
+    },
+  };
+
   return {
     input,
     output,

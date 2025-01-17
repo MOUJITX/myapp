@@ -5,7 +5,7 @@ import Cell from './Cell';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import { commonStyles } from '../../screens/styles';
+import { commonStyles } from '../../styles';
 import { languageTag } from '../../i18n/i18n';
 
 interface Props extends CellProps {

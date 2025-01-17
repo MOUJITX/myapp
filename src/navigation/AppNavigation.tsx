@@ -7,11 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppNavigationList } from './AppNavigationList';
 import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
 import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 export const AppNavigation = () => {
-  const { t } = useTranslation();
-
   const RootStack = createNativeStackNavigator<AppNavigationList>({
     initialRouteName: 'WelcomeScreen',
     screens: {

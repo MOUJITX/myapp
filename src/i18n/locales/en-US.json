@@ -1,12 +1,29 @@
 {
   "userProfile": {
     "login": {
-      "title": "Sign in"
+      "title": "Sign in",
+      "password": {
+        "label": "password",
+        "placeholder": "Please enter your password",
+        "info": {
+          "empty": "Password cannot be empty"
+        }
+      },
+      "username": {
+        "label": "username",
+        "placeholder": "Please enter your username",
+        "info": {
+          "empty": "Username cannot be empty"
+        }
+      }
     }
   },
   "component": {
     "textInput": {
       "placeholder": "Please enter"
+    },
+    "button": {
+      "label": "Button"
     }
   }
 }
