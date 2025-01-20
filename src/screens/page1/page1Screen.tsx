@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { usePage1Hook } from './page1Hook';
-import { t } from 'i18next';
 
 export const PageA = () => {
   const {
-    input: { isLogin, loginUser },
-    output: { login, logout },
+    input: { isLogin, loginUser, allState },
+    output: { logout },
   } = usePage1Hook();
 
   return (
@@ -17,7 +16,6 @@ export const PageA = () => {
       <Text>page 1</Text>
       <Text>page 1</Text>
       <Text>page 1</Text>
-      <Button title="login" onPress={login} />
       <Text>page 1</Text>
       <Text>page 1</Text>
       <Button title="logout" onPress={logout} />
@@ -25,8 +23,7 @@ export const PageA = () => {
       <Text>loginUser: {loginUser ?? 'none'}</Text>
       <Text>page 1</Text>
       <Text>page 1</Text>
-      <Text>local language: {}</Text>
-      <Text>{t('userProfile.login.title')}</Text>
+      <Text>{allState}</Text>
     </View>
   );
 };

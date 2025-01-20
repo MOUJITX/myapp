@@ -1,22 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { randomUUID } from '../../utils/utils';
 import {
+  selectAll,
   selectIsUserLogin,
   selectLoginUser,
 } from '../../store/userProfile/userProfile.selectors';
-import {
-  userLoginFailure,
-  userLoginSuccess,
-} from '../../store/userProfile/userProfile.redux';
+import { userLoginFailureAction } from '../../store/userProfile/userProfile.redux';
 
 type Input = {
   isLogin: boolean;
   loginUser?: string;
+  allState: string;
 };
 
 type Output = {
-  login: () => void;
   logout: () => void;
 };
 
@@ -29,16 +26,14 @@ export const usePage1Hook = (): Page1Hook => {
   const input: Input = {
     isLogin: useSelector(selectIsUserLogin),
     loginUser: useSelector(selectLoginUser),
+    allState: JSON.stringify(useSelector(selectAll)),
   };
 
   const dispatch = useDispatch();
 
   const output: Output = {
-    login: () => {
-      dispatch(userLoginSuccess(randomUUID()));
-    },
     logout: () => {
-      dispatch(userLoginFailure());
+      dispatch(userLoginFailureAction());
     },
   };
   return {

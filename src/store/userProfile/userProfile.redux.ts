@@ -4,7 +4,7 @@ import { LoginPayload, UserInfo, UserProfileState } from './userProfile.type';
 const initialState: UserProfileState = {
   isLogin: false,
   loginUser: undefined,
-  userInfo: [],
+  userInfos: [],
 };
 
 const filterUserInfoByUUID = (
@@ -22,24 +22,26 @@ export const userProfileRedux = createSlice({
   name: 'userProfile',
   initialState,
   reducers: {
-    userLogin: (_state, _action: PayloadAction<LoginPayload>) => {
-      return;
-    },
-    userLoginSuccess: (state, action: PayloadAction<string>) => {
+    userLoginAction: (_state, _action: PayloadAction<LoginPayload>) => {},
+    userLoginSuccessAction: (state, action: PayloadAction<string>) => {
       state.isLogin = true;
       state.loginUser = action.payload;
     },
-    userLoginFailure: state => {
+    userLoginFailureAction: state => {
       state.isLogin = false;
       state.loginUser = undefined;
     },
-    userAddInfo: (state, action: PayloadAction<UserInfo>) => {
-      if (!filterUserInfoByUUID(state.userInfo, action.payload.uuid)) {
-        state.userInfo.push(action.payload);
+    userAddInfoAction: (state, action: PayloadAction<UserInfo>) => {
+      if (!filterUserInfoByUUID(state.userInfos, action.payload.uuid)) {
+        state.userInfos.push(action.payload);
       }
     },
   },
 });
 
-export const { userLogin, userLoginSuccess, userLoginFailure, userAddInfo } =
-  userProfileRedux.actions;
+export const {
+  userLoginAction,
+  userLoginSuccessAction,
+  userLoginFailureAction,
+  userAddInfoAction,
+} = userProfileRedux.actions;
