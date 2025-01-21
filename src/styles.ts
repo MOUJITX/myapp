@@ -40,6 +40,17 @@ const fontSize = {
   largeXX: 20,
 };
 
+const imageSize = {
+  small2X: 16,
+  smallX: 24,
+  small: 32,
+  medium: 48,
+  large: 96,
+  largeX: 128,
+};
+
+export type ImageSize = keyof typeof imageSize;
+
 const spacings = {
   small2X: 4,
   smallX: 8,
@@ -67,6 +78,7 @@ export const commonStyles = {
   textColor,
   statusColor,
   fontSize,
+  imageSize,
   spacings,
   lineHeight,
   radius,

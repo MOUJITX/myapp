@@ -52,11 +52,7 @@ export const LoginScreen = () => {
               setUsername(value);
               checkUsername();
             }}
-            info={
-              isUsername
-                ? undefined
-                : t('userProfile.login.username.info.empty')
-            }
+            info={isUsername ? '' : t('userProfile.login.username.info.empty')}
             infoType="danger"
             onBlur={checkUsername}
           />
@@ -69,11 +65,7 @@ export const LoginScreen = () => {
               checkPassword();
             }}
             type="password"
-            info={
-              isPassword
-                ? undefined
-                : t('userProfile.login.password.info.empty')
-            }
+            info={isPassword ? '' : t('userProfile.login.password.info.empty')}
             infoType="danger"
             onBlur={checkPassword}
           />

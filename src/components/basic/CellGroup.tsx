@@ -1,15 +1,22 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { commonStyles } from '../../styles';
 
 interface Props {
   children?: ReactNode;
   card?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default (props: Props) => {
   return (
-    <View style={[styles.cellGroup, props.card ? styles.card : undefined]}>
+    <View
+      style={[
+        styles.cellGroup,
+        props.card ? styles.card : undefined,
+        props.style,
+      ]}
+    >
       {props.children}
     </View>
   );
@@ -20,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyles.color.white,
     paddingHorizontal: commonStyles.spacings.medium,
     paddingVertical: commonStyles.spacings.small,
-    marginVertical: commonStyles.spacings.smallX,
+    marginVertical: commonStyles.spacings.small2X,
   },
   card: {
     borderRadius: commonStyles.radius.medium,

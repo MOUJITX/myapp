@@ -29,5 +29,8 @@
     "button": {
       "label": "Button"
     }
+  },
+  "debug": {
+    "longText": "This is an ultra long text test that tests whether the component displays properly under the condition of ultra long text."
   }
 }

@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { commonStyles } from '../../styles';
 import { statusType } from '../../types';
+import Divider from './Divider';
 
 export interface Props {
   label?: string;
@@ -21,11 +22,10 @@ export default (props: Props) => {
             {props.label && <Text style={styles.labelText}>{props.label}</Text>}
             {props.required && <Text style={styles.required}>*</Text>}
           </View>
-          <View style={props.inline ? undefined : styles.cellChildren}>
-            {props.children}
-          </View>
+          <View style={[styles.cellChildren]}>{props.children}</View>
         </View>
       </View>
+      {props.info !== undefined && <Divider />}
       <Text
         style={[
           styles.infoText,
@@ -41,8 +41,6 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderBottomWidth: 1,
-    borderBottomColor: commonStyles.color.gray3,
   },
   containerInline: {
     display: 'flex',
@@ -65,10 +63,9 @@ const styles = StyleSheet.create({
     color: commonStyles.textColor.default,
   },
   cellChildren: {
-    paddingBottom: commonStyles.spacings.smallX,
+    flexShrink: 1,
   },
   infoText: {
-    marginTop: commonStyles.spacings.small2X,
     fontSize: commonStyles.fontSize.small,
   },
 });
