@@ -19,6 +19,10 @@ export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 const preCheck = (loginPayload: LoginPayload, state: RootState) => {
   const userInfo = selectUserInfoByUsername(state, loginPayload.username);
 
+  if (!loginPayload.username || !loginPayload.password) {
+    return [];
+  }
+
   if (!userInfo) {
     const uuid = randomUUID();
     return [
