@@ -1,9 +1,11 @@
-import { filter, from, mergeMap } from 'rxjs';
+import { filter, from, mergeMap, of } from 'rxjs';
 import {
   userAddInfoAction,
+  userAddLoginHistoryAction,
   userLoginAction,
   userLoginFailureAction,
   userLoginSuccessAction,
+  userLogoutAction,
 } from './userProfile.redux';
 import { randomUUID } from '../../utils/utils';
 import { combineEpics, Epic } from 'redux-observable';
@@ -20,7 +22,7 @@ const preCheck = (loginPayload: LoginPayload, state: RootState) => {
   if (!userInfo) {
     const uuid = randomUUID();
     return [
-      userAddInfoAction({ ...loginPayload, uuid }),
+      userAddInfoAction({ ...loginPayload, uuid, createTime: new Date() }),
       userLoginSuccessAction(uuid),
     ];
   }
@@ -29,7 +31,7 @@ const preCheck = (loginPayload: LoginPayload, state: RootState) => {
     return [userLoginSuccessAction(userInfo.uuid)];
   }
 
-  return [userLoginFailureAction()];
+  return [userLoginFailureAction(userInfo.uuid)];
 };
 
 const userLoginEpic: UserProfileEpic = (action$, state$) =>
@@ -38,4 +40,57 @@ const userLoginEpic: UserProfileEpic = (action$, state$) =>
     mergeMap(action => from(preCheck(action.payload, state$.value)))
   );
 
-export const userProfileEpics = combineEpics(userLoginEpic);
+const userLoginSuccessEpic: UserProfileEpic = action$ =>
+  action$.pipe(
+    filter(userLoginSuccessAction.match),
+    mergeMap(action =>
+      of(
+        userAddLoginHistoryAction({
+          uuid: action.payload,
+          loginTime: new Date(),
+          actionType: 'login',
+          isSuccess: true,
+          isManual: true,
+        })
+      )
+    )
+  );
+
+const userLoginFailureEpic: UserProfileEpic = action$ =>
+  action$.pipe(
+    filter(userLoginFailureAction.match),
+    mergeMap(action =>
+      of(
+        userAddLoginHistoryAction({
+          uuid: action.payload,
+          loginTime: new Date(),
+          actionType: 'login',
+          isSuccess: false,
+          isManual: true,
+        })
+      )
+    )
+  );
+
+const userLogoutEpic: UserProfileEpic = action$ =>
+  action$.pipe(
+    filter(userLogoutAction.match),
+    mergeMap(action =>
+      of(
+        userAddLoginHistoryAction({
+          uuid: action.payload,
+          loginTime: new Date(),
+          actionType: 'logout',
+          isSuccess: true,
+          isManual: true,
+        })
+      )
+    )
+  );
+
+export const userProfileEpics = combineEpics(
+  userLoginEpic,
+  userLoginSuccessEpic,
+  userLoginFailureEpic,
+  userLogoutEpic
+);

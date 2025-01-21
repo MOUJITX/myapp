@@ -1,10 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoginPayload, UserInfo, UserProfileState } from './userProfile.type';
+import {
+  LoginHistory,
+  LoginPayload,
+  UserInfo,
+  UserProfileState,
+} from './userProfile.type';
 
 const initialState: UserProfileState = {
   isLogin: false,
   loginUser: undefined,
   userInfos: [],
+  loginHistory: [],
 };
 
 const filterUserInfoByUUID = (
@@ -27,9 +33,17 @@ export const userProfileRedux = createSlice({
       state.isLogin = true;
       state.loginUser = action.payload;
     },
-    userLoginFailureAction: state => {
+    userLoginFailureAction: (state, _action: PayloadAction<string>) => {
       state.isLogin = false;
       state.loginUser = undefined;
+    },
+    userLogoutAction: (state, _action: PayloadAction<string>) => {
+      state.isLogin = false;
+      state.loginUser = undefined;
+    },
+    userAddLoginHistoryAction: (state, action: PayloadAction<LoginHistory>) => {
+      console.log('push', action.payload);
+      state.loginHistory.push(action.payload);
     },
     userAddInfoAction: (state, action: PayloadAction<UserInfo>) => {
       if (!filterUserInfoByUUID(state.userInfos, action.payload.uuid)) {
@@ -43,5 +57,7 @@ export const {
   userLoginAction,
   userLoginSuccessAction,
   userLoginFailureAction,
+  userLogoutAction,
+  userAddLoginHistoryAction,
   userAddInfoAction,
 } = userProfileRedux.actions;

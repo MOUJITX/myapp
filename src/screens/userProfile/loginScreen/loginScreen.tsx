@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useLoginHook } from './loginHook';
 import TextInput from '../../../components/basic/TextInput';
@@ -8,7 +8,8 @@ import { t } from 'i18next';
 
 export const LoginScreen = () => {
   const {
-    output: { handleLogin },
+    input: { isLogin },
+    output: { handleLogin, gotoDefaultScreen },
   } = useLoginHook();
 
   const [username, setUsername] = useState('');
@@ -31,6 +32,12 @@ export const LoginScreen = () => {
       handleLogin({ username, password });
     }
   };
+
+  useEffect(() => {
+    if (isLogin) {
+      gotoDefaultScreen();
+    }
+  }, [gotoDefaultScreen, isLogin]);
 
   return (
     <View>
@@ -70,7 +77,11 @@ export const LoginScreen = () => {
             infoType="danger"
             onBlur={checkPassword}
           />
-          <Button plain onPress={checkLogin} />
+          <Button
+            plain
+            onPress={checkLogin}
+            label={t('userProfile.login.button.login')}
+          />
         </CellGroup>
       </ScrollView>
     </View>

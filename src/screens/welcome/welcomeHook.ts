@@ -1,8 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppNavigationList } from '../../navigation/AppNavigationList';
-import { useSelector } from 'react-redux';
-import { selectIsUserLogin } from '../../store/userProfile/userProfile.selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectIsUserLogin,
+  selectLoginUserInfo,
+} from '../../store/userProfile/userProfile.selectors';
+import { userAddLoginHistoryAction } from '../../store/userProfile/userProfile.redux';
 
 type Input = {
   isLogin: boolean;
@@ -24,10 +28,25 @@ export const useWelcomeHook = (): WelcomeHook => {
   };
 
   const navigation = useNavigation<StackNavigationProp<AppNavigationList>>();
+  const dispatch = useDispatch();
+
+  const loginUser = useSelector(selectLoginUserInfo)?.uuid;
 
   const output: Output = {
     gotoLoginScreen: () => navigation.replace('LoginScreen'),
-    gotoDefaultScreen: () => navigation.replace('PageA'),
+    gotoDefaultScreen: () => {
+      navigation.replace('PageA');
+      loginUser &&
+        dispatch(
+          userAddLoginHistoryAction({
+            uuid: loginUser,
+            loginTime: new Date(),
+            actionType: 'login',
+            isSuccess: true,
+            isManual: false,
+          })
+        );
+    },
   };
 
   return {

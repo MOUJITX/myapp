@@ -15,6 +15,10 @@
         "info": {
           "empty": "Username cannot be empty"
         }
+      },
+      "button": {
+        "login": "Sign in",
+        "logout": "Log out"
       }
     }
   },

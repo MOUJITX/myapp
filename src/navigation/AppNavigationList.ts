@@ -6,4 +6,5 @@ export type AppNavigationList = {
   PageC: {
     initMsg: String;
   };
+  DebugScreen: undefined;
 };

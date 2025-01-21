@@ -8,6 +8,7 @@ import { AppNavigationList } from './AppNavigationList';
 import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
 import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
 import { t } from 'i18next';
+import { DebugScreen } from '../screens/debug/debugScreen';
 
 export const AppNavigation = () => {
   const RootStack = createNativeStackNavigator<AppNavigationList>({
@@ -27,15 +28,14 @@ export const AppNavigation = () => {
       },
       PageA: {
         screen: PageA,
-        options: {
-          headerShown: false,
-        },
+        options: {},
       },
       PageB: PageB,
       PageC: {
         screen: PageC,
         initialParams: { initMsg: 'init msg' },
       },
+      DebugScreen: DebugScreen,
     },
   });
 

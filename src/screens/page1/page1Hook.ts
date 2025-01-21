@@ -1,20 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  selectAll,
-  selectIsUserLogin,
-  selectLoginUser,
-} from '../../store/userProfile/userProfile.selectors';
-import { userLoginFailureAction } from '../../store/userProfile/userProfile.redux';
+import { userLogoutAction } from '../../store/userProfile/userProfile.redux';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppNavigationList } from '../../navigation/AppNavigationList';
+import { selectLoginUserInfo } from '../../store/userProfile/userProfile.selectors';
 
-type Input = {
-  isLogin: boolean;
-  loginUser?: string;
-  allState: string;
-};
+type Input = {};
 
 type Output = {
   logout: () => void;
+  gotoDebugScreen: () => void;
 };
 
 type Page1Hook = {
@@ -23,17 +19,20 @@ type Page1Hook = {
 };
 
 export const usePage1Hook = (): Page1Hook => {
-  const input: Input = {
-    isLogin: useSelector(selectIsUserLogin),
-    loginUser: useSelector(selectLoginUser),
-    allState: JSON.stringify(useSelector(selectAll)),
-  };
+  const input: Input = {};
 
   const dispatch = useDispatch();
+  const navigation = useNavigation<StackNavigationProp<AppNavigationList>>();
+
+  const loginUser = useSelector(selectLoginUserInfo)?.uuid;
 
   const output: Output = {
     logout: () => {
-      dispatch(userLoginFailureAction());
+      loginUser && dispatch(userLogoutAction(loginUser));
+      navigation.replace('LoginScreen');
+    },
+    gotoDebugScreen: () => {
+      navigation.navigate('DebugScreen');
     },
   };
   return {

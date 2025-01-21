@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyles.color.white,
     paddingHorizontal: commonStyles.spacings.medium,
     paddingVertical: commonStyles.spacings.small,
+    marginVertical: commonStyles.spacings.smallX,
   },
   card: {
     borderRadius: commonStyles.radius.medium,
