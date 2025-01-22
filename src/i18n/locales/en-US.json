@@ -38,7 +38,8 @@
       "expired": "Expired ",
       "valid": "Valid",
       "daysLeft": "days left",
-      "dayLeft": "day left"
+      "dayLeft": "day left",
+      "soon": "Soon"
     },
     "info": {
       "dosage": {

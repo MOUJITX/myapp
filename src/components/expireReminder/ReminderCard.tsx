@@ -18,95 +18,111 @@ interface Props {
   /** 储藏条件(可选) */
   storage?: string;
   items: {
-    isExpired: boolean;
     expireDate: Date;
   }[];
 }
 
-export default (props: Props) => {
-  const daysUntilExpiry = (expireDate: Date) =>
-    Math.ceil(
-      (expireDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24)
-    );
+const getDaysUntilExpiry = (expireDate: Date) =>
+  Math.ceil((expireDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
 
+const getExpiryStatus = (expireDate: Date) => {
+  const days = getDaysUntilExpiry(expireDate);
+  return days <= 0 ? 'expired' : days <= 30 ? 'soon' : 'valid';
+};
+
+const InfoRow = ({
+  dosage,
+  frequency,
+  storage,
+}: {
+  dosage?: string;
+  frequency?: string;
+  storage?: string;
+}) => {
+  const infoItems = [
+    dosage && {
+      icon: t('expireReminder.info.dosage.icon'),
+      text: t('expireReminder.info.dosage.text', { dosage }),
+    },
+    frequency && {
+      icon: t('expireReminder.info.frequency.icon'),
+      text: t('expireReminder.info.frequency.text', { frequency }),
+    },
+    storage && {
+      icon: t('expireReminder.info.storage.icon'),
+      text: t('expireReminder.info.storage.text', { storage }),
+    },
+  ].filter((item): item is { icon: string; text: string } => Boolean(item));
+
+  return infoItems.length ? (
+    <View style={styles.infoRow}>
+      {infoItems.map((item, index) => (
+        <Text key={index} style={styles.infoText}>
+          {item.icon} {item.text}
+        </Text>
+      ))}
+    </View>
+  ) : null;
+};
+
+const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
+  const status = getExpiryStatus(expireDate);
+  const days = getDaysUntilExpiry(expireDate);
+  const statusColor =
+    commonStyles.statusColor[
+      status === 'soon'
+        ? 'warning'
+        : status === 'expired'
+          ? 'danger'
+          : 'success'
+    ];
+
+  return (
+    <View style={styles.leftBottomInfo}>
+      <View style={styles.statusContainer}>
+        <View style={[styles.statusDot, { backgroundColor: statusColor }]} />
+        <Text style={[styles.statusText, { color: statusColor }]}>
+          {t(`expireReminder.status.${status}`)}
+        </Text>
+      </View>
+      {status !== 'expired' && (
+        <View style={styles.daysLeftContainer}>
+          <Text style={[styles.daysNumber, { color: statusColor }]}>
+            {days}
+          </Text>
+          <Text style={[styles.daysText, { color: statusColor }]}>
+            {t(`expireReminder.status.${days === 1 ? 'dayLeft' : 'daysLeft'}`)}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+};
+
+export default (props: Props) => {
   return (
     <CellGroup card>
       <View style={styles.main}>
         <Image img={props.img} size={'medium'} radius />
         <View style={styles.mainDetail}>
-          <View style={styles.titleRow}>
-            <Text
-              style={[styles.titleLabel]}
-              numberOfLines={2}
-              ellipsizeMode="tail"
-            >
-              {props.title}
-            </Text>
-          </View>
-          {(props.dosage || props.frequency || props.storage) && (
-            <View style={styles.infoRow}>
-              {[
-                props.dosage && {
-                  icon: t('expireReminder.info.dosage.icon'),
-                  text: t('expireReminder.info.dosage.text', {
-                    dosage: props.dosage,
-                  }),
-                },
-                props.frequency && {
-                  icon: t('expireReminder.info.frequency.icon'),
-                  text: t('expireReminder.info.frequency.text', {
-                    frequency: props.frequency,
-                  }),
-                },
-                props.storage && { icon: '🌡️', text: props.storage },
-              ]
-                .filter((item): item is { icon: string; text: string } =>
-                  Boolean(item)
-                )
-                .map((item, index) => (
-                  <Text key={index} style={styles.infoText}>
-                    {item.icon} {item.text}
-                  </Text>
-                ))}
-            </View>
-          )}
+          <Text
+            style={styles.titleLabel}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          >
+            {props.title}
+          </Text>
+          <InfoRow
+            dosage={props.dosage}
+            frequency={props.frequency}
+            storage={props.storage}
+          />
         </View>
       </View>
       <Divider />
       {props.items.map((item, index) => (
         <View style={styles.bottomInfo} key={index}>
-          <View style={styles.leftBottomInfo}>
-            <View style={styles.statusContainer}>
-              <View
-                style={[
-                  styles.statusDot,
-                  item.isExpired ? styles.expiredDot : styles.validDot,
-                ]}
-              />
-              <Text
-                style={[
-                  styles.statusText,
-                  item.isExpired ? styles.expiredText : styles.validText,
-                ]}
-              >
-                {t(
-                  `expireReminder.status.${item.isExpired ? 'expired' : 'valid'}`
-                )}
-              </Text>
-            </View>
-            {!item.isExpired && (
-              <View style={styles.daysLeftContainer}>
-                <Text style={styles.daysNumber}>
-                  {daysUntilExpiry(item.expireDate)}
-                </Text>
-                <Text style={styles.daysText}>
-                  {daysUntilExpiry(item.expireDate) === 1
-                    ? t('expireReminder.status.dayLeft')
-                    : t('expireReminder.status.daysLeft')}
-                </Text>
-              </View>
-            )}
-          </View>
+          <StatusIndicator expireDate={item.expireDate} />
           <Text style={styles.dateText}>
             {item.expireDate.toLocaleDateString()}
           </Text>
@@ -125,19 +141,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: commonStyles.spacings.small,
   },
-  titleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    minHeight: commonStyles.lineHeight.largeX,
-  },
   titleLabel: {
-    flex: 1,
     fontSize: commonStyles.fontSize.largeX,
     fontWeight: 'bold',
     lineHeight: commonStyles.lineHeight.largeX,
   },
-
   infoRow: {
     flexDirection: 'row',
     marginTop: commonStyles.spacings.smallX,
@@ -148,7 +156,6 @@ const styles = StyleSheet.create({
     fontSize: commonStyles.fontSize.small,
     color: commonStyles.color.gray8,
   },
-
   bottomInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -160,7 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: commonStyles.spacings.smallX,
   },
-
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -171,35 +177,20 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginRight: commonStyles.spacings.small2X,
   },
-  validDot: {
-    backgroundColor: commonStyles.statusColor.success,
-  },
-  expiredDot: {
-    backgroundColor: commonStyles.statusColor.danger,
-  },
   statusText: {
     fontSize: commonStyles.fontSize.medium,
   },
-  validText: {
-    color: commonStyles.statusColor.success,
-  },
-  expiredText: {
-    color: commonStyles.statusColor.danger,
-  },
-
   daysLeftContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: commonStyles.spacings.small2X,
   },
   daysNumber: {
     fontSize: commonStyles.fontSize.largeX,
     fontWeight: '600',
-    color: commonStyles.statusColor.success,
   },
   daysText: {
     fontSize: commonStyles.fontSize.small,
-    color: commonStyles.statusColor.success,
   },
   dateText: {
     fontSize: commonStyles.fontSize.small,
