@@ -32,5 +32,27 @@
   },
   "debug": {
     "longText": "This is an ultra long text test that tests whether the component displays properly under the condition of ultra long text."
+  },
+  "expireReminder": {
+    "status": {
+      "daysLeft_one": "{{days}} day left",
+      "daysLeft_other": "{{days}} days left",
+      "expired": "Expired ",
+      "valid": "in use"
+    },
+    "info": {
+      "dosage": {
+        "icon": "💊",
+        "text": "{{dosage}}"
+      },
+      "frequency": {
+        "icon": "⏰",
+        "text": "{{frequency}}"
+      },
+      "storage": {
+        "icon": "🌡️",
+        "text": "{{storage}}"
+      }
+    }
   }
 }

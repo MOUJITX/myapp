@@ -46,15 +46,28 @@ export default (props: Props) => {
             </Text>
             {!props.isExpired && (
               <Text style={styles.daysLeft}>
-                {t('expireReminder.status.daysLeft', { days: daysUntilExpiry })}
+                {t('expireReminder.status.daysLeft', {
+                  days: daysUntilExpiry,
+                  count: daysUntilExpiry,
+                })}
               </Text>
             )}
           </View>
           {(props.dosage || props.frequency || props.storage) && (
             <View style={styles.infoRow}>
               {[
-                props.dosage && { icon: '💊', text: props.dosage },
-                props.frequency && { icon: '⏰', text: props.frequency },
+                props.dosage && {
+                  icon: t('expireReminder.info.dosage.icon'),
+                  text: t('expireReminder.info.dosage.text', {
+                    dosage: props.dosage,
+                  }),
+                },
+                props.frequency && {
+                  icon: t('expireReminder.info.frequency.icon'),
+                  text: t('expireReminder.info.frequency.text', {
+                    frequency: props.frequency,
+                  }),
+                },
                 props.storage && { icon: '🌡️', text: props.storage },
               ]
                 .filter((item): item is { icon: string; text: string } =>

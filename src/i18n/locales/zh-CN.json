@@ -37,7 +37,22 @@
     "status": {
       "expired": "已过期",
       "valid": "使用中",
-      "daysLeft": "余 {{days}} 天"
+      "daysLeft_one": "余 {{days}} 天",
+      "daysLeft_other": "余 {{days}} 天"
+    },
+    "info": {
+      "dosage": {
+        "icon": "💊",
+        "text": "{{dosage}}"
+      },
+      "frequency": {
+        "icon": "⏰",
+        "text": "{{frequency}}"
+      },
+      "storage": {
+        "icon": "🌡️",
+        "text": "{{storage}}"
+      }
     }
   }
 }
