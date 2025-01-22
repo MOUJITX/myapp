@@ -39,14 +39,17 @@ export const AppNavigation = () => {
           name="LoginScreen"
           component={LoginScreen}
           options={{
-            title: t('userProfile.login.title'),
             ...commonHeaderOptions,
+            title: t('userProfile.login.title'),
           }}
         />
         <RootStack.Screen
           name="ExpireReminderScreen"
           component={ExpireReminderScreen}
-          options={commonHeaderOptions}
+          options={{
+            ...commonHeaderOptions,
+            title: t('expireReminder.title'),
+          }}
         />
         <RootStack.Screen
           name="PageB"

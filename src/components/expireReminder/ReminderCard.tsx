@@ -5,6 +5,7 @@ import Image from '../basic/Image';
 import { t } from 'i18next';
 import Divider from '../basic/Divider';
 import { commonStyles } from '../../styles';
+import { ExpiryStatus } from '../../store/expireReminder/expireReminder.type';
 
 interface Props {
   /** 提醒项标题 */
@@ -27,7 +28,11 @@ const getDaysUntilExpiry = (expireDate: Date) =>
 
 const getExpiryStatus = (expireDate: Date) => {
   const days = getDaysUntilExpiry(expireDate);
-  return days <= 0 ? 'expired' : days <= 30 ? 'soon' : 'valid';
+  return days <= 0
+    ? ExpiryStatus.Expired
+    : days <= 30
+      ? ExpiryStatus.Soon
+      : ExpiryStatus.Valid;
 };
 
 const InfoRow = ({
@@ -70,9 +75,9 @@ const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
   const days = getDaysUntilExpiry(expireDate);
   const statusColor =
     commonStyles.statusColor[
-      status === 'soon'
+      status === ExpiryStatus.Soon
         ? 'warning'
-        : status === 'expired'
+        : status === ExpiryStatus.Expired
           ? 'danger'
           : 'success'
     ];
@@ -85,7 +90,7 @@ const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
           {t(`expireReminder.status.${status}`)}
         </Text>
       </View>
-      {status !== 'expired' && (
+      {status !== ExpiryStatus.Expired && (
         <View style={styles.daysLeftContainer}>
           <Text style={[styles.daysNumber, { color: statusColor }]}>
             {days}
