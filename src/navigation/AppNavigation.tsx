@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageA } from '../screens/page1/page1Screen';
+import { ExpireReminderScreen } from '../screens/expireReminder/reminderScreen';
 import { PageB } from '../page2';
 import { PageC } from '../page3';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -44,8 +44,8 @@ export const AppNavigation = () => {
           }}
         />
         <RootStack.Screen
-          name="PageA"
-          component={PageA}
+          name="ExpireReminderScreen"
+          component={ExpireReminderScreen}
           options={commonHeaderOptions}
         />
         <RootStack.Screen

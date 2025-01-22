@@ -1,7 +1,7 @@
 export type AppNavigationList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
-  PageA: undefined;
+  ExpireReminderScreen: undefined;
   PageB: undefined;
   PageC: {
     initMsg: String;

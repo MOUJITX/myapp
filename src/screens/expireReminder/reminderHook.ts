@@ -12,12 +12,12 @@ type Output = {
   logout: () => void;
 };
 
-type Page1Hook = {
+type ExpireReminderHook = {
   input: Input;
   output: Output;
 };
 
-export const usePage1Hook = (): Page1Hook => {
+export const useExpireReminderHook = (): ExpireReminderHook => {
   const input: Input = {};
 
   const dispatch = useDispatch();

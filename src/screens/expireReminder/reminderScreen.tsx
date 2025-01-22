@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, ScrollView } from 'react-native';
-import { usePage1Hook } from './page1Hook';
+import { useExpireReminderHook } from './reminderHook';
 import ReminderCard from '../../components/expireReminder/ReminderCard';
 import { t } from 'i18next';
 
-export const PageA = () => {
+export const ExpireReminderScreen = () => {
   const {
     output: { logout },
-  } = usePage1Hook();
+  } = useExpireReminderHook();
 
   return (
     <ScrollView>
