@@ -9,12 +9,13 @@ const color = {
   gray6: '#969799',
   gray7: '#646566',
   gray8: '#323233',
-  red: '#ee0a24',
+  green: '#4CAF50',
+  greenLight: '#4CAF5015',
   blue: '#1989fa',
   orange: '#ff976a',
   orangeDark: '#ed6a0c',
   orangeLight: '#fffbe8',
-  green: '#07c160',
+  red: '#F44336',
 };
 
 const textColor = {
@@ -28,6 +29,10 @@ const textColor = {
 
 const statusColor = {
   ...textColor,
+};
+
+const backgroundColor = {
+  success: color.greenLight,
 };
 
 const fontSize = {
@@ -77,6 +82,7 @@ export const commonStyles = {
   color,
   textColor,
   statusColor,
+  backgroundColor,
   fontSize,
   imageSize,
   spacings,

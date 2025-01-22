@@ -32,5 +32,12 @@
   },
   "debug": {
     "longText": "这是一个超长文本测试，测试组件在超长文本情况下显示的状况是否正常适应。"
+  },
+  "expireReminder": {
+    "status": {
+      "expired": "已过期",
+      "valid": "使用中",
+      "daysLeft": "余 {{days}} 天"
+    }
   }
 }
