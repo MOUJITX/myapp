@@ -38,7 +38,7 @@
       "daysLeft_one": "{{days}} day left",
       "daysLeft_other": "{{days}} days left",
       "expired": "Expired ",
-      "valid": "in use"
+      "valid": "Valid"
     },
     "info": {
       "dosage": {

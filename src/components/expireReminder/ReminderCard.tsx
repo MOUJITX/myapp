@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginRight: commonStyles.spacings.smallX,
+    marginRight: commonStyles.spacings.small2X,
   },
   validDot: {
     backgroundColor: commonStyles.statusColor.success,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
 
   dateText: {
-    fontSize: commonStyles.fontSize.small,
+    fontSize: commonStyles.fontSize.medium,
     color: commonStyles.textColor.info,
   },
 });
