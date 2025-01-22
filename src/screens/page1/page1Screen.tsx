@@ -6,7 +6,7 @@ import { t } from 'i18next';
 
 export const PageA = () => {
   const {
-    output: { logout, gotoDebugScreen },
+    output: { logout },
   } = usePage1Hook();
 
   return (
@@ -62,7 +62,6 @@ export const PageA = () => {
         ]}
       />
       <Button title="logout" onPress={logout} />
-      <Button onPress={gotoDebugScreen} title="Debug" />
     </ScrollView>
   );
 };

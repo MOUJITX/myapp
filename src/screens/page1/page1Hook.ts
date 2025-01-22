@@ -10,7 +10,6 @@ type Input = {};
 
 type Output = {
   logout: () => void;
-  gotoDebugScreen: () => void;
 };
 
 type Page1Hook = {
@@ -30,9 +29,6 @@ export const usePage1Hook = (): Page1Hook => {
     logout: () => {
       loginUser && dispatch(userLogoutAction(loginUser));
       navigation.replace('LoginScreen');
-    },
-    gotoDebugScreen: () => {
-      navigation.navigate('DebugScreen');
     },
   };
   return {
