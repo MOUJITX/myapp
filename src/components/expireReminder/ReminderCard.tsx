@@ -95,12 +95,16 @@ export default (props: Props) => {
               </Text>
             </View>
             {!item.isExpired && (
-              <Text style={styles.daysLeft}>
-                {t('expireReminder.status.daysLeft', {
-                  days: daysUntilExpiry(item.expireDate),
-                  count: daysUntilExpiry(item.expireDate),
-                })}
-              </Text>
+              <View style={styles.daysLeftContainer}>
+                <Text style={styles.daysNumber}>
+                  {daysUntilExpiry(item.expireDate)}
+                </Text>
+                <Text style={styles.daysText}>
+                  {daysUntilExpiry(item.expireDate) === 1
+                    ? t('expireReminder.status.dayLeft')
+                    : t('expireReminder.status.daysLeft')}
+                </Text>
+              </View>
             )}
           </View>
           <Text style={styles.dateText}>
@@ -183,17 +187,23 @@ const styles = StyleSheet.create({
     color: commonStyles.statusColor.danger,
   },
 
-  daysLeft: {
+  daysLeftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  daysNumber: {
+    fontSize: commonStyles.fontSize.largeX,
+    fontWeight: '600',
+    color: commonStyles.statusColor.success,
+  },
+  daysText: {
     fontSize: commonStyles.fontSize.small,
     color: commonStyles.statusColor.success,
-    backgroundColor: commonStyles.backgroundColor.success,
-    paddingHorizontal: commonStyles.spacings.smallX,
-    paddingVertical: commonStyles.spacings.small2X,
-    borderRadius: commonStyles.radius.medium,
   },
-
   dateText: {
-    fontSize: commonStyles.fontSize.medium,
-    color: commonStyles.textColor.info,
+    fontSize: commonStyles.fontSize.small,
+    color: commonStyles.color.gray6,
+    fontWeight: '500',
   },
 });

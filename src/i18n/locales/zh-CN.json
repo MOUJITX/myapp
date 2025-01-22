@@ -37,8 +37,8 @@
     "status": {
       "expired": "已过期",
       "valid": "使用中",
-      "daysLeft_one": "余 {{days}} 天",
-      "daysLeft_other": "余 {{days}} 天"
+      "daysLeft": "天后",
+      "dayLeft": "天后"
     },
     "info": {
       "dosage": {

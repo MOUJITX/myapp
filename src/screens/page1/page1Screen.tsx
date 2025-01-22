@@ -26,7 +26,7 @@ export const PageA = () => {
         img="https://moujitx.cn/files/3c02b44a88d947b580103e8cec4495f8.jpg-128"
         items={[
           { isExpired: true, expireDate: new Date('2025-3-12') },
-          { isExpired: true, expireDate: new Date('2025-3-12') },
+          { isExpired: false, expireDate: new Date('2025-3-12') },
         ]}
       />
 
@@ -37,7 +37,7 @@ export const PageA = () => {
         storage="25℃"
         frequency="2 times/day"
         items={[
-          { isExpired: false, expireDate: new Date('2025-3-12') },
+          { isExpired: false, expireDate: new Date('2025-1-23') },
           { isExpired: false, expireDate: new Date('2025-3-12') },
         ]}
       />

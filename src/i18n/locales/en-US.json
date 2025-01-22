@@ -35,10 +35,10 @@
   },
   "expireReminder": {
     "status": {
-      "daysLeft_one": "{{days}} day left",
-      "daysLeft_other": "{{days}} days left",
       "expired": "Expired ",
-      "valid": "Valid"
+      "valid": "Valid",
+      "daysLeft": "days left",
+      "dayLeft": "day left"
     },
     "info": {
       "dosage": {
