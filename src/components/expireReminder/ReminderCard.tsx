@@ -11,22 +11,23 @@ interface Props {
   title: string;
   /** 提醒项图片URL */
   img: string;
-  /** 是否已过期 */
-  isExpired: boolean;
-  /** 过期日期 */
-  expireDate: Date;
   /** 剂量信息(可选) - 仅用于药品类提醒 */
   dosage?: string;
   /** 服用频率(可选) - 仅用于药品类提醒 */
   frequency?: string;
   /** 储藏条件(可选) */
   storage?: string;
+  items: {
+    isExpired: boolean;
+    expireDate: Date;
+  }[];
 }
 
 export default (props: Props) => {
-  const daysUntilExpiry = Math.ceil(
-    (props.expireDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24)
-  );
+  const daysUntilExpiry = (expireDate: Date) =>
+    Math.ceil(
+      (expireDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24)
+    );
 
   return (
     <CellGroup card>
@@ -35,23 +36,12 @@ export default (props: Props) => {
         <View style={styles.mainDetail}>
           <View style={styles.titleRow}>
             <Text
-              style={[
-                styles.titleLabel,
-                props.isExpired && styles.expiredTitleLabel,
-              ]}
+              style={[styles.titleLabel]}
               numberOfLines={2}
               ellipsizeMode="tail"
             >
               {props.title}
             </Text>
-            {!props.isExpired && (
-              <Text style={styles.daysLeft}>
-                {t('expireReminder.status.daysLeft', {
-                  days: daysUntilExpiry,
-                  count: daysUntilExpiry,
-                })}
-              </Text>
-            )}
           </View>
           {(props.dosage || props.frequency || props.storage) && (
             <View style={styles.infoRow}>
@@ -83,29 +73,41 @@ export default (props: Props) => {
         </View>
       </View>
       <Divider />
-      <View style={styles.bottomInfo}>
-        <View style={styles.statusContainer}>
-          <View
-            style={[
-              styles.statusDot,
-              props.isExpired ? styles.expiredDot : styles.validDot,
-            ]}
-          />
-          <Text
-            style={[
-              styles.statusText,
-              props.isExpired ? styles.expiredText : styles.validText,
-            ]}
-          >
-            {t(
-              `expireReminder.status.${props.isExpired ? 'expired' : 'valid'}`
+      {props.items.map((item, index) => (
+        <View style={styles.bottomInfo} key={index}>
+          <View style={styles.leftBottomInfo}>
+            <View style={styles.statusContainer}>
+              <View
+                style={[
+                  styles.statusDot,
+                  item.isExpired ? styles.expiredDot : styles.validDot,
+                ]}
+              />
+              <Text
+                style={[
+                  styles.statusText,
+                  item.isExpired ? styles.expiredText : styles.validText,
+                ]}
+              >
+                {t(
+                  `expireReminder.status.${item.isExpired ? 'expired' : 'valid'}`
+                )}
+              </Text>
+            </View>
+            {!item.isExpired && (
+              <Text style={styles.daysLeft}>
+                {t('expireReminder.status.daysLeft', {
+                  days: daysUntilExpiry(item.expireDate),
+                  count: daysUntilExpiry(item.expireDate),
+                })}
+              </Text>
             )}
+          </View>
+          <Text style={styles.dateText}>
+            {item.expireDate.toLocaleDateString()}
           </Text>
         </View>
-        <Text style={styles.dateText}>
-          {props.expireDate.toLocaleDateString()}
-        </Text>
-      </View>
+      ))}
     </CellGroup>
   );
 };
@@ -132,11 +134,6 @@ const styles = StyleSheet.create({
     lineHeight: commonStyles.lineHeight.largeX,
   },
 
-  expiredTitleLabel: {
-    color: commonStyles.color.gray6,
-    textDecorationLine: 'line-through',
-  },
-
   infoRow: {
     flexDirection: 'row',
     marginTop: commonStyles.spacings.smallX,
@@ -152,12 +149,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: commonStyles.spacings.small2X,
   },
+  leftBottomInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: commonStyles.spacings.smallX,
+  },
+
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-
   statusDot: {
     width: 8,
     height: 8,
@@ -187,7 +190,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: commonStyles.spacings.smallX,
     paddingVertical: commonStyles.spacings.small2X,
     borderRadius: commonStyles.radius.medium,
-    marginLeft: commonStyles.spacings.small2X,
   },
 
   dateText: {
