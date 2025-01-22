@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, ScrollView } from 'react-native';
+import { Button, ScrollView } from 'react-native';
 import { usePage1Hook } from './page1Hook';
 import ReminderCard from '../../components/expireReminder/ReminderCard';
 import { t } from 'i18next';
