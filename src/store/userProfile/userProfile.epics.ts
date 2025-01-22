@@ -13,6 +13,7 @@ import { AnyAction } from 'redux';
 import { RootState } from '../type';
 import { LoginPayload } from './userProfile.type';
 import { selectUserInfoByUsername } from './userProfile.selectors';
+import { navigateAction } from '../navigation/navigation.redux';
 
 export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 
@@ -49,6 +50,10 @@ const userLoginSuccessEpic: UserProfileEpic = action$ =>
     filter(userLoginSuccessAction.match),
     mergeMap(action =>
       of(
+        navigateAction({
+          screen: 'PageA',
+          replace: true,
+        }),
         userAddLoginHistoryAction({
           uuid: action.payload,
           loginTime: new Date(),

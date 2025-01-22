@@ -24,7 +24,7 @@ const filterUserInfoByUUID = (
 // ): UserInfo | undefined =>
 //   userList.find(userInfo => userInfo.username === username);
 
-export const userProfileRedux = createSlice({
+const userProfileSlice = createSlice({
   name: 'userProfile',
   initialState,
   reducers: {
@@ -60,4 +60,6 @@ export const {
   userLogoutAction,
   userAddLoginHistoryAction,
   userAddInfoAction,
-} = userProfileRedux.actions;
+} = userProfileSlice.actions;
+
+export default userProfileSlice.reducer;

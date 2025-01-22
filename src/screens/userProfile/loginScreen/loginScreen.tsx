@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useLoginHook } from './loginHook';
 import TextInput from '../../../components/basic/TextInput';
@@ -8,8 +8,8 @@ import { t } from 'i18next';
 
 export const LoginScreen = () => {
   const {
-    input: { isLogin },
-    output: { handleLogin, gotoDefaultScreen },
+    input: {},
+    output: { handleLogin },
   } = useLoginHook();
 
   const [username, setUsername] = useState('');
@@ -32,12 +32,6 @@ export const LoginScreen = () => {
       handleLogin({ username, password });
     }
   };
-
-  useEffect(() => {
-    if (isLogin) {
-      gotoDefaultScreen();
-    }
-  }, [gotoDefaultScreen, isLogin]);
 
   return (
     <View>
