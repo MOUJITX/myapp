@@ -25,15 +25,19 @@ export default (props: Props) => {
           <View style={[styles.cellChildren]}>{props.children}</View>
         </View>
       </View>
-      {props.info !== undefined && <Divider />}
-      <Text
-        style={[
-          styles.infoText,
-          { color: commonStyles.textColor[props.infoType ?? 'info'] },
-        ]}
-      >
-        {props.info}
-      </Text>
+      {props.info !== undefined && (
+        <>
+          <Divider />
+          <Text
+            style={[
+              styles.infoText,
+              { color: commonStyles.textColor[props.infoType ?? 'info'] },
+            ]}
+          >
+            {props.info}
+          </Text>
+        </>
+      )}
     </>
   );
 };
