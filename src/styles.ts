@@ -1,4 +1,5 @@
 const color = {
+  alpha0: '#00000000',
   white: '#ffffff',
   black: '#000000',
   gray1: '#f7f8fa',
@@ -55,7 +56,6 @@ const imageSize = {
   largeX: 96,
   large2X: 128,
 };
-
 export type ImageSize = keyof typeof imageSize;
 
 const spacings = {
@@ -78,6 +78,7 @@ const lineHeight = {
 };
 
 const radius = {
+  small: 4,
   medium: 10,
   circle: '100%',
 };
@@ -90,15 +91,40 @@ const shadow = {
   shadowRadius: 3.84,
 };
 
+const textSize = {
+  h1: { fontSize: fontSize.large3X, fontWeight: 'bold' },
+  h2: { fontSize: fontSize.large2X, fontWeight: 'bold' },
+  h3: {
+    fontSize: fontSize.largeX,
+    fontWeight: 'bold',
+    lineHeight: lineHeight.largeX,
+  },
+  h4: { fontSize: fontSize.large },
+  h5: { fontSize: fontSize.medium },
+  h6: { fontSize: fontSize.small },
+  h7: { fontSize: fontSize.smallX },
+  h8: { fontSize: fontSize.small2X },
+};
+export type TextSize = keyof typeof textSize;
+
+const buttonSize = {
+  small: 24,
+  medium: 40,
+  large: 56,
+};
+export type ButtonSize = keyof typeof buttonSize;
+
 export const commonStyles = {
   color,
   textColor,
   statusColor,
   backgroundColor,
   fontSize,
+  textSize,
   imageSize,
   spacings,
   lineHeight,
   radius,
   shadow,
+  buttonSize,
 };

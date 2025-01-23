@@ -31,6 +31,5 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: commonStyles.radius.medium,
-    margin: commonStyles.spacings.small,
   },
 });

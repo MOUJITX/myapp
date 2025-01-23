@@ -1,18 +1,27 @@
-import React from 'react';
-import { ScrollView, View } from 'react-native';
-import ReminderCard from '../../components/expireReminder/ReminderCard';
+import React, { useRef } from 'react';
+import { View } from 'react-native';
 import { t } from 'i18next';
-import { useExpireReminderHook } from './reminderHook';
-import HoverButton from '../../components/basic/HoverButton';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { useExpireReminderListHook } from './reminderListHook';
+import HoverButton from '../../../components/basic/HoverButton';
+import BottomSheet from '../../../components/basic/BottomSheet';
+import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
+import ReminderCard from '../../../components/expireReminder/ReminderCard';
+import SpacingView from '../../../components/basic/SpacingView';
 
-export const ExpireReminderScreen = () => {
+export const ExpireReminderListScreen = () => {
   const {
     output: {},
-  } = useExpireReminderHook();
+  } = useExpireReminderListHook();
+
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const openAddReminderBottomSheet = () => {
+    bottomSheetRef.current?.present();
+  };
 
   return (
     <View>
-      <ScrollView>
+      <SpacingView>
         <ReminderCard
           title={t('debug.longText')}
           img="https://moujitx.cn/files/3c02b44a88d947b580103e8cec4495f8.jpg-128"
@@ -63,13 +72,13 @@ export const ExpireReminderScreen = () => {
             { expireDate: new Date('2025-3-12') },
           ]}
         />
-      </ScrollView>
+      </SpacingView>
 
-      <HoverButton
-        onPress={() => {
-          console.log('add');
-        }}
-        label="+"
+      <HoverButton onPress={openAddReminderBottomSheet} label="+" />
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        children={<ExpireReminderAddScreen />}
       />
     </View>
   );

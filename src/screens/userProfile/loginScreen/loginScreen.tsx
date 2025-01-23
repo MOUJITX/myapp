@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useLoginHook } from './loginHook';
 import TextInput from '../../../components/basic/TextInput';
 import CellGroup from '../../../components/basic/CellGroup';
 import Button from '../../../components/basic/Button';
 import { t } from 'i18next';
+import SpacingView from '../../../components/basic/SpacingView';
 
 export const LoginScreen = () => {
   const {
@@ -35,7 +36,7 @@ export const LoginScreen = () => {
 
   return (
     <View>
-      <ScrollView>
+      <SpacingView>
         <Text>{t('userProfile.login.title')}</Text>
         <CellGroup card>
           <TextInput
@@ -69,7 +70,7 @@ export const LoginScreen = () => {
             label={t('userProfile.login.button.login')}
           />
         </CellGroup>
-      </ScrollView>
+      </SpacingView>
     </View>
   );
 };

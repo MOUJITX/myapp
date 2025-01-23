@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { commonStyles } from '../../styles';
+import { commonStyles, TextSize } from '../../styles';
 import { statusType } from '../../types';
 import Divider from './Divider';
 
 export interface Props {
   label?: string;
+  labelSize?: TextSize;
   inline?: boolean;
   required?: boolean;
   children?: ReactNode;
@@ -15,15 +16,24 @@ export interface Props {
 
 export default (props: Props) => {
   return (
-    <>
-      <View style={styles.container}>
-        <View style={props.inline ? styles.containerInline : undefined}>
+    <View style={styles.container}>
+      <View style={props.inline ? styles.containerInline : undefined}>
+        {props.label && (
           <View style={styles.label}>
-            {props.label && <Text style={styles.labelText}>{props.label}</Text>}
+            {props.label && (
+              <Text
+                style={[
+                  styles.labelText,
+                  props.labelSize && commonStyles.textSize[props.labelSize],
+                ]}
+              >
+                {props.label}
+              </Text>
+            )}
             {props.required && <Text style={styles.required}>*</Text>}
           </View>
-          <View style={[styles.cellChildren]}>{props.children}</View>
-        </View>
+        )}
+        <View style={[styles.cellChildren]}>{props.children}</View>
       </View>
       {props.info !== undefined && (
         <>
@@ -38,7 +48,7 @@ export default (props: Props) => {
           </Text>
         </>
       )}
-    </>
+    </View>
   );
 };
 
@@ -51,6 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    minHeight: 40,
   },
   label: {
     width: '30%',

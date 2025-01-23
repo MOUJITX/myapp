@@ -147,9 +147,8 @@ const styles = StyleSheet.create({
     marginLeft: commonStyles.spacings.small,
   },
   titleLabel: {
-    fontSize: commonStyles.fontSize.largeX,
+    ...commonStyles.textSize.h3,
     fontWeight: 'bold',
-    lineHeight: commonStyles.lineHeight.largeX,
   },
   infoRow: {
     flexDirection: 'row',

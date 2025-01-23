@@ -2,12 +2,12 @@ type Input = {};
 
 type Output = {};
 
-type ExpireReminderHook = {
+type ExpireReminderListHook = {
   input: Input;
   output: Output;
 };
 
-export const useExpireReminderHook = (): ExpireReminderHook => {
+export const useExpireReminderListHook = (): ExpireReminderListHook => {
   const input: Input = {};
 
   const output: Output = {};
