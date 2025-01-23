@@ -1,10 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAll,
   selectIsUserLogin,
   selectLoginUserInfo,
 } from '../../store/userProfile/userProfile.selectors';
 import { envInfo } from '../../utils/envInfo';
+import { userLogoutAction } from '../../store/userProfile/userProfile.redux';
+import { navigateAction } from '../../store/navigation/navigation.redux';
 
 type Input = {
   isLogin: boolean;
@@ -14,7 +16,9 @@ type Input = {
   envInfo: any;
 };
 
-type Output = {};
+type Output = {
+  logout: () => void;
+};
 
 type DebugHook = {
   input: Input;
@@ -30,9 +34,20 @@ export const useDebugHook = (): DebugHook => {
     envInfo: envInfo,
   };
 
+  const dispatch = useDispatch();
+
   const output: Output = {
-    logout: () => {},
+    logout: () => {
+      input.loginUser && dispatch(userLogoutAction(input.loginUser));
+      dispatch(
+        navigateAction({
+          screen: 'WelcomeScreen',
+          replace: true,
+        })
+      );
+    },
   };
+
   return {
     input,
     output,

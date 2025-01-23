@@ -36,13 +36,14 @@ const backgroundColor = {
 };
 
 const fontSize = {
-  smallXX: 8,
+  small2X: 8,
   smallX: 10,
   small: 12,
   medium: 14,
   large: 16,
   largeX: 18,
-  largeXX: 20,
+  large2X: 20,
+  large3X: 24,
 };
 
 const imageSize = {
@@ -50,8 +51,9 @@ const imageSize = {
   smallX: 24,
   small: 32,
   medium: 48,
-  large: 96,
-  largeX: 128,
+  large: 64,
+  largeX: 96,
+  large2X: 128,
 };
 
 export type ImageSize = keyof typeof imageSize;
@@ -64,6 +66,7 @@ const spacings = {
   large: 20,
   largeX: 24,
   large2X: 32,
+  large3X: 40,
 };
 
 const lineHeight = {
@@ -76,6 +79,15 @@ const lineHeight = {
 
 const radius = {
   medium: 10,
+  circle: '100%',
+};
+
+const shadow = {
+  elevation: 5,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
 };
 
 export const commonStyles = {
@@ -88,4 +100,5 @@ export const commonStyles = {
   spacings,
   lineHeight,
   radius,
+  shadow,
 };
