@@ -1,4 +1,10 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { commonStyles } from '../../styles';
@@ -7,44 +13,72 @@ interface Props {
   children: React.ReactNode;
 }
 
-const backdrop = () => {
-  return <View style={styles.backdrop} />;
-};
+export interface BottomSheetRef {
+  openBottomSheet: () => void;
+  closeBottomSheet: () => void;
+}
 
-export default forwardRef<BottomSheetModal, Props>((props, ref) => {
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
+  props,
+  ref
+) => {
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.present();
+    setIsOpen(true);
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.dismiss();
+    setIsOpen(false);
+  };
+
+  const backdrop = () => {
+    return (
+      <View style={styles(isOpen).backdrop} onTouchEnd={closeBottomSheet} />
+    );
+  };
+
+  useImperativeHandle(
+    ref,
+    (): BottomSheetRef => ({
+      openBottomSheet,
+      closeBottomSheet,
+    })
+  );
 
   return (
     <BottomSheetModal
-      ref={ref}
-      onChange={handleSheetChanges}
+      ref={bottomSheetRef}
       snapPoints={['90%']}
       index={1}
-      backgroundStyle={styles.bottomSheetBackground}
+      backgroundStyle={styles(isOpen).bottomSheetBackground}
       backdropComponent={backdrop}
     >
-      <BottomSheetView style={styles.contentContainer}>
+      <BottomSheetView style={styles(isOpen).contentContainer}>
         {props.children}
       </BottomSheetView>
     </BottomSheetModal>
   );
-});
+};
 
-const styles = StyleSheet.create({
-  bottomSheetBackground: {
-    backgroundColor: commonStyles.color.gray2,
-  },
-  contentContainer: {
-    flex: 1,
-  },
-  backdrop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: commonStyles.color.gray8 + '80',
-  },
-});
+const styles = (isOpen: boolean) =>
+  StyleSheet.create({
+    bottomSheetBackground: {
+      backgroundColor: commonStyles.color.gray2,
+    },
+    contentContainer: {
+      flex: 1,
+    },
+    backdrop: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      backgroundColor: commonStyles.color.gray8,
+      opacity: isOpen ? 0.6 : 0,
+    },
+  });
+
+export default forwardRef<BottomSheetRef, Props>(BottomSheet);

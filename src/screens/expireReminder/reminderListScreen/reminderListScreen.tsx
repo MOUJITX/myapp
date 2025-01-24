@@ -1,22 +1,23 @@
 import React, { useRef } from 'react';
 import { View } from 'react-native';
 import { t } from 'i18next';
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
-import BottomSheet from '../../../components/basic/BottomSheet';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
 import ReminderCard from '../../../components/expireReminder/ReminderCard';
 import SpacingView from '../../../components/basic/SpacingView';
+import BottomSheet, {
+  BottomSheetRef,
+} from '../../../components/basic/BottomSheet';
 
 export const ExpireReminderListScreen = () => {
   const {
     output: {},
   } = useExpireReminderListHook();
 
-  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const bottomSheetRef = useRef<BottomSheetRef>(null);
   const openAddReminderBottomSheet = () => {
-    bottomSheetRef.current?.present();
+    bottomSheetRef.current?.openBottomSheet();
   };
 
   return (

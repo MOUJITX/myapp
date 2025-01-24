@@ -11,6 +11,7 @@ interface Props {
   size?: ButtonSize;
   onPress?: () => void;
   shape?: 'default' | 'circle' | 'square';
+  shadow?: boolean;
 }
 
 export default (props: Props) => {
@@ -47,6 +48,7 @@ const styles = (props: Props) =>
           : undefined,
       alignItems: 'center',
       justifyContent: 'center',
+      ...(props.shadow ? commonStyles.shadow : {}),
     },
     label: {
       textAlign: 'center',

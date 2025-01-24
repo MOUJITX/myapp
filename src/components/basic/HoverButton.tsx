@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { commonStyles } from '../../styles';
+import Button from './Button';
 
 interface Props {
   onPress?: () => void;
@@ -9,28 +10,23 @@ interface Props {
 
 export default (props: Props) => {
   return (
-    <TouchableOpacity style={styles.addButton} onPress={props.onPress}>
-      <Text style={styles.addButtonText}>{props.label}</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Button
+        onPress={props.onPress}
+        label={props.label}
+        size="large"
+        type="primary"
+        shape="circle"
+        shadow
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  addButton: {
+  container: {
     position: 'absolute',
     right: commonStyles.spacings.large2X,
     bottom: commonStyles.spacings.large3X,
-    width: commonStyles.imageSize.large,
-    height: commonStyles.imageSize.large,
-    borderRadius: commonStyles.radius.circle,
-    backgroundColor: commonStyles.color.blue,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...commonStyles.shadow,
-  },
-  addButtonText: {
-    fontSize: commonStyles.fontSize.large3X,
-    color: commonStyles.color.white,
-    fontWeight: 'bold',
   },
 });
