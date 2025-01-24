@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 
-interface Props {
+export interface Props {
   img: string;
   size: ImageSize;
   radius?: boolean;

@@ -53,9 +53,9 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
     <BottomSheetModal
       ref={bottomSheetRef}
       snapPoints={['90%']}
-      index={1}
       backgroundStyle={styles(isOpen).bottomSheetBackground}
       backdropComponent={backdrop}
+      enableDynamicSizing={false}
     >
       <BottomSheetView style={styles(isOpen).contentContainer}>
         {props.children}

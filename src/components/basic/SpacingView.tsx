@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { commonStyles } from '../../styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface Props {
   children?: ReactNode;
