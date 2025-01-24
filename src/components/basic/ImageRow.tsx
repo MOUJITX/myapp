@@ -9,6 +9,7 @@ interface Props {
   size: ImageSize;
   radius?: boolean;
   disabled?: boolean;
+  onValueChange?: (imgs: string[]) => void;
 }
 
 export default (props: Props) => {
@@ -25,7 +26,9 @@ export default (props: Props) => {
             </View>
           }
           source={'mixed'}
-          onImageChange={imgUri => console.log('imgUri', imgUri)}
+          onImageChange={newImg =>
+            props.onValueChange?.([...props.imgs, newImg])
+          }
         />
       )}
     </View>

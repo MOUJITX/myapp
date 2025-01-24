@@ -48,12 +48,15 @@ const SelectSource = ({
 );
 
 const ImagePicker = (props: Props) => {
+  const bottomSheetRef = useRef<BottomSheetRef>(null);
+
   const saveImage = (imgUri: string) => {
     const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
     RNFS.copyFile(imgUri, path)
       .then(() => {
         console.log('Image saved to', path);
         props.onImageChange('file://' + path);
+        bottomSheetRef.current?.closeBottomSheet();
       })
       .catch(err => {
         console.log('Error saving image', err);
@@ -91,8 +94,6 @@ const ImagePicker = (props: Props) => {
       }
     });
   };
-
-  const bottomSheetRef = useRef<BottomSheetRef>(null);
 
   const openImagePicker = () => {
     props.source === 'camera' && handleTakePhoto();
