@@ -11,6 +11,8 @@ import { commonStyles } from '../../styles';
 
 interface Props {
   children: React.ReactNode;
+  autoSize?: boolean;
+  hideHeader?: boolean;
 }
 
 export interface BottomSheetRef {
@@ -52,10 +54,11 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
   return (
     <BottomSheetModal
       ref={bottomSheetRef}
-      snapPoints={['90%']}
+      snapPoints={props.autoSize ? undefined : ['90%']}
       backgroundStyle={styles(isOpen).bottomSheetBackground}
       backdropComponent={backdrop}
-      enableDynamicSizing={false}
+      enableDynamicSizing={props.autoSize ?? false}
+      handleComponent={props.hideHeader ? null : undefined}
     >
       <BottomSheetView style={styles(isOpen).contentContainer}>
         {props.children}

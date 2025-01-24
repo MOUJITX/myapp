@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Image from './Image';
 import { commonStyles, ImageSize } from '../../styles';
+import ImagePicker from './ImagePicker';
 
 interface Props {
   imgs: string[];
@@ -17,9 +18,15 @@ export default (props: Props) => {
         <Image img={img} size={props.size} radius={props.radius} key={index} />
       ))}
       {!props.disabled && (
-        <View style={styles(props).addButton}>
-          <Text style={styles(props).addButtonText}>+</Text>
-        </View>
+        <ImagePicker
+          children={
+            <View style={styles(props).addButton}>
+              <Text style={styles(props).addButtonText}>+</Text>
+            </View>
+          }
+          source={'mixed'}
+          onImageChange={imgUri => console.log('imgUri', imgUri)}
+        />
       )}
     </View>
   );

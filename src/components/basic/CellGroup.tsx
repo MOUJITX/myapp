@@ -6,6 +6,7 @@ interface Props {
   children?: ReactNode;
   card?: boolean;
   style?: StyleProp<ViewStyle>;
+  noSpacing?: boolean;
 }
 
 export default (props: Props) => {
@@ -14,6 +15,7 @@ export default (props: Props) => {
       style={[
         styles.cellGroup,
         props.card ? styles.card : undefined,
+        props.noSpacing ? undefined : styles.groupSpace,
         props.style,
       ]}
     >
@@ -27,6 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyles.color.white,
     paddingHorizontal: commonStyles.spacings.medium,
     paddingVertical: commonStyles.spacings.small,
+  },
+  groupSpace: {
     marginVertical: commonStyles.spacings.smallX,
   },
   card: {

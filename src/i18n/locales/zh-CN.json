@@ -28,6 +28,11 @@
     },
     "button": {
       "label": "按钮"
+    },
+    "imagePicker": {
+      "chooseImage": "从相册中选择",
+      "takePhoto": "拍摄照片",
+      "cancel": "取消"
     }
   },
   "debug": {

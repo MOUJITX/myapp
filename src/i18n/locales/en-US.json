@@ -28,6 +28,11 @@
     },
     "button": {
       "label": "Button"
+    },
+    "imagePicker": {
+      "cancel": "Cancel",
+      "takePhoto": "Take Photo",
+      "chooseImage": "Choose Image"
     }
   },
   "debug": {

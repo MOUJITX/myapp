@@ -1,17 +1,59 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Image, Button } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { randomUUID } from '../../utils/utils';
+import CellGroup from './CellGroup';
+import BottomSheet, { BottomSheetRef } from './BottomSheet';
+import Divider from './Divider';
+import { commonStyles } from '../../styles';
+import { t } from 'i18next';
 
-const ImagePicker = () => {
-  const [imageUri, setImageUri] = useState<string | null>(null);
+interface Props {
+  children: React.ReactNode;
+  source: 'camera' | 'library' | 'mixed';
+  onImageChange: (imgUri: string) => void;
+}
 
+const SelectSource = ({
+  handleChooseImage,
+  handleTakePhoto,
+  handleClose,
+}: {
+  handleChooseImage: () => void;
+  handleTakePhoto: () => void;
+  handleClose: () => void;
+}) => (
+  <>
+    <CellGroup noSpacing>
+      <TouchableOpacity onPress={handleChooseImage} style={styles.selectButton}>
+        <Text style={styles.text}>
+          {t('component.imagePicker.chooseImage')}
+        </Text>
+      </TouchableOpacity>
+      <Divider />
+      <TouchableOpacity onPress={handleTakePhoto} style={styles.selectButton}>
+        <Text style={styles.text}>{t('component.imagePicker.takePhoto')}</Text>
+      </TouchableOpacity>
+    </CellGroup>
+    <View style={styles.breakLine} />
+    <CellGroup noSpacing>
+      <TouchableOpacity onPress={handleClose} style={styles.selectButton}>
+        <Text style={[styles.text, styles.cancelText]}>
+          {t('component.imagePicker.cancel')}
+        </Text>
+      </TouchableOpacity>
+    </CellGroup>
+  </>
+);
+
+const ImagePicker = (props: Props) => {
   const saveImage = (imgUri: string) => {
     const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
     RNFS.copyFile(imgUri, path)
       .then(() => {
         console.log('Image saved to', path);
+        props.onImageChange('file://' + path);
       })
       .catch(err => {
         console.log('Error saving image', err);
@@ -28,7 +70,6 @@ const ImagePicker = () => {
         const imgAsset = response.assets?.[0];
         console.log('imgAsset', imgAsset);
         if (imgAsset?.uri) {
-          setImageUri(imgAsset.uri);
           saveImage(imgAsset.uri);
         }
       }
@@ -45,32 +86,54 @@ const ImagePicker = () => {
         const imgAsset = response.assets?.[0];
         console.log('imgAsset', imgAsset);
         if (imgAsset?.uri) {
-          setImageUri(imgAsset.uri);
           saveImage(imgAsset.uri);
         }
       }
     });
   };
 
+  const bottomSheetRef = useRef<BottomSheetRef>(null);
+
+  const openImagePicker = () => {
+    props.source === 'camera' && handleTakePhoto();
+    props.source === 'library' && handleChooseImage();
+    props.source === 'mixed' && bottomSheetRef.current?.openBottomSheet();
+  };
+
   return (
-    <View style={styles.container} onTouchEnd={() => console.log('touchEnd')}>
-      {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
-      <Button title="Choose Image" onPress={handleChooseImage} />
-      <Button title="Take Photo" onPress={handleTakePhoto} />
+    <View onTouchEnd={openImagePicker}>
+      {props.children}
+      <BottomSheet
+        ref={bottomSheetRef}
+        children={
+          <SelectSource
+            handleChooseImage={handleChooseImage}
+            handleTakePhoto={handleTakePhoto}
+            handleClose={() => bottomSheetRef.current?.closeBottomSheet()}
+          />
+        }
+        autoSize
+        hideHeader
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+  selectButton: {
     alignItems: 'center',
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: commonStyles.color.alpha0,
   },
-  image: {
-    width: 300,
-    height: 300,
-    marginBottom: 20,
+  breakLine: {
+    height: commonStyles.spacings.smallX,
+  },
+  text: {
+    fontSize: commonStyles.fontSize.large,
+  },
+  cancelText: {
+    color: commonStyles.color.red,
   },
 });
 
