@@ -4,30 +4,41 @@ import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
 import TextLabel from '../../../components/basic/TextLabel';
 import Button from '../../../components/basic/Button';
-import NumberInput from '../../../components/basic/NumberInput';
 import SpacingView from '../../../components/basic/SpacingView';
 import ImageRow from '../../../components/basic/ImageRow';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
-import DatetimePicker from '../../../components/basic/DatetimePicker';
 import { randomUUID } from '../../../utils/utils';
+import ReminderAddCell from './reminderAddCell';
 
 export const ExpireReminderAddScreen = () => {
   const [title, setTitle] = useState<string>();
   const [imgs, setImgs] = useState<string[]>([]);
   const [uniCode, setUniCode] = useState<string>();
-  const [number, setNumber] = useState<number>(1);
   const [items, setItems] = useState<GoodItem[]>([]);
 
-  // useEffect(() => {
-  //   setItems([
-  //     ...items,
-  //     {
-  //       itemID: randomUUID(),
-  //       expireDate: new Date(),
-  //       createTime: new Date(),
-  //     },
-  //   ]);
-  // }, [items, number]);
+  useEffect(() => {
+    items.length === 0
+      ? setItems([
+          {
+            itemID: randomUUID(),
+            createTime: new Date(),
+            expireDate: new Date(),
+          },
+        ])
+      : undefined;
+  }, [items.length]);
+
+  const handleAdd = (index: number) => {
+    console.log('handleAdd', index);
+  };
+
+  const handleCopy = (index: number) => {
+    console.log('handleCopy', index);
+  };
+
+  const handleDelete = (index: number) => {
+    console.log('handleCopy', index);
+  };
 
   return (
     <SpacingView>
@@ -52,28 +63,17 @@ export const ExpireReminderAddScreen = () => {
             value={uniCode}
             onValueChange={value => setUniCode(value)}
           />
-          <NumberInput
-            inline
-            label="数量"
-            step={1}
-            min={0}
-            max={50}
-            value={number}
-            onValueChange={value => setNumber(value ?? 0)}
-          />
+          <TextLabel inline label="数量" value={items.length.toString()} />
         </CellGroup>
         {items.map((item, index) => (
-          <CellGroup card key={index}>
-            <TextLabel inline label={`# ${index}`} labelSize="h2" />
-            <DatetimePicker inline label="生产日期" onValueChange={() => {}} />
-            <TextInput inline label="保质期" onValueChange={() => {}} />
-            <DatetimePicker
-              inline
-              label="有效期至"
-              value={item.expireDate}
-              onValueChange={() => {}}
-            />
-          </CellGroup>
+          <ReminderAddCell
+            item={item}
+            onAdd={() => handleAdd(index)}
+            onCopy={() => handleCopy(index)}
+            onDelete={() => handleDelete(index)}
+            onValueChange={value => console.log(value)}
+            index={index}
+          />
         ))}
         <Button type="primary" label="保存" />
       </View>

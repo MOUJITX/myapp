@@ -7,6 +7,7 @@ interface Props {
   card?: boolean;
   style?: StyleProp<ViewStyle>;
   noSpacing?: boolean;
+  header?: ReactNode;
 }
 
 export default (props: Props) => {
@@ -19,6 +20,7 @@ export default (props: Props) => {
         props.style,
       ]}
     >
+      {props.header}
       {props.children}
     </View>
   );

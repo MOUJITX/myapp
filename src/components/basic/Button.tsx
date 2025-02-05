@@ -32,7 +32,7 @@ const styles = (props: Props) =>
       backgroundColor: props.plain
         ? commonStyles.color.alpha0
         : commonStyles.statusColor[props.type ?? 'default'],
-      marginVertical: commonStyles.spacings.small,
+      // marginVertical: commonStyles.spacings.small,
       paddingHorizontal:
         props.shape === 'default' || !props.shape
           ? commonStyles.spacings.small

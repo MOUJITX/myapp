@@ -12,6 +12,7 @@ export enum GoodType {
 
 export interface GoodItem {
   itemID: string;
+  productionDate?: Date;
   expireDate?: Date;
   createTime: Date;
 }
