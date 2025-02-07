@@ -6,12 +6,21 @@ import TextLabel from '../../../components/basic/TextLabel';
 import Button from '../../../components/basic/Button';
 import SpacingView from '../../../components/basic/SpacingView';
 import ImageRow from '../../../components/basic/ImageRow';
-import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
-import { randomUUID } from '../../../utils/utils';
+import {
+  GoodItem,
+  GoodType,
+} from '../../../store/expireReminder/expireReminder.type';
+import { randomString, randomUUID } from '../../../utils/utils';
 import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
+import { useExpireReminderAddHook } from './reminderAddHook';
 
 export const ExpireReminderAddScreen = () => {
+  const {
+    input: {},
+    output: { handleAddGood },
+  } = useExpireReminderAddHook();
+
   const [title, setTitle] = useState<string>();
   const [imgs, setImgs] = useState<string[]>([]);
   const [uniCode, setUniCode] = useState<string>();
@@ -37,17 +46,35 @@ export const ExpireReminderAddScreen = () => {
   };
 
   const handleCopy = (index: number) => {
-    console.log('handleCopy', index);
+    const copiedItem = { ...items[index], itemID: randomUUID() };
+    let newItems = [...items];
+    newItems.splice(index + 1, 0, copiedItem);
+    setItems(newItems);
   };
 
   const handleDelete = (index: number) => {
-    console.log('handleCopy', index);
+    let newItems = [...items];
+    newItems.splice(index, 1);
+    setItems(newItems);
   };
 
   const handleValueChange = (index: number, value: GoodItem) => {
     let newItems = [...items];
     newItems[index] = value;
     setItems(newItems);
+  };
+
+  const handleAddGoodCheck = () => {
+    handleAddGood({
+      goodID: randomUUID(),
+      title: title ?? randomString(),
+      uniqueCode: uniCode ?? randomUUID(),
+      imgs,
+      type: GoodType.Medicine,
+      detail: {},
+      items,
+      createTime: new Date(),
+    });
   };
 
   return (
@@ -86,7 +113,7 @@ export const ExpireReminderAddScreen = () => {
             key={index}
           />
         ))}
-        <Button type="primary" label="保存" />
+        <Button type="primary" label="保存" onPress={handleAddGoodCheck} />
       </View>
     </SpacingView>
   );

@@ -22,7 +22,7 @@ export interface Good {
   goodID: string;
   title: string;
   uniqueCode: string;
-  img?: string;
+  imgs: string[];
   type: GoodType;
   detail: {
     dosage?: string;

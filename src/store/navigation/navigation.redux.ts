@@ -12,8 +12,9 @@ const navigationSlice = createSlice({
   initialState: {},
   reducers: {
     navigateAction: (_state, _action: PayloadAction<NavigatePayload>) => {},
+    goBackAction: (_state, _action: PayloadAction) => {},
   },
 });
 
-export const { navigateAction } = navigationSlice.actions;
+export const { navigateAction, goBackAction } = navigationSlice.actions;
 export default navigationSlice.reducer;

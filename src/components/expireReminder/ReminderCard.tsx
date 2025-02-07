@@ -5,26 +5,18 @@ import Image from '../basic/Image';
 import { t } from 'i18next';
 import Divider from '../basic/Divider';
 import { commonStyles } from '../../styles';
-import { ExpiryStatus } from '../../store/expireReminder/expireReminder.type';
+import {
+  ExpiryStatus,
+  Good,
+} from '../../store/expireReminder/expireReminder.type';
+import { calculateDays } from '../../utils/datetime';
 
 interface Props {
-  /** 提醒项标题 */
-  title: string;
-  /** 提醒项图片URL */
-  img: string;
-  /** 剂量信息(可选) - 仅用于药品类提醒 */
-  dosage?: string;
-  /** 服用频率(可选) - 仅用于药品类提醒 */
-  frequency?: string;
-  /** 储藏条件(可选) */
-  storage?: string;
-  items: {
-    expireDate: Date;
-  }[];
+  good: Good;
 }
 
 const getDaysUntilExpiry = (expireDate: Date) =>
-  Math.ceil((expireDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  calculateDays(new Date(expireDate), new Date());
 
 const getExpiryStatus = (expireDate: Date) => {
   const days = getDaysUntilExpiry(expireDate);
@@ -108,29 +100,35 @@ export default (props: Props) => {
   return (
     <CellGroup card>
       <View style={styles.main}>
-        <Image img={props.img} size={'medium'} radius />
+        <Image img={props.good.imgs[0]} size={'medium'} radius />
         <View style={styles.mainDetail}>
           <Text
             style={styles.titleLabel}
             numberOfLines={2}
             ellipsizeMode="tail"
           >
-            {props.title}
+            {props.good.title}
           </Text>
           <InfoRow
-            dosage={props.dosage}
-            frequency={props.frequency}
-            storage={props.storage}
+            dosage={props.good.detail.dosage}
+            frequency={props.good.detail.frequency}
+            storage={props.good.detail.storage}
           />
         </View>
       </View>
       <Divider />
-      {props.items.map((item, index) => (
+      {props.good.items.map((item, index) => (
         <View style={styles.bottomInfo} key={index}>
-          <StatusIndicator expireDate={item.expireDate} />
-          <Text style={styles.dateText}>
-            {item.expireDate.toLocaleDateString()}
-          </Text>
+          {item.expireDate && (
+            <>
+              <StatusIndicator expireDate={item.expireDate} />
+              <Text style={styles.dateText}>
+                {item.expireDate
+                  ? new Date(item.expireDate).toLocaleDateString()
+                  : 'N/A'}
+              </Text>
+            </>
+          )}
         </View>
       ))}
     </CellGroup>

@@ -1,7 +1,7 @@
 import { filter, map } from 'rxjs';
 import { combineEpics, Epic } from 'redux-observable';
 import { AnyAction } from 'redux';
-import { navigateAction } from './navigation.redux';
+import { goBackAction, navigateAction } from './navigation.redux';
 import { RootState } from '../type';
 import { navigationRef } from '../../navigation/AppNavigationRef';
 
@@ -24,4 +24,15 @@ const navigationEpic: NavigationEpic = action$ =>
     })
   );
 
-export const navigationEpics = combineEpics(navigationEpic);
+const goBackEpic: NavigationEpic = action$ =>
+  action$.pipe(
+    filter(goBackAction.match),
+    map(() => {
+      if (navigationRef.current) {
+        navigationRef.current.goBack();
+      }
+      return { type: 'GO_BACK_COMPLETE' };
+    })
+  );
+
+export const navigationEpics = combineEpics(navigationEpic, goBackEpic);
