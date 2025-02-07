@@ -5,6 +5,7 @@ import ReminderAddCellHeader from './reminderAddCellHeader';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
 import { calculateDays } from '../../../utils/datetime';
+import { useComponentMount } from '../../../utils/componentMount';
 
 interface Props {
   itemNum: number;
@@ -16,17 +17,15 @@ interface Props {
 }
 
 export default (props: Props) => {
-  interface GoodItemCell extends GoodItem {
-    lifePeriod: number;
-  }
+  const [goodItemCell, setGoodItemCell] = useState<GoodItem>(props.item);
 
-  const [goodItemCell, setGoodItemCell] = useState<GoodItemCell>({
-    ...props.item,
-    lifePeriod: calculateDays(props.item.productionDate, props.item.expireDate),
+  useComponentMount(() => {
+    setGoodItemCell(props.item);
+    console.log('goodItemCell', props.item);
   });
 
-  const handleValueChange = (key: keyof GoodItemCell, value: any) => {
-    let newGoodItemCell: GoodItemCell = { ...goodItemCell };
+  const handleValueChange = (key: keyof GoodItem, value: any) => {
+    let newGoodItemCell: GoodItem = goodItemCell;
 
     if (key === 'productionDate') {
       newGoodItemCell = {
@@ -73,7 +72,7 @@ export default (props: Props) => {
       <DatetimePicker
         inline
         label="生产日期"
-        value={goodItemCell.productionDate}
+        value={props.item.productionDate}
         maxDate={goodItemCell.expireDate}
         onValueChange={value => handleValueChange('productionDate', value)}
       />
@@ -81,13 +80,13 @@ export default (props: Props) => {
         inline
         label="保质期 (天)"
         min={0}
-        value={goodItemCell.lifePeriod}
+        value={props.item.lifePeriod}
         onValueChange={value => handleValueChange('lifePeriod', value)}
       />
       <DatetimePicker
         inline
         label="有效期至"
-        value={goodItemCell.expireDate}
+        value={props.item.expireDate}
         minDate={goodItemCell.productionDate}
         onValueChange={value => handleValueChange('expireDate', value)}
       />

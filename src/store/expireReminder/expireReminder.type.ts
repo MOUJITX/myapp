@@ -14,6 +14,7 @@ export interface GoodItem {
   itemID: string;
   productionDate?: Date;
   expireDate?: Date;
+  lifePeriod?: number;
   createTime: Date;
 }
 

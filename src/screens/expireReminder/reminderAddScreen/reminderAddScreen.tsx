@@ -17,21 +17,23 @@ export const ExpireReminderAddScreen = () => {
   const [uniCode, setUniCode] = useState<string>();
   const [items, setItems] = useState<GoodItem[]>([]);
 
+  const initItem: GoodItem = {
+    itemID: randomUUID(),
+    createTime: new Date(),
+    expireDate: new Date(),
+    productionDate: new Date(),
+    lifePeriod: 0,
+  };
+
   useComponentMount(() => {
-    items.length === 0
-      ? setItems([
-          {
-            itemID: randomUUID(),
-            createTime: new Date(),
-            expireDate: new Date(),
-            productionDate: new Date(),
-          },
-        ])
-      : undefined;
+    items.length === 0 ? setItems([initItem]) : undefined;
   });
 
   const handleAdd = (index: number) => {
-    console.log('handleAdd', index);
+    let newItems = [...items];
+    newItems.splice(index + 1, 0, initItem);
+    console.log('handleAdd', newItems);
+    setItems(newItems);
   };
 
   const handleCopy = (index: number) => {
@@ -40,6 +42,12 @@ export const ExpireReminderAddScreen = () => {
 
   const handleDelete = (index: number) => {
     console.log('handleCopy', index);
+  };
+
+  const handleValueChange = (index: number, value: GoodItem) => {
+    let newItems = [...items];
+    newItems[index] = value;
+    setItems(newItems);
   };
 
   return (
@@ -74,7 +82,7 @@ export const ExpireReminderAddScreen = () => {
             onAdd={() => handleAdd(index)}
             onCopy={() => handleCopy(index)}
             onDelete={() => handleDelete(index)}
-            onValueChange={value => console.log(value)}
+            onValueChange={value => handleValueChange(index, value)}
             key={index}
           />
         ))}
