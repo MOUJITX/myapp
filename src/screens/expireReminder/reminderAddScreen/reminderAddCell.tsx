@@ -4,9 +4,10 @@ import DatetimePicker from '../../../components/basic/DatetimePicker';
 import ReminderAddCellHeader from './reminderAddCellHeader';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
+import { calculateDays } from '../../../utils/datetime';
 
 interface Props {
-  index: number;
+  itemNum: number;
   item: GoodItem;
   onDelete?: () => void;
   onCopy?: () => void;
@@ -19,29 +20,50 @@ export default (props: Props) => {
     lifePeriod: number;
   }
 
-  const calculateDays = (beforeDay?: Date, afterDay?: Date) => {
-    if (!beforeDay || !afterDay) {
-      return 0;
-    }
-
-    const diffTime = Math.abs(afterDay.getTime() - beforeDay.getTime());
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  };
-
   const [goodItemCell, setGoodItemCell] = useState<GoodItemCell>({
     ...props.item,
     lifePeriod: calculateDays(props.item.productionDate, props.item.expireDate),
   });
 
-  const handleValueChange = (key: keyof GoodItemCell, value: any) => {};
+  const handleValueChange = (key: keyof GoodItemCell, value: any) => {
+    let newGoodItemCell: GoodItemCell = { ...goodItemCell };
+
+    if (key === 'productionDate') {
+      newGoodItemCell = {
+        ...goodItemCell,
+        productionDate: value,
+        lifePeriod: calculateDays(value, goodItemCell.expireDate),
+      };
+    }
+
+    if (key === 'lifePeriod') {
+      const newDate = new Date(goodItemCell.productionDate ?? new Date());
+      newDate.setDate(newDate.getDate() + value);
+      newGoodItemCell = {
+        ...goodItemCell,
+        lifePeriod: value,
+        expireDate: newDate,
+      };
+    }
+
+    if (key === 'expireDate') {
+      newGoodItemCell = {
+        ...goodItemCell,
+        expireDate: value,
+        lifePeriod: calculateDays(value, goodItemCell.productionDate),
+      };
+    }
+
+    setGoodItemCell(newGoodItemCell);
+    props.onValueChange && props.onValueChange(newGoodItemCell);
+  };
 
   return (
     <CellGroup
       card
-      key={props.index}
       header={
         <ReminderAddCellHeader
-          index={props.index}
+          index={props.itemNum}
           onAdd={props.onAdd}
           onDelete={props.onDelete}
           onCopy={props.onCopy}
@@ -51,20 +73,22 @@ export default (props: Props) => {
       <DatetimePicker
         inline
         label="生产日期"
-        value={props.item.productionDate}
+        value={goodItemCell.productionDate}
+        maxDate={goodItemCell.expireDate}
         onValueChange={value => handleValueChange('productionDate', value)}
       />
       <NumberInput
         inline
         label="保质期 (天)"
         min={0}
-        value={calculateDays(props.item.productionDate, props.item.expireDate)}
+        value={goodItemCell.lifePeriod}
         onValueChange={value => handleValueChange('lifePeriod', value)}
       />
       <DatetimePicker
         inline
         label="有效期至"
-        value={props.item.expireDate}
+        value={goodItemCell.expireDate}
+        minDate={goodItemCell.productionDate}
         onValueChange={value => handleValueChange('expireDate', value)}
       />
     </CellGroup>

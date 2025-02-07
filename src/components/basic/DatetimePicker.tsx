@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Props as CellProps } from './Cell';
 import { Keyboard, Platform, StyleSheet, Text } from 'react-native';
 import Cell from './Cell';
@@ -11,12 +11,18 @@ import { languageTag } from '../../i18n/i18n';
 interface Props extends CellProps {
   value?: Date;
   mode?: 'date' | 'time';
+  maxDate?: Date;
+  minDate?: Date;
   onValueChange: (value: Date) => void;
 }
 
 export default (props: Props) => {
   const [date, setDate] = useState(props.value ?? new Date());
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setDate(props.value ?? new Date());
+  }, [props.value]);
 
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -47,6 +53,8 @@ export default (props: Props) => {
           is24Hour={true}
           display="default"
           onChange={onChange}
+          maximumDate={props.maxDate}
+          minimumDate={props.minDate}
         />
       )}
     </Cell>

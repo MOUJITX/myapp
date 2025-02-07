@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
@@ -9,6 +9,7 @@ import ImageRow from '../../../components/basic/ImageRow';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import { randomUUID } from '../../../utils/utils';
 import ReminderAddCell from './reminderAddCell';
+import { useComponentMount } from '../../../utils/componentMount';
 
 export const ExpireReminderAddScreen = () => {
   const [title, setTitle] = useState<string>();
@@ -16,17 +17,18 @@ export const ExpireReminderAddScreen = () => {
   const [uniCode, setUniCode] = useState<string>();
   const [items, setItems] = useState<GoodItem[]>([]);
 
-  useEffect(() => {
+  useComponentMount(() => {
     items.length === 0
       ? setItems([
           {
             itemID: randomUUID(),
             createTime: new Date(),
             expireDate: new Date(),
+            productionDate: new Date(),
           },
         ])
       : undefined;
-  }, [items.length]);
+  });
 
   const handleAdd = (index: number) => {
     console.log('handleAdd', index);
@@ -68,11 +70,12 @@ export const ExpireReminderAddScreen = () => {
         {items.map((item, index) => (
           <ReminderAddCell
             item={item}
+            itemNum={index}
             onAdd={() => handleAdd(index)}
             onCopy={() => handleCopy(index)}
             onDelete={() => handleDelete(index)}
             onValueChange={value => console.log(value)}
-            index={index}
+            key={index}
           />
         ))}
         <Button type="primary" label="保存" />

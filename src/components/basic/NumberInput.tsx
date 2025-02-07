@@ -17,27 +17,32 @@ interface Props extends CellProps {
 export default (props: Props) => {
   const [numberValue, setNumberValue] = useState<number>(props.value ?? 0);
 
+  useEffect(() => {
+    console.log(props.value);
+    setNumberValue(props.value ?? 0);
+  }, [props.value]);
+
+  const setNumberValueToPropValue = (value: number) => {
+    setNumberValue(value);
+    props.onValueChange(value);
+  };
+
   const handleNumberInput = (value: string) => {
-    const numberFormat = Number(value.replace(/[^0-9-]/g, ''));
-    setNumberValue(numberFormat);
+    const numberFormat = Number(value.replace(/[^0-9]/g, ''));
+    setNumberValueToPropValue(numberFormat);
   };
 
   const handleNumberChange = (value: number) => {
-    setNumberValue(prev => {
-      const newValue = prev + value;
-      if (props.min !== undefined && newValue < props.min) {
-        return props.min;
-      }
-      if (props.max !== undefined && newValue > props.max) {
-        return props.max;
-      }
-      return newValue;
-    });
-  };
+    let newValue = numberValue + value;
+    if (props.min !== undefined && newValue < props.min) {
+      newValue = props.min;
+    }
+    if (props.max !== undefined && newValue > props.max) {
+      newValue = props.max;
+    }
 
-  useEffect(() => {
-    props.onValueChange(Number(numberValue));
-  }, [numberValue, props]);
+    setNumberValueToPropValue(newValue);
+  };
 
   return (
     <Cell {...props}>
