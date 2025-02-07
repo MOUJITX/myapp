@@ -18,17 +18,17 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [isPassword, setIsPassword] = useState<boolean>(true);
 
-  const checkUsername = () => {
-    username ? setIsUsername(true) : setIsUsername(false);
+  const checkUsername = (value: string) => {
+    value ? setIsUsername(true) : setIsUsername(false);
   };
 
-  const checkPassword = () => {
-    password ? setIsPassword(true) : setIsPassword(false);
+  const checkPassword = (value: string) => {
+    value ? setIsPassword(true) : setIsPassword(false);
   };
 
   const checkLogin = () => {
-    checkUsername();
-    checkPassword();
+    checkUsername(username);
+    checkPassword(password);
     if (isUsername && isPassword) {
       handleLogin({ username, password });
     }
@@ -44,12 +44,14 @@ export const LoginScreen = () => {
             label={t('userProfile.login.username.label')}
             placeholder={t('userProfile.login.username.placeholder')}
             onValueChange={value => {
+              console.log(value);
               setUsername(value);
-              checkUsername();
+              checkUsername(value);
             }}
             info={isUsername ? '' : t('userProfile.login.username.info.empty')}
             infoType="danger"
-            onBlur={checkUsername}
+            // onBlur={checkUsername}
+            autoComplete="username"
           />
           <TextInput
             required
@@ -57,12 +59,13 @@ export const LoginScreen = () => {
             placeholder={t('userProfile.login.password.placeholder')}
             onValueChange={value => {
               setPassword(value);
-              checkPassword();
+              checkPassword(value);
             }}
             type="password"
             info={isPassword ? '' : t('userProfile.login.password.info.empty')}
             infoType="danger"
-            onBlur={checkPassword}
+            // onBlur={checkPassword}
+            autoComplete="password"
           />
           <Button
             plain
