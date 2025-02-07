@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CellGroup from '../../../components/basic/CellGroup';
 import DatetimePicker from '../../../components/basic/DatetimePicker';
 import ReminderAddCellHeader from './reminderAddCellHeader';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
 import { calculateDays } from '../../../utils/datetime';
-import { useComponentMount } from '../../../utils/componentMount';
 
 interface Props {
   itemNum: number;
@@ -17,29 +16,22 @@ interface Props {
 }
 
 export default (props: Props) => {
-  const [goodItemCell, setGoodItemCell] = useState<GoodItem>(props.item);
-
-  useComponentMount(() => {
-    setGoodItemCell(props.item);
-    console.log('goodItemCell', props.item);
-  });
-
   const handleValueChange = (key: keyof GoodItem, value: any) => {
-    let newGoodItemCell: GoodItem = goodItemCell;
+    let newGoodItemCell: GoodItem = props.item;
 
     if (key === 'productionDate') {
       newGoodItemCell = {
-        ...goodItemCell,
+        ...newGoodItemCell,
         productionDate: value,
-        lifePeriod: calculateDays(value, goodItemCell.expireDate),
+        lifePeriod: calculateDays(value, newGoodItemCell.expireDate),
       };
     }
 
     if (key === 'lifePeriod') {
-      const newDate = new Date(goodItemCell.productionDate ?? new Date());
+      const newDate = new Date(newGoodItemCell.productionDate ?? new Date());
       newDate.setDate(newDate.getDate() + value);
       newGoodItemCell = {
-        ...goodItemCell,
+        ...newGoodItemCell,
         lifePeriod: value,
         expireDate: newDate,
       };
@@ -47,13 +39,12 @@ export default (props: Props) => {
 
     if (key === 'expireDate') {
       newGoodItemCell = {
-        ...goodItemCell,
+        ...newGoodItemCell,
         expireDate: value,
-        lifePeriod: calculateDays(value, goodItemCell.productionDate),
+        lifePeriod: calculateDays(value, newGoodItemCell.productionDate),
       };
     }
 
-    setGoodItemCell(newGoodItemCell);
     props.onValueChange && props.onValueChange(newGoodItemCell);
   };
 
@@ -73,7 +64,7 @@ export default (props: Props) => {
         inline
         label="生产日期"
         value={props.item.productionDate}
-        maxDate={goodItemCell.expireDate}
+        maxDate={props.item.expireDate}
         onValueChange={value => handleValueChange('productionDate', value)}
       />
       <NumberInput
@@ -87,7 +78,7 @@ export default (props: Props) => {
         inline
         label="有效期至"
         value={props.item.expireDate}
-        minDate={goodItemCell.productionDate}
+        minDate={props.item.productionDate}
         onValueChange={value => handleValueChange('expireDate', value)}
       />
     </CellGroup>

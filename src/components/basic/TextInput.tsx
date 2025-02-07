@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Props as CellProps } from './Cell';
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 import Cell from './Cell';
@@ -13,15 +13,14 @@ interface Props extends CellProps, TextInputProps {
 }
 
 export default (props: Props) => {
-  const [textValue, setTextValue] = useState(props.value);
-
   const handleTextInput = (value: string) => {
+    let newValue = value;
+
     if (props.type === 'number') {
-      const numberFormat = value.replace(/[^0-9]/g, '');
-      setTextValue(numberFormat);
+      newValue = value.replace(/[^0-9]/g, '');
     }
 
-    props.onValueChange(value);
+    props.onValueChange(newValue);
   };
 
   return (
@@ -31,7 +30,7 @@ export default (props: Props) => {
         multiline={!!props.textLines && props.textLines > 1}
         numberOfLines={props.textLines}
         placeholder={props.placeholder ?? t('component.textInput.placeholder')}
-        value={textValue}
+        value={props.value}
         onChangeText={handleTextInput}
         keyboardType={props.type === 'number' ? 'numeric' : 'default'}
         secureTextEntry={props.type === 'password'}
