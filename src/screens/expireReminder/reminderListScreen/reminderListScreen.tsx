@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlatList, RefreshControl, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
@@ -27,11 +27,13 @@ export const ExpireReminderListScreen = () => {
 
   return (
     <View>
-      <SpacingView>
+      <SpacingView notScroll>
         <FlatList
           data={allExpireReminderList}
           renderItem={renderGoodItem}
-          refreshControl={<RefreshControl refreshing />}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          // refreshControl={<RefreshControl refreshing />}
         />
       </SpacingView>
 
