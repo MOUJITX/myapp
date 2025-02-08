@@ -60,6 +60,32 @@
         "text": "{{storage}}"
       }
     },
-    "title": "Expire Reminder"
+    "title": "Expire Reminder",
+    "add": {
+      "expireDate": {
+        "label": "Valid until"
+      },
+      "goodCode": {
+        "label": "Barcode",
+        "placeholder": "Please enter barcode"
+      },
+      "goodNumber": {
+        "label": "Quantity"
+      },
+      "lifeDays": {
+        "label": "Shelf life (days)"
+      },
+      "name": {
+        "placeholder": "Please enter the product name"
+      },
+      "productionDate": {
+        "label": "Date of production"
+      }
+    }
+  },
+  "common": {
+    "save": {
+      "label": "Save"
+    }
   }
 }

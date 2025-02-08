@@ -5,6 +5,7 @@ import ReminderAddCellHeader from './reminderAddCellHeader';
 import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
 import { calculateDays } from '../../../utils/datetime';
+import { t } from 'i18next';
 
 interface Props {
   itemNum: number;
@@ -23,16 +24,16 @@ export default (props: Props) => {
       newGoodItemCell = {
         ...newGoodItemCell,
         productionDate: value,
-        lifePeriod: calculateDays(value, newGoodItemCell.expireDate, true),
+        lifeDays: calculateDays(value, newGoodItemCell.expireDate, true),
       };
     }
 
-    if (key === 'lifePeriod') {
+    if (key === 'lifeDays') {
       const newDate = new Date(newGoodItemCell.productionDate ?? new Date());
       newDate.setDate(newDate.getDate() + value);
       newGoodItemCell = {
         ...newGoodItemCell,
-        lifePeriod: value,
+        lifeDays: value,
         expireDate: newDate,
       };
     }
@@ -41,7 +42,7 @@ export default (props: Props) => {
       newGoodItemCell = {
         ...newGoodItemCell,
         expireDate: value,
-        lifePeriod: calculateDays(value, newGoodItemCell.productionDate, true),
+        lifeDays: calculateDays(value, newGoodItemCell.productionDate, true),
       };
     }
 
@@ -62,21 +63,21 @@ export default (props: Props) => {
     >
       <DatetimePicker
         inline
-        label="生产日期"
+        label={t('expireReminder.add.productionDate.label')}
         value={props.item.productionDate}
         maxDate={props.item.expireDate}
         onValueChange={value => handleValueChange('productionDate', value)}
       />
       <NumberInput
         inline
-        label="保质期 (天)"
+        label={t('expireReminder.add.lifeDays.label')}
         min={0}
-        value={props.item.lifePeriod}
-        onValueChange={value => handleValueChange('lifePeriod', value)}
+        value={props.item.lifeDays}
+        onValueChange={value => handleValueChange('lifeDays', value)}
       />
       <DatetimePicker
         inline
-        label="有效期至"
+        label={t('expireReminder.add.expireDate.label')}
         value={props.item.expireDate}
         minDate={props.item.productionDate}
         onValueChange={value => handleValueChange('expireDate', value)}

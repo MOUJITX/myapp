@@ -15,6 +15,8 @@ import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
+import ScanCamera from '../../../components/basic/ScanCamera';
+import { t } from 'i18next';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -36,7 +38,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
     createTime: new Date(),
     expireDate: new Date(),
     productionDate: new Date(),
-    lifePeriod: 0,
+    lifeDays: 0,
   };
 
   useComponentMount(() => {
@@ -87,12 +89,14 @@ export const ExpireReminderAddScreen = (props: Props) => {
   return (
     <SpacingView>
       <Text>ExpireReminderAddScreen</Text>
+      <ScanCamera onCodeScanSuccess={setUniCode} codeType="ean-13" />
       <View>
         <CellGroup card>
           <TextInput
             inline
             value={title}
             onValueChange={value => setTitle(value)}
+            placeholder={t('expireReminder.add.name.placeholder')}
           />
           <ImageRow
             imgs={imgs}
@@ -102,12 +106,17 @@ export const ExpireReminderAddScreen = (props: Props) => {
           />
           <TextInput
             inline
-            label="商品条码"
+            label={t('expireReminder.add.goodCode.label')}
             type="number"
             value={uniCode}
             onValueChange={value => setUniCode(value)}
+            placeholder={t('expireReminder.add.goodCode.placeholder')}
           />
-          <TextLabel inline label="数量" value={items.length.toString()} />
+          <TextLabel
+            inline
+            label={t('expireReminder.add.goodNumber.label')}
+            value={items.length.toString()}
+          />
         </CellGroup>
         {items.map((item, index) => (
           <ReminderAddCell
@@ -120,7 +129,11 @@ export const ExpireReminderAddScreen = (props: Props) => {
             key={index}
           />
         ))}
-        <Button type="primary" label="保存" onPress={handleAddGoodCheck} />
+        <Button
+          type="primary"
+          label={t('common.save.label')}
+          onPress={handleAddGoodCheck}
+        />
       </View>
     </SpacingView>
   );

@@ -5877,6 +5877,11 @@ react-native-screens@~4.4.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-vision-camera@^4.6.3:
+  version "4.6.3"
+  resolved "https://pkgs.dev.azure.com/pt-iot/_packaging/Artifacts/npm/registry/react-native-vision-camera/-/react-native-vision-camera-4.6.3.tgz#4454ec5a00d529dde6e4d96e29cdb49fc37a3b7f"
+  integrity sha1-RFTsWgDVKd3m5NluKc20n8N6O38=
+
 react-native@0.76.5:
   version "0.76.5"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.76.5.tgz"

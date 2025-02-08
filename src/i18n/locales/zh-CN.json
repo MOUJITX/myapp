@@ -60,6 +60,32 @@
         "text": "{{storage}}"
       }
     },
-    "title": "有效期"
+    "title": "有效期",
+    "add": {
+      "productionDate": {
+        "label": "生产日期"
+      },
+      "lifeDays": {
+        "label": "保质期 (天)"
+      },
+      "expireDate": {
+        "label": "有效期至"
+      },
+      "goodCode": {
+        "label": "商品条码",
+        "placeholder": "请输入条码"
+      },
+      "goodNumber": {
+        "label": "数量"
+      },
+      "name": {
+        "placeholder": "请输入商品名称"
+      }
+    }
+  },
+  "common": {
+    "save": {
+      "label": "保存"
+    }
   }
 }
