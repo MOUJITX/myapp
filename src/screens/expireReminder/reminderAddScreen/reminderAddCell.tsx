@@ -23,7 +23,7 @@ export default (props: Props) => {
       newGoodItemCell = {
         ...newGoodItemCell,
         productionDate: value,
-        lifePeriod: calculateDays(value, newGoodItemCell.expireDate),
+        lifePeriod: calculateDays(value, newGoodItemCell.expireDate, true),
       };
     }
 
@@ -41,7 +41,7 @@ export default (props: Props) => {
       newGoodItemCell = {
         ...newGoodItemCell,
         expireDate: value,
-        lifePeriod: calculateDays(value, newGoodItemCell.productionDate),
+        lifePeriod: calculateDays(value, newGoodItemCell.productionDate, true),
       };
     }
 

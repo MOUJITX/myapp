@@ -16,7 +16,7 @@ interface Props {
 }
 
 const getDaysUntilExpiry = (expireDate: Date) =>
-  calculateDays(new Date(expireDate), new Date());
+  calculateDays(new Date(), new Date(expireDate));
 
 const getExpiryStatus = (expireDate: Date) => {
   const days = getDaysUntilExpiry(expireDate);
