@@ -41,7 +41,7 @@ export const ExpireReminderListScreen = () => {
 
       <BottomSheet
         ref={bottomSheetRef}
-        children={<ExpireReminderAddScreen />}
+        children={<ExpireReminderAddScreen bottomSheetRef={bottomSheetRef} />}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { RefObject, useState } from 'react';
 import { Text, View } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
@@ -14,8 +14,13 @@ import { randomString, randomUUID } from '../../../utils/utils';
 import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 
-export const ExpireReminderAddScreen = () => {
+interface Props {
+  bottomSheetRef: RefObject<BottomSheetRef>;
+}
+
+export const ExpireReminderAddScreen = (props: Props) => {
   const {
     input: {},
     output: { handleAddGood },
@@ -75,6 +80,8 @@ export const ExpireReminderAddScreen = () => {
       items,
       createTime: new Date(),
     });
+
+    props.bottomSheetRef.current?.closeBottomSheet();
   };
 
   return (

@@ -9,14 +9,22 @@ export const expireReminderSlice = createSlice({
   name: 'expireReminder',
   initialState,
   reducers: {
-    addGoodAction: (state, action: PayloadAction<Good>) => {
+    addGoodAction: (
+      state,
+      action: PayloadAction<{ good: Good; loginUser?: string }>
+    ) => {
       const good = state.goodsList.find(
-        g => g.uniqueCode === action.payload.uniqueCode
+        g =>
+          g.uniqueCode === action.payload.good.uniqueCode &&
+          g.createUser === action.payload.loginUser
       );
       if (good) {
-        good.items.push(...action.payload.items);
+        good.items.push(...action.payload.good.items);
       } else {
-        state.goodsList.push(action.payload);
+        state.goodsList.push({
+          ...action.payload.good,
+          createUser: action.payload.loginUser,
+        });
       }
     },
     removeGoodAction: (state, action: PayloadAction<string>) => {

@@ -31,6 +31,7 @@ export interface Good {
   };
   items: GoodItem[];
   createTime: Date;
+  createUser?: string;
 }
 
 export interface ExpireReminderState {

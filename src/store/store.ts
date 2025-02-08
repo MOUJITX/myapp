@@ -8,6 +8,7 @@ import userProfileRedux from './userProfile/userProfile.redux';
 import navigationRedux from './navigation/navigation.redux';
 import { navigationEpics } from './navigation/navigation.epics';
 import expireReminderRedux from './expireReminder/expireReminder.redux';
+import { expireReminderEpics } from './expireReminder/expireReminder.epics';
 // import { expireReminderEpics } from './expireReminder/expireReminder.epics';
 
 export const rootReducer = combineReducers({
@@ -18,8 +19,8 @@ export const rootReducer = combineReducers({
 
 export const rootEpic: any = combineEpics(
   userProfileEpics,
-  navigationEpics
-  // expireReminderEpics
+  navigationEpics,
+  expireReminderEpics
 );
 
 const persistConfig = {
