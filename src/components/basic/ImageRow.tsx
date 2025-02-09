@@ -16,7 +16,13 @@ export default (props: Props) => {
   return (
     <View style={styles(props).container}>
       {props.imgs.map((img, index) => (
-        <Image img={img} size={props.size} radius={props.radius} key={index} />
+        <Image
+          img={img}
+          size={props.size}
+          radius={props.radius}
+          key={index}
+          preview
+        />
       ))}
       {!props.disabled && (
         <ImagePicker
