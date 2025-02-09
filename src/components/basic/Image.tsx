@@ -25,7 +25,7 @@ export default (props: Props) => {
     <>
       <TouchableOpacity
         onPress={handlePress}
-        disabled={!props.onPress && !props.preview}
+        disabled={!props.preview || !props.img}
       >
         <Image
           source={{ uri: props.img }}

@@ -18,6 +18,11 @@ This is a React Native project by MOUJITX.
 - [ ] RECORD food shelf life
 - [ ] RECORD medicine shelf life
 
+# issue
+
+- [ ] Some components under the bottom navigation bar after setting the statusBar to translucent.
+- [ ] Go back gesture can't be used in the bottomSheet to close it.
+
 # Folder Structure
 
 ```
