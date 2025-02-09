@@ -73,7 +73,10 @@
         "label": "Quantity"
       },
       "lifeDays": {
-        "label": "Shelf life (days)"
+        "label": "Life (days)",
+        "oneYear": "One year",
+        "twoYear": "Two years",
+        "threeYear": "Three years"
       },
       "name": {
         "placeholder": "Please enter the product name"

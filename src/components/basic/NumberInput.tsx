@@ -11,6 +11,7 @@ interface Props extends CellProps {
   step?: number;
   min?: number;
   max?: number;
+  quickValues?: { value: number; label: string }[];
   onValueChange: (value?: number) => void;
 }
 
@@ -70,6 +71,19 @@ export default (props: Props) => {
           shape="square"
         />
       </View>
+      {props.quickValues && (
+        <View style={styles.quickValue}>
+          {props.quickValues.map(quickValue => (
+            <Button
+              label={quickValue.label}
+              plain={quickValue.value !== numberValue}
+              type="primary"
+              onPress={() => handleNumberInput(quickValue.value.toString())}
+              size="small"
+            />
+          ))}
+        </View>
+      )}
     </Cell>
   );
 };
@@ -78,10 +92,18 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   textInput: {
     marginHorizontal: commonStyles.spacings.smallX,
     minWidth: 25,
     textAlign: 'center',
+  },
+  quickValue: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flexWrap: 'wrap',
+    gap: commonStyles.spacings.smallX,
   },
 });

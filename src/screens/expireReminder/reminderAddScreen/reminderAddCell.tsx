@@ -73,6 +73,11 @@ export default (props: Props) => {
         label={t('expireReminder.add.lifeDays.label')}
         min={0}
         value={props.item.lifeDays}
+        quickValues={[
+          { label: t('expireReminder.add.lifeDays.oneYear'), value: 365 },
+          { label: t('expireReminder.add.lifeDays.twoYear'), value: 730 },
+          { label: t('expireReminder.add.lifeDays.threeYear'), value: 1095 },
+        ]}
         onValueChange={value => handleValueChange('lifeDays', value)}
       />
       <DatetimePicker

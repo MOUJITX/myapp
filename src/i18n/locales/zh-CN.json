@@ -66,7 +66,10 @@
         "label": "生产日期"
       },
       "lifeDays": {
-        "label": "保质期 (天)"
+        "label": "保质期 (天)",
+        "oneYear": "一年",
+        "twoYear": "两年",
+        "threeYear": "三年"
       },
       "expireDate": {
         "label": "有效期至"
