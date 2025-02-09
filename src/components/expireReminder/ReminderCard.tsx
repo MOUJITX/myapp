@@ -102,7 +102,7 @@ export default (props: Props) => {
     <TouchableOpacity onPress={props.onPress}>
       <CellGroup card>
         <View style={styles.main}>
-          <Image img={props.good.imgs[0]} size={'medium'} radius />
+          <Image img={props.good.imgs[0]} size={'medium'} radius preview />
           <View style={styles.mainDetail}>
             <Text
               style={styles.titleLabel}
