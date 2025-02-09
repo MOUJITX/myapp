@@ -1,4 +1,9 @@
 {
   "name": "myApp",
-  "displayName": "myApp"
+  "displayName": "myApp",
+  "expo": {
+    "packagerOpts": {
+      "config": "metro.config.js"
+    }
+  }
 }

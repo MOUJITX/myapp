@@ -9,6 +9,7 @@ import BottomSheet, {
   BottomSheetRef,
 } from '../../../components/basic/BottomSheet';
 import { Good } from '../../../store/expireReminder/expireReminder.type';
+import IconAdd from '../../../assets/icons/addCircle.svg';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -28,6 +29,7 @@ export const ExpireReminderListScreen = () => {
   return (
     <View>
       <SpacingView notScroll>
+        <IconAdd width="40" height="40" />
         <FlatList
           data={allExpireReminderList}
           renderItem={renderGoodItem}

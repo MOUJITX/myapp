@@ -2,5 +2,9 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "declaration.d.ts"
+  ]
 }
