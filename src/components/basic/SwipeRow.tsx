@@ -1,65 +1,74 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { commonStyles } from '../../styles';
-import Button from './Button';
+import { ButtonSize, commonStyles } from '../../styles';
+import Button, { ButtonShapeType } from './Button';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import Reanimated, {
+  SharedValue,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import { statusType } from '../../types';
+
+interface ButtonActionProps {
+  label?: string;
+  type?: statusType;
+  onPress?: () => void;
+}
 
 interface Props {
-  onDelete?: () => void;
+  leftButton?: ButtonActionProps[];
+  rightButton?: ButtonActionProps[];
+  shape?: ButtonShapeType;
+  size?: ButtonSize;
+  sizeX?: number;
+  plain?: boolean;
+  children?: React.ReactNode;
 }
 
 export default (props: Props) => {
-  // 右侧滑动操作按钮
-  const renderRightButtons = () => (
-    <View style={styles.rightAction}>
-      <Button
-        type="warning"
-        shape="circle"
-        size="medium"
-        onPress={props.onDelete}
-        label="Right 1"
-      />
-      <Button
-        type="danger"
-        shape="circle"
-        size="medium"
-        onPress={props.onDelete}
-        label="Right 2"
-      />
-    </View>
-  );
+  // 右侧滑动操作按钮（添加进度参数）
+  const renderButtons = useCallback(
+    (progress: SharedValue<number>, buttonProps: ButtonActionProps[]) => {
+      const animatedStyle = useAnimatedStyle(() => ({
+        opacity: progress.value,
+      }));
 
-  const renderLeftButtons = () => (
-    <View style={styles.rightAction}>
-      <Button
-        type="success"
-        shape="circle"
-        size="medium"
-        onPress={props.onDelete}
-        label="Left"
-      />
-    </View>
+      return (
+        <Reanimated.View style={[styles.rightAction, animatedStyle]}>
+          {buttonProps.map((bp, index) => (
+            <Button
+              {...bp}
+              shape={props.shape}
+              size={props.size}
+              sizeX={props.sizeX}
+              plain={props.plain}
+              key={index}
+            />
+          ))}
+        </Reanimated.View>
+      );
+    },
+    [props.plain, props.shape, props.size, props.sizeX]
   );
 
   return (
     <Swipeable
       friction={2}
       rightThreshold={40}
-      renderRightActions={renderRightButtons}
-      renderLeftActions={renderLeftButtons}
+      renderRightActions={progress =>
+        props.rightButton && renderButtons(progress, props.rightButton)
+      }
+      renderLeftActions={progress =>
+        props.leftButton && renderButtons(progress, props.leftButton)
+      }
+      animationOptions={{ useNativeDriver: true }}
     >
-      <View style={styles.container}>{/* 这里放主要内容 */}</View>
+      <View>{props.children}</View>
     </Swipeable>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: commonStyles.color.gray5,
-    height: 100,
-    justifyContent: 'center',
-    padding: 16,
-  },
   rightAction: {
     justifyContent: 'center',
     alignItems: 'center',

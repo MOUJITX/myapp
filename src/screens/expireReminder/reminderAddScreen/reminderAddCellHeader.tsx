@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Button from '../../../components/basic/Button';
+import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import { Text } from 'react-native';
 import { commonStyles } from '../../../styles';
 
@@ -22,7 +22,7 @@ export default (props: Props) => {
           type="primary"
           onPress={props.onAdd}
           size="small"
-          shape="square"
+          shape={ButtonShapeType.Square}
         />
         <Button
           label="-"
@@ -30,7 +30,7 @@ export default (props: Props) => {
           type="danger"
           onPress={props.onDelete}
           size="small"
-          shape="square"
+          shape={ButtonShapeType.Square}
         />
         <Button
           label="C"
@@ -38,7 +38,7 @@ export default (props: Props) => {
           type="primary"
           onPress={props.onCopy}
           size="small"
-          shape="square"
+          shape={ButtonShapeType.Square}
         />
       </View>
     </View>

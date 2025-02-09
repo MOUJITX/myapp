@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { commonStyles } from '../../styles';
-import Button from './Button';
+import Button, { ButtonShapeType } from './Button';
 
 interface Props {
   onPress?: () => void;
@@ -16,7 +16,7 @@ export default (props: Props) => {
         label={props.label}
         size="large"
         type="primary"
-        shape="circle"
+        shape={ButtonShapeType.Circle}
         shadow
       />
     </View>

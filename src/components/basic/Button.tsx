@@ -4,13 +4,20 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { ButtonSize, commonStyles } from '../../styles';
 import { statusType } from '../../types';
 
-interface Props {
+export enum ButtonShapeType {
+  Default = 'default',
+  Circle = 'circle',
+  Square = 'square',
+}
+
+export interface Props {
   label?: string;
   type?: statusType;
   plain?: boolean;
   size?: ButtonSize;
+  sizeX?: number;
   onPress?: () => void;
-  shape?: 'default' | 'circle' | 'square';
+  shape?: ButtonShapeType;
   shadow?: boolean;
 }
 
@@ -41,10 +48,11 @@ const styles = (props: Props) =>
         props.shape === 'circle'
           ? commonStyles.radius.circle
           : commonStyles.radius[props.size === 'small' ? 'small' : 'medium'],
-      height: commonStyles.buttonSize[props.size ?? 'medium'],
+      height:
+        commonStyles.buttonSize[props.size ?? 'medium'] * (props.sizeX ?? 1),
       width:
         props.shape === 'circle' || props.shape === 'square'
-          ? commonStyles.buttonSize[props.size ?? 'medium']
+          ? commonStyles.buttonSize[props.size ?? 'medium'] * (props.sizeX ?? 1)
           : undefined,
       alignItems: 'center',
       justifyContent: 'center',

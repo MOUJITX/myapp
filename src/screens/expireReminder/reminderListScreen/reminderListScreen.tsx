@@ -10,6 +10,7 @@ import BottomSheet, {
 } from '../../../components/basic/BottomSheet';
 import { Good } from '../../../store/expireReminder/expireReminder.type';
 import SwipeRow from '../../../components/basic/SwipeRow';
+import { ButtonShapeType } from '../../../components/basic/Button';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -23,13 +24,29 @@ export const ExpireReminderListScreen = () => {
   };
 
   const renderGoodItem = ({ item }: { item: Good }) => {
-    return <ReminderCard good={item} />;
+    return (
+      <SwipeRow
+        rightButton={[
+          {
+            label: '-',
+            type: 'danger',
+            onPress: () => console.log('delete', item.goodID),
+          },
+        ]}
+        shape={ButtonShapeType.Circle}
+        size="large"
+      >
+        <ReminderCard
+          good={item}
+          onPress={() => console.log('edit', item.goodID)}
+        />
+      </SwipeRow>
+    );
   };
 
   return (
     <View>
       <SpacingView notScroll>
-        <SwipeRow />
         <FlatList
           data={allExpireReminderList}
           renderItem={renderGoodItem}

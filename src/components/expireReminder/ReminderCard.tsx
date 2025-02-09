@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CellGroup from '../basic/CellGroup';
 import Image from '../basic/Image';
 import { t } from 'i18next';
@@ -13,6 +13,7 @@ import { calculateDays } from '../../utils/datetime';
 
 interface Props {
   good: Good;
+  onPress: () => void;
 }
 
 const getDaysUntilExpiry = (expireDate: Date) =>
@@ -98,40 +99,42 @@ const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
 
 export default (props: Props) => {
   return (
-    <CellGroup card>
-      <View style={styles.main}>
-        <Image img={props.good.imgs[0]} size={'medium'} radius />
-        <View style={styles.mainDetail}>
-          <Text
-            style={styles.titleLabel}
-            numberOfLines={2}
-            ellipsizeMode="tail"
-          >
-            {props.good.title}
-          </Text>
-          <InfoRow
-            dosage={props.good.detail.dosage}
-            frequency={props.good.detail.frequency}
-            storage={props.good.detail.storage}
-          />
+    <TouchableOpacity onPress={props.onPress}>
+      <CellGroup card>
+        <View style={styles.main}>
+          <Image img={props.good.imgs[0]} size={'medium'} radius />
+          <View style={styles.mainDetail}>
+            <Text
+              style={styles.titleLabel}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {props.good.title}
+            </Text>
+            <InfoRow
+              dosage={props.good.detail.dosage}
+              frequency={props.good.detail.frequency}
+              storage={props.good.detail.storage}
+            />
+          </View>
         </View>
-      </View>
-      <Divider />
-      {props.good.items.map((item, index) => (
-        <View style={styles.bottomInfo} key={index}>
-          {item.expireDate && (
-            <>
-              <StatusIndicator expireDate={item.expireDate} />
-              <Text style={styles.dateText}>
-                {item.expireDate
-                  ? new Date(item.expireDate).toLocaleDateString()
-                  : 'N/A'}
-              </Text>
-            </>
-          )}
-        </View>
-      ))}
-    </CellGroup>
+        <Divider />
+        {props.good.items.map((item, index) => (
+          <View style={styles.bottomInfo} key={index}>
+            {item.expireDate && (
+              <>
+                <StatusIndicator expireDate={item.expireDate} />
+                <Text style={styles.dateText}>
+                  {item.expireDate
+                    ? new Date(item.expireDate).toLocaleDateString()
+                    : 'N/A'}
+                </Text>
+              </>
+            )}
+          </View>
+        ))}
+      </CellGroup>
+    </TouchableOpacity>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Props as CellProps } from './Cell';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Cell from './Cell';
-import Button from './Button';
+import Button, { ButtonShapeType } from './Button';
 import { commonStyles } from '../../styles';
 
 interface Props extends CellProps {
@@ -54,7 +54,7 @@ export default (props: Props) => {
           type="primary"
           onPress={() => handleNumberChange(-(props.step ?? 1))}
           size="small"
-          shape="square"
+          shape={ButtonShapeType.Square}
         />
         <TextInput
           style={styles.textInput}
@@ -68,18 +68,19 @@ export default (props: Props) => {
           type="primary"
           onPress={() => handleNumberChange(props.step ?? 1)}
           size="small"
-          shape="square"
+          shape={ButtonShapeType.Square}
         />
       </View>
       {props.quickValues && (
         <View style={styles.quickValue}>
-          {props.quickValues.map(quickValue => (
+          {props.quickValues.map((quickValue, index) => (
             <Button
               label={quickValue.label}
               plain={quickValue.value !== numberValue}
               type="primary"
               onPress={() => handleNumberInput(quickValue.value.toString())}
               size="small"
+              key={index}
             />
           ))}
         </View>
