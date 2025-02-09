@@ -29,7 +29,7 @@ export const ExpireReminderListScreen = () => {
   return (
     <View>
       <SpacingView notScroll>
-        <IconAdd width="40" height="40" />
+        <IconAdd width={40} height={40} fill="#000" />
         <FlatList
           data={allExpireReminderList}
           renderItem={renderGoodItem}

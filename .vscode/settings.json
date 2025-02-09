@@ -17,4 +17,5 @@
         "gorhom",
         "RNFS"
     ],
+    "java.configuration.updateBuildConfiguration": "interactive",
 }
