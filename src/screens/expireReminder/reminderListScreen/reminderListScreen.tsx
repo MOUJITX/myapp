@@ -9,6 +9,7 @@ import BottomSheet, {
   BottomSheetRef,
 } from '../../../components/basic/BottomSheet';
 import { Good } from '../../../store/expireReminder/expireReminder.type';
+import SwipeRow from '../../../components/basic/SwipeRow';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -28,6 +29,7 @@ export const ExpireReminderListScreen = () => {
   return (
     <View>
       <SpacingView notScroll>
+        <SwipeRow />
         <FlatList
           data={allExpireReminderList}
           renderItem={renderGoodItem}
