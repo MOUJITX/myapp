@@ -7,6 +7,7 @@ import Button from '../../../components/basic/Button';
 import SpacingView from '../../../components/basic/SpacingView';
 import ImageRow from '../../../components/basic/ImageRow';
 import {
+  Good,
   GoodItem,
   GoodType,
 } from '../../../store/expireReminder/expireReminder.type';
@@ -20,18 +21,21 @@ import { t } from 'i18next';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
+  good?: Good;
 }
 
 export const ExpireReminderAddScreen = (props: Props) => {
   const {
     input: {},
-    output: { handleAddGood },
+    output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
-  const [title, setTitle] = useState<string>();
-  const [imgs, setImgs] = useState<string[]>([]);
-  const [uniCode, setUniCode] = useState<string>();
-  const [items, setItems] = useState<GoodItem[]>([]);
+  const [title, setTitle] = useState<string | undefined>(props.good?.title);
+  const [imgs, setImgs] = useState<string[]>(props.good?.imgs ?? []);
+  const [uniCode, setUniCode] = useState<string | undefined>(
+    props.good?.uniqueCode
+  );
+  const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);
 
   const initItem: GoodItem = {
     itemID: randomUUID(),
@@ -71,16 +75,16 @@ export const ExpireReminderAddScreen = (props: Props) => {
     setItems(newItems);
   };
 
-  const handleAddGoodCheck = () => {
-    handleAddGood({
-      goodID: randomUUID(),
+  const handleSubmitGoodCheck = () => {
+    handleSubmitGood({
+      goodID: props.good?.goodID ?? randomUUID(),
       title: title ?? randomString(),
       uniqueCode: uniCode ?? randomUUID(),
       imgs,
       type: GoodType.Medicine,
       detail: {},
       items,
-      createTime: new Date(),
+      createTime: props.good?.createTime ?? new Date(),
     });
 
     props.bottomSheetRef.current?.closeBottomSheet();
@@ -132,7 +136,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
         <Button
           type="primary"
           label={t('common.save.label')}
-          onPress={handleAddGoodCheck}
+          onPress={handleSubmitGoodCheck}
         />
       </View>
     </SpacingView>

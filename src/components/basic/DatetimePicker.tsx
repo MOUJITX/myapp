@@ -41,8 +41,8 @@ export default (props: Props) => {
       {(!show || Platform.OS === 'android') && (
         <Text onPress={showPicker} style={styles.dateTimeText}>
           {props.mode === 'time'
-            ? date.toLocaleTimeString()
-            : date.toLocaleDateString()}
+            ? new Date(date).toLocaleTimeString()
+            : new Date(date).toLocaleDateString()}
         </Text>
       )}
       {show && (

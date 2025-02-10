@@ -13,18 +13,29 @@ export const expireReminderSlice = createSlice({
       state,
       action: PayloadAction<{ good: Good; loginUser?: string }>
     ) => {
-      const good = state.goodsList.find(
-        g =>
-          g.uniqueCode === action.payload.good.uniqueCode &&
-          g.createUser === action.payload.loginUser
+      const goodIndex = state.goodsList.findIndex(
+        g => g.goodID === action.payload.good.goodID
       );
-      if (good) {
-        good.items.push(...action.payload.good.items);
-      } else {
-        state.goodsList.push({
+
+      if (goodIndex !== -1) {
+        state.goodsList[goodIndex] = {
           ...action.payload.good,
           createUser: action.payload.loginUser,
-        });
+        };
+      } else {
+        const good = state.goodsList.find(
+          g =>
+            g.uniqueCode === action.payload.good.uniqueCode &&
+            g.createUser === action.payload.loginUser
+        );
+        if (good) {
+          good.items.push(...action.payload.good.items);
+        } else {
+          state.goodsList.push({
+            ...action.payload.good,
+            createUser: action.payload.loginUser,
+          });
+        }
       }
     },
     removeGoodAction: (state, action: PayloadAction<string>) => {

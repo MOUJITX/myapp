@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
@@ -19,7 +19,10 @@ export const ExpireReminderListScreen = () => {
   } = useExpireReminderListHook();
 
   const bottomSheetRef = useRef<BottomSheetRef>(null);
+  const [good, setGood] = useState<Good>();
+
   const openAddReminderBottomSheet = () => {
+    setGood(undefined);
     bottomSheetRef.current?.openBottomSheet();
   };
 
@@ -28,7 +31,8 @@ export const ExpireReminderListScreen = () => {
       <ReminderCard
         good={item}
         onPress={() => {
-          // console.log('edit', item.goodID)
+          setGood(item);
+          bottomSheetRef.current?.openBottomSheet();
         }}
       />
     );
@@ -56,7 +60,12 @@ export const ExpireReminderListScreen = () => {
 
       <BottomSheet
         ref={bottomSheetRef}
-        children={<ExpireReminderAddScreen bottomSheetRef={bottomSheetRef} />}
+        children={
+          <ExpireReminderAddScreen
+            bottomSheetRef={bottomSheetRef}
+            good={good}
+          />
+        }
       />
     </View>
   );

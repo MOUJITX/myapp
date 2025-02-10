@@ -6,7 +6,7 @@ import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.sele
 type Input = {};
 
 type Output = {
-  handleAddGood: (good: Good) => void;
+  handleSubmitGood: (good: Good) => void;
 };
 
 type ExpireReminderAddHook = {
@@ -20,7 +20,7 @@ export const useExpireReminderAddHook = (): ExpireReminderAddHook => {
 
   const input: Input = {};
   const output: Output = {
-    handleAddGood: good => dispatch(addGoodAction({ good, loginUser })),
+    handleSubmitGood: good => dispatch(addGoodAction({ good, loginUser })),
   };
 
   return {
