@@ -21,8 +21,9 @@ This is a React Native project by MOUJITX.
 # issue
 
 - [ ] Some components under the bottom navigation bar after setting the statusBar to translucent.
-- [ ] Go back gesture can't be used in the bottomSheet to close it.
+- [x] Go back gesture can't be used in the bottomSheet to close it.
 - [ ] SVG support failed. (branch: `feat/202502091752-svg-support`)
+- [ ] First bottomSheet will be closed when the second bottomSheet is opened.
 
 # Folder Structure
 

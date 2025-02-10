@@ -4,8 +4,9 @@ import React, {
   useImperativeHandle,
   useRef,
   useState,
+  useEffect,
 } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, BackHandler } from 'react-native';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { commonStyles } from '../../styles';
 
@@ -50,6 +51,23 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
       closeBottomSheet,
     })
   );
+
+  useEffect(() => {
+    const backAction = () => {
+      if (isOpen) {
+        closeBottomSheet();
+        return true;
+      }
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove(); // 清理事件监听器
+  }, [isOpen]);
 
   return (
     <BottomSheetModal
