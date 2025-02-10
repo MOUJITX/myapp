@@ -16,8 +16,8 @@ import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
-import ScanCamera from '../../../components/basic/ScanCamera';
 import { t } from 'i18next';
+import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -93,7 +93,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
   return (
     <SpacingView>
       <Text>ExpireReminderAddScreen</Text>
-      <ScanCamera onCodeScanSuccess={setUniCode} codeType="ean-13" />
+      <ScanCameraButton />
       <View>
         <CellGroup card>
           <TextInput

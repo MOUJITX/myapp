@@ -7,10 +7,19 @@ import {
   useCameraDevice,
   CodeType,
 } from 'react-native-vision-camera';
+import Button from './Button';
+import HoverButton from './HoverButton';
+
+export enum CodeScanFailedType {
+  NO_PERMISSION = 'NO_PERMISSION',
+  NO_DEVICE = 'NO_DEVICE',
+  USER_CANCEL = 'USER_CANCEL',
+}
 
 interface Props {
   codeType: CodeType;
   onCodeScanSuccess: (value: string) => void;
+  onCodeScanFailed?: (error: CodeScanFailedType) => void;
 }
 
 export default (props: Props) => {
@@ -20,8 +29,6 @@ export default (props: Props) => {
   const [checked, setChecked] = useState(false);
   const [isActive, setIsActive] = useState(true);
 
-  const [code, setCode] = useState('');
-
   useEffect(() => {
     requestPermission();
     setChecked(hasPermission);
@@ -30,8 +37,6 @@ export default (props: Props) => {
   const codeScanner = useCodeScanner({
     codeTypes: [props.codeType],
     onCodeScanned: codes => {
-      // console.log('codes', codes);
-      setCode(codes[0].value ?? '');
       setIsActive(false);
 
       props.onCodeScanSuccess(codes[0].value ?? '');
@@ -40,17 +45,47 @@ export default (props: Props) => {
 
   return (
     <View>
-      {!device && <Text>未获取设备</Text>}
-      {!checked && <Text>未获取权限</Text>}
-      {device && checked && isActive && (
-        <Camera
-          style={styles.camera}
-          device={device}
-          isActive={isActive}
-          codeScanner={codeScanner}
-        />
+      {!device && (
+        <View>
+          <Text>未获取设备</Text>
+          <Button
+            onPress={() =>
+              props.onCodeScanFailed &&
+              props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE)
+            }
+            label="返回"
+          />
+        </View>
       )}
-      {code && <Text>code: {code}</Text>}
+      {!checked && (
+        <View>
+          <Text>未获取权限</Text>
+          <Button
+            onPress={() =>
+              props.onCodeScanFailed &&
+              props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION)
+            }
+            label="返回"
+          />
+        </View>
+      )}
+      {device && checked && isActive && (
+        <View>
+          <Camera
+            style={styles.camera}
+            device={device}
+            isActive={isActive}
+            codeScanner={codeScanner}
+          />
+          <HoverButton
+            label="×"
+            onPress={() =>
+              props.onCodeScanFailed &&
+              props.onCodeScanFailed(CodeScanFailedType.USER_CANCEL)
+            }
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -58,6 +93,6 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   camera: {
     width: '100%',
-    height: 200,
+    height: '100%',
   },
 });
