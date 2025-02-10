@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FlatList, View } from 'react-native';
 import SwipeRow, { swipeRowConfig } from './SwipeRow';
+import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 
 export interface Props extends swipeRowConfig {
   renderItem?: ({ item }: { item: any }) => React.ReactNode;
@@ -8,8 +9,31 @@ export interface Props extends swipeRowConfig {
 }
 
 export default (props: Props) => {
+  const currentOpenSwipeRowRef = useRef<SwipeableMethods | null>(null);
+
+  const handleSwipeableOpen = (instance: SwipeableMethods) => {
+    if (
+      currentOpenSwipeRowRef.current &&
+      currentOpenSwipeRowRef.current !== instance
+    ) {
+      currentOpenSwipeRowRef.current.close();
+    }
+    currentOpenSwipeRowRef.current = instance;
+  };
+
+  const handleSwipeableClose = (instance: SwipeableMethods) => {
+    if (currentOpenSwipeRowRef.current === instance) {
+      currentOpenSwipeRowRef.current = null;
+    }
+  };
+
   const renderSwipeRow = ({ item }: { item: any }) => (
-    <SwipeRow {...props} onPressItem={item}>
+    <SwipeRow
+      {...props}
+      onPressItem={item}
+      onSwipeableClose={handleSwipeableClose}
+      onSwipeableOpen={handleSwipeableOpen}
+    >
       {props.renderItem && props.renderItem({ item })}
     </SwipeRow>
   );

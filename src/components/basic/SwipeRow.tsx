@@ -29,28 +29,30 @@ interface Props extends swipeRowConfig {
   children?: React.ReactNode;
 
   onPressItem?: (item: any) => void;
-  onSwipeableOpen?: () => void;
-  onSwipeableClose?: () => void;
+  onSwipeableOpen?: (instance: SwipeableMethods) => void;
+  onSwipeableClose?: (instance: SwipeableMethods) => void;
 }
 
 const RenderButtons = (
   progress: SharedValue<number>,
   buttonProps: swipeActionProps[],
-  { shape, size, plain, onPressItem }: Props
+  { shape, size, plain, onPressItem }: Props,
+  swipeableInstance: SwipeableMethods
 ) => {
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity: progress.value,
-      transform: [{ scale: Math.min(progress.value, 1) }],
-    };
-  });
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: progress.value,
+    transform: [{ scale: Math.min(progress.value, 1) }],
+  }));
 
   return (
     <Reanimated.View style={[styles.rightAction, animatedStyle]}>
       {buttonProps.map((bp, index) => (
         <Button
           {...bp}
-          onPress={() => bp.onPress?.(onPressItem)}
+          onPress={() => {
+            bp.onPress?.(onPressItem);
+            swipeableInstance?.close();
+          }}
           shape={shape}
           size={size}
           plain={plain}
@@ -68,7 +70,7 @@ export default (props: Props) => {
     const swipeable = swipeableRef.current;
     return () => {
       if (swipeable && props.onSwipeableClose) {
-        props.onSwipeableClose();
+        props.onSwipeableClose(swipeable);
       }
     };
   }, [props]);
@@ -76,16 +78,18 @@ export default (props: Props) => {
   return (
     <Swipeable
       ref={swipeableRef}
-      onSwipeableClose={props.onSwipeableClose}
-      onSwipeableOpen={props.onSwipeableOpen}
+      onSwipeableClose={() => props.onSwipeableClose?.(swipeableRef.current!)}
+      onSwipeableOpen={() => props.onSwipeableOpen?.(swipeableRef.current!)}
       friction={2}
       rightThreshold={40}
       renderRightActions={progress =>
-        props.rightButton && RenderButtons(progress, props.rightButton, props)
+        props.rightButton &&
+        RenderButtons(progress, props.rightButton, props, swipeableRef.current!)
       }
       leftThreshold={40}
       renderLeftActions={progress =>
-        props.leftButton && RenderButtons(progress, props.leftButton, props)
+        props.leftButton &&
+        RenderButtons(progress, props.leftButton, props, swipeableRef.current!)
       }
       animationOptions={{ useNativeDriver: true }}
     >
