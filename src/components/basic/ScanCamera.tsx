@@ -30,7 +30,7 @@ export default (props: Props) => {
   const codeScanner = useCodeScanner({
     codeTypes: [props.codeType],
     onCodeScanned: codes => {
-      console.log('codes', codes);
+      // console.log('codes', codes);
       setCode(codes[0].value ?? '');
       setIsActive(false);
 

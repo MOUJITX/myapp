@@ -19,7 +19,7 @@ export default (props: Props) => {
   const [numberValue, setNumberValue] = useState<number>(props.value ?? 0);
 
   useEffect(() => {
-    console.log(props.value);
+    // console.log(props.value);
     setNumberValue(props.value ?? 0);
   }, [props.value]);
 

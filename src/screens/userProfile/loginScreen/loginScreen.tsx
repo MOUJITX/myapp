@@ -44,7 +44,7 @@ export const LoginScreen = () => {
             label={t('userProfile.login.username.label')}
             placeholder={t('userProfile.login.username.placeholder')}
             onValueChange={value => {
-              console.log(value);
+              // console.log(value);
               setUsername(value);
               checkUsername(value);
             }}

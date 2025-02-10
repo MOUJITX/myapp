@@ -11,7 +11,7 @@ const addGoodEpic: ExpireRemindersEpic = action$ =>
   action$.pipe(
     filter(addGoodAction.match),
     mergeMap(() => {
-      console.log('addGoodEpic');
+      // console.log('addGoodEpic');
       return of(navigateAction({ screen: 'ExpireReminderScreen' }));
     })
   );

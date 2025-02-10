@@ -48,7 +48,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const handleAdd = (index: number) => {
     let newItems = [...items];
     newItems.splice(index + 1, 0, initItem);
-    console.log('handleAdd', newItems);
+    // console.log('handleAdd', newItems);
     setItems(newItems);
   };
 

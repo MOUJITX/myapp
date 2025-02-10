@@ -30,7 +30,9 @@ export const ExpireReminderListScreen = () => {
           {
             label: '-',
             type: 'danger',
-            onPress: () => console.log('delete', item.goodID),
+            onPress: () => {
+              // console.log('delete', item.goodID)
+            },
           },
         ]}
         shape={ButtonShapeType.Circle}
@@ -38,7 +40,9 @@ export const ExpireReminderListScreen = () => {
       >
         <ReminderCard
           good={item}
-          onPress={() => console.log('edit', item.goodID)}
+          onPress={() => {
+            // console.log('edit', item.goodID)
+          }}
         />
       </SwipeRow>
     );

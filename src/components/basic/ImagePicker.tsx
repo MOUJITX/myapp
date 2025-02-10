@@ -54,24 +54,24 @@ const ImagePicker = (props: Props) => {
     const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
     RNFS.copyFile(imgUri, path)
       .then(() => {
-        console.log('Image saved to', path);
+        // console.log('Image saved to', path);
         props.onImageChange('file://' + path);
         bottomSheetRef.current?.closeBottomSheet();
       })
-      .catch(err => {
-        console.log('Error saving image', err);
+      .catch(_err => {
+        // console.log('Error saving image', err);
       });
   };
 
   const handleChooseImage = () => {
     launchImageLibrary({ mediaType: 'photo' }, response => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (response.errorMessage) {
-        console.log('Image picker error: ', response.errorMessage);
+        // console.log('Image picker error: ', response.errorMessage);
       } else {
         const imgAsset = response.assets?.[0];
-        console.log('imgAsset', imgAsset);
+        // console.log('imgAsset', imgAsset);
         if (imgAsset?.uri) {
           saveImage(imgAsset.uri);
         }
@@ -82,12 +82,12 @@ const ImagePicker = (props: Props) => {
   const handleTakePhoto = () => {
     launchCamera({ mediaType: 'photo' }, response => {
       if (response.didCancel) {
-        console.log('User cancelled camera');
+        // console.log('User cancelled camera');
       } else if (response.errorMessage) {
-        console.log('Camera error: ', response.errorMessage);
+        // console.log('Camera error: ', response.errorMessage);
       } else {
         const imgAsset = response.assets?.[0];
-        console.log('imgAsset', imgAsset);
+        // console.log('imgAsset', imgAsset);
         if (imgAsset?.uri) {
           saveImage(imgAsset.uri);
         }

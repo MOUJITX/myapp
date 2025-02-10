@@ -42,7 +42,7 @@ const userProfileSlice = createSlice({
       state.loginUser = undefined;
     },
     userAddLoginHistoryAction: (state, action: PayloadAction<LoginHistory>) => {
-      console.log('push', action.payload);
+      // console.log('push', action.payload);
       state.loginHistory.push(action.payload);
     },
     userAddInfoAction: (state, action: PayloadAction<UserInfo>) => {
