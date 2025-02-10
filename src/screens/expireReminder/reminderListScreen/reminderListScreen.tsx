@@ -15,7 +15,7 @@ import { ButtonShapeType } from '../../../components/basic/Button';
 export const ExpireReminderListScreen = () => {
   const {
     input: { allExpireReminderList },
-    output: {},
+    output: { handleRemoveGood },
   } = useExpireReminderListHook();
 
   const bottomSheetRef = useRef<BottomSheetRef>(null);
@@ -44,9 +44,7 @@ export const ExpireReminderListScreen = () => {
             {
               label: '-',
               type: 'danger',
-              onPress: (item: Good) => {
-                console.log('delete', item.goodID);
-              },
+              onPress: (item: Good) => handleRemoveGood(item.goodID),
             },
           ]}
           shape={ButtonShapeType.Circle}
