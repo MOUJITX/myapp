@@ -58,6 +58,7 @@ export default (props: Props) => {
       renderRightActions={progress =>
         props.rightButton && renderButtons(progress, props.rightButton)
       }
+      leftThreshold={40}
       renderLeftActions={progress =>
         props.leftButton && renderButtons(progress, props.leftButton)
       }
