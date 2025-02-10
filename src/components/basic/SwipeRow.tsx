@@ -1,66 +1,91 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ButtonSize, commonStyles } from '../../styles';
 import Button, { ButtonShapeType } from './Button';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import Swipeable, {
+  SwipeableMethods,
+} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { statusType } from '../../types';
 
-interface ButtonActionProps {
+export interface swipeActionProps {
   label?: string;
   type?: statusType;
-  onPress?: () => void;
+  onPress?: (item: any) => void;
 }
 
-interface Props {
-  leftButton?: ButtonActionProps[];
-  rightButton?: ButtonActionProps[];
+export interface swipeRowConfig {
+  leftButton?: swipeActionProps[];
+  rightButton?: swipeActionProps[];
   shape?: ButtonShapeType;
   size?: ButtonSize;
-  sizeX?: number;
   plain?: boolean;
-  children?: React.ReactNode;
 }
 
-export default (props: Props) => {
-  // 右侧滑动操作按钮（添加进度参数）
-  const renderButtons = useCallback(
-    (progress: SharedValue<number>, buttonProps: ButtonActionProps[]) => {
-      const animatedStyle = useAnimatedStyle(() => ({
-        opacity: progress.value,
-      }));
+interface Props extends swipeRowConfig {
+  children?: React.ReactNode;
 
-      return (
-        <Reanimated.View style={[styles.rightAction, animatedStyle]}>
-          {buttonProps.map((bp, index) => (
-            <Button
-              {...bp}
-              shape={props.shape}
-              size={props.size}
-              sizeX={props.sizeX}
-              plain={props.plain}
-              key={index}
-            />
-          ))}
-        </Reanimated.View>
-      );
-    },
-    [props.plain, props.shape, props.size, props.sizeX]
+  onPressItem?: (item: any) => void;
+  onSwipeableOpen?: () => void;
+  onSwipeableClose?: () => void;
+}
+
+const RenderButtons = (
+  progress: SharedValue<number>,
+  buttonProps: swipeActionProps[],
+  { shape, size, plain, onPressItem }: Props
+) => {
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: progress.value,
+      transform: [{ scale: Math.min(progress.value, 1) }],
+    };
+  });
+
+  return (
+    <Reanimated.View style={[styles.rightAction, animatedStyle]}>
+      {buttonProps.map((bp, index) => (
+        <Button
+          {...bp}
+          onPress={() => bp.onPress?.(onPressItem)}
+          shape={shape}
+          size={size}
+          plain={plain}
+          key={index}
+        />
+      ))}
+    </Reanimated.View>
   );
+};
+
+export default (props: Props) => {
+  const swipeableRef = useRef<SwipeableMethods>(null);
+
+  useEffect(() => {
+    const swipeable = swipeableRef.current;
+    return () => {
+      if (swipeable && props.onSwipeableClose) {
+        props.onSwipeableClose();
+      }
+    };
+  }, [props]);
 
   return (
     <Swipeable
+      ref={swipeableRef}
+      onSwipeableClose={props.onSwipeableClose}
+      onSwipeableOpen={props.onSwipeableOpen}
       friction={2}
       rightThreshold={40}
       renderRightActions={progress =>
-        props.rightButton && renderButtons(progress, props.rightButton)
+        props.rightButton && RenderButtons(progress, props.rightButton, props)
       }
       leftThreshold={40}
       renderLeftActions={progress =>
-        props.leftButton && renderButtons(progress, props.leftButton)
+        props.leftButton && RenderButtons(progress, props.leftButton, props)
       }
       animationOptions={{ useNativeDriver: true }}
     >

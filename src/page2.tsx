@@ -1,10 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import Example from './components/basic/sr';
 
 export const PageB = () => {
-  return (
-    <View>
-      <Text>page 2: isLogin === false</Text>
-    </View>
-  );
+  return <Example />;
 };

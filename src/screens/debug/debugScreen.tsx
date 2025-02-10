@@ -5,16 +5,18 @@ import CellGroup from '../../components/basic/CellGroup';
 import TextLabel from '../../components/basic/TextLabel';
 import { languageCode, languageTag } from '../../i18n/i18n';
 import HoverButton from '../../components/basic/HoverButton';
+import Button from '../../components/basic/Button';
 
 export const DebugScreen = () => {
   const {
     input: { isLogin, loginUser, loginUsername, allState, envInfo },
-    output: { logout },
+    output: { logout, gotoPage2 },
   } = useDebugHook();
 
   return (
     <View>
       <ScrollView>
+        <Button label="goto page2" type="primary" onPress={gotoPage2} />
         <CellGroup>
           <TextLabel label="os" value={envInfo.os} inline />
           <TextLabel label="version" value={envInfo.osVersion} inline />
