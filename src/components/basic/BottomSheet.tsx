@@ -97,8 +97,8 @@ const styles = (isOpen: boolean) =>
       position: 'absolute',
       width: '100%',
       height: '100%',
-      backgroundColor: commonStyles.color.gray8,
-      opacity: isOpen ? 0.6 : 0,
+      backgroundColor: commonStyles.backgroundColor.backDrop,
+      opacity: isOpen ? commonStyles.backgroundColor.backDropOpacity : 0,
     },
   });
 

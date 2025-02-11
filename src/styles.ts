@@ -33,6 +33,9 @@ const statusColor = {
 };
 
 const backgroundColor = {
+  backDrop: color.gray8,
+  backDropOpacity: 0.6,
+  backDropWithOpacity: color.gray8 + '60',
   success: color.greenLight,
 };
 
@@ -76,6 +79,8 @@ const lineHeight = {
   medium: 20,
   large: 22,
   largeX: 24,
+  large2X: 28,
+  large3X: 32,
 };
 
 const radius = {

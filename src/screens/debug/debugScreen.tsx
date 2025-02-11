@@ -10,13 +10,14 @@ import Button from '../../components/basic/Button';
 export const DebugScreen = () => {
   const {
     input: { isLogin, loginUser, loginUsername, allState, envInfo },
-    output: { logout, gotoPage2 },
+    output: { logout, gotoPage2, gotoPage3 },
   } = useDebugHook();
 
   return (
     <View>
       <ScrollView>
         <Button label="goto page2" type="primary" onPress={gotoPage2} />
+        <Button label="goto page3" type="primary" onPress={gotoPage3} />
         <CellGroup>
           <TextLabel label="os" value={envInfo.os} inline />
           <TextLabel label="version" value={envInfo.osVersion} inline />

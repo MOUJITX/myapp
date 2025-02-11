@@ -60,7 +60,7 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   modalBackdrop: {
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
     justifyContent: 'center',
     alignItems: 'center',
   },
