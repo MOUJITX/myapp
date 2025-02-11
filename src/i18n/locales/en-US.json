@@ -33,6 +33,16 @@
       "cancel": "Cancel",
       "takePhoto": "Take Photo",
       "chooseImage": "Choose Image"
+    },
+    "camera": {
+      "noDevice": {
+        "message": "Unable to turn on camera, please check if the device is functioning properly",
+        "title": "No Camera Device Found"
+      },
+      "noPermission": {
+        "message": "The current feature requires camera permission to be enabled",
+        "title": "No Permission"
+      }
     }
   },
   "debug": {
@@ -89,6 +99,12 @@
   "common": {
     "save": {
       "label": "Save"
+    },
+    "close": {
+      "icon": "×"
+    },
+    "return": {
+      "label": "Return"
     }
   }
 }

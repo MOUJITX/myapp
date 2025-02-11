@@ -33,6 +33,16 @@
       "chooseImage": "从相册中选择",
       "takePhoto": "拍摄照片",
       "cancel": "取消"
+    },
+    "camera": {
+      "noDevice": {
+        "title": "摄像头打开失败",
+        "message": "无法打开摄像头，请检查设备是否正常"
+      },
+      "noPermission": {
+        "title": "获取权限失败",
+        "message": "当前功能需要开启相机权限"
+      }
     }
   },
   "debug": {
@@ -89,6 +99,12 @@
   "common": {
     "save": {
       "label": "保存"
+    },
+    "return": {
+      "label": "返回"
+    },
+    "close": {
+      "icon": "×"
     }
   }
 }

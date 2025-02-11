@@ -9,6 +9,7 @@ import {
 } from 'react-native-vision-camera';
 import HoverButton from './HoverButton';
 import Popup from './Popup';
+import { t } from 'i18next';
 
 export enum CodeScanFailedType {
   NO_PERMISSION = 'NO_PERMISSION',
@@ -26,7 +27,7 @@ export default (props: Props) => {
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice('back');
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean | undefined>(undefined);
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
@@ -48,11 +49,11 @@ export default (props: Props) => {
       {!device && (
         <Popup
           visible={!device}
-          title="摄像头打开失败"
-          content={'无法打开摄像头，请检查设备是否正常'}
+          title={t('component.camera.noDevice.title')}
+          content={t('component.camera.noDevice.message')}
           buttons={[
             {
-              label: '返回',
+              label: t('common.return.label'),
               onPress: () =>
                 props.onCodeScanFailed &&
                 props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE),
@@ -61,14 +62,14 @@ export default (props: Props) => {
           ]}
         />
       )}
-      {!checked && (
+      {checked === false && (
         <Popup
           visible={!checked}
-          title="获取权限失败"
-          content={'当前功能需要开启相机权限'}
+          title={t('component.camera.noPermission.title')}
+          content={t('component.camera.noPermission.message')}
           buttons={[
             {
-              label: '返回',
+              label: t('common.return.label'),
               onPress: () =>
                 props.onCodeScanFailed &&
                 props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION),
@@ -86,7 +87,7 @@ export default (props: Props) => {
             codeScanner={codeScanner}
           />
           <HoverButton
-            label="×"
+            label={t('common.close.icon')}
             onPress={() =>
               props.onCodeScanFailed &&
               props.onCodeScanFailed(CodeScanFailedType.USER_CANCEL)
