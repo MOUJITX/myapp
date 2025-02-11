@@ -27,7 +27,7 @@ export const PageC = (props: Props) => {
           {
             label: '取消',
             onPress: () => setVisible(false),
-            type: 'warning',
+            type: 'danger',
           },
           {
             label: '取消1',

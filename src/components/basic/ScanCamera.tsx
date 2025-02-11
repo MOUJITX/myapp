@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   Camera,
   useCodeScanner,
@@ -7,8 +7,8 @@ import {
   useCameraDevice,
   CodeType,
 } from 'react-native-vision-camera';
-import Button from './Button';
 import HoverButton from './HoverButton';
+import Popup from './Popup';
 
 export enum CodeScanFailedType {
   NO_PERMISSION = 'NO_PERMISSION',
@@ -46,28 +46,36 @@ export default (props: Props) => {
   return (
     <View>
       {!device && (
-        <View>
-          <Text>未获取设备</Text>
-          <Button
-            onPress={() =>
-              props.onCodeScanFailed &&
-              props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE)
-            }
-            label="返回"
-          />
-        </View>
+        <Popup
+          visible={!device}
+          title="摄像头打开失败"
+          content={'无法打开摄像头，请检查设备是否正常'}
+          buttons={[
+            {
+              label: '返回',
+              onPress: () =>
+                props.onCodeScanFailed &&
+                props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE),
+              type: 'danger',
+            },
+          ]}
+        />
       )}
       {!checked && (
-        <View>
-          <Text>未获取权限</Text>
-          <Button
-            onPress={() =>
-              props.onCodeScanFailed &&
-              props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION)
-            }
-            label="返回"
-          />
-        </View>
+        <Popup
+          visible={!checked}
+          title="获取权限失败"
+          content={'当前功能需要开启相机权限'}
+          buttons={[
+            {
+              label: '返回',
+              onPress: () =>
+                props.onCodeScanFailed &&
+                props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION),
+              type: 'danger',
+            },
+          ]}
+        />
       )}
       {device && checked && isActive && (
         <View>
