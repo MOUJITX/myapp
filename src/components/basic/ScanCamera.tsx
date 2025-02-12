@@ -54,9 +54,11 @@ export default (props: Props) => {
           buttons={[
             {
               label: t('common.return.label'),
-              onPress: () =>
+              onPress: () => {
                 props.onCodeScanFailed &&
-                props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE),
+                  props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE),
+                  setIsActive(false);
+              },
               type: 'danger',
             },
           ]}
@@ -70,9 +72,11 @@ export default (props: Props) => {
           buttons={[
             {
               label: t('common.return.label'),
-              onPress: () =>
+              onPress: () => {
                 props.onCodeScanFailed &&
-                props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION),
+                  props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION),
+                  setIsActive(false);
+              },
               type: 'danger',
             },
           ]}
@@ -88,10 +92,11 @@ export default (props: Props) => {
           />
           <HoverButton
             label={t('common.close.icon')}
-            onPress={() =>
+            onPress={() => {
               props.onCodeScanFailed &&
-              props.onCodeScanFailed(CodeScanFailedType.USER_CANCEL)
-            }
+                props.onCodeScanFailed(CodeScanFailedType.USER_CANCEL);
+              setIsActive(false);
+            }}
           />
         </View>
       )}

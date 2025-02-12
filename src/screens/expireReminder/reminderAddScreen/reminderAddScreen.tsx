@@ -90,10 +90,13 @@ export const ExpireReminderAddScreen = (props: Props) => {
     props.bottomSheetRef.current?.closeBottomSheet();
   };
 
+  const renderCameraScanButton = () => (
+    <ScanCameraButton onSuccess={value => setUniCode(value)} />
+  );
+
   return (
     <SpacingView>
       <Text>ExpireReminderAddScreen</Text>
-      <ScanCameraButton />
       <View>
         <CellGroup card>
           <TextInput
@@ -115,6 +118,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
             value={uniCode}
             onValueChange={value => setUniCode(value)}
             placeholder={t('expireReminder.add.goodCode.placeholder')}
+            right={renderCameraScanButton}
           />
           <TextLabel
             inline

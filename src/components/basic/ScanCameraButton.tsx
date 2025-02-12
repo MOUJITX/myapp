@@ -8,7 +8,11 @@ import {
 } from 'react-native';
 import ScanCamera from './ScanCamera';
 
-export default () => {
+interface Props {
+  onSuccess: (value: string) => void;
+}
+
+export default (props: Props) => {
   const [visible, setVisible] = useState(false);
 
   const handleOpenCamera = () => {
@@ -22,6 +26,7 @@ export default () => {
         shape={ButtonShapeType.Square}
         size="small"
         type="default"
+        plain
         label="><"
         onPress={handleOpenCamera}
       />
@@ -37,6 +42,7 @@ export default () => {
               onCodeScanSuccess={value => {
                 console.log('Scan Success', value);
                 setVisible(false);
+                props.onSuccess(value);
               }}
               onCodeScanFailed={error => {
                 console.log('Scan Failed', error);
