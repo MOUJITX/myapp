@@ -9,22 +9,22 @@ import { t } from 'i18next';
 import { DebugScreen } from '../screens/debug/debugScreen';
 import { navigationRef } from './AppNavigationRef';
 import { TouchableOpacity, Text } from 'react-native';
-import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
+import BottomTabNavigation from './BottomTabNavigation';
+
+const debugButton = () => (
+  <TouchableOpacity
+    onPress={() => navigationRef.current?.navigate('DebugScreen')}
+  >
+    <Text>Debug</Text>
+  </TouchableOpacity>
+);
+
+export const commonHeaderOptions = {
+  headerRight: __DEV__ ? debugButton : undefined,
+};
 
 export const AppNavigation = () => {
   const RootStack = createNativeStackNavigator<AppNavigationList>();
-
-  const debugButton = () => (
-    <TouchableOpacity
-      onPress={() => navigationRef.current?.navigate('DebugScreen')}
-    >
-      <Text>Debug</Text>
-    </TouchableOpacity>
-  );
-
-  const commonHeaderOptions = {
-    headerRight: __DEV__ ? debugButton : undefined,
-  };
 
   return (
     <RootStack.Navigator initialRouteName="WelcomeScreen">
@@ -42,11 +42,11 @@ export const AppNavigation = () => {
         }}
       />
       <RootStack.Screen
-        name="ExpireReminderScreen"
-        component={ExpireReminderListScreen}
+        name="BottomTab"
+        component={BottomTabNavigation}
         options={{
           ...commonHeaderOptions,
-          title: t('expireReminder.title'),
+          headerShown: false,
         }}
       />
       <RootStack.Screen

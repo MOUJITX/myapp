@@ -35,7 +35,7 @@ export const useWelcomeHook = (): WelcomeHook => {
   const output: Output = {
     gotoLoginScreen: () => navigation.replace('LoginScreen'),
     gotoDefaultScreen: () => {
-      navigation.replace('ExpireReminderScreen');
+      navigation.replace('BottomTab');
       loginUser &&
         dispatch(
           userAddLoginHistoryAction({

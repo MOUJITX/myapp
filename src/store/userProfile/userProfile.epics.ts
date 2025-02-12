@@ -51,7 +51,7 @@ const userLoginSuccessEpic: UserProfileEpic = action$ =>
     mergeMap(action =>
       of(
         navigateAction({
-          screen: 'ExpireReminderScreen',
+          screen: 'BottomTab',
           replace: true,
         }),
         userAddLoginHistoryAction({
