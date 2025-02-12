@@ -11,7 +11,11 @@ import {
   GoodItem,
   GoodType,
 } from '../../../store/expireReminder/expireReminder.type';
-import { randomString, randomUUID } from '../../../utils/utils';
+import {
+  randomString,
+  randomStringNumber,
+  randomUUID,
+} from '../../../utils/utils';
 import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
@@ -79,7 +83,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
     handleSubmitGood({
       goodID: props.good?.goodID ?? randomUUID(),
       title: title ?? randomString(),
-      uniqueCode: uniCode ?? randomUUID(),
+      uniqueCode: uniCode ?? randomStringNumber(),
       imgs,
       type: GoodType.Medicine,
       detail: {},
