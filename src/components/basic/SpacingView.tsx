@@ -19,6 +19,5 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
-    height: '100%',
   },
 });

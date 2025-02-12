@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
@@ -11,6 +11,7 @@ import BottomSheet, {
 import { Good } from '../../../store/expireReminder/expireReminder.type';
 import SwipeRowList from '../../../components/basic/SwipeRowList';
 import { ButtonShapeType } from '../../../components/basic/Button';
+import CategoryFilter from '../../../components/expireReminder/CategoryFilter';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -39,8 +40,24 @@ export const ExpireReminderListScreen = () => {
   };
 
   return (
-    <View>
+    <View style={style.container}>
       <SpacingView notScroll>
+        <CategoryFilter
+          data={[
+            { label: '全部', value: 'all' },
+            { label: '进行中', value: 'processing' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+            { label: '已完成', value: 'completed' },
+          ]}
+          selectedValue={'all'}
+          onSelect={value => console.log(value)}
+        />
         <SwipeRowList
           renderItem={renderGoodItem}
           data={allExpireReminderList}
@@ -70,3 +87,9 @@ export const ExpireReminderListScreen = () => {
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

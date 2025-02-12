@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import SwipeRow, { swipeRowConfig } from './SwipeRow';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 
@@ -39,14 +39,12 @@ export default (props: Props) => {
   );
 
   return (
-    <View>
-      <FlatList
-        data={props.data}
-        renderItem={renderSwipeRow}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        // refreshControl={<RefreshControl refreshing />}
-      />
-    </View>
+    <FlatList
+      data={props.data}
+      renderItem={renderSwipeRow}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+      // refreshControl={<RefreshControl refreshing />}
+    />
   );
 };
