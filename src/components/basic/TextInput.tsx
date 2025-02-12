@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 0,
     margin: 0,
+    flexShrink: 1,
   },
   inputRow: {
     flexDirection: 'row',

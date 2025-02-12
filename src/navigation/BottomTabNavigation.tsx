@@ -5,8 +5,8 @@ import { commonStyles } from '../styles';
 import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
 import { t } from 'i18next';
 import { Text } from 'react-native';
-import { DebugScreen } from '../screens/debug/debugScreen';
 import { commonHeaderOptions } from './AppNavigation';
+import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
 
 export default () => {
   const BottomTab = createBottomTabNavigator<AppNavigationList>();
@@ -36,7 +36,7 @@ export default () => {
       />
       <BottomTab.Screen
         name="ProfileScreen"
-        component={DebugScreen}
+        component={profileScreen}
         options={{
           title: '我的',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '👤' }),
