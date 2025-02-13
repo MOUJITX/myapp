@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
@@ -19,12 +19,18 @@ export const ExpireReminderListScreen = () => {
     output: { handleRemoveGood },
   } = useExpireReminderListHook();
 
-  const bottomSheetRef = useRef<BottomSheetRef>(null);
+  const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
+  const CategoryScreenBottomSheetRef = useRef<BottomSheetRef>(null);
   const [good, setGood] = useState<Good>();
+  const [selectCategory, setSelectCategory] = useState('all');
 
   const openAddReminderBottomSheet = () => {
     setGood(undefined);
-    bottomSheetRef.current?.openBottomSheet();
+    AddScreenBottomSheetRef.current?.openBottomSheet();
+  };
+
+  const openCategoryScreenBottomSheet = () => {
+    CategoryScreenBottomSheetRef.current?.openBottomSheet();
   };
 
   const renderGoodItem = ({ item }: { item: Good }) => {
@@ -33,7 +39,7 @@ export const ExpireReminderListScreen = () => {
         good={item}
         onPress={() => {
           setGood(item);
-          bottomSheetRef.current?.openBottomSheet();
+          AddScreenBottomSheetRef.current?.openBottomSheet();
         }}
       />
     );
@@ -47,16 +53,10 @@ export const ExpireReminderListScreen = () => {
             { label: '全部', value: 'all' },
             { label: '进行中', value: 'processing' },
             { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
-            { label: '已完成', value: 'completed' },
           ]}
-          selectedValue={'all'}
-          onSelect={value => console.log(value)}
+          selectedValue={selectCategory}
+          onSelect={value => setSelectCategory(value)}
+          onPressMoreButton={openCategoryScreenBottomSheet}
         />
         <SwipeRowList
           renderItem={renderGoodItem}
@@ -75,15 +75,16 @@ export const ExpireReminderListScreen = () => {
 
       <HoverButton onPress={openAddReminderBottomSheet} label="+" />
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        children={
-          <ExpireReminderAddScreen
-            bottomSheetRef={bottomSheetRef}
-            good={good}
-          />
-        }
-      />
+      <BottomSheet ref={AddScreenBottomSheetRef}>
+        <ExpireReminderAddScreen
+          bottomSheetRef={AddScreenBottomSheetRef}
+          good={good}
+        />
+      </BottomSheet>
+
+      <BottomSheet ref={CategoryScreenBottomSheetRef} autoSize>
+        <Text>category</Text>
+      </BottomSheet>
     </View>
   );
 };

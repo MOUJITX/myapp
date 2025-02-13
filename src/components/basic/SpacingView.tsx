@@ -12,12 +12,19 @@ export default (props: Props) => {
   return props.notScroll ? (
     <View style={styles.container}>{props.children}</View>
   ) : (
-    <ScrollView style={styles.container}>{props.children}</ScrollView>
+    <ScrollView style={styles.container}>
+      {props.children}
+      <View style={styles.bottom} />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
+    flex: 1,
+  },
+  bottom: {
+    height: commonStyles.spacings.large,
   },
 });

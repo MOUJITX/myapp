@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import SwipeRow, { swipeRowConfig } from './SwipeRow';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 
@@ -40,6 +40,7 @@ export default (props: Props) => {
 
   return (
     <FlatList
+      style={styles.container}
       data={props.data}
       renderItem={renderSwipeRow}
       showsVerticalScrollIndicator={false}
@@ -48,3 +49,9 @@ export default (props: Props) => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+  },
+});

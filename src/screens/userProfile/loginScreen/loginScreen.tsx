@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { useLoginHook } from './loginHook';
 import TextInput from '../../../components/basic/TextInput';
 import CellGroup from '../../../components/basic/CellGroup';
@@ -35,45 +35,43 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View>
-      <SpacingView>
-        <Text>{t('userProfile.login.title')}</Text>
-        <CellGroup card>
-          <TextInput
-            required
-            label={t('userProfile.login.username.label')}
-            placeholder={t('userProfile.login.username.placeholder')}
-            onValueChange={value => {
-              // console.log(value);
-              setUsername(value);
-              checkUsername(value);
-            }}
-            info={isUsername ? '' : t('userProfile.login.username.info.empty')}
-            infoType="danger"
-            // onBlur={checkUsername}
-            autoComplete="username"
-          />
-          <TextInput
-            required
-            label={t('userProfile.login.password.label')}
-            placeholder={t('userProfile.login.password.placeholder')}
-            onValueChange={value => {
-              setPassword(value);
-              checkPassword(value);
-            }}
-            type="password"
-            info={isPassword ? '' : t('userProfile.login.password.info.empty')}
-            infoType="danger"
-            // onBlur={checkPassword}
-            autoComplete="password"
-          />
-          <Button
-            plain
-            onPress={checkLogin}
-            label={t('userProfile.login.button.login')}
-          />
-        </CellGroup>
-      </SpacingView>
-    </View>
+    <SpacingView>
+      <Text>{t('userProfile.login.title')}</Text>
+      <CellGroup card>
+        <TextInput
+          required
+          label={t('userProfile.login.username.label')}
+          placeholder={t('userProfile.login.username.placeholder')}
+          onValueChange={value => {
+            // console.log(value);
+            setUsername(value);
+            checkUsername(value);
+          }}
+          info={isUsername ? '' : t('userProfile.login.username.info.empty')}
+          infoType="danger"
+          // onBlur={checkUsername}
+          autoComplete="username"
+        />
+        <TextInput
+          required
+          label={t('userProfile.login.password.label')}
+          placeholder={t('userProfile.login.password.placeholder')}
+          onValueChange={value => {
+            setPassword(value);
+            checkPassword(value);
+          }}
+          type="password"
+          info={isPassword ? '' : t('userProfile.login.password.info.empty')}
+          infoType="danger"
+          // onBlur={checkPassword}
+          autoComplete="password"
+        />
+        <Button
+          plain
+          onPress={checkLogin}
+          label={t('userProfile.login.button.login')}
+        />
+      </CellGroup>
+    </SpacingView>
   );
 };
