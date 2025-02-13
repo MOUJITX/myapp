@@ -83,7 +83,7 @@ export const ExpireReminderListScreen = () => {
         />
       </BottomSheet>
 
-      <BottomSheet ref={CategoryScreenBottomSheetRef} autoSize>
+      <BottomSheet ref={CategoryScreenBottomSheetRef}>
         <ReminderCategoryScreen
           selected={selectCategory}
           onSelect={setSelectCategory}

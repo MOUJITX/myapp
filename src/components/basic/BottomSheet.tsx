@@ -77,9 +77,6 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
       backdropComponent={backdrop}
       enableDynamicSizing={props.autoSize ?? false}
       handleComponent={props.hideHeader ? null : undefined}
-      keyboardBehavior="interactive"
-      keyboardBlurBehavior="restore"
-      android_keyboardInputMode="adjustResize"
     >
       <BottomSheetView style={styles(isOpen).contentContainer}>
         {props.children}

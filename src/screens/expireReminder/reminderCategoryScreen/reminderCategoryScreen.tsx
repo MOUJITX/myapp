@@ -68,8 +68,8 @@ export const ReminderCategoryScreen = (props: Props) => {
     <SpacingView>
       <CellGroup>
         {/* 现有分类列表 */}
-        {categories.map(category => (
-          <View key={category.value} style={styles.listItem}>
+        {categories.map((category, index) => (
+          <View key={index} style={styles.listItem}>
             <TouchableOpacity
               style={styles.itemLeft}
               onPress={() => handleSelect(category.value)}
