@@ -51,9 +51,9 @@ export const ExpireReminderListScreen = () => {
       <SpacingView notScroll>
         <CategoryFilter
           data={[
-            { label: '全部', value: 'all' },
-            { label: '进行中', value: 'processing' },
-            { label: '已完成', value: 'completed' },
+            { label: '全部', value: 'all', isDefault: true },
+            { label: '药品', value: 'medicine', isDefault: true },
+            { label: '食物', value: 'food', isDefault: true },
           ]}
           selectedValue={selectCategory}
           onSelect={value => setSelectCategory(value)}
@@ -84,7 +84,10 @@ export const ExpireReminderListScreen = () => {
       </BottomSheet>
 
       <BottomSheet ref={CategoryScreenBottomSheetRef} autoSize>
-        <ReminderCategoryScreen />
+        <ReminderCategoryScreen
+          selected={selectCategory}
+          onSelect={setSelectCategory}
+        />
       </BottomSheet>
     </View>
   );

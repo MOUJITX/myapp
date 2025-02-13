@@ -4,13 +4,14 @@ import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button, { ButtonShapeType } from '../basic/Button';
 
-interface ScrollButton {
+export interface Category {
   label: string;
   value: string;
+  isDefault?: boolean;
 }
 
 interface Props {
-  data: ScrollButton[];
+  data: Category[];
   selectedValue: string;
   onSelect: (value: string) => void;
   onPressMoreButton?: () => void;
@@ -67,20 +68,22 @@ const styles = StyleSheet.create({
   },
   scrollRow: {
     gap: commonStyles.spacings.small,
+    alignItems: 'baseline',
   },
   button: {
     alignItems: 'center',
   },
   text: {
     fontWeight: 'bold',
-    fontSize: commonStyles.fontSize.largeX,
     paddingHorizontal: commonStyles.spacings.small3X,
   },
   selectedText: {
     color: commonStyles.textColor.default,
+    fontSize: commonStyles.fontSize.large3X,
   },
   defaultText: {
     color: commonStyles.textColor.info,
+    fontSize: commonStyles.fontSize.largeX,
   },
   underline: {
     height: 4,
