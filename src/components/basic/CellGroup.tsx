@@ -8,6 +8,7 @@ interface Props {
   style?: StyleProp<ViewStyle>;
   noSpacing?: boolean;
   header?: ReactNode;
+  shadow?: boolean;
 }
 
 export default (props: Props) => {
@@ -18,6 +19,7 @@ export default (props: Props) => {
         props.card ? styles.card : undefined,
         props.noSpacing ? undefined : styles.groupSpace,
         props.style,
+        props.shadow ? commonStyles.shadow : undefined,
       ]}
     >
       {props.header}

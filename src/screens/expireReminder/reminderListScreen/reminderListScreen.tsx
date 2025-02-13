@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
@@ -12,6 +12,7 @@ import { Good } from '../../../store/expireReminder/expireReminder.type';
 import SwipeRowList from '../../../components/basic/SwipeRowList';
 import { ButtonShapeType } from '../../../components/basic/Button';
 import CategoryFilter from '../../../components/expireReminder/CategoryFilter';
+import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -83,7 +84,7 @@ export const ExpireReminderListScreen = () => {
       </BottomSheet>
 
       <BottomSheet ref={CategoryScreenBottomSheetRef} autoSize>
-        <Text>category</Text>
+        <ReminderCategoryScreen />
       </BottomSheet>
     </View>
   );
