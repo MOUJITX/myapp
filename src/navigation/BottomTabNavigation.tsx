@@ -7,6 +7,7 @@ import { t } from 'i18next';
 import { Text } from 'react-native';
 import { commonHeaderOptions } from './AppNavigation';
 import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
+import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/tickerCardScreen';
 
 export default () => {
   const BottomTab = createBottomTabNavigator<AppNavigationList>();
@@ -31,6 +32,15 @@ export default () => {
         options={{
           title: t('expireReminder.title'),
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '📅' }),
+          ...commonHeaderOptions,
+        }}
+      />
+      <BottomTab.Screen
+        name="TicketCardScreen"
+        component={TicketCardScreen}
+        options={{
+          // title: t('expireReminder.title'),
+          tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '💳' }),
           ...commonHeaderOptions,
         }}
       />
