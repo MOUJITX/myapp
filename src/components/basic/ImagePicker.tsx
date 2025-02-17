@@ -40,7 +40,7 @@ const SelectSource = ({
     <CellGroup noSpacing>
       <TouchableOpacity onPress={handleClose} style={styles.selectButton}>
         <Text style={[styles.text, styles.cancelText]}>
-          {t('component.imagePicker.cancel')}
+          {t('common.cancel.label')}
         </Text>
       </TouchableOpacity>
     </CellGroup>

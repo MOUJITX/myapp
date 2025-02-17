@@ -12,11 +12,11 @@ This is a React Native project by MOUJITX.
 
 # Todo
 
-- [ ] INIT main page
+- [x] INIT main page
 - [ ] RECORD train ticket
 - [ ] RECORD id/credit/... card
-- [ ] RECORD food shelf life
-- [ ] RECORD medicine shelf life
+- [x] RECORD food shelf life
+- [x] RECORD medicine shelf life
 
 # issue
 

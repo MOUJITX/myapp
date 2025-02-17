@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Image, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 import Popup from './Popup';
+import { t } from 'i18next';
 
 export interface Props {
   img: string;
@@ -61,16 +62,16 @@ export default (props: Props) => {
 
       <Popup
         visible={deleteConfirm}
-        title="删除图片"
-        content={'是否删除该图片'}
+        title={t('component.imagePicker.removeConfirm.title')}
+        content={t('component.imagePicker.removeConfirm.content')}
         buttons={[
           {
-            label: '确定',
+            label: t('common.confirm.label'),
             onPress: () => props.onRemove && props.onRemove(),
             type: 'danger',
           },
           {
-            label: '取消',
+            label: t('common.cancel.label'),
             onPress: () => setDeleteConfirm(false),
             type: 'default',
           },

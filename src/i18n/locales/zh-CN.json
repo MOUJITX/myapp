@@ -32,7 +32,10 @@
     "imagePicker": {
       "chooseImage": "从相册中选择",
       "takePhoto": "拍摄照片",
-      "cancel": "取消"
+      "removeConfirm": {
+        "title": "删除图片",
+        "content": "是否删除该图片"
+      }
     },
     "camera": {
       "noDevice": {
@@ -135,6 +138,12 @@
     },
     "close": {
       "icon": "×"
+    },
+    "confirm": {
+      "label": "确定"
+    },
+    "cancel": {
+      "label": "取消"
     }
   }
 }
