@@ -94,6 +94,29 @@
       "name": {
         "placeholder": "请输入商品名称"
       }
+    },
+    "category": {
+      "add": {
+        "button": {
+          "label": "+ 添加新分类"
+        },
+        "input": {
+          "placeholder": "输入分类名称"
+        }
+      },
+      "selector": {
+        "icon": {
+          "selected": "✔",
+          "unselected": "○",
+          "remove": "×"
+        }
+      },
+      "label": {
+        "food": "Food",
+        "all": "All",
+        "medicine": "Medicine",
+        "default": "Default"
+      }
     }
   },
   "common": {

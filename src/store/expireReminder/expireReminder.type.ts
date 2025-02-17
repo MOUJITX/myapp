@@ -10,6 +10,13 @@ export enum GoodType {
   Other = 'other',
 }
 
+export interface GoodCategory {
+  categoryID: string;
+  label: string;
+  createUser: string;
+  isDefault: boolean;
+}
+
 export interface GoodItem {
   itemID: string;
   productionDate?: Date;
@@ -23,7 +30,7 @@ export interface Good {
   title: string;
   uniqueCode: string;
   imgs: string[];
-  type: GoodType;
+  type: string;
   detail: {
     dosage?: string;
     frequency?: string;
@@ -36,4 +43,5 @@ export interface Good {
 
 export interface ExpireReminderState {
   goodsList: Good[];
+  categoriesList: GoodCategory[];
 }

@@ -16,7 +16,7 @@ import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCatego
 
 export const ExpireReminderListScreen = () => {
   const {
-    input: { allExpireReminderList },
+    input: { allExpireReminderList, allGoodCategoriesList },
     output: { handleRemoveGood },
   } = useExpireReminderListHook();
 
@@ -50,11 +50,7 @@ export const ExpireReminderListScreen = () => {
     <View style={style.container}>
       <SpacingView notScroll>
         <CategoryFilter
-          data={[
-            { label: '全部', value: 'all', isDefault: true },
-            { label: '药品', value: 'medicine', isDefault: true },
-            { label: '食物', value: 'food', isDefault: true },
-          ]}
+          data={allGoodCategoriesList}
           selectedValue={selectCategory}
           onSelect={value => setSelectCategory(value)}
           onPressMoreButton={openCategoryScreenBottomSheet}

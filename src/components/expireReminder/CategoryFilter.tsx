@@ -3,15 +3,10 @@ import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button, { ButtonShapeType } from '../basic/Button';
-
-export interface Category {
-  label: string;
-  value: string;
-  isDefault?: boolean;
-}
+import { GoodCategory } from '../../store/expireReminder/expireReminder.type';
 
 interface Props {
-  data: Category[];
+  data: GoodCategory[];
   selectedValue: string;
   onSelect: (value: string) => void;
   onPressMoreButton?: () => void;
@@ -26,11 +21,11 @@ export default (props: Props) => {
         contentContainerStyle={styles.scrollRow}
       >
         {props.data.map((item, index) => {
-          const isSelected = item.value === props.selectedValue;
+          const isSelected = item.categoryID === props.selectedValue;
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => props.onSelect(item.value)}
+              onPress={() => props.onSelect(item.categoryID)}
               style={styles.button}
             >
               <Text

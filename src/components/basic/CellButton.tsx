@@ -5,20 +5,29 @@ import { commonStyles } from '../../styles';
 
 interface Props {
   label: string;
-  icon?: string;
+  leftIcon?: string;
+  rightIcon?: string;
   onPress?: () => void;
+  onRightPress?: () => void;
+  onLongPress?: () => void;
 }
 
 export default (props: Props) => {
   return (
     <Cell>
-      <TouchableOpacity onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress} onLongPress={props.onLongPress}>
         <View style={styles.buttonRow}>
           <View style={styles.textRow}>
-            {props.icon && <Text style={styles.text}>{props.icon}</Text>}
+            {props.leftIcon && (
+              <Text style={[styles.text, styles.leftIcon]}>
+                {props.leftIcon}
+              </Text>
+            )}
             <Text style={styles.text}>{props.label}</Text>
           </View>
-          <Text style={styles.directIcon}>{'>'}</Text>
+          <Text style={styles.directIcon} onPress={props.onRightPress}>
+            {props.rightIcon ?? '>'}
+          </Text>
         </View>
       </TouchableOpacity>
     </Cell>
@@ -39,14 +48,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexShrink: 1,
   },
+  leftIcon: {
+    width: commonStyles.spacings.large,
+  },
   text: {
     color: commonStyles.textColor.default,
     fontSize: commonStyles.fontSize.large,
     flexShrink: 1,
+    gap: 5,
   },
   directIcon: {
     color: commonStyles.color.gray6,
     fontSize: commonStyles.fontSize.largeX,
-    marginLeft: commonStyles.spacings.medium,
+    width: commonStyles.spacings.large,
+    textAlign: 'right',
   },
 });

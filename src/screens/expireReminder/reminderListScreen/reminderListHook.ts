@@ -1,10 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllExpireReminder } from '../../../store/expireReminder/expireReminder.selectors';
-import { Good } from '../../../store/expireReminder/expireReminder.type';
+import {
+  selectAllExpireReminder,
+  selectAllGoodCategory,
+} from '../../../store/expireReminder/expireReminder.selectors';
+import {
+  Good,
+  GoodCategory,
+} from '../../../store/expireReminder/expireReminder.type';
 import { removeGoodAction } from '../../../store/expireReminder/expireReminder.redux';
 
 type Input = {
   allExpireReminderList: Good[];
+  allGoodCategoriesList: GoodCategory[];
 };
 
 type Output = {
@@ -19,6 +26,7 @@ type ExpireReminderListHook = {
 export const useExpireReminderListHook = (): ExpireReminderListHook => {
   const input: Input = {
     allExpireReminderList: useSelector(selectAllExpireReminder),
+    allGoodCategoriesList: useSelector(selectAllGoodCategory),
   };
 
   const dispatch = useDispatch();

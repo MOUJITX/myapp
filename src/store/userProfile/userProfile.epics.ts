@@ -14,6 +14,7 @@ import { RootState } from '../type';
 import { LoginPayload } from './userProfile.type';
 import { selectUserInfoByUsername } from './userProfile.selectors';
 import { navigateAction } from '../navigation/navigation.redux';
+import { initCategoryAction } from '../expireReminder/expireReminder.redux';
 
 export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 
@@ -97,9 +98,16 @@ const userLogoutEpic: UserProfileEpic = action$ =>
     )
   );
 
+const userAddInfoEpic: UserProfileEpic = action$ =>
+  action$.pipe(
+    filter(userAddInfoAction.match),
+    mergeMap(action => of(initCategoryAction(action.payload.uuid)))
+  );
+
 export const userProfileEpics = combineEpics(
   userLoginEpic,
   userLoginSuccessEpic,
   userLoginFailureEpic,
-  userLogoutEpic
+  userLogoutEpic,
+  userAddInfoEpic
 );

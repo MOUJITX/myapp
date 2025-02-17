@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ExpireReminderState, Good, GoodItem } from './expireReminder.type';
+import {
+  ExpireReminderState,
+  Good,
+  GoodCategory,
+  GoodItem,
+} from './expireReminder.type';
+import { randomUUID } from '../../utils/utils';
+import { t } from 'i18next';
 
 const initialState: ExpireReminderState = {
   goodsList: [],
+  categoriesList: [],
 };
 
 export const expireReminderSlice = createSlice({
@@ -89,6 +97,70 @@ export const expireReminderSlice = createSlice({
         good.items = [];
       }
     },
+    initCategoryAction: (state, action: PayloadAction<string>) => {
+      const categoriesList: GoodCategory[] = [
+        {
+          categoryID: 'all',
+          label: t('expireReminder.category.label.all'),
+          createUser: action.payload,
+          isDefault: true,
+        },
+        {
+          categoryID: 'medicine',
+          label: t('expireReminder.category.label.medicine'),
+          createUser: action.payload,
+          isDefault: false,
+        },
+        {
+          categoryID: 'food',
+          label: t('expireReminder.category.label.food'),
+          createUser: action.payload,
+          isDefault: false,
+        },
+        {
+          categoryID: 'default',
+          label: t('expireReminder.category.label.default'),
+          createUser: action.payload,
+          isDefault: false,
+        },
+      ];
+      state.categoriesList.push(...categoriesList);
+    },
+    addCategoryAction: (
+      state,
+      action: PayloadAction<{
+        label: string;
+        createUser: string;
+      }>
+    ) => {
+      state.categoriesList.push({
+        ...action.payload,
+        categoryID: randomUUID(),
+        isDefault: false,
+      });
+    },
+    updateCategoryAction: (
+      state,
+      action: PayloadAction<{
+        categoryID: string;
+        newLabel: string;
+      }>
+    ) => {
+      const index = state.categoriesList.findIndex(
+        category => category.categoryID === action.payload.categoryID
+      );
+      if (index !== -1) {
+        state.categoriesList[index] = {
+          ...state.categoriesList[index],
+          label: action.payload.newLabel,
+        };
+      }
+    },
+    removeCategoryAction: (state, action: PayloadAction<string>) => {
+      state.categoriesList = state.categoriesList.filter(
+        cat => cat.categoryID !== action.payload
+      );
+    },
   },
 });
 
@@ -100,6 +172,10 @@ export const {
   updateGoodItemAction,
   clearAllGoodsAction,
   clearGoodAllItemsAction,
+  initCategoryAction,
+  addCategoryAction,
+  updateCategoryAction,
+  removeCategoryAction,
 } = expireReminderSlice.actions;
 
 export default expireReminderSlice.reducer;
