@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useExpireReminderListHook } from './reminderListHook';
 import HoverButton from '../../../components/basic/HoverButton';
@@ -61,6 +61,15 @@ export const ExpireReminderListScreen = () => {
       setReminderList(categoryExpireReminderList(category));
     }
   };
+
+  useEffect(() => {
+    if (selectCategory === 'all') {
+      setReminderList(allExpireReminderList);
+    } else {
+      setReminderList(categoryExpireReminderList(selectCategory));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allExpireReminderList]);
 
   return (
     <View style={style.container}>
