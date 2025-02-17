@@ -54,7 +54,8 @@
       "valid": "Valid",
       "daysLeft": "days left",
       "dayLeft": "day left",
-      "soon": "Soon"
+      "soon": "Soon",
+      "used": "Used Up"
     },
     "info": {
       "dosage": {
@@ -96,6 +97,9 @@
       },
       "category": {
         "label": "Category"
+      },
+      "used": {
+        "label": "In Use"
       }
     },
     "category": {

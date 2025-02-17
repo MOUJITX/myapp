@@ -6,6 +6,7 @@ import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
 import { calculateDays } from '../../../utils/datetime';
 import { t } from 'i18next';
+import Switch from '../../../components/basic/Switch';
 
 interface Props {
   itemNum: number;
@@ -43,6 +44,14 @@ export default (props: Props) => {
         ...newGoodItemCell,
         expireDate: value,
         lifeDays: calculateDays(value, newGoodItemCell.productionDate, true),
+      };
+    }
+
+    if (key === 'isUsed') {
+      console.log(value);
+      newGoodItemCell = {
+        ...newGoodItemCell,
+        isUsed: !value,
       };
     }
 
@@ -86,6 +95,12 @@ export default (props: Props) => {
         value={props.item.expireDate}
         minDate={props.item.productionDate}
         onValueChange={value => handleValueChange('expireDate', value)}
+      />
+      <Switch
+        inline
+        label={t('expireReminder.add.used.label')}
+        value={!props.item.isUsed}
+        onValueChange={value => handleValueChange('isUsed', value)}
       />
     </CellGroup>
   );

@@ -54,7 +54,8 @@
       "valid": "使用中",
       "daysLeft": "天后",
       "dayLeft": "天后",
-      "soon": "即将过期"
+      "soon": "即将过期",
+      "used": "已用尽"
     },
     "info": {
       "dosage": {
@@ -96,6 +97,9 @@
       },
       "category": {
         "label": "类别"
+      },
+      "used": {
+        "label": "存余"
       }
     },
     "category": {

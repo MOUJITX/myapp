@@ -54,6 +54,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
     expireDate: new Date(),
     productionDate: new Date(),
     lifeDays: 0,
+    isUsed: false,
   };
 
   useComponentMount(() => {

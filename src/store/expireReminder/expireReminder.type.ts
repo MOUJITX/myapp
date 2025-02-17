@@ -2,6 +2,7 @@ export enum ExpiryStatus {
   Valid = 'valid',
   Soon = 'soon',
   Expired = 'expired',
+  Used = 'used',
 }
 
 export interface GoodCategory {
@@ -16,6 +17,7 @@ export interface GoodItem {
   productionDate?: Date;
   expireDate?: Date;
   lifeDays?: number;
+  isUsed: boolean;
   createTime: Date;
 }
 

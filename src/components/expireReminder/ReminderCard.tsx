@@ -19,7 +19,11 @@ interface Props {
 const getDaysUntilExpiry = (expireDate: Date) =>
   calculateDays(new Date(), new Date(expireDate));
 
-const getExpiryStatus = (expireDate: Date) => {
+const getExpiryStatus = (expireDate: Date, isUsed: boolean) => {
+  if (isUsed) {
+    return ExpiryStatus.Used;
+  }
+
   const days = getDaysUntilExpiry(expireDate);
   return days <= 0
     ? ExpiryStatus.Expired
@@ -63,16 +67,22 @@ const InfoRow = ({
   ) : null;
 };
 
-const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
-  const status = getExpiryStatus(expireDate);
+const StatusIndicator = ({
+  expireDate,
+  isUsed,
+}: {
+  expireDate: Date;
+  isUsed: boolean;
+}) => {
+  const status = getExpiryStatus(expireDate, isUsed);
   const days = getDaysUntilExpiry(expireDate);
   const statusColor =
     commonStyles.statusColor[
       status === ExpiryStatus.Soon
         ? 'warning'
-        : status === ExpiryStatus.Expired
-          ? 'danger'
-          : 'success'
+        : status === ExpiryStatus.Valid
+          ? 'success'
+          : 'danger'
     ];
 
   return (
@@ -83,7 +93,7 @@ const StatusIndicator = ({ expireDate }: { expireDate: Date }) => {
           {t(`expireReminder.status.${status}`)}
         </Text>
       </View>
-      {status !== ExpiryStatus.Expired && (
+      {(status === ExpiryStatus.Valid || status === ExpiryStatus.Soon) && (
         <View style={styles.daysLeftContainer}>
           <Text style={[styles.daysNumber, { color: statusColor }]}>
             {days}
@@ -123,7 +133,10 @@ export default (props: Props) => {
           <View style={styles.bottomInfo} key={index}>
             {item.expireDate && (
               <>
-                <StatusIndicator expireDate={item.expireDate} />
+                <StatusIndicator
+                  expireDate={item.expireDate}
+                  isUsed={item.isUsed}
+                />
                 <Text style={styles.dateText}>
                   {item.expireDate
                     ? new Date(item.expireDate).toLocaleDateString()
