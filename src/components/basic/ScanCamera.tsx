@@ -56,8 +56,8 @@ export default (props: Props) => {
               label: t('common.return.label'),
               onPress: () => {
                 props.onCodeScanFailed &&
-                  props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE),
-                  setIsActive(false);
+                  props.onCodeScanFailed(CodeScanFailedType.NO_DEVICE);
+                setIsActive(false);
               },
               type: 'danger',
             },
@@ -74,8 +74,8 @@ export default (props: Props) => {
               label: t('common.return.label'),
               onPress: () => {
                 props.onCodeScanFailed &&
-                  props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION),
-                  setIsActive(false);
+                  props.onCodeScanFailed(CodeScanFailedType.NO_PERMISSION);
+                setIsActive(false);
               },
               type: 'danger',
             },
