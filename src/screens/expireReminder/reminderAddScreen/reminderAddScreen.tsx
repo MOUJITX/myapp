@@ -1,5 +1,5 @@
 import React, { RefObject, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
 import TextLabel from '../../../components/basic/TextLabel';
@@ -112,7 +112,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
 
   return (
     <SpacingView>
-      <Text>ExpireReminderAddScreen</Text>
       <View>
         <CellGroup card>
           <TextInput

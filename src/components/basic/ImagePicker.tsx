@@ -54,7 +54,7 @@ const ImagePicker = (props: Props) => {
     const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
     RNFS.copyFile(imgUri, path)
       .then(() => {
-        // console.log('Image saved to', path);
+        // console.log('Image saved to', path, imgUri);
         props.onImageChange('file://' + path);
         bottomSheetRef.current?.closeBottomSheet();
       })

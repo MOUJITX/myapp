@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
+import Popup from './Popup';
 
 export interface Props {
   img: string;
@@ -8,10 +9,12 @@ export interface Props {
   radius?: boolean;
   onPress?: () => void;
   preview?: boolean;
+  onRemove?: () => void;
 }
 
 export default (props: Props) => {
   const [visible, setVisible] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const handlePress = () => {
     if (props.onPress) {
@@ -26,6 +29,7 @@ export default (props: Props) => {
       <TouchableOpacity
         onPress={handlePress}
         disabled={!props.preview || !props.img}
+        onLongPress={() => props.onRemove && setDeleteConfirm(true)}
       >
         <Image
           source={{ uri: props.img }}
@@ -54,6 +58,24 @@ export default (props: Props) => {
           />
         </TouchableOpacity>
       </Modal>
+
+      <Popup
+        visible={deleteConfirm}
+        title="删除图片"
+        content={'是否删除该图片'}
+        buttons={[
+          {
+            label: '确定',
+            onPress: () => props.onRemove && props.onRemove(),
+            type: 'danger',
+          },
+          {
+            label: '取消',
+            onPress: () => setDeleteConfirm(false),
+            type: 'default',
+          },
+        ]}
+      />
     </>
   );
 };

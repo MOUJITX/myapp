@@ -22,6 +22,9 @@ export default (props: Props) => {
           radius={props.radius}
           key={index}
           preview
+          onRemove={() => {
+            props.onValueChange?.(props.imgs.filter((_, i) => i !== index));
+          }}
         />
       ))}
       {!props.disabled && (
