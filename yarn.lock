@@ -1110,9 +1110,9 @@
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
 "@gorhom/bottom-sheet@^5.0.6":
-  version "5.1.0"
-  resolved "https://registry.npmmirror.com/@gorhom/bottom-sheet/-/bottom-sheet-5.1.0.tgz#c932170d771bd922ae40d26282c36777aaf96301"
-  integrity sha512-GcVR/nEztP28ulqDMnMcI9J4dmW1BRtyqsYTTIcAyDJgL6FmCBqhwSff5FxNfBzEdxfgEkBwHN46eXnIN/YomA==
+  version "5.1.1"
+  resolved "https://registry.npmmirror.com/@gorhom/bottom-sheet/-/bottom-sheet-5.1.1.tgz#43ecb9e7b4d4ca4b4cefdf3b6b497f7715f350bc"
+  integrity sha512-Y8FiuRmeZYaP+ZGQ0axDwWrrKqVp4ByYRs1D2fTJTxHMt081MHHRQsqmZ3SK7AFp3cSID+vTqnD8w/KAASpy+w==
   dependencies:
     "@gorhom/portal" "1.0.14"
     invariant "^2.2.4"
