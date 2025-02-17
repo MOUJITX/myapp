@@ -94,6 +94,29 @@
       "productionDate": {
         "label": "Date of production"
       }
+    },
+    "category": {
+      "add": {
+        "button": {
+          "label": "+ Add new category"
+        },
+        "input": {
+          "placeholder": "Enter category name"
+        }
+      },
+      "label": {
+        "all": "All",
+        "default": "☄️ Default",
+        "food": "🍜 Food",
+        "medicine": "💊 Medicine"
+      },
+      "selector": {
+        "icon": {
+          "remove": "×",
+          "selected": "✔",
+          "unselected": "○"
+        }
+      }
     }
   },
   "common": {

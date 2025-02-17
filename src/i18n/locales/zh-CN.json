@@ -112,10 +112,10 @@
         }
       },
       "label": {
-        "food": "Food",
-        "all": "All",
-        "medicine": "Medicine",
-        "default": "Default"
+        "food": "🍜食物",
+        "all": "全部",
+        "medicine": "💊药品",
+        "default": "☄️默认"
       }
     }
   },
