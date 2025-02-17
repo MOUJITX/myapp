@@ -1,4 +1,4 @@
-import React, { RefObject, useState } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
@@ -9,7 +9,6 @@ import ImageRow from '../../../components/basic/ImageRow';
 import {
   Good,
   GoodItem,
-  GoodType,
 } from '../../../store/expireReminder/expireReminder.type';
 import {
   randomString,
@@ -19,9 +18,12 @@ import {
 import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
-import { BottomSheetRef } from '../../../components/basic/BottomSheet';
+import BottomSheet, {
+  BottomSheetRef,
+} from '../../../components/basic/BottomSheet';
 import { t } from 'i18next';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
+import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -30,7 +32,7 @@ interface Props {
 
 export const ExpireReminderAddScreen = (props: Props) => {
   const {
-    input: {},
+    input: { categoryLabel },
     output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
@@ -39,7 +41,12 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const [uniCode, setUniCode] = useState<string | undefined>(
     props.good?.uniqueCode
   );
+  const [category, setCategory] = useState<string>(
+    props.good?.type ?? 'default'
+  );
   const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);
+
+  const CategoryScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const initItem: GoodItem = {
     itemID: randomUUID(),
@@ -85,7 +92,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
       title: title ?? randomString(),
       uniqueCode: uniCode ?? randomStringNumber(),
       imgs,
-      type: GoodType.Medicine,
+      type: category,
       detail: {},
       items,
       createTime: props.good?.createTime ?? new Date(),
@@ -97,6 +104,10 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const renderCameraScanButton = () => (
     <ScanCameraButton onSuccess={value => setUniCode(value)} />
   );
+
+  const openCategorySelectScreenBottomSheet = () => {
+    CategoryScreenBottomSheetRef.current?.openBottomSheet();
+  };
 
   return (
     <SpacingView>
@@ -129,6 +140,13 @@ export const ExpireReminderAddScreen = (props: Props) => {
             label={t('expireReminder.add.goodNumber.label')}
             value={items.length.toString()}
           />
+          <TextLabel
+            inline
+            label={t('expireReminder.add.category.label')}
+            value={categoryLabel(category)}
+            textColor="primary"
+            onTextPress={openCategorySelectScreenBottomSheet}
+          />
         </CellGroup>
         {items.map((item, index) => (
           <ReminderAddCell
@@ -147,6 +165,15 @@ export const ExpireReminderAddScreen = (props: Props) => {
           onPress={handleSubmitGoodCheck}
         />
       </View>
+
+      <BottomSheet ref={CategoryScreenBottomSheetRef}>
+        <ReminderCategoryScreen
+          bottomSheetRef={CategoryScreenBottomSheetRef}
+          selected={category}
+          onSelect={setCategory}
+          hideAll
+        />
+      </BottomSheet>
     </SpacingView>
   );
 };

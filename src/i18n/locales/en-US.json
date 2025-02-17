@@ -93,6 +93,9 @@
       },
       "productionDate": {
         "label": "Date of production"
+      },
+      "category": {
+        "label": "Category"
       }
     },
     "category": {

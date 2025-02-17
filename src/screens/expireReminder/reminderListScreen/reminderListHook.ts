@@ -11,6 +11,7 @@ import { removeGoodAction } from '../../../store/expireReminder/expireReminder.r
 
 type Input = {
   allExpireReminderList: Good[];
+  categoryExpireReminderList: (category: string) => Good[];
   allGoodCategoriesList: GoodCategory[];
 };
 
@@ -24,8 +25,12 @@ type ExpireReminderListHook = {
 };
 
 export const useExpireReminderListHook = (): ExpireReminderListHook => {
+  const allExpireReminderList = useSelector(selectAllExpireReminder);
+
   const input: Input = {
-    allExpireReminderList: useSelector(selectAllExpireReminder),
+    allExpireReminderList,
+    categoryExpireReminderList: (category: string) =>
+      allExpireReminderList.filter(g => g.type === category),
     allGoodCategoriesList: useSelector(selectAllGoodCategory),
   };
 

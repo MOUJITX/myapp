@@ -93,6 +93,9 @@
       },
       "name": {
         "placeholder": "请输入商品名称"
+      },
+      "category": {
+        "label": "类别"
       }
     },
     "category": {

@@ -10,6 +10,7 @@ import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.sele
 
 type Input = {
   allCategories: GoodCategory[];
+  allCategoriesHideAll: GoodCategory[];
 };
 
 type Output = {
@@ -26,6 +27,9 @@ type ReminderCategoryHook = {
 export const useReminderCategoryHook = (): ReminderCategoryHook => {
   const input: Input = {
     allCategories: useSelector(selectAllGoodCategory),
+    allCategoriesHideAll: useSelector(selectAllGoodCategory).filter(
+      c => c.categoryID !== 'all'
+    ),
   };
 
   const dispatch = useDispatch();

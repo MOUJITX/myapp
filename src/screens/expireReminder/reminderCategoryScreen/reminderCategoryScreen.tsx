@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SpacingView from '../../../components/basic/SpacingView';
 import CellGroup from '../../../components/basic/CellGroup';
@@ -9,29 +9,35 @@ import TextInput from '../../../components/basic/TextInput';
 import { useReminderCategoryHook } from './reminderCategoryHook';
 import { GoodCategory } from '../../../store/expireReminder/expireReminder.type';
 import { t } from 'i18next';
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 
 interface Props {
+  bottomSheetRef: RefObject<BottomSheetRef>;
   selected: string;
   onSelect: (category: string) => void;
+  hideAll?: boolean;
 }
 
 export const ReminderCategoryScreen = (props: Props) => {
   const {
-    input: { allCategories },
+    input: { allCategories, allCategoriesHideAll },
     output: { addCategory, removeCategory, updateCategory },
   } = useReminderCategoryHook();
 
-  const [categories, setCategories] = useState<GoodCategory[]>(allCategories);
+  const [categories, setCategories] = useState<GoodCategory[]>(
+    props.hideAll ? allCategoriesHideAll : allCategories
+  );
   const [editingCategory, setEditingCategory] = useState<GoodCategory | null>();
   const [newCategoryName, setNewCategoryName] = useState('');
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    setCategories(allCategories);
-  }, [allCategories]);
+    setCategories(props.hideAll ? allCategoriesHideAll : allCategories);
+  }, [allCategories, allCategoriesHideAll, props.hideAll]);
 
   const handleSelect = (value: string) => {
     props.onSelect(value);
+    props.bottomSheetRef.current?.closeBottomSheet();
   };
 
   const handleAddCategory = () => {

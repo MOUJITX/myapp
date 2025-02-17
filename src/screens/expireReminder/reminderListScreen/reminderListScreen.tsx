@@ -16,14 +16,21 @@ import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCatego
 
 export const ExpireReminderListScreen = () => {
   const {
-    input: { allExpireReminderList, allGoodCategoriesList },
+    input: {
+      allExpireReminderList,
+      allGoodCategoriesList,
+      categoryExpireReminderList,
+    },
     output: { handleRemoveGood },
   } = useExpireReminderListHook();
 
   const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
   const CategoryScreenBottomSheetRef = useRef<BottomSheetRef>(null);
   const [good, setGood] = useState<Good>();
-  const [selectCategory, setSelectCategory] = useState('all');
+  const [selectCategory, setSelectCategory] = useState<string>('all');
+  const [reminderList, setReminderList] = useState<Good[]>(
+    allExpireReminderList
+  );
 
   const openAddReminderBottomSheet = () => {
     setGood(undefined);
@@ -46,18 +53,27 @@ export const ExpireReminderListScreen = () => {
     );
   };
 
+  const handleSelectCategory = (category: string) => {
+    setSelectCategory(category);
+    if (category === 'all') {
+      setReminderList(allExpireReminderList);
+    } else {
+      setReminderList(categoryExpireReminderList(category));
+    }
+  };
+
   return (
     <View style={style.container}>
       <SpacingView notScroll>
         <CategoryFilter
           data={allGoodCategoriesList}
           selectedValue={selectCategory}
-          onSelect={value => setSelectCategory(value)}
+          onSelect={handleSelectCategory}
           onPressMoreButton={openCategoryScreenBottomSheet}
         />
         <SwipeRowList
           renderItem={renderGoodItem}
-          data={allExpireReminderList}
+          data={reminderList}
           rightButton={[
             {
               label: '-',
@@ -81,8 +97,9 @@ export const ExpireReminderListScreen = () => {
 
       <BottomSheet ref={CategoryScreenBottomSheetRef}>
         <ReminderCategoryScreen
+          bottomSheetRef={CategoryScreenBottomSheetRef}
           selected={selectCategory}
-          onSelect={setSelectCategory}
+          onSelect={handleSelectCategory}
         />
       </BottomSheet>
     </View>

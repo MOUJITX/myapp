@@ -4,12 +4,6 @@ export enum ExpiryStatus {
   Expired = 'expired',
 }
 
-export enum GoodType {
-  Medicine = 'medicine',
-  Food = 'food',
-  Other = 'other',
-}
-
 export interface GoodCategory {
   categoryID: string;
   label: string;
