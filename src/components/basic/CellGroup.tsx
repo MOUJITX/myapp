@@ -9,6 +9,7 @@ interface Props {
   noSpacing?: boolean;
   header?: ReactNode;
   shadow?: boolean;
+  onPress?: () => void;
 }
 
 export default (props: Props) => {
@@ -21,6 +22,7 @@ export default (props: Props) => {
         props.style,
         props.shadow ? commonStyles.shadow : undefined,
       ]}
+      onTouchEnd={props.onPress}
     >
       {props.header}
       {props.children}

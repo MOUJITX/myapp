@@ -3,8 +3,13 @@ import { ScrollView } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import Divider from '../../../components/basic/Divider';
 import CellButton from '../../../components/basic/CellButton';
+import { useProfileHook } from './profileHook';
 
 export default () => {
+  const {
+    input: {},
+    output: { logout, gotoBackupScreen },
+  } = useProfileHook();
   return (
     <ScrollView>
       <CellGroup>
@@ -13,14 +18,12 @@ export default () => {
         <CellButton label="系统权限" />
       </CellGroup>
       <CellGroup>
-        <CellButton label="导出/备份数据" />
-        <Divider />
-        <CellButton label="恢复数据" />
+        <CellButton label="数据备份与恢复" onPress={gotoBackupScreen} />
       </CellGroup>
       <CellGroup>
         <CellButton label="切换账号" />
         <Divider />
-        <CellButton label="退出" />
+        <CellButton label="退出" onPress={logout} />
       </CellGroup>
     </ScrollView>
   );

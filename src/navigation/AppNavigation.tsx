@@ -10,6 +10,7 @@ import { DebugScreen } from '../screens/debug/debugScreen';
 import { navigationRef } from './AppNavigationRef';
 import { TouchableOpacity, Text } from 'react-native';
 import BottomTabNavigation from './BottomTabNavigation';
+import { BackupDataScreen } from '../screens/userProfile/backupDataScreen/backupDataScreen';
 
 const debugButton = () => (
   <TouchableOpacity
@@ -58,6 +59,11 @@ export const AppNavigation = () => {
         name="PageC"
         component={PageC}
         initialParams={{ initMsg: 'init msg' }}
+      />
+      <RootStack.Screen
+        name="BackupDataScreen"
+        component={BackupDataScreen}
+        options={{ ...commonHeaderOptions }}
       />
       <RootStack.Screen name="DebugScreen" component={DebugScreen} />
     </RootStack.Navigator>
