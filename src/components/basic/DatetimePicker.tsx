@@ -17,8 +17,8 @@ interface Props extends CellProps {
 }
 
 export default (props: Props) => {
-  const [date, setDate] = useState(props.value ?? new Date());
-  const [show, setShow] = useState(false);
+  const [date, setDate] = useState<Date>(props.value ?? new Date());
+  const [show, setShow] = useState<Boolean>(false);
 
   useEffect(() => {
     setDate(props.value ?? new Date());
@@ -48,13 +48,13 @@ export default (props: Props) => {
       {show && (
         <DateTimePicker
           locale={languageTag}
-          value={date}
+          value={new Date(date)}
           mode={props.mode ?? 'date'}
           is24Hour={true}
           display="default"
           onChange={onChange}
-          maximumDate={props.maxDate}
-          minimumDate={props.minDate}
+          maximumDate={props.maxDate && new Date(props.maxDate)}
+          minimumDate={props.minDate && new Date(props.minDate)}
         />
       )}
     </Cell>
