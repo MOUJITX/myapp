@@ -1,59 +1,74 @@
 import React, { useState } from 'react';
-import { StyleSheet, Animated, LayoutAnimation, View } from 'react-native';
-import SpacingView from '../../../components/basic/SpacingView';
+import { StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import TicketCard from '../../../components/TicketCard/TicketCard';
-
-// 模拟数据
-const mockTickets = [
-  {
-    id: '1',
-    trainNumber: 'G123',
-    departure: '北京南',
-    arrival: '上海虹桥',
-    time: '08:00 - 12:30',
-    seat: '二等座 08车12F',
-    passenger: '张三',
-    status: '已检票',
-  },
-  {
-    id: '2',
-    trainNumber: 'G123',
-    departure: '北京南',
-    arrival: '上海虹桥',
-    time: '08:00 - 12:30',
-    seat: '二等座 08车12F',
-    passenger: '张三',
-    status: '已检票',
-  },
-  {
-    id: '3',
-    trainNumber: 'G123',
-    departure: '北京南',
-    arrival: '上海虹桥',
-    time: '08:00 - 12:30',
-    seat: '二等座 08车12F',
-    passenger: '张三',
-    status: '已检票',
-  },
-  // ...可以继续添加更多测试数据
-];
+import { commonStyles } from '../../../styles';
+import SpacingView from '../../../components/basic/SpacingView';
+import { autoFontSize } from '../../../utils/autoSize';
 
 export const TicketCardScreen = () => {
+  const [expandedId, setExpandedId] = useState<number | undefined>(undefined);
+
+  const handleCardPress = (id: number) => {
+    setExpandedId(expandedId === id ? undefined : id);
+  };
+
   return (
     <SpacingView>
-      <TicketCard />
+      {[1, 2, 3, 4].map((ticket, index) => (
+        <TicketCardAnim
+          key={index}
+          ticket={ticket}
+          isExpanded={expandedId === index}
+          onPress={() => handleCardPress(index)}
+        />
+      ))}
     </SpacingView>
   );
 };
 
-const TicketCardAnim = () => {
-  return <TicketCard />;
+const TicketCardAnim = ({ ticket, isExpanded, onPress }: any) => {
+  const heightAnim = React.useRef(new Animated.Value(0)).current;
+  const marginAnim = React.useRef(new Animated.Value(0)).current;
+
+  React.useEffect(() => {
+    Animated.parallel([
+      Animated.timing(heightAnim, {
+        toValue: isExpanded ? 230 : 104,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(marginAnim, {
+        toValue: isExpanded ? 0 : -40,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }, [heightAnim, isExpanded, marginAnim]);
+
+  return (
+    <Animated.View
+      style={[
+        {
+          height: heightAnim,
+          marginBottom: marginAnim,
+        },
+      ]}
+    >
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={onPress}
+        style={styles.cardContainer}
+      >
+        <TicketCard />
+      </TouchableOpacity>
+    </Animated.View>
+  );
 };
 
-// const styles = StyleSheet.create({
-//   cardContainer: {
-//     borderRadius: 12,
-//     marginBottom: -40, // 实现堆叠效果
-//     overflow: 'hidden',
-//   },
-// });
+const styles = StyleSheet.create({
+  cardContainer: {
+    borderRadius: autoFontSize(12),
+    overflow: 'hidden',
+    ...commonStyles.shadow,
+  },
+});

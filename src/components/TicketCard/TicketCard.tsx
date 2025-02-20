@@ -55,7 +55,7 @@ export default () => {
         >
           <View style={styles(baseWidth).stationStart}>
             <TextSingleLine
-              label={'温一岭'}
+              label={'温   岭'}
               style={styles(baseWidth).stationCN}
             />
           </View>

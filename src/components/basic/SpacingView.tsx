@@ -1,5 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { envInfo } from '../../utils/envInfo';
@@ -7,6 +14,7 @@ import { envInfo } from '../../utils/envInfo';
 interface Props {
   children?: ReactNode;
   notScroll?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default (props: Props) => {
@@ -27,16 +35,20 @@ export default (props: Props) => {
   }, []);
 
   return props.notScroll ? (
-    <View style={styles.container}>{props.children}</View>
+    <View style={[styles.container, props.style]}>{props.children}</View>
   ) : (
     <KeyboardAvoidingView
       behavior={envInfo.isIOS ? 'padding' : 'height'}
-      style={styles.container}
+      style={styles.flex}
     >
       <ScrollView
-        contentContainerStyle={
-          isKeyboardShow ? styles.scrollViewKeyboardShow : undefined
-        }
+        contentContainerStyle={[
+          isKeyboardShow
+            ? [styles.container, props.style, styles.scrollViewKeyboardShow]
+            : undefined,
+          styles.container,
+          props.style,
+        ]}
         keyboardShouldPersistTaps="handled"
       >
         {props.children}
@@ -49,6 +61,8 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
+  },
+  flex: {
     flex: 1,
   },
   bottom: {
