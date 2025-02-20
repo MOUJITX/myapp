@@ -10,17 +10,15 @@ import Animated, {
 import TicketCard from './components/TicketCard/TicketCard';
 import SpacingView from './components/basic/SpacingView';
 
-const Card = ({
-  index,
-  onPress,
-  isOpen,
-  topCard,
-}: {
+// 提取独立类型定义
+interface CardProps {
   index: number;
   onPress: () => void;
   isOpen: boolean;
   topCard: number;
-}) => {
+}
+
+const Card = ({ index, onPress, isOpen, topCard }: CardProps) => {
   const translateY = useSharedValue(0);
   const height = useSharedValue(50);
 
@@ -42,12 +40,12 @@ const Card = ({
       translateY.value = withTiming(0);
     }
   }, [
-    height,
     index,
     isOpen,
+    topCard,
     openCardHeadHeight,
     openMoveHeight,
-    topCard,
+    height,
     translateY,
   ]);
 
@@ -82,7 +80,8 @@ export const PageC = () => {
 
   return (
     <SpacingView>
-      {[0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12].map(index => (
+      {/* 动态生成卡片数组 */}
+      {Array.from({ length: 13 }, (_, i) => i).map(index => (
         <Card
           key={index}
           index={index}
