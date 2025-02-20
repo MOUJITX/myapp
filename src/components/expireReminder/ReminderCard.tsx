@@ -109,7 +109,7 @@ const StatusIndicator = ({
 
 export default (props: Props) => {
   return (
-    <TouchableOpacity onPress={props.onPress}>
+    <TouchableOpacity onPress={props.onPress} activeOpacity={0.5}>
       <CellGroup card>
         <View style={styles.main}>
           <Image img={props.good.imgs[0]} size={'medium'} radius preview />
