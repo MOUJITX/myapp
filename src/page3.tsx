@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, {
@@ -22,23 +22,38 @@ const Card = ({
   topCard: number;
 }) => {
   const translateY = useSharedValue(0);
+  const height = useSharedValue(50);
+
+  const openCardHeadHeight = isOpen ? 28 : 63;
+  const openMoveHeight = Dimensions.get('window').height * 0.6;
 
   useEffect(() => {
+    height.value = withTiming(openCardHeadHeight);
+
     if (isOpen) {
       if (index > topCard) {
-        translateY.value = withTiming(150 + 200);
+        translateY.value = withTiming(3 * openCardHeadHeight + openMoveHeight);
       } else if (index < topCard) {
-        translateY.value = withTiming(200 + 200);
+        translateY.value = withTiming(4 * openCardHeadHeight + openMoveHeight);
       } else {
-        translateY.value = withTiming(-50 * index);
+        translateY.value = withTiming(-openCardHeadHeight * index);
       }
     } else {
       translateY.value = withTiming(0);
     }
-  }, [index, isOpen, topCard, translateY]);
+  }, [
+    height,
+    index,
+    isOpen,
+    openCardHeadHeight,
+    openMoveHeight,
+    topCard,
+    translateY,
+  ]);
 
   const cardStyle = useAnimatedStyle(() => {
     return {
+      height: height.value,
       transform: [{ translateY: translateY.value }],
     };
   });
@@ -53,7 +68,7 @@ const Card = ({
 };
 
 export const PageC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState(0);
 
   const handleCardPress = (index: any) => {
@@ -67,7 +82,7 @@ export const PageC = () => {
 
   return (
     <SpacingView>
-      {[0, 1, 2, 3, 4, 5, 6].map(index => (
+      {[0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12].map(index => (
         <Card
           key={index}
           index={index}
