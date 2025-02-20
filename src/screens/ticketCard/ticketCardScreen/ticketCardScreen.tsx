@@ -21,7 +21,7 @@ export const TicketCardScreen = () => {
   return (
     <View style={styles.container}>
       <SpacingView>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((ticket, index) => (
+        {[1, 2, 3, 4].map((ticket, index) => (
           <TicketCardAnim
             key={index}
             ticket={ticket}
@@ -45,7 +45,7 @@ export const TicketCardScreen = () => {
 
 const TicketCardAnim = ({ _ticket, isExpanded, onPress }: any) => {
   const heightAnim = useRef(new Animated.Value(0)).current;
-  const marginAnim = useRef(new Animated.Value(0)).current;
+  const marginAnim = useRef(new Animated.Value(-35)).current;
 
   useEffect(() => {
     Animated.parallel([
@@ -63,28 +63,24 @@ const TicketCardAnim = ({ _ticket, isExpanded, onPress }: any) => {
   }, [heightAnim, isExpanded, marginAnim]);
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-      <Animated.View
-        style={[
-          styles.cardContainer,
-          {
-            height: heightAnim,
-            marginBottom: marginAnim,
-          },
-        ]}
-      >
+    <Animated.View
+      style={[
+        styles.cardContainer,
+        { height: heightAnim, marginBottom: marginAnim },
+      ]}
+    >
+      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
         <TicketCard />
-      </Animated.View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   cardContainer: {
     borderRadius: autoFontSize(12),
-    ...commonStyles.shadow,
+    overflow: 'hidden',
+    // ...commonStyles.shadow,
   },
 });

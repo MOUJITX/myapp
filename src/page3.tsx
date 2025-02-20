@@ -1,41 +1,87 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { AppNavigationList } from './navigation/AppNavigationList';
-import { StackScreenProps } from '@react-navigation/stack';
-import Popup from './components/basic/Popup';
-import Button from './components/basic/Button';
+import { StyleSheet } from 'react-native';
+import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import TicketCard from './components/TicketCard/TicketCard';
+import SpacingView from './components/basic/SpacingView';
 
-type Props = StackScreenProps<AppNavigationList, 'PageC'>;
+const Card = ({
+  index,
+  onPress,
+  isOpen,
+  topCard,
+}: {
+  index: number;
+  onPress: () => void;
+  isOpen: boolean;
+  topCard: number;
+}) => {
+  const translateY = useSharedValue(0);
 
-export const PageC = (props: Props) => {
-  const initMsg = props.route.params.initMsg;
-  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (isOpen) {
+      if (index > topCard) {
+        translateY.value = withTiming(150 + 200);
+      } else if (index < topCard) {
+        translateY.value = withTiming(200 + 200);
+      } else {
+        translateY.value = withTiming(-50 * index);
+      }
+    } else {
+      translateY.value = withTiming(0);
+    }
+  }, [index, isOpen, topCard, translateY]);
+
+  const cardStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    };
+  });
 
   return (
-    <View>
-      <Text>page 3</Text>
-      <Text>{initMsg}</Text>
-      <Button label="show popup" onPress={() => setVisible(true)} />
-      <Popup
-        visible={visible}
-        title="权限申请"
-        content={
-          '在设置-应用-微信-权限中开启相机权限，以正常使用拍摄、小视频、扫一扫等功能'
-        }
-        buttonsInline
-        buttons={[
-          {
-            label: '取消',
-            onPress: () => setVisible(false),
-            type: 'danger',
-          },
-          {
-            label: '取消1',
-            onPress: () => setVisible(false),
-            type: 'default',
-          },
-        ]}
-      />
-    </View>
+    <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
+      <Animated.View style={[styles.card, cardStyle]}>
+        <TicketCard />
+      </Animated.View>
+    </TouchableOpacity>
   );
 };
+
+export const PageC = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [topCard, setTopCard] = useState(0);
+
+  const handleCardPress = (index: any) => {
+    if (isOpen) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+      setTopCard(index);
+    }
+  };
+
+  return (
+    <SpacingView>
+      {[0, 1, 2, 3, 4, 5, 6].map(index => (
+        <Card
+          key={index}
+          index={index}
+          onPress={() => handleCardPress(index)}
+          isOpen={isOpen}
+          topCard={topCard}
+        />
+      ))}
+    </SpacingView>
+  );
+};
+
+const styles = StyleSheet.create({
+  card: {
+    height: 50,
+  },
+});

@@ -87,15 +87,9 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
-    marginTop: commonStyles.spacings.small,
+    marginTop: commonStyles.spacings.smallX,
   },
-  flex: {
-    flex: 1,
-  },
-  bottom: {
-    height: commonStyles.spacings.large,
-  },
-  scrollViewKeyboardShow: {
-    paddingBottom: 100,
-  },
+  flex: { flex: 1 },
+  bottom: { height: commonStyles.spacings.large2X },
+  scrollViewKeyboardShow: { paddingBottom: 100 },
 });
