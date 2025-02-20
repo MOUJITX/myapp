@@ -1,5 +1,14 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { envInfo } from '../../utils/envInfo';
@@ -7,6 +16,7 @@ import { envInfo } from '../../utils/envInfo';
 interface Props {
   children?: ReactNode;
   notScroll?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default (props: Props) => {
@@ -26,18 +36,46 @@ export default (props: Props) => {
     };
   }, []);
 
+  const ScrollViewRef = useRef<ScrollView>(null);
+
+  const [isScrollEnd, setIsScrollEnd] = useState(false);
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const isAtBottom =
+      layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+    // console.log('isAtBottom', isAtBottom);
+    setIsScrollEnd(isAtBottom);
+  };
+
+  const handleScrollSizeChange = () => {
+    // console.log('handleScrollSizeChange');
+    if (isScrollEnd) {
+      ScrollViewRef.current?.scrollToEnd({ animated: true });
+    }
+  };
+
   return props.notScroll ? (
-    <View style={styles.container}>{props.children}</View>
+    <View style={[styles.container, styles.flex, props.style]}>
+      {props.children}
+    </View>
   ) : (
     <KeyboardAvoidingView
       behavior={envInfo.isIOS ? 'padding' : 'height'}
-      style={styles.container}
+      style={styles.flex}
     >
       <ScrollView
-        contentContainerStyle={
-          isKeyboardShow ? styles.scrollViewKeyboardShow : undefined
-        }
+        contentContainerStyle={[
+          isKeyboardShow
+            ? [styles.container, props.style, styles.scrollViewKeyboardShow]
+            : undefined,
+          styles.container,
+          props.style,
+        ]}
         keyboardShouldPersistTaps="handled"
+        onScroll={handleScroll}
+        onContentSizeChange={handleScrollSizeChange}
+        ref={ScrollViewRef}
       >
         {props.children}
         <View style={styles.bottom} />
@@ -49,6 +87,9 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
+    marginTop: commonStyles.spacings.small,
+  },
+  flex: {
     flex: 1,
   },
   bottom: {

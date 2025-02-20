@@ -58,7 +58,7 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: commonStyles.spacings.small,
+    paddingBottom: commonStyles.spacings.small,
     flexDirection: 'row',
   },
   scrollRow: {

@@ -19,8 +19,8 @@ export default (props: Props) => {
         styles.cellGroup,
         props.card ? styles.card : undefined,
         props.noSpacing ? undefined : styles.groupSpace,
-        props.style,
         props.shadow ? commonStyles.shadow : undefined,
+        props.style,
       ]}
       onTouchEnd={props.onPress}
     >
