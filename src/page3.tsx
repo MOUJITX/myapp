@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, {
@@ -9,6 +9,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import TicketCard from './components/TicketCard/TicketCard';
 import SpacingView from './components/basic/SpacingView';
+import HoverButton from './components/basic/HoverButton';
+import BottomSheet, { BottomSheetRef } from './components/basic/BottomSheet';
+import { TicketCardAddScreen } from './screens/ticketCard/ticketCardAddScreen.tsx/ticketCardAddScreen';
 
 // 提取独立类型定义
 interface CardProps {
@@ -58,7 +61,7 @@ const Card = ({ index, onPress, isOpen, topCard }: CardProps) => {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
-      <Animated.View style={[styles.card, cardStyle]}>
+      <Animated.View style={[cardStyle]}>
         <TicketCard />
       </Animated.View>
     </TouchableOpacity>
@@ -68,6 +71,8 @@ const Card = ({ index, onPress, isOpen, topCard }: CardProps) => {
 export const PageC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState(0);
+
+  const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const handleCardPress = (index: any) => {
     if (isOpen) {
@@ -79,23 +84,30 @@ export const PageC = () => {
   };
 
   return (
-    <SpacingView>
-      {/* 动态生成卡片数组 */}
-      {Array.from({ length: 13 }, (_, i) => i).map(index => (
-        <Card
-          key={index}
-          index={index}
-          onPress={() => handleCardPress(index)}
-          isOpen={isOpen}
-          topCard={topCard}
-        />
-      ))}
-    </SpacingView>
+    <View style={styles.container}>
+      <SpacingView>
+        {/* 动态生成卡片数组 */}
+        {Array.from({ length: 13 }, (_, i) => i).map(index => (
+          <Card
+            key={index}
+            index={index}
+            onPress={() => handleCardPress(index)}
+            isOpen={isOpen}
+            topCard={topCard}
+          />
+        ))}
+      </SpacingView>
+
+      <HoverButton
+        label="+"
+        onPress={() => AddScreenBottomSheetRef.current?.openBottomSheet()}
+      />
+
+      <BottomSheet ref={AddScreenBottomSheetRef}>
+        <TicketCardAddScreen />
+      </BottomSheet>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    height: 50,
-  },
-});
+const styles = StyleSheet.create({ container: { flex: 1 } });

@@ -16,6 +16,7 @@ import { envInfo } from '../../utils/envInfo';
 interface Props {
   children?: ReactNode;
   notScroll?: boolean;
+  notAutoEnd?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -50,7 +51,7 @@ export default (props: Props) => {
 
   const handleScrollSizeChange = () => {
     // console.log('handleScrollSizeChange');
-    if (isScrollEnd) {
+    if (isScrollEnd && !props.notAutoEnd) {
       ScrollViewRef.current?.scrollToEnd({ animated: true });
     }
   };
