@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import TicketCard from '../../../components/TicketCard/TicketCard';
 import { commonStyles } from '../../../styles';
@@ -14,7 +14,7 @@ export const TicketCardScreen = () => {
 
   return (
     <SpacingView>
-      {[1, 2, 3, 4].map((ticket, index) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((ticket, index) => (
         <TicketCardAnim
           key={index}
           ticket={ticket}
@@ -26,19 +26,19 @@ export const TicketCardScreen = () => {
   );
 };
 
-const TicketCardAnim = ({ ticket, isExpanded, onPress }: any) => {
-  const heightAnim = React.useRef(new Animated.Value(0)).current;
-  const marginAnim = React.useRef(new Animated.Value(0)).current;
+const TicketCardAnim = ({ _ticket, isExpanded, onPress }: any) => {
+  const heightAnim = useRef(new Animated.Value(0)).current;
+  const marginAnim = useRef(new Animated.Value(0)).current;
 
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.parallel([
       Animated.timing(heightAnim, {
-        toValue: isExpanded ? 230 : 104,
+        toValue: isExpanded ? autoFontSize(210) : autoFontSize(100),
         duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(marginAnim, {
-        toValue: isExpanded ? 0 : -40,
+        toValue: isExpanded ? 10 : -35,
         duration: 300,
         useNativeDriver: false,
       }),
@@ -46,22 +46,19 @@ const TicketCardAnim = ({ ticket, isExpanded, onPress }: any) => {
   }, [heightAnim, isExpanded, marginAnim]);
 
   return (
-    <Animated.View
-      style={[
-        {
-          height: heightAnim,
-          marginBottom: marginAnim,
-        },
-      ]}
-    >
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={onPress}
-        style={styles.cardContainer}
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <Animated.View
+        style={[
+          styles.cardContainer,
+          {
+            height: heightAnim,
+            marginBottom: marginAnim,
+          },
+        ]}
       >
         <TicketCard />
-      </TouchableOpacity>
-    </Animated.View>
+      </Animated.View>
+    </TouchableOpacity>
   );
 };
 

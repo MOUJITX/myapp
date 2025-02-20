@@ -1,7 +1,9 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
   View,
@@ -34,8 +36,29 @@ export default (props: Props) => {
     };
   }, []);
 
+  const ScrollViewRef = useRef<ScrollView>(null);
+
+  const [isScrollEnd, setIsScrollEnd] = useState(false);
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const isAtBottom =
+      layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+    // console.log('isAtBottom', isAtBottom);
+    setIsScrollEnd(isAtBottom);
+  };
+
+  const handleScrollSizeChange = () => {
+    // console.log('handleScrollSizeChange');
+    if (isScrollEnd) {
+      ScrollViewRef.current?.scrollToEnd({ animated: true });
+    }
+  };
+
   return props.notScroll ? (
-    <View style={[styles.container, props.style]}>{props.children}</View>
+    <View style={[styles.container, styles.flex, props.style]}>
+      {props.children}
+    </View>
   ) : (
     <KeyboardAvoidingView
       behavior={envInfo.isIOS ? 'padding' : 'height'}
@@ -50,6 +73,9 @@ export default (props: Props) => {
           props.style,
         ]}
         keyboardShouldPersistTaps="handled"
+        onScroll={handleScroll}
+        onContentSizeChange={handleScrollSizeChange}
+        ref={ScrollViewRef}
       >
         {props.children}
         <View style={styles.bottom} />
@@ -61,6 +87,7 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: commonStyles.spacings.medium,
+    marginTop: commonStyles.spacings.small,
   },
   flex: {
     flex: 1,

@@ -28,7 +28,6 @@ export default () => {
 
   const onLayout = (event: LayoutChangeEvent) => {
     setBaseWidth(event.nativeEvent.layout.width);
-    console.log(event.nativeEvent.layout.width);
   };
 
   return (
@@ -190,7 +189,8 @@ const styles = (baseWidth: number) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      aspectRatio: 2782 / 1755,
+      aspectRatio: 1077 / 666,
+      // aspectRatio: 2782 / 1755,
       alignItems: 'center',
     },
     cardInfo: {
