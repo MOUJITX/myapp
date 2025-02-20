@@ -103,7 +103,10 @@ export const ExpireReminderAddScreen = (props: Props) => {
   };
 
   const renderCameraScanButton = () => (
-    <ScanCameraButton onSuccess={value => setUniCode(value)} />
+    <ScanCameraButton
+      codeType={'ean-13'}
+      onSuccess={value => setUniCode(value)}
+    />
   );
 
   const openCategorySelectScreenBottomSheet = () => {

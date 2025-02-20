@@ -192,6 +192,8 @@ const styles = (baseWidth: number) =>
       aspectRatio: 1077 / 666,
       // aspectRatio: 2782 / 1755,
       alignItems: 'center',
+      borderRadius: autoFontSize(12),
+      overflow: 'hidden',
     },
     cardInfo: {
       width: '90%',

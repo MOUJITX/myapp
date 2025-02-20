@@ -7,7 +7,7 @@ import { t } from 'i18next';
 import { Text } from 'react-native';
 import { commonHeaderOptions } from './AppNavigation';
 import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
-import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/tickerCardScreen';
+import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/ticketCardScreen';
 
 export default () => {
   const BottomTab = createBottomTabNavigator<AppNavigationList>();

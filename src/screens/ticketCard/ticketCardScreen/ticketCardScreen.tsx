@@ -5,9 +5,14 @@ import { commonStyles } from '../../../styles';
 import SpacingView from '../../../components/basic/SpacingView';
 import { autoFontSize } from '../../../utils/autoSize';
 import HoverButton from '../../../components/basic/HoverButton';
+import BottomSheet, {
+  BottomSheetRef,
+} from '../../../components/basic/BottomSheet';
+import { TicketCardAddScreen } from '../ticketCardAddScreen.tsx/ticketCardAddScreen';
 
 export const TicketCardScreen = () => {
   const [expandedId, setExpandedId] = useState<number | undefined>(undefined);
+  const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const handleCardPress = (id: number) => {
     setExpandedId(expandedId === id ? undefined : id);
@@ -26,7 +31,14 @@ export const TicketCardScreen = () => {
         ))}
       </SpacingView>
 
-      <HoverButton label="+" />
+      <HoverButton
+        label="+"
+        onPress={() => AddScreenBottomSheetRef.current?.openBottomSheet()}
+      />
+
+      <BottomSheet ref={AddScreenBottomSheetRef}>
+        <TicketCardAddScreen />
+      </BottomSheet>
     </View>
   );
 };
@@ -73,7 +85,6 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     borderRadius: autoFontSize(12),
-    overflow: 'hidden',
     ...commonStyles.shadow,
   },
 });

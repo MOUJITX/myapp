@@ -12,7 +12,7 @@ export default () => {
   } = useProfileHook();
   return (
     <ScrollView>
-      <CellGroup>
+      <CellGroup title="设置">
         <CellButton label="通用设置" />
         <Divider />
         <CellButton label="系统权限" />

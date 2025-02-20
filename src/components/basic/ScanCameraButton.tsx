@@ -7,9 +7,11 @@ import {
   View,
 } from 'react-native';
 import ScanCamera from './ScanCamera';
+import { CodeType } from 'react-native-vision-camera';
 
 interface Props {
   onSuccess: (value: string) => void;
+  codeType: CodeType;
 }
 
 export default (props: Props) => {
@@ -48,7 +50,7 @@ export default (props: Props) => {
                 console.log('Scan Failed', error);
                 setVisible(false);
               }}
-              codeType="ean-13"
+              codeType={props.codeType}
             />
           </View>
         </TouchableWithoutFeedback>
