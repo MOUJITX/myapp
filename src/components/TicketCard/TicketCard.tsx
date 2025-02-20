@@ -8,6 +8,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { autoFontSize } from '../../utils/autoSize';
+import QRCode from 'react-native-qrcode-svg';
 
 const TextSingleLine = ({
   label,
@@ -64,8 +65,8 @@ export default () => {
         <View style={[styles.areaCommon, styles.trainPayArea]}>
           <TextSingleLine label="31.0" style={[styles.trainPay]} />
           <View style={[styles.trainMark]}>
-            {['惠', '学'].map(mark => (
-              <View style={styles.markCircle}>
+            {['惠', '学'].map((mark, index) => (
+              <View style={styles.markCircle} key={index}>
                 <TextSingleLine label={mark} style={[styles.trainMarkText]} />
               </View>
             ))}
@@ -87,7 +88,13 @@ export default () => {
           />
           <TextSingleLine label="行二" style={styles.cardTipText} />
         </View>
-        <View style={styles.QRcodeArea} />
+        <View style={styles.QRcodeArea}>
+          <QRCode
+            value="http://awesome.link.qr"
+            backgroundColor="rgba(0,0,0,0)"
+            size={autoFontSize(58)}
+          />
+        </View>
         <TextSingleLine
           label="33108100200122ED51944289 JM"
           style={styles.cardCodeArea}
@@ -106,8 +113,6 @@ const styles = StyleSheet.create({
   cardInfo: {
     width: '90%',
     height: '100%',
-
-    borderWidth: 1,
   },
   areaCommon: {
     flexDirection: 'row',
@@ -233,7 +238,11 @@ const styles = StyleSheet.create({
     fontSize: autoFontSize(13),
   },
 
-  QRcodeArea: {},
+  QRcodeArea: {
+    position: 'absolute',
+    top: '61%',
+    left: '79%',
+  },
 
   cardCodeArea: {
     top: '5.5%',
