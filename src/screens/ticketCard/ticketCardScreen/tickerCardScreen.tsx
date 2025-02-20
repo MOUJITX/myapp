@@ -39,7 +39,11 @@ const mockTickets = [
 ];
 
 export const TicketCardScreen = () => {
-  return <TicketCard />;
+  return (
+    <SpacingView>
+      <TicketCard />
+    </SpacingView>
+  );
 };
 
 const TicketCardAnim = () => {
