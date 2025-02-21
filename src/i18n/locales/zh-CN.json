@@ -59,6 +59,19 @@
         "title": "获取权限失败",
         "message": "当前功能需要开启相机权限"
       }
+    },
+    "selectList": {
+      "placeholder": "请选择",
+      "icon": {
+        "selected": "✔",
+        "unSelected": "○",
+        "remove": "×"
+      },
+      "add": {
+        "button": {
+          "label": "+ 添加新选项"
+        }
+      }
     }
   },
   "debug": {

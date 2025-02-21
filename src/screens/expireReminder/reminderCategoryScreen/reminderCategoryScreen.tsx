@@ -149,7 +149,6 @@ export const ReminderCategoryScreen = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
   input: {
     borderBottomWidth: 1,
     borderColor: '#4CAF50',

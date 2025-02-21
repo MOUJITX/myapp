@@ -14,14 +14,17 @@ import BottomSheet, {
 import SpacingView from '../../../components/basic/SpacingView';
 import HoverButton from '../../../components/basic/HoverButton';
 import { TicketCardAddScreen } from '../ticketCardAddScreen.tsx/ticketCardAddScreen';
+import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 
 const TicketCardAnim = ({
   index,
+  ticket,
   onPress,
   isOpen,
   topCard,
 }: {
   index: number;
+  ticket: TrainTicket;
   onPress: () => void;
   isOpen: boolean;
   topCard: number;
@@ -66,7 +69,7 @@ const TicketCardAnim = ({
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
       <Animated.View style={[cardStyle]}>
-        <TicketCard />
+        <TicketCard ticket={ticket} />
       </Animated.View>
     </TouchableOpacity>
   );
@@ -90,11 +93,11 @@ export const TicketCardScreen = () => {
   return (
     <View style={styles.container}>
       <SpacingView>
-        {/* 动态生成卡片数组 */}
-        {Array.from({ length: 13 }, (_, i) => i).map(index => (
+        {[].map((ticket, index) => (
           <TicketCardAnim
             key={index}
             index={index}
+            ticket={ticket}
             onPress={() => handleCardPress(index)}
             isOpen={isOpen}
             topCard={topCard}

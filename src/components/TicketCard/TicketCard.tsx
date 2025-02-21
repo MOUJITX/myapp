@@ -10,20 +10,55 @@ import {
 } from 'react-native';
 import { autoFontSize } from '../../utils/autoSize';
 import QRCode from 'react-native-qrcode-svg';
+import {
+  TrainPassengerInfo,
+  TrainTicket,
+} from '../../store/ticketCard/ticketCard.type';
+import { formatDate } from '../../utils/datetime';
+import { stringFormat } from '../../utils/utils';
+
+interface Props {
+  ticket: TrainTicket;
+}
 
 const TextSingleLine = ({
   label,
   style,
 }: {
-  label: string;
+  label?: string | number;
   style?: StyleProp<TextStyle>;
-}) => (
-  <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
-    {label}
-  </Text>
-);
+}) =>
+  label && (
+    <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
+      {label}
+    </Text>
+  );
 
-export default () => {
+const TextDoubleLines = ({
+  label,
+  style,
+}: {
+  label?: string;
+  style?: StyleProp<TextStyle>;
+}) =>
+  label && (
+    <>
+      <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
+        {label.split(',')[0]}
+      </Text>
+
+      <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
+        {label.split(',')[1]}
+      </Text>
+    </>
+  );
+
+const formatPassengerInfo = (info: TrainPassengerInfo) => {
+  const formatString = `${info.idCard.slice(0, 10) + '****' + info.idCard.slice(14, 18)} ${info.name}`;
+  return stringFormat(formatString, 'upAll');
+};
+
+export default (props: Props) => {
   const [baseWidth, setBaseWidth] = useState<number>(300);
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -41,11 +76,11 @@ export default () => {
           style={[styles(baseWidth).areaCommon, styles(baseWidth).headArea]}
         >
           <TextSingleLine
-            label={'ED51944289'}
+            label={stringFormat(props.ticket.ticketRedNumber, 'upAll')}
             style={styles(baseWidth).cardNumber}
           />
           <TextSingleLine
-            label={'检票：一楼检票口1 '}
+            label={props.ticket.checking && `检票：${props.ticket.checking}`}
             style={styles(baseWidth).checkWindow}
           />
         </View>
@@ -54,17 +89,17 @@ export default () => {
         >
           <View style={styles(baseWidth).stationStart}>
             <TextSingleLine
-              label={'温   岭'}
+              label={props.ticket.startStation.name}
               style={styles(baseWidth).stationCN}
             />
           </View>
           <TextSingleLine
-            label={'G747555666'}
+            label={stringFormat(props.ticket.trainNumber, 'upAll')}
             style={styles(baseWidth).trainNumber}
           />
           <View style={styles(baseWidth).stationEnd}>
             <TextSingleLine
-              label={'温州南'}
+              label={props.ticket.endStation.name}
               style={styles(baseWidth).stationCN}
             />
           </View>
@@ -76,11 +111,11 @@ export default () => {
           ]}
         >
           <TextSingleLine
-            label={'Wenling'}
+            label={stringFormat(props.ticket.startStation.code, 'upFirst')}
             style={styles(baseWidth).stationEN}
           />
           <TextSingleLine
-            label={'Wenzhounan'}
+            label={stringFormat(props.ticket.endStation.code, 'upFirst')}
             style={styles(baseWidth).stationEN}
           />
         </View>
@@ -97,34 +132,34 @@ export default () => {
             ]}
           >
             <TextSingleLine
-              label="2020"
+              label={formatDate(props.ticket.dateTime, 'year')}
               style={styles(baseWidth).trainDateText}
             />
             <TextSingleLine
-              label="01"
+              label={formatDate(props.ticket.dateTime, 'month')}
               style={styles(baseWidth).trainDateText}
             />
             <TextSingleLine
-              label="22"
+              label={formatDate(props.ticket.dateTime, 'day')}
               style={styles(baseWidth).trainDateText}
             />
             <TextSingleLine
-              label="08:54"
+              label={formatDate(props.ticket.dateTime, 'hh:mm')}
               style={styles(baseWidth).trainDateText}
             />
           </View>
           <View
             style={[
               styles(baseWidth).areaCommon,
-              styles(baseWidth).trainSitNumber,
+              styles(baseWidth).trainSeatNumber,
             ]}
           >
             <TextSingleLine
-              label="04"
+              label={props.ticket.seat.carNumber}
               style={styles(baseWidth).trainDateText}
             />
             <TextSingleLine
-              label="11F"
+              label={stringFormat(props.ticket.seat.seatNumber, 'upAll')}
               style={styles(baseWidth).trainDateText}
             />
           </View>
@@ -132,9 +167,12 @@ export default () => {
         <View
           style={[styles(baseWidth).areaCommon, styles(baseWidth).trainPayArea]}
         >
-          <TextSingleLine label="31.0" style={[styles(baseWidth).trainPay]} />
+          <TextSingleLine
+            label={props.ticket.trainPay}
+            style={[styles(baseWidth).trainPay]}
+          />
           <View style={[styles(baseWidth).trainMark]}>
-            {['惠', '学'].map((mark, index) => (
+            {props.ticket.mark.map((mark, index) => (
               <View style={styles(baseWidth).markCircle} key={index}>
                 <TextSingleLine
                   label={mark}
@@ -144,40 +182,35 @@ export default () => {
             ))}
           </View>
           <TextSingleLine
-            label="二等座"
-            style={[styles(baseWidth).trainSitType]}
+            label={props.ticket.seat.seatType}
+            style={[styles(baseWidth).trainSeatType]}
           />
         </View>
         <View style={[styles(baseWidth).trainInfoArea]}>
-          <TextSingleLine
-            label="行一"
-            style={styles(baseWidth).trainInfoText}
-          />
-          <TextSingleLine
-            label="仅供"
+          <TextDoubleLines
+            label={props.ticket.cardInfo}
             style={styles(baseWidth).trainInfoText}
           />
         </View>
         <TextSingleLine
-          label="3310812001****801X 季双节"
+          label={formatPassengerInfo(props.ticket.passenger)}
           style={styles(baseWidth).passengerArea}
         />
         <View style={styles(baseWidth).cardTipArea}>
-          <TextSingleLine
-            label="买票请到12306 发货请到95306"
+          <TextDoubleLines
+            label={props.ticket.cardTip}
             style={styles(baseWidth).cardTipText}
           />
-          <TextSingleLine label="行二" style={styles(baseWidth).cardTipText} />
         </View>
         <View style={styles(baseWidth).QRcodeArea}>
           <QRCode
-            value="http://awesome.link.qr"
+            value={props.ticket.qrCode}
             backgroundColor="rgba(0,0,0,0)"
             size={autoFontSize(65, baseWidth)}
           />
         </View>
         <TextSingleLine
-          label="33108100200122ED51944289 JM"
+          label={stringFormat(props.ticket.ticketBlackNumber, 'upAll')}
           style={styles(baseWidth).cardCodeArea}
         />
       </View>
@@ -259,7 +292,7 @@ const styles = (baseWidth: number) =>
     trainDateTime: {
       gap: '9.5%',
     },
-    trainSitNumber: {
+    trainSeatNumber: {
       width: '32%',
       gap: '22%',
     },
@@ -293,7 +326,7 @@ const styles = (baseWidth: number) =>
     trainMarkText: {
       fontSize: autoFontSize(16, baseWidth),
     },
-    trainSitType: {
+    trainSeatType: {
       position: 'absolute',
       left: '79%',
       fontSize: autoFontSize(17, baseWidth),

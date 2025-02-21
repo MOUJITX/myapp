@@ -5,7 +5,7 @@ import Cell from './Cell';
 import { statusType } from '../../types';
 import { commonStyles } from '../../styles';
 
-interface Props extends CellProps {
+export interface Props extends CellProps {
   value?: string;
   textColor?: statusType;
   onTextPress?: () => void;

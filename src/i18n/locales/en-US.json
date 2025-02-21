@@ -46,6 +46,13 @@
         "message": "The current feature requires camera permission to be enabled",
         "title": "No Permission"
       }
+    },
+    "selectList": {
+      "placeholder": "Please choose",
+      "icon": {
+        "unSelected": "○",
+        "selected": "✔"
+      }
     }
   },
   "debug": {
