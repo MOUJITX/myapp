@@ -12,7 +12,6 @@ import { Good } from '../../../store/expireReminder/expireReminder.type';
 import SwipeRowList from '../../../components/basic/SwipeRowList';
 import { ButtonShapeType } from '../../../components/basic/Button';
 import CategoryFilter from '../../../components/expireReminder/CategoryFilter';
-import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
 
 export const ExpireReminderListScreen = () => {
   const {
@@ -25,7 +24,6 @@ export const ExpireReminderListScreen = () => {
   } = useExpireReminderListHook();
 
   const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
-  const CategoryScreenBottomSheetRef = useRef<BottomSheetRef>(null);
   const [good, setGood] = useState<Good>();
   const [selectCategory, setSelectCategory] = useState<string>('all');
   const [reminderList, setReminderList] = useState<Good[]>(
@@ -35,10 +33,6 @@ export const ExpireReminderListScreen = () => {
   const openAddReminderBottomSheet = () => {
     setGood(undefined);
     AddScreenBottomSheetRef.current?.openBottomSheet();
-  };
-
-  const openCategoryScreenBottomSheet = () => {
-    CategoryScreenBottomSheetRef.current?.openBottomSheet();
   };
 
   const renderGoodItem = ({ item }: { item: Good }) => {
@@ -78,7 +72,7 @@ export const ExpireReminderListScreen = () => {
           data={allGoodCategoriesList}
           selectedValue={selectCategory}
           onSelect={handleSelectCategory}
-          onPressMoreButton={openCategoryScreenBottomSheet}
+          showMoreButton
         />
         <SwipeRowList
           renderItem={renderGoodItem}
@@ -101,14 +95,6 @@ export const ExpireReminderListScreen = () => {
         <ExpireReminderAddScreen
           bottomSheetRef={AddScreenBottomSheetRef}
           good={good}
-        />
-      </BottomSheet>
-
-      <BottomSheet ref={CategoryScreenBottomSheetRef}>
-        <ReminderCategoryScreen
-          bottomSheetRef={CategoryScreenBottomSheetRef}
-          selected={selectCategory}
-          onSelect={handleSelectCategory}
         />
       </BottomSheet>
     </View>

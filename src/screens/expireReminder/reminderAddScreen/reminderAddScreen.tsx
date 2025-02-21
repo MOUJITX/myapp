@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useState } from 'react';
+import React, { RefObject, useState } from 'react';
 import { View } from 'react-native';
 import CellGroup from '../../../components/basic/CellGroup';
 import TextInput from '../../../components/basic/TextInput';
@@ -18,9 +18,7 @@ import {
 import ReminderAddCell from './reminderAddCell';
 import { useComponentMount } from '../../../utils/componentMount';
 import { useExpireReminderAddHook } from './reminderAddHook';
-import BottomSheet, {
-  BottomSheetRef,
-} from '../../../components/basic/BottomSheet';
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import { t } from 'i18next';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
@@ -32,7 +30,7 @@ interface Props {
 
 export const ExpireReminderAddScreen = (props: Props) => {
   const {
-    input: { categoryLabel },
+    input: {},
     output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
@@ -45,8 +43,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
     props.good?.type ?? 'default'
   );
   const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);
-
-  const CategoryScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const initItem: GoodItem = {
     itemID: randomUUID(),
@@ -109,10 +105,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
     />
   );
 
-  const openCategorySelectScreenBottomSheet = () => {
-    CategoryScreenBottomSheetRef.current?.openBottomSheet();
-  };
-
   return (
     <SpacingView>
       <View>
@@ -143,12 +135,12 @@ export const ExpireReminderAddScreen = (props: Props) => {
             label={t('expireReminder.add.goodNumber.label')}
             value={items.length.toString()}
           />
-          <TextLabel
+          <ReminderCategoryScreen
             inline
             label={t('expireReminder.add.category.label')}
-            value={categoryLabel(category)}
-            textColor="primary"
-            onTextPress={openCategorySelectScreenBottomSheet}
+            selected={category}
+            onSelect={setCategory}
+            hideAll
           />
         </CellGroup>
         {items.map((item, index) => (
@@ -168,15 +160,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
           onPress={handleSubmitGoodCheck}
         />
       </View>
-
-      <BottomSheet ref={CategoryScreenBottomSheetRef}>
-        <ReminderCategoryScreen
-          bottomSheetRef={CategoryScreenBottomSheetRef}
-          selected={category}
-          onSelect={setCategory}
-          hideAll
-        />
-      </BottomSheet>
     </SpacingView>
   );
 };

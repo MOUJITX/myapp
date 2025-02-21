@@ -2,14 +2,14 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
-import Button, { ButtonShapeType } from '../basic/Button';
 import { GoodCategory } from '../../store/expireReminder/expireReminder.type';
+import { ReminderCategoryScreen } from '../../screens/expireReminder/reminderCategoryScreen/reminderCategoryScreen';
 
 interface Props {
   data: GoodCategory[];
   selectedValue: string;
   onSelect: (value: string) => void;
-  onPressMoreButton?: () => void;
+  showMoreButton?: boolean;
 }
 
 export default (props: Props) => {
@@ -41,14 +41,11 @@ export default (props: Props) => {
           );
         })}
       </ScrollView>
-      {props.onPressMoreButton && (
+      {props.showMoreButton && (
         <View style={styles.moreButton}>
-          <Button
-            shape={ButtonShapeType.Square}
-            size="small"
-            label="+"
-            shadow
-            onPress={props.onPressMoreButton}
+          <ReminderCategoryScreen
+            selected={props.selectedValue}
+            onSelect={props.onSelect}
           />
         </View>
       )}
