@@ -77,10 +77,22 @@ export const TicketCardAddScreen = () => {
           onValueChange={value => console.log('selected', value)}
           selectList={[
             { label: 'Option 1', value: 'option1', isDefault: true },
-            { label: 'Option 2', value: 'option2' },
-            { label: 'Option 3', value: 'option3' },
+            {
+              label: 'Option 2',
+              value: 'option2',
+              valueData: { name: '123', idCard: '456' },
+            },
+            {
+              label: 'Option 3',
+              value: 'option3',
+              valueData: { name: 'abc', idCard: 'def' },
+            },
           ]}
           editable
+          editBottomSheet={[
+            { label: '姓名', key: 'name', type: 'text' },
+            { label: '身份证号', key: 'idCard', type: 'text' },
+          ]}
         />
       </CellGroup>
       <CellGroup card title="基础">

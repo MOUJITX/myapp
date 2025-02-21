@@ -1,6 +1,6 @@
-import React, { RefObject, useState } from 'react';
+import React, { RefObject, useRef, useState, useEffect } from 'react';
 import CellGroup from './CellGroup';
-import { BottomSheetRef } from './BottomSheet';
+import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import { StyleSheet, View } from 'react-native';
 import Divider from './Divider';
 import TextInput from './TextInput';
@@ -8,17 +8,26 @@ import Button from './Button';
 import { t } from 'i18next';
 import CellButton from './CellButton';
 import { randomUUID } from '../../utils/utils';
+import SpacingView from './SpacingView';
 
 export interface SelectItem {
-  label: string;
   value: string;
+  label: string;
   isDefault?: boolean;
+  valueData?: any;
+}
+
+export interface SelectItemCustomField {
+  key: string;
+  label: string;
+  type: 'text';
 }
 
 export interface SelectOptionListProps {
   editable?: boolean;
   selectList: SelectItem[];
   value?: string;
+  editBottomSheet?: SelectItemCustomField[];
   onValueChange?: (value: string) => void;
   onItemAdd?: (item: SelectItem) => void;
   onItemUpdate?: (item: SelectItem) => void;
@@ -28,6 +37,52 @@ export interface SelectOptionListProps {
 export interface Props extends SelectOptionListProps {
   bottomSheetRef: RefObject<BottomSheetRef>;
 }
+
+const CustomFieldEditForm = (fields: SelectItemCustomField[], form?: any) => {
+  const [customForm, setCustomForm] = useState<Record<string, string>>();
+
+  const handleCustomFieldUpdate = (key: string, value: string) => {
+    setCustomForm(prev => ({ ...prev, [key]: value }));
+  };
+
+  useEffect(() => {
+    const initCustomForm = fields.reduce(
+      (acc, cur) => {
+        acc[cur.key] = form ? form[cur.key] : '';
+        return acc;
+      },
+      {} as Record<string, string>
+    );
+    setCustomForm(initCustomForm);
+  }, [fields, form]);
+
+  return (
+    <SpacingView>
+      <CellGroup card>
+        {fields.map((field, index) => {
+          if (field.type === 'text') {
+            return (
+              <TextInput
+                key={index}
+                inline
+                label={field.label}
+                value={customForm?.[field.key]}
+                onValueChange={value =>
+                  handleCustomFieldUpdate(field.key, value)
+                }
+              />
+            );
+          }
+        })}
+      </CellGroup>
+      <Button
+        label="保存"
+        type="primary"
+        onPress={() => console.log('customFieldEditForm', customForm)}
+      />
+    </SpacingView>
+  );
+};
 
 export default (props: Props) => {
   const [editingItem, setEditingItem] = useState<SelectItem | null>();
@@ -68,11 +123,21 @@ export default (props: Props) => {
     );
   };
 
+  const customFieldEditBottomSheetRef = useRef<BottomSheetRef>(null);
+
+  const renderCustomFieldEditBottomSheet = (
+    fields: SelectItemCustomField[]
+  ) => (
+    <BottomSheet ref={customFieldEditBottomSheetRef}>
+      {CustomFieldEditForm(fields, editingItem?.valueData)}
+    </BottomSheet>
+  );
+
   return (
     <CellGroup>
       {props.selectList.map((item, index) => (
         <View key={index}>
-          {editingItem?.value === item.value ? (
+          {editingItem?.value === item.value && !props.editBottomSheet ? (
             <TextInput
               style={styles.input}
               value={newItemLabel}
@@ -109,6 +174,8 @@ export default (props: Props) => {
                   setEditingItem(item);
                   setNewItemLabel(item.label);
                   setIsAdding(false);
+                  props.editBottomSheet &&
+                    customFieldEditBottomSheetRef.current?.openBottomSheet();
                 }
               }}
             />
@@ -119,7 +186,7 @@ export default (props: Props) => {
 
       {props.editable && (
         <View>
-          {isAdding ? (
+          {isAdding && !props.editBottomSheet ? (
             <TextInput
               style={styles.input}
               value={newItemLabel}
@@ -137,6 +204,8 @@ export default (props: Props) => {
               onPress={() => {
                 setEditingItem(null);
                 setIsAdding(true);
+                props.editBottomSheet &&
+                  customFieldEditBottomSheetRef.current?.openBottomSheet();
               }}
               label={t('component.selectList.add.button.label')}
               plain
@@ -144,6 +213,9 @@ export default (props: Props) => {
           )}
         </View>
       )}
+
+      {props.editBottomSheet &&
+        renderCustomFieldEditBottomSheet(props.editBottomSheet)}
     </CellGroup>
   );
 };
