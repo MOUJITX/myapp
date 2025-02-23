@@ -12,12 +12,19 @@ export interface Props {
   children?: ReactNode;
   info?: string;
   infoType?: statusType;
+  left?: () => ReactNode;
+  right?: () => ReactNode;
 }
 
 export default (props: Props) => {
   return (
     <View style={styles.container}>
-      <View style={props.inline ? styles.containerInline : undefined}>
+      <View
+        style={[
+          styles.editContainer,
+          props.inline && styles.editContainerInline,
+        ]}
+      >
         {props.label && (
           <View style={styles.label}>
             {props.label && (
@@ -39,7 +46,9 @@ export default (props: Props) => {
             props.inline && styles.cellChildrenInline,
           ]}
         >
-          {props.children}
+          {props.left && props.left()}
+          <View>{props.children}</View>
+          {props.right && props.right()}
         </View>
       </View>
       {props.info !== undefined && (
@@ -63,12 +72,14 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  containerInline: {
+  editContainer: {
+    minHeight: 40,
+  },
+  editContainerInline: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    minHeight: 40,
   },
   label: {
     width: '30%',
@@ -86,10 +97,15 @@ const styles = StyleSheet.create({
   },
   cellChildren: {
     flexShrink: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    gap: commonStyles.spacings.smallX,
+    width: '100%',
+    borderWidth: 1,
   },
   cellChildrenInline: {
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   infoText: {
     fontSize: commonStyles.fontSize.small,

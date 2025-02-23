@@ -110,7 +110,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
       <View>
         <CellGroup card>
           <TextInput
-            inline
             value={title}
             onValueChange={value => setTitle(value)}
             placeholder={t('expireReminder.add.name.placeholder')}
