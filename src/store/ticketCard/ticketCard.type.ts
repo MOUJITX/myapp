@@ -1,3 +1,5 @@
+import { SelectItem } from '../../components/basic/SelectOptionList';
+
 export interface TrainStation {
   uuid: string;
   name: string;
@@ -41,6 +43,23 @@ export interface TrainTicket {
   createUser: string;
 }
 
+export interface SelectItemWithUser extends SelectItem {
+  createUser?: string;
+  createTime?: Date;
+}
+
+export interface TrainQuickSelect {
+  stations: SelectItemWithUser[];
+  checks: SelectItemWithUser[];
+  // seatTypes: SelectItemWithUser[];
+  // seatCars: SelectItemWithUser[];
+  // seatNumbers: SelectItemWithUser[];
+  passengers: SelectItemWithUser[];
+  // cardInfos: SelectItemWithUser[];
+  // cardTips: SelectItemWithUser[];
+}
+
 export interface TicketCardState {
   trainTickets: TrainTicket[];
+  trainSelect: TrainQuickSelect;
 }

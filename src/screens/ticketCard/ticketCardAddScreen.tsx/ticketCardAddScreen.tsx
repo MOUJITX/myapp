@@ -13,8 +13,24 @@ import {
   TrainTicket,
 } from '../../../store/ticketCard/ticketCard.type';
 import SelectList from '../../../components/basic/SelectList';
+import { useTicketCardAddHook } from './ticketCardAddHook';
+import {
+  TrainTicketCardCarNumber,
+  TrainTicketCardInfos,
+  TrainTicketCardSeatType,
+  TrainTicketCardTips,
+} from './types';
 
 export const TicketCardAddScreen = () => {
+  const {
+    input: { quickSelectStations, quickSelectChecks, quickSelectPassengers },
+    output: {
+      quickSelectItemAdd,
+      quickSelectItemRemove,
+      quickSelectItemUpdate,
+    },
+  } = useTicketCardAddHook();
+
   const renderText = (text: string) => <Text>{text}</Text>;
 
   const renderCameraScanButton = () => (
@@ -70,30 +86,13 @@ export const TicketCardAddScreen = () => {
   return (
     <SpacingView>
       <TicketCard ticket={initTrainTicket} />
-      <CellGroup card>
+      {/* <CellGroup card>
         <SelectList
           inline
           label="选择列表"
           onValueChange={value => console.log('selected', value)}
-          value="option2"
-          selectList={[
-            { label: 'Option 1', value: 'option1', isDefault: true },
-            {
-              label: 'Option 2',
-              value: 'option2',
-              valueData: { name: '123', idCard: '456', save: 'true' },
-            },
-            {
-              label: 'Option 3',
-              value: 'option3',
-              valueData: { name: 'abc', idCard: 'def', save: true },
-            },
-            {
-              label: 'Option 4',
-              value: 'option4',
-              valueData: { name: 'abc', idCard: 'def', save: '2' },
-            },
-          ]}
+          // value="option2"
+          selectList={quickSelectStations}
           onItemAdd={item => console.log('add item', item)}
           onItemUpdate={item => console.log('update item', item)}
           onItemRemove={value => console.log('delete item', value)}
@@ -107,19 +106,45 @@ export const TicketCardAddScreen = () => {
             label: '$name($idCard)',
           }}
         />
-      </CellGroup>
+      </CellGroup> */}
       <CellGroup card title="基础">
-        <TextInput
+        <SelectList
           inline
           label="出发站"
           right={() => renderText('站')}
           onValueChange={value => handleValueChange('startStation', value)}
+          // value={trainTicket.startStation.uuid}
+          selectList={quickSelectStations}
+          onItemAdd={item => quickSelectItemAdd('stations', item)}
+          onItemUpdate={item => quickSelectItemUpdate('stations', item)}
+          onItemRemove={value => quickSelectItemRemove('stations', value)}
+          editable
+          customFormSetting={{
+            fields: [
+              { label: '站名', key: 'name', type: 'text' },
+              { label: '拼写', key: 'code', type: 'text' },
+            ],
+            label: '$name($code)',
+          }}
         />
-        <TextInput
+        <SelectList
           inline
           label="到达站"
           right={() => renderText('站')}
           onValueChange={value => handleValueChange('endStation', value)}
+          // value={trainTicket.endStation.uuid}
+          selectList={quickSelectStations}
+          onItemAdd={item => quickSelectItemAdd('stations', item)}
+          onItemUpdate={item => quickSelectItemUpdate('stations', item)}
+          onItemRemove={value => quickSelectItemRemove('stations', value)}
+          editable
+          customFormSetting={{
+            fields: [
+              { label: '站名', key: 'name', type: 'text' },
+              { label: '拼写', key: 'code', type: 'text' },
+            ],
+            label: '$name($code)',
+          }}
         />
         <DatetimePicker
           inline
@@ -141,11 +166,19 @@ export const TicketCardAddScreen = () => {
           inline
           label="票价"
           onValueChange={value => handleValueChange('trainPay', value)}
+          left={() => renderText('￥')}
+          right={() => renderText('元')}
         />
-        <TextInput
+        <SelectList
           inline
           label="检票"
           onValueChange={value => handleValueChange('checking', value)}
+          // value={trainTicket.checking}
+          selectList={quickSelectChecks}
+          onItemAdd={item => quickSelectItemAdd('checks', item)}
+          onItemUpdate={item => quickSelectItemUpdate('checks', item)}
+          onItemRemove={value => quickSelectItemRemove('checks', value)}
+          editable
         />
       </CellGroup>
 
@@ -168,15 +201,19 @@ export const TicketCardAddScreen = () => {
       </CellGroup>
 
       <CellGroup card title="座位">
-        <TextInput
+        <SelectList
           inline
           label="席别"
           onValueChange={value => handleValueChange('seat', value)}
+          // value={trainTicket.seat.seatType}
+          selectList={TrainTicketCardSeatType}
         />
-        <TextInput
+        <SelectList
           inline
           label="车厢号"
           onValueChange={value => handleValueChange('seat', value)}
+          // value={trainTicket.seat.carNumber}
+          selectList={TrainTicketCardCarNumber}
         />
         <TextInput
           inline
@@ -186,15 +223,23 @@ export const TicketCardAddScreen = () => {
       </CellGroup>
 
       <CellGroup card title="乘客信息">
-        <TextInput
+        <SelectList
           inline
-          label="身份证号"
+          label="乘客信息"
           onValueChange={value => handleValueChange('passenger', value)}
-        />
-        <TextInput
-          inline
-          label="姓名"
-          onValueChange={value => handleValueChange('passenger', value)}
+          // value={trainTicket.passenger.name}
+          selectList={quickSelectPassengers}
+          onItemAdd={item => quickSelectItemAdd('passengers', item)}
+          onItemUpdate={item => quickSelectItemUpdate('passengers', item)}
+          onItemRemove={value => quickSelectItemRemove('passengers', value)}
+          editable
+          customFormSetting={{
+            fields: [
+              { label: '姓名', key: 'name', type: 'text' },
+              { label: '身份证', key: 'idCard', type: 'text' },
+            ],
+            label: '$name($idCard)',
+          }}
         />
       </CellGroup>
 
@@ -215,14 +260,19 @@ export const TicketCardAddScreen = () => {
           left={renderCameraScanButton}
           onValueChange={value => handleValueChange('qrCode', value)}
           textLines={4}
+          editable={false}
         />
-        <TextInput
+        <SelectList
           label="框上文字"
           onValueChange={value => handleValueChange('cardInfo', value)}
+          // value={trainTicket.cardInfo}
+          selectList={TrainTicketCardInfos}
         />
-        <TextInput
+        <SelectList
           label="框内文字"
           onValueChange={value => handleValueChange('cardTip', value)}
+          // value={trainTicket.cardTip}
+          selectList={TrainTicketCardTips}
         />
       </CellGroup>
       <Button

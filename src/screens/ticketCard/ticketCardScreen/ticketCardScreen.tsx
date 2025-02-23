@@ -15,6 +15,7 @@ import SpacingView from '../../../components/basic/SpacingView';
 import HoverButton from '../../../components/basic/HoverButton';
 import { TicketCardAddScreen } from '../ticketCardAddScreen.tsx/ticketCardAddScreen';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
+import { useTicketCardHook } from './ticketCardHook';
 
 const TicketCardAnim = ({
   index,
@@ -76,6 +77,11 @@ const TicketCardAnim = ({
 };
 
 export const TicketCardScreen = () => {
+  const {
+    input: { trainTickets },
+    output: {},
+  } = useTicketCardHook();
+
   const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState(0);
 
@@ -93,7 +99,7 @@ export const TicketCardScreen = () => {
   return (
     <View style={styles.container}>
       <SpacingView>
-        {[].map((ticket, index) => (
+        {trainTickets.map((ticket, index) => (
           <TicketCardAnim
             key={index}
             index={index}

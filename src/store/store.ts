@@ -9,12 +9,13 @@ import navigationRedux from './navigation/navigation.redux';
 import { navigationEpics } from './navigation/navigation.epics';
 import expireReminderRedux from './expireReminder/expireReminder.redux';
 import { expireReminderEpics } from './expireReminder/expireReminder.epics';
-// import { expireReminderEpics } from './expireReminder/expireReminder.epics';
+import ticketCardRedux from './ticketCard/ticketCard.redux';
 
 export const rootReducer = combineReducers({
   userProfile: userProfileRedux,
   navigation: navigationRedux,
   expireReminder: expireReminderRedux,
+  ticketCard: ticketCardRedux,
 });
 
 export const rootEpic: any = combineEpics(
