@@ -33,7 +33,14 @@ export default (props: Props) => {
             {props.required && <Text style={styles.required}>*</Text>}
           </View>
         )}
-        <View style={[styles.cellChildren]}>{props.children}</View>
+        <View
+          style={[
+            styles.cellChildren,
+            props.inline && styles.cellChildrenInline,
+          ]}
+        >
+          {props.children}
+        </View>
       </View>
       {props.info !== undefined && (
         <>
@@ -79,6 +86,10 @@ const styles = StyleSheet.create({
   },
   cellChildren: {
     flexShrink: 1,
+    alignItems: 'flex-start',
+  },
+  cellChildrenInline: {
+    alignItems: 'flex-end',
   },
   infoText: {
     fontSize: commonStyles.fontSize.small,

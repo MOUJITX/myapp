@@ -75,24 +75,37 @@ export const TicketCardAddScreen = () => {
           inline
           label="选择列表"
           onValueChange={value => console.log('selected', value)}
+          value="option2"
           selectList={[
             { label: 'Option 1', value: 'option1', isDefault: true },
             {
               label: 'Option 2',
               value: 'option2',
-              valueData: { name: '123', idCard: '456' },
+              valueData: { name: '123', idCard: '456', save: 'true' },
             },
             {
               label: 'Option 3',
               value: 'option3',
-              valueData: { name: 'abc', idCard: 'def' },
+              valueData: { name: 'abc', idCard: 'def', save: true },
+            },
+            {
+              label: 'Option 4',
+              value: 'option4',
+              valueData: { name: 'abc', idCard: 'def', save: '2' },
             },
           ]}
+          onItemAdd={item => console.log('add item', item)}
+          onItemUpdate={item => console.log('update item', item)}
+          onItemRemove={value => console.log('delete item', value)}
           editable
-          editBottomSheet={[
-            { label: '姓名', key: 'name', type: 'text' },
-            { label: '身份证号', key: 'idCard', type: 'text' },
-          ]}
+          customFormSetting={{
+            fields: [
+              { label: '姓名', key: 'name', type: 'text' },
+              { label: '身份证号', key: 'idCard', type: 'text' },
+              { label: '保存', key: 'save', type: 'switch' },
+            ],
+            label: '$name($idCard)',
+          }}
         />
       </CellGroup>
       <CellGroup card title="基础">

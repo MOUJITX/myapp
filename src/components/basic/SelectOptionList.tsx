@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useState, useEffect } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 import CellGroup from './CellGroup';
 import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import { StyleSheet, View } from 'react-native';
@@ -8,7 +8,7 @@ import Button from './Button';
 import { t } from 'i18next';
 import CellButton from './CellButton';
 import { randomUUID } from '../../utils/utils';
-import SpacingView from './SpacingView';
+import CustomForm, { CustomFormField } from './CustomForm';
 
 export interface SelectItem {
   value: string;
@@ -17,17 +17,11 @@ export interface SelectItem {
   valueData?: any;
 }
 
-export interface SelectItemCustomField {
-  key: string;
-  label: string;
-  type: 'text';
-}
-
 export interface SelectOptionListProps {
   editable?: boolean;
   selectList: SelectItem[];
   value?: string;
-  editBottomSheet?: SelectItemCustomField[];
+  customFormSetting?: { fields: CustomFormField[]; label: string };
   onValueChange?: (value: string) => void;
   onItemAdd?: (item: SelectItem) => void;
   onItemUpdate?: (item: SelectItem) => void;
@@ -38,54 +32,8 @@ export interface Props extends SelectOptionListProps {
   bottomSheetRef: RefObject<BottomSheetRef>;
 }
 
-const CustomFieldEditForm = (fields: SelectItemCustomField[], form?: any) => {
-  const [customForm, setCustomForm] = useState<Record<string, string>>();
-
-  const handleCustomFieldUpdate = (key: string, value: string) => {
-    setCustomForm(prev => ({ ...prev, [key]: value }));
-  };
-
-  useEffect(() => {
-    const initCustomForm = fields.reduce(
-      (acc, cur) => {
-        acc[cur.key] = form ? form[cur.key] : '';
-        return acc;
-      },
-      {} as Record<string, string>
-    );
-    setCustomForm(initCustomForm);
-  }, [fields, form]);
-
-  return (
-    <SpacingView>
-      <CellGroup card>
-        {fields.map((field, index) => {
-          if (field.type === 'text') {
-            return (
-              <TextInput
-                key={index}
-                inline
-                label={field.label}
-                value={customForm?.[field.key]}
-                onValueChange={value =>
-                  handleCustomFieldUpdate(field.key, value)
-                }
-              />
-            );
-          }
-        })}
-      </CellGroup>
-      <Button
-        label="保存"
-        type="primary"
-        onPress={() => console.log('customFieldEditForm', customForm)}
-      />
-    </SpacingView>
-  );
-};
-
 export default (props: Props) => {
-  const [editingItem, setEditingItem] = useState<SelectItem | null>();
+  const [editingItem, setEditingItem] = useState<SelectItem | undefined>();
   const [newItemLabel, setNewItemLabel] = useState('');
   const [isAdding, setIsAdding] = useState(false);
 
@@ -94,22 +42,33 @@ export default (props: Props) => {
     props.bottomSheetRef.current?.closeBottomSheet();
   };
 
-  const handleAddCategory = () => {
-    if (newItemLabel.trim()) {
-      props.onItemAdd &&
-        props.onItemAdd({ label: newItemLabel, value: randomUUID() });
+  const handleAddSelectItem = (item?: SelectItem) => {
+    if (item || newItemLabel.trim()) {
+      const newItem: SelectItem = {
+        value: item?.value ?? randomUUID(),
+        label: item?.label ?? newItemLabel,
+        valueData: item?.valueData ?? undefined,
+      };
+
+      props.onItemAdd && props.onItemAdd(newItem);
       setIsAdding(false);
       setNewItemLabel('');
+      setEditingItem(undefined);
     }
   };
 
-  const handleUpdateSelectItem = () => {
-    if (editingItem && newItemLabel.trim()) {
-      props.onItemUpdate &&
-        props.onItemUpdate({ label: newItemLabel, value: editingItem.value });
+  const handleUpdateSelectItem = (item?: SelectItem) => {
+    if (item || editingItem) {
+      const newItem: SelectItem = {
+        value: item?.value ?? editingItem?.value ?? randomUUID(),
+        label: item?.label ?? newItemLabel,
+        valueData: item?.valueData ?? undefined,
+      };
+
+      props.onItemUpdate && props.onItemUpdate(newItem);
       setIsAdding(false);
       setNewItemLabel('');
-      setEditingItem(null);
+      setEditingItem(undefined);
     }
   };
 
@@ -126,18 +85,40 @@ export default (props: Props) => {
   const customFieldEditBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const renderCustomFieldEditBottomSheet = (
-    fields: SelectItemCustomField[]
-  ) => (
-    <BottomSheet ref={customFieldEditBottomSheetRef}>
-      {CustomFieldEditForm(fields, editingItem?.valueData)}
-    </BottomSheet>
-  );
+    fields: CustomFormField[],
+    handleAction: (selectItem: SelectItem) => void
+  ) => {
+    const handleValueChange = (form: any) => {
+      const newSelectItem: SelectItem = {
+        value: editingItem?.value ?? randomUUID(),
+        label: newItemLabel,
+        valueData: form,
+      };
+      handleAction(newSelectItem);
+      setEditingItem(undefined);
+      setIsAdding(false);
+      setNewItemLabel('');
+      customFieldEditBottomSheetRef.current?.closeBottomSheet();
+    };
+
+    return (
+      <BottomSheet ref={customFieldEditBottomSheetRef}>
+        <CustomForm
+          fields={fields}
+          form={editingItem?.valueData}
+          formLabel={props.customFormSetting?.label}
+          onValueChange={handleValueChange}
+          onFormLabelChange={setNewItemLabel}
+        />
+      </BottomSheet>
+    );
+  };
 
   return (
     <CellGroup>
       {props.selectList.map((item, index) => (
         <View key={index}>
-          {editingItem?.value === item.value && !props.editBottomSheet ? (
+          {editingItem?.value === item.value && !props.customFormSetting ? (
             <TextInput
               style={styles.input}
               value={newItemLabel}
@@ -147,7 +128,7 @@ export default (props: Props) => {
               onBlur={() => {
                 setIsAdding(false);
                 setNewItemLabel('');
-                setEditingItem(null);
+                setEditingItem(undefined);
               }}
             />
           ) : (
@@ -174,7 +155,7 @@ export default (props: Props) => {
                   setEditingItem(item);
                   setNewItemLabel(item.label);
                   setIsAdding(false);
-                  props.editBottomSheet &&
+                  props.customFormSetting &&
                     customFieldEditBottomSheetRef.current?.openBottomSheet();
                 }
               }}
@@ -186,25 +167,25 @@ export default (props: Props) => {
 
       {props.editable && (
         <View>
-          {isAdding && !props.editBottomSheet ? (
+          {isAdding && !props.customFormSetting ? (
             <TextInput
               style={styles.input}
               value={newItemLabel}
               autoFocus
               onValueChange={setNewItemLabel}
-              right={() => renderConfirmButton(handleAddCategory)}
+              right={() => renderConfirmButton(handleAddSelectItem)}
               onBlur={() => {
                 setIsAdding(false);
                 setNewItemLabel('');
-                setEditingItem(null);
+                setEditingItem(undefined);
               }}
             />
           ) : (
             <Button
               onPress={() => {
-                setEditingItem(null);
+                setEditingItem(undefined);
                 setIsAdding(true);
-                props.editBottomSheet &&
+                props.customFormSetting &&
                   customFieldEditBottomSheetRef.current?.openBottomSheet();
               }}
               label={t('component.selectList.add.button.label')}
@@ -214,8 +195,11 @@ export default (props: Props) => {
         </View>
       )}
 
-      {props.editBottomSheet &&
-        renderCustomFieldEditBottomSheet(props.editBottomSheet)}
+      {props.customFormSetting &&
+        renderCustomFieldEditBottomSheet(
+          props.customFormSetting.fields,
+          isAdding ? handleAddSelectItem : handleUpdateSelectItem
+        )}
     </CellGroup>
   );
 };
