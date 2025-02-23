@@ -25,6 +25,6 @@ const styles = (props: Props) =>
   StyleSheet.create({
     text: {
       color: commonStyles.textColor[props.textColor ?? 'default'],
-      paddingBottom: commonStyles.spacings.smallX,
+      // paddingBottom: commonStyles.spacings.smallX,
     },
   });

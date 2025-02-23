@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: commonStyles.spacings.small2X,
+    width: '100%',
   },
   textRow: {
     gap: commonStyles.spacings.smallX,

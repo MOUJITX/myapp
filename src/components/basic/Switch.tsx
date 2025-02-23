@@ -1,6 +1,6 @@
 import React from 'react';
 import { Props as CellProps } from './Cell';
-import { Switch } from 'react-native';
+import { StyleSheet, Switch, View } from 'react-native';
 import Cell from './Cell';
 
 interface Props extends CellProps {
@@ -11,7 +11,17 @@ interface Props extends CellProps {
 export default (props: Props) => {
   return (
     <Cell {...props}>
-      <Switch value={props.value} onValueChange={props.onValueChange} />
+      <View style={styles.container}>
+        <Switch value={props.value} onValueChange={props.onValueChange} />
+      </View>
     </Cell>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+});

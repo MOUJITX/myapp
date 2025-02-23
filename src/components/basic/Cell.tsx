@@ -42,12 +42,20 @@ export default (props: Props) => {
         )}
         <View
           style={[
-            styles.cellChildren,
-            props.inline && styles.cellChildrenInline,
+            styles.cellEdit,
+            props.inline && styles.cellEditInline,
+            !props.label && styles.cellEditNoLabel,
           ]}
         >
           {props.left && props.left()}
-          <View>{props.children}</View>
+          <View
+            style={[
+              styles.cellChildren,
+              !props.inline && styles.cellChildrenInline,
+            ]}
+          >
+            {props.children}
+          </View>
           {props.right && props.right()}
         </View>
       </View>
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   editContainer: {
-    minHeight: 40,
+    // minHeight: 40,
   },
   editContainerInline: {
     display: 'flex',
@@ -95,17 +103,25 @@ const styles = StyleSheet.create({
     fontSize: commonStyles.fontSize.medium,
     color: commonStyles.textColor.default,
   },
-  cellChildren: {
+  cellEdit: {
     flexShrink: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
     flexDirection: 'row',
     gap: commonStyles.spacings.smallX,
     width: '100%',
-    borderWidth: 1,
+  },
+  cellEditNoLabel: {
+    minHeight: 40,
+  },
+  cellEditInline: {
+    justifyContent: 'flex-end',
+  },
+  cellChildren: {
+    flexShrink: 1,
+    justifyContent: 'flex-start',
   },
   cellChildrenInline: {
-    justifyContent: 'flex-end',
+    flex: 1,
   },
   infoText: {
     fontSize: commonStyles.fontSize.small,

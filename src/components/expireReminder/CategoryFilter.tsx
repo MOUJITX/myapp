@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   container: {
     paddingBottom: commonStyles.spacings.small,
     flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   scrollRow: {
     gap: commonStyles.spacings.small,

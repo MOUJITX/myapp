@@ -100,9 +100,9 @@ export const TicketCardAddScreen = () => {
           editable
           customFormSetting={{
             fields: [
-              { label: '姓名', key: 'name', type: 'text' },
-              { label: '身份证号', key: 'idCard', type: 'text' },
-              { label: '保存', key: 'save', type: 'switch' },
+              { label: '姓名', key: 'name', type: 'text', inline: true },
+              { label: '身份证号', key: 'idCard', type: 'text', inline: true },
+              { label: '保存', key: 'save', type: 'switch', inline: true },
             ],
             label: '$name($idCard)',
           }}
@@ -214,6 +214,7 @@ export const TicketCardAddScreen = () => {
           value={trainTicket.qrCode}
           left={renderCameraScanButton}
           onValueChange={value => handleValueChange('qrCode', value)}
+          textLines={4}
         />
         <TextInput
           label="框上文字"
