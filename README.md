@@ -13,20 +13,20 @@ This is a React Native project by MOUJITX.
 # Todo
 
 - [x] INIT main page
-- [ ] RECORD train ticket
+- [x] RECORD train ticket
 - [ ] RECORD id/credit/... card
 - [x] RECORD food shelf life
 - [x] RECORD medicine shelf life
 
 # issue
 
-- [ ] Some components under the bottom navigation bar after setting the statusBar to translucent.
+- [x] Some components under the bottom navigation bar after setting the statusBar to translucent.
 - [x] Go back gesture can't be used in the bottomSheet to close it.
 - [ ] SVG support failed. (branch: `feat/202502091752-svg-support`)
 - [ ] First bottomSheet will be closed when the second bottomSheet is opened.
 - [x] Swipe another swipeable view after swiping the first one, the first one can not close automatic.
 
-# Folder Structure
+<!-- # Folder Structure
 
 ```
 App
@@ -43,7 +43,7 @@ App
     ├── ticketListScreen
     └── ticketDetailScreen
 └── ...
-```
+``` -->
 
 # Start
 
