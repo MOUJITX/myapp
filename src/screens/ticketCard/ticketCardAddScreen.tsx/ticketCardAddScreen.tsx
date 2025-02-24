@@ -48,7 +48,7 @@ export const TicketCardAddScreen = (props: Props) => {
 
   const renderCameraScanButton = () => (
     <ScanCameraButton
-      codeType={'ean-13'}
+      codeType={'qr'}
       onSuccess={value => handleValueChange('qrCode', value)}
     />
   );
