@@ -27,12 +27,11 @@ const TextSingleLine = ({
 }: {
   label?: string | number;
   style?: StyleProp<TextStyle>;
-}) =>
-  label && (
-    <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
-      {label}
-    </Text>
-  );
+}) => (
+  <Text numberOfLines={1} ellipsizeMode="clip" style={style}>
+    {label}
+  </Text>
+);
 
 const TextDoubleLines = ({
   label,
@@ -204,7 +203,11 @@ export default (props: Props) => {
         </View>
         <View style={styles(baseWidth).QRcodeArea}>
           <QRCode
-            value={props.ticket.qrCode}
+            value={
+              props.ticket.qrCode === undefined || props.ticket.qrCode === ''
+                ? '12306'
+                : props.ticket.qrCode
+            }
             backgroundColor="rgba(0,0,0,0)"
             size={autoFontSize(65, baseWidth)}
           />

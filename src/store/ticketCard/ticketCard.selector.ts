@@ -17,7 +17,7 @@ export const selectTrainQuickSelectItems = (
 ) =>
   createSelector(
     (state: RootState) => state.ticketCard.trainSelect[selectKey],
-    trainSelect => trainSelect
+    trainSelect => trainSelect.filter(t => t.value !== '')
   );
 
 export const selectTrainTickets = createSelector(

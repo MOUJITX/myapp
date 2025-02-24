@@ -1,18 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTrainQuickSelectItems } from '../../../store/ticketCard/ticketCard.selector';
+import {
+  selectTrainQuickSelectItems,
+  selectTrainQuickSelectItemsWithLoginUser,
+} from '../../../store/ticketCard/ticketCard.selector';
 import { SelectItem } from '../../../components/basic/SelectOptionList';
 import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
 import {
   trainSelectAddAction,
   trainSelectRemoveAction,
   trainSelectUpdateAction,
+  trainTicketsSubmitAction,
 } from '../../../store/ticketCard/ticketCard.redux';
-import { TrainQuickSelect } from '../../../store/ticketCard/ticketCard.type';
+import {
+  TrainQuickSelect,
+  TrainTicket,
+} from '../../../store/ticketCard/ticketCard.type';
 
 type Input = {
   quickSelectStations: SelectItem[];
   quickSelectChecks: SelectItem[];
   quickSelectPassengers: SelectItem[];
+  createUser: string;
 };
 
 type Output = {
@@ -22,6 +30,7 @@ type Output = {
     key: keyof TrainQuickSelect,
     item: SelectItem
   ) => void;
+  trainTicketSubmit: (ticket: TrainTicket) => void;
 };
 
 type TicketCardAddHook = {
@@ -30,16 +39,18 @@ type TicketCardAddHook = {
 };
 
 export const useTicketCardAddHook = (): TicketCardAddHook => {
+  const createUser = useSelector(selectLoginUserUUID);
+
   const input: Input = {
     quickSelectStations: useSelector(selectTrainQuickSelectItems('stations')),
     quickSelectChecks: useSelector(selectTrainQuickSelectItems('checks')),
     quickSelectPassengers: useSelector(
-      selectTrainQuickSelectItems('passengers')
+      selectTrainQuickSelectItemsWithLoginUser('passengers')
     ),
+    createUser: createUser ?? '',
   };
 
   const dispatch = useDispatch();
-  const createUser = useSelector(selectLoginUserUUID);
 
   const output: Output = {
     quickSelectItemAdd: (key, item) =>
@@ -56,6 +67,7 @@ export const useTicketCardAddHook = (): TicketCardAddHook => {
       dispatch(trainSelectRemoveAction({ key, value: id })),
     quickSelectItemUpdate: (key, item) =>
       dispatch(trainSelectUpdateAction({ key, item })),
+    trainTicketSubmit: ticket => dispatch(trainTicketsSubmitAction(ticket)),
   };
 
   return {

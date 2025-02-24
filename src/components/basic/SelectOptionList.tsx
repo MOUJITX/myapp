@@ -22,7 +22,9 @@ export interface SelectOptionListProps {
   selectList: SelectItem[];
   value?: string;
   customFormSetting?: { fields: CustomFormField[]; label: string };
+  valueIsLabel?: boolean;
   onValueChange?: (value: string) => void;
+  onItemChange?: (item: SelectItem) => void;
   onItemAdd?: (item: SelectItem) => void;
   onItemUpdate?: (item: SelectItem) => void;
   onItemRemove?: (value: string) => void;
@@ -37,16 +39,18 @@ export default (props: Props) => {
   const [newItemLabel, setNewItemLabel] = useState('');
   const [isAdding, setIsAdding] = useState(false);
 
-  const handleSelect = (value: string) => {
-    props.onValueChange && props.onValueChange(value);
+  const handleSelect = (item: SelectItem) => {
+    props.onValueChange && props.onValueChange(item.value);
+    props.onItemChange && props.onItemChange(item);
     props.bottomSheetRef.current?.closeBottomSheet();
   };
 
   const handleAddSelectItem = (item?: SelectItem) => {
     if (item || newItemLabel.trim()) {
+      const label = item?.label ?? newItemLabel;
       const newItem: SelectItem = {
-        value: item?.value ?? randomUUID(),
-        label: item?.label ?? newItemLabel,
+        value: item?.value ?? (props.valueIsLabel ? label : randomUUID()),
+        label,
         valueData: item?.valueData ?? undefined,
       };
 
@@ -59,9 +63,13 @@ export default (props: Props) => {
 
   const handleUpdateSelectItem = (item?: SelectItem) => {
     if (item || editingItem) {
+      const label = item?.label ?? newItemLabel;
       const newItem: SelectItem = {
-        value: item?.value ?? editingItem?.value ?? randomUUID(),
-        label: item?.label ?? newItemLabel,
+        value:
+          item?.value ??
+          editingItem?.value ??
+          (props.valueIsLabel ? label : randomUUID()),
+        label,
         valueData: item?.valueData ?? undefined,
       };
 
@@ -90,7 +98,9 @@ export default (props: Props) => {
   ) => {
     const handleValueChange = (form: any) => {
       const newSelectItem: SelectItem = {
-        value: editingItem?.value ?? randomUUID(),
+        value:
+          editingItem?.value ??
+          (props.valueIsLabel ? newItemLabel : randomUUID()),
         label: newItemLabel,
         valueData: form,
       };
@@ -144,7 +154,7 @@ export default (props: Props) => {
                   : ''
               }
               label={item.label}
-              onPress={() => handleSelect(item.value)}
+              onPress={() => handleSelect(item)}
               onRightPress={() => {
                 if (props.editable && !item.isDefault) {
                   handleDeleteCategory(item.value);

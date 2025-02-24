@@ -117,7 +117,7 @@ export const TicketCardScreen = () => {
       />
 
       <BottomSheet ref={AddScreenBottomSheetRef}>
-        <TicketCardAddScreen />
+        <TicketCardAddScreen bottomSheetRef={AddScreenBottomSheetRef} />
       </BottomSheet>
     </View>
   );

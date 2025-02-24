@@ -19,6 +19,7 @@ export enum TrainMark {
 }
 
 export interface TrainPassengerInfo {
+  uuid: string;
   idCard: string;
   name: string;
 }

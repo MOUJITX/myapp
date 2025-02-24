@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { RefObject, useState } from 'react';
 import CellGroup from '../../../components/basic/CellGroup';
 import SpacingView from '../../../components/basic/SpacingView';
 import TextInput from '../../../components/basic/TextInput';
@@ -20,14 +20,26 @@ import {
   TrainTicketCardSeatType,
   TrainTicketCardTips,
 } from './types';
+import { randomUUID } from '../../../utils/utils';
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 
-export const TicketCardAddScreen = () => {
+interface Props {
+  bottomSheetRef: RefObject<BottomSheetRef>;
+}
+
+export const TicketCardAddScreen = (props: Props) => {
   const {
-    input: { quickSelectStations, quickSelectChecks, quickSelectPassengers },
+    input: {
+      quickSelectStations,
+      quickSelectChecks,
+      quickSelectPassengers,
+      createUser,
+    },
     output: {
       quickSelectItemAdd,
       quickSelectItemRemove,
       quickSelectItemUpdate,
+      trainTicketSubmit,
     },
   } = useTicketCardAddHook();
 
@@ -35,85 +47,87 @@ export const TicketCardAddScreen = () => {
 
   const renderCameraScanButton = () => (
     <ScanCameraButton
-      codeType={'qr'}
+      codeType={'ean-13'}
       onSuccess={value => handleValueChange('qrCode', value)}
     />
   );
 
   const initTrainTicket: TrainTicket = {
-    uuid: 'uuid2025',
+    uuid: randomUUID(),
     startStation: {
-      uuid: 'ss',
-      name: '杭州东',
-      code: 'hangzhoudong',
+      uuid: '',
+      name: '',
+      code: '',
     },
     endStation: {
-      uuid: 'es',
-      name: '南京南',
-      code: 'nanjingnan',
+      uuid: '',
+      name: '',
+      code: '',
     },
-    trainNumber: 'G1234',
-    dateTime: new Date('2024-12-21 11:41:02'),
+    trainNumber: '',
+    dateTime: new Date(),
     seat: {
-      carNumber: '05',
-      seatNumber: '12F',
-      seatType: '二等座',
+      carNumber: '',
+      seatNumber: '',
+      seatType: '',
     },
-    trainPay: 12.3,
-    mark: [TrainMark.Student, TrainMark.Discount],
+    trainPay: 0,
+    mark: [],
     passenger: {
-      idCard: '330001200102034321',
-      name: '王小明',
+      uuid: '',
+      idCard: '',
+      name: '',
     },
-    checking: '14A',
-    ticketRedNumber: 'E01234567',
-    ticketBlackNumber: '33108100200122ED51944289 JM',
-    qrCode: '33122324311242414142141421114',
-    cardInfo: ',仅供报销使用',
-    cardTip: '买票请到12306 发货请到95306,报销凭证 遗失不补',
+    checking: '',
+    ticketRedNumber: '',
+    ticketBlackNumber: '',
+    qrCode: '',
+    cardInfo: '',
+    cardTip: '',
     createTime: new Date(),
-    createUser: 'cu',
+    createUser,
   };
 
   const [trainTicket, setTrainTicket] = useState<TrainTicket>(initTrainTicket);
 
   const handleValueChange = (key: keyof TrainTicket, value: any) => {
     console.log('key:', key, '; value:', value);
+    if (key === 'startStation' || key === 'endStation') {
+      const newTrainTicket = {
+        ...trainTicket,
+        [key]: {
+          uuid: value.value,
+          name: value.valueData.name,
+          code: value.valueData.code,
+        },
+      };
+      setTrainTicket(newTrainTicket);
+      return;
+    }
+
     const newTrainTicket = { ...trainTicket, [key]: value };
     setTrainTicket(newTrainTicket);
+    return;
+  };
+
+  const setMark = (mark: TrainMark, value: boolean): TrainMark[] => {
+    const marks = trainTicket.mark.filter(m => m !== mark);
+    if (value) {
+      marks.push(mark);
+    }
+    return marks;
   };
 
   return (
     <SpacingView>
-      <TicketCard ticket={initTrainTicket} />
-      {/* <CellGroup card>
-        <SelectList
-          inline
-          label="选择列表"
-          onValueChange={value => console.log('selected', value)}
-          // value="option2"
-          selectList={quickSelectStations}
-          onItemAdd={item => console.log('add item', item)}
-          onItemUpdate={item => console.log('update item', item)}
-          onItemRemove={value => console.log('delete item', value)}
-          editable
-          customFormSetting={{
-            fields: [
-              { label: '姓名', key: 'name', type: 'text', inline: true },
-              { label: '身份证号', key: 'idCard', type: 'text', inline: true },
-              { label: '保存', key: 'save', type: 'switch', inline: true },
-            ],
-            label: '$name($idCard)',
-          }}
-        />
-      </CellGroup> */}
+      <TicketCard ticket={trainTicket} />
       <CellGroup card title="基础">
         <SelectList
           inline
           label="出发站"
           right={() => renderText('站')}
-          onValueChange={value => handleValueChange('startStation', value)}
-          // value={trainTicket.startStation.uuid}
+          onItemChange={item => handleValueChange('startStation', item)}
+          value={trainTicket.startStation.uuid}
           selectList={quickSelectStations}
           onItemAdd={item => quickSelectItemAdd('stations', item)}
           onItemUpdate={item => quickSelectItemUpdate('stations', item)}
@@ -131,8 +145,8 @@ export const TicketCardAddScreen = () => {
           inline
           label="到达站"
           right={() => renderText('站')}
-          onValueChange={value => handleValueChange('endStation', value)}
-          // value={trainTicket.endStation.uuid}
+          onItemChange={item => handleValueChange('endStation', item)}
+          value={trainTicket.endStation.uuid}
           selectList={quickSelectStations}
           onItemAdd={item => quickSelectItemAdd('stations', item)}
           onItemUpdate={item => quickSelectItemUpdate('stations', item)}
@@ -149,22 +163,26 @@ export const TicketCardAddScreen = () => {
         <DatetimePicker
           inline
           label="出发日期"
+          value={trainTicket.dateTime}
           onValueChange={value => handleValueChange('dateTime', value)}
         />
         <DatetimePicker
           inline
           label="出发时间"
           mode="time"
+          value={trainTicket.dateTime}
           onValueChange={value => handleValueChange('dateTime', value)}
         />
         <TextInput
           inline
           label="车次"
+          value={trainTicket.trainNumber}
           onValueChange={value => handleValueChange('trainNumber', value)}
         />
         <TextInput
           inline
           label="票价"
+          value={trainTicket.trainPay.toString()}
           onValueChange={value => handleValueChange('trainPay', value)}
           left={() => renderText('￥')}
           right={() => renderText('元')}
@@ -173,7 +191,8 @@ export const TicketCardAddScreen = () => {
           inline
           label="检票"
           onValueChange={value => handleValueChange('checking', value)}
-          // value={trainTicket.checking}
+          valueIsLabel
+          value={trainTicket.checking}
           selectList={quickSelectChecks}
           onItemAdd={item => quickSelectItemAdd('checks', item)}
           onItemUpdate={item => quickSelectItemUpdate('checks', item)}
@@ -186,17 +205,26 @@ export const TicketCardAddScreen = () => {
         <Switch
           inline
           label="网售"
-          onValueChange={value => handleValueChange('mark', value)}
+          value={trainTicket.mark.includes(TrainMark.Online)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Online, value))
+          }
         />
         <Switch
           inline
           label="学生"
-          onValueChange={value => handleValueChange('mark', value)}
+          value={trainTicket.mark.includes(TrainMark.Student)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Student, value))
+          }
         />
         <Switch
           inline
           label="优惠"
-          onValueChange={value => handleValueChange('mark', value)}
+          value={trainTicket.mark.includes(TrainMark.Discount)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Discount, value))
+          }
         />
       </CellGroup>
 
@@ -204,21 +232,33 @@ export const TicketCardAddScreen = () => {
         <SelectList
           inline
           label="席别"
-          onValueChange={value => handleValueChange('seat', value)}
-          // value={trainTicket.seat.seatType}
+          valueIsLabel
+          onValueChange={value =>
+            handleValueChange('seat', { ...trainTicket.seat, seatType: value })
+          }
+          value={trainTicket.seat.seatType}
           selectList={TrainTicketCardSeatType}
         />
         <SelectList
           inline
           label="车厢号"
-          onValueChange={value => handleValueChange('seat', value)}
-          // value={trainTicket.seat.carNumber}
+          valueIsLabel
+          onValueChange={value =>
+            handleValueChange('seat', { ...trainTicket.seat, carNumber: value })
+          }
+          value={trainTicket.seat.carNumber}
           selectList={TrainTicketCardCarNumber}
         />
         <TextInput
           inline
           label="座位号"
-          onValueChange={value => handleValueChange('seat', value)}
+          value={trainTicket.seat.seatNumber}
+          onValueChange={value =>
+            handleValueChange('seat', {
+              ...trainTicket.seat,
+              seatNumber: value,
+            })
+          }
         />
       </CellGroup>
 
@@ -226,8 +266,14 @@ export const TicketCardAddScreen = () => {
         <SelectList
           inline
           label="乘客信息"
-          onValueChange={value => handleValueChange('passenger', value)}
-          // value={trainTicket.passenger.name}
+          onItemChange={item =>
+            handleValueChange('passenger', {
+              uuid: item.value,
+              name: item.valueData.name,
+              idCard: item.valueData.idCard,
+            })
+          }
+          value={trainTicket.passenger.uuid}
           selectList={quickSelectPassengers}
           onItemAdd={item => quickSelectItemAdd('passengers', item)}
           onItemUpdate={item => quickSelectItemUpdate('passengers', item)}
@@ -247,11 +293,13 @@ export const TicketCardAddScreen = () => {
         <TextInput
           inline
           label="红色编号"
+          value={trainTicket.ticketRedNumber}
           onValueChange={value => handleValueChange('ticketRedNumber', value)}
         />
         <TextInput
           inline
           label="黑色编号"
+          value={trainTicket.ticketBlackNumber}
           onValueChange={value => handleValueChange('ticketBlackNumber', value)}
         />
         <TextInput
@@ -265,20 +313,23 @@ export const TicketCardAddScreen = () => {
         <SelectList
           label="框上文字"
           onValueChange={value => handleValueChange('cardInfo', value)}
-          // value={trainTicket.cardInfo}
+          value={trainTicket.cardInfo}
           selectList={TrainTicketCardInfos}
         />
         <SelectList
           label="框内文字"
           onValueChange={value => handleValueChange('cardTip', value)}
-          // value={trainTicket.cardTip}
+          value={trainTicket.cardTip}
           selectList={TrainTicketCardTips}
         />
       </CellGroup>
       <Button
         label="保存"
         type="primary"
-        onPress={() => console.log('trainTicket', trainTicket)}
+        onPress={() => {
+          trainTicketSubmit(trainTicket);
+          props.bottomSheetRef.current?.closeBottomSheet();
+        }}
       />
     </SpacingView>
   );
