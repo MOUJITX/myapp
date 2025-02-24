@@ -48,7 +48,7 @@ export default () => {
         name="ProfileScreen"
         component={profileScreen}
         options={{
-          title: '我的',
+          title: t('userProfile.title'),
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '👤' }),
         }}
       />

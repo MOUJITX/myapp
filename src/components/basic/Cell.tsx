@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { commonStyles, TextSize } from '../../styles';
 import { statusType } from '../../types';
 import Divider from './Divider';
+import { t } from 'i18next';
 
 export interface Props {
   label?: string;
@@ -37,7 +38,9 @@ export default (props: Props) => {
                 {props.label}
               </Text>
             )}
-            {props.required && <Text style={styles.required}>*</Text>}
+            {props.required && (
+              <Text style={styles.required}>{t('common.required.icon')}</Text>
+            )}
           </View>
         )}
         <View

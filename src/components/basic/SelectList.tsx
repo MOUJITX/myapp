@@ -50,4 +50,3 @@ export default (props: Props) => {
     </View>
   );
 };
-

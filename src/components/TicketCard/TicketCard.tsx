@@ -80,7 +80,7 @@ export default (props: Props) => {
             style={styles(baseWidth).cardNumber}
           />
           <TextSingleLine
-            label={props.ticket.checking && `检票：${props.ticket.checking}`}
+            label={props.ticket.checking}
             style={styles(baseWidth).checkWindow}
           />
         </View>

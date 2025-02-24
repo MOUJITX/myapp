@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Cell from './Cell';
 import { commonStyles } from '../../styles';
+import { t } from 'i18next';
 
 interface Props {
   label: string;
@@ -26,7 +27,7 @@ export default (props: Props) => {
             <Text style={styles.text}>{props.label}</Text>
           </View>
           <Text style={styles.directIcon} onPress={props.onRightPress}>
-            {props.rightIcon ?? '>'}
+            {props.rightIcon ?? t('common.goto.icon')}
           </Text>
         </View>
       </TouchableOpacity>

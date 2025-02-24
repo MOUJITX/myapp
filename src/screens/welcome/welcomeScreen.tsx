@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useWelcomeHook } from './welcomeHook';
+import { t } from 'i18next';
 
 export const WelcomeScreen = () => {
   const {
@@ -20,7 +21,7 @@ export const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>hello world</Text>
+      <Text>{t('userProfile.welcome.label')}</Text>
     </View>
   );
 };

@@ -126,13 +126,6 @@
         "default": "☄️ Default",
         "food": "🍜 Food",
         "medicine": "💊 Medicine"
-      },
-      "selector": {
-        "icon": {
-          "remove": "×",
-          "selected": "✔",
-          "unselected": "○"
-        }
       }
     }
   },

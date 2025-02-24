@@ -33,6 +33,34 @@
         "label": "恢复数据",
         "content": "将保存在本地的备份数据恢复至应用中，恢复数据时将覆盖已有数据。"
       }
+    },
+    "title": "我的",
+    "menu": {
+      "settings": {
+        "title": {
+          "label": "设置"
+        },
+        "general": {
+          "label": "通用设置"
+        },
+        "permission": {
+          "label": "系统权限"
+        }
+      },
+      "backup": {
+        "label": "数据备份与恢复"
+      },
+      "exit": {
+        "exchange": {
+          "label": "切换账号"
+        },
+        "exit": {
+          "label": "退出"
+        }
+      }
+    },
+    "welcome": {
+      "label": "hello world"
     }
   },
   "component": {
@@ -140,13 +168,6 @@
           "placeholder": "输入分类名称"
         }
       },
-      "selector": {
-        "icon": {
-          "selected": "✔",
-          "unselected": "○",
-          "remove": "×"
-        }
-      },
       "label": {
         "food": "🍜食物",
         "all": "全部",
@@ -170,6 +191,12 @@
     },
     "cancel": {
       "label": "取消"
+    },
+    "required": {
+      "icon": "*"
+    },
+    "goto": {
+      "icon": ">"
     }
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Example from './components/basic/sr';
+import { Text } from 'react-native';
 
 export const PageB = () => {
-  return <Example />;
+  return <Text>Page 2</Text>;
 };

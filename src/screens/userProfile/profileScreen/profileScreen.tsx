@@ -4,6 +4,7 @@ import CellGroup from '../../../components/basic/CellGroup';
 import Divider from '../../../components/basic/Divider';
 import CellButton from '../../../components/basic/CellButton';
 import { useProfileHook } from './profileHook';
+import { t } from 'i18next';
 
 export default () => {
   const {
@@ -12,18 +13,24 @@ export default () => {
   } = useProfileHook();
   return (
     <ScrollView>
-      <CellGroup title="设置">
-        <CellButton label="通用设置" />
+      <CellGroup title={t('userProfile.menu.settings.title.label')}>
+        <CellButton label={t('userProfile.menu.settings.general.label')} />
         <Divider />
-        <CellButton label="系统权限" />
+        <CellButton label={t('userProfile.menu.settings.permission.label')} />
       </CellGroup>
       <CellGroup>
-        <CellButton label="数据备份与恢复" onPress={gotoBackupScreen} />
+        <CellButton
+          label={t('userProfile.menu.backup.label')}
+          onPress={gotoBackupScreen}
+        />
       </CellGroup>
       <CellGroup>
-        <CellButton label="切换账号" />
+        <CellButton label={t('userProfile.menu.exit.exchange.label')} />
         <Divider />
-        <CellButton label="退出" onPress={logout} />
+        <CellButton
+          label={t('userProfile.menu.exit.exit.label')}
+          onPress={logout}
+        />
       </CellGroup>
     </ScrollView>
   );
