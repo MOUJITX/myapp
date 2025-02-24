@@ -25,6 +25,7 @@ import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
+  ticket?: TrainTicket;
 }
 
 export const TicketCardAddScreen = (props: Props) => {
@@ -88,7 +89,9 @@ export const TicketCardAddScreen = (props: Props) => {
     createUser,
   };
 
-  const [trainTicket, setTrainTicket] = useState<TrainTicket>(initTrainTicket);
+  const [trainTicket, setTrainTicket] = useState<TrainTicket>(
+    props.ticket ?? initTrainTicket
+  );
 
   const handleValueChange = (key: keyof TrainTicket, value: any) => {
     console.log('key:', key, '; value:', value);

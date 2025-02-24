@@ -22,6 +22,7 @@
       }
     },
     "backup": {
+      "title": "数据备份与恢复",
       "popup": {
         "title": "分享备份数据"
       },
@@ -198,5 +199,8 @@
     "goto": {
       "icon": ">"
     }
+  },
+  "trainTicket": {
+    "title": "旅行票夹"
   }
 }

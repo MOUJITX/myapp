@@ -18,40 +18,56 @@ export const calculateDays = (
 
 export const formatDate = (
   date: Date,
-  section: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'hh:mm'
+  section:
+    | 'year'
+    | 'month'
+    | 'day'
+    | 'hour'
+    | 'minute'
+    | 'second'
+    | 'hh:mm'
+    | 'timestamp'
 ) => {
+  const dateObj = new Date(date);
+
   if (section === 'year') {
-    return date.getFullYear();
+    return dateObj.getFullYear();
   }
 
   if (section === 'month') {
-    const month = date.getMonth() + 1;
+    const month = dateObj.getMonth() + 1;
     return month < 10 ? `0${month}` : `${month}`;
   }
 
   if (section === 'day') {
-    const day = date.getDate();
+    const day = dateObj.getDate();
     return day < 10 ? `0${day}` : `${day}`;
   }
 
   if (section === 'hour') {
-    const hour = date.getHours();
+    const hour = dateObj.getHours();
     return hour < 10 ? `0${hour}` : `${hour}`;
   }
 
   if (section === 'minute') {
-    const minute = date.getMinutes();
+    const minute = dateObj.getMinutes();
     return minute < 10 ? `0${minute}` : `${minute}`;
   }
 
   if (section === 'second') {
-    const second = date.getSeconds();
+    const second = dateObj.getSeconds();
     return second < 10 ? `0${second}` : `${second}`;
   }
 
   if (section === 'hh:mm') {
-    const hour = date.getHours();
-    const minute = date.getMinutes();
+    const hour = dateObj.getHours();
+    const minute = dateObj.getMinutes();
     return `${hour < 10 ? `0${hour}` : `${hour}`}:${minute < 10 ? `0${minute}` : `${minute}`}`;
   }
+
+  if (section === 'timestamp') {
+    return dateObj.getTime();
+  }
+
+  return 0;
 };

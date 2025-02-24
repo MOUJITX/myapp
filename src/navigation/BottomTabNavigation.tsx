@@ -31,6 +31,7 @@ export default () => {
         component={ExpireReminderListScreen}
         options={{
           title: t('expireReminder.title'),
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '📅' }),
           ...commonHeaderOptions,
         }}
@@ -39,7 +40,8 @@ export default () => {
         name="TicketCardScreen"
         component={TicketCardScreen}
         options={{
-          // title: t('expireReminder.title'),
+          title: t('trainTicket.title'),
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '💳' }),
           ...commonHeaderOptions,
         }}
@@ -49,6 +51,7 @@ export default () => {
         component={profileScreen}
         options={{
           title: t('userProfile.title'),
+          headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '👤' }),
         }}
       />

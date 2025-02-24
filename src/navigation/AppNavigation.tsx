@@ -40,6 +40,7 @@ export const AppNavigation = () => {
         options={{
           ...commonHeaderOptions,
           title: t('userProfile.login.title'),
+          headerTitleAlign: 'center',
         }}
       />
       <RootStack.Screen
@@ -63,7 +64,11 @@ export const AppNavigation = () => {
       <RootStack.Screen
         name="BackupDataScreen"
         component={BackupDataScreen}
-        options={{ ...commonHeaderOptions }}
+        options={{
+          ...commonHeaderOptions,
+          title: t('userProfile.backup.title'),
+          headerTitleAlign: 'center',
+        }}
       />
       <RootStack.Screen name="DebugScreen" component={DebugScreen} />
     </RootStack.Navigator>

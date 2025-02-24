@@ -63,6 +63,9 @@ export const ticketCardSlice = createSlice({
       });
     },
     trainTicketsSubmitAction: (state, action: PayloadAction<TrainTicket>) => {
+      state.trainTickets = state.trainTickets.filter(
+        item => item.uuid !== action.payload.uuid
+      );
       state.trainTickets.push(action.payload);
     },
     trainTicketsRemoveAction: (state, action: PayloadAction<string>) => {

@@ -1,12 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 import { selectTrainTickets } from '../../../store/ticketCard/ticketCard.selector';
+import { trainTicketsRemoveAction } from '../../../store/ticketCard/ticketCard.redux';
 
 type Input = {
   trainTickets: TrainTicket[];
 };
 
-type Output = {};
+type Output = {
+  trainTicketRemove: (id: string) => void;
+};
 
 type TicketCardHook = {
   input: Input;
@@ -18,7 +21,13 @@ export const useTicketCardHook = (): TicketCardHook => {
     trainTickets: useSelector(selectTrainTickets),
   };
 
-  const output: Output = {};
+  const dispatch = useDispatch();
+
+  const output: Output = {
+    trainTicketRemove: (id: string) => {
+      dispatch(trainTicketsRemoveAction(id));
+    },
+  };
 
   return {
     input,
