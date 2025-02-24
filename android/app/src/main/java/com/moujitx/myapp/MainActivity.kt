@@ -1,4 +1,4 @@
-package com.myapp
+package com.moujitx.myapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
