@@ -72,13 +72,23 @@ yarn ios     # For iOS
 
 ## For Android
 
-Step 0: general release key
+Step 0: clean history release
+
+```bash
+rm -rf android/.gradle android/app/build android/app/.cxx
+# Also
+yarn releaseClean
+```
+
+Step 1: general release key
 
 ```bash
 keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+# Also
+yarn releaseKey
 ```
 
-Step 1: Edit android/gradle.properties
+Step 2: Edit android/gradle.properties
 
 ```bash
 MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
@@ -87,7 +97,7 @@ MYAPP_RELEASE_STORE_PASSWORD=yourpassword
 MYAPP_RELEASE_KEY_PASSWORD=yourpassword
 ```
 
-Step 2: Edit android/app/build.gradle
+Step 3: Edit android/app/build.gradle
 
 ```java
 android {
@@ -110,10 +120,10 @@ android {
 // ... existing code ...
 ```
 
-Step 3: Build APK
+Step 4: Build APK
 
 ```bash
 yarn release
 ```
 
-Step 4: Find APK in android/app/build/outputs/apk/release/app-release.apk
+Step 5: Find APK in android/app/build/outputs/apk/release/app-release.apk

@@ -10,7 +10,9 @@
     "test": "jest",
     "prettier": "prettier --list-different --write 'src/**/*.{ts,tsx,json}'",
     "pod": "cd ios && pod install",
-    "release": "cd android && ./gradlew clean && ./gradlew assembleRelease"
+    "releaseClean": "rm -rf android/.gradle android/app/build android/app/.cxx",
+    "releaseKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
+    "release": "yarn releaseClean && cd android && ./gradlew clean && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.6",
