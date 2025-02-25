@@ -22,7 +22,51 @@
       }
     },
     "backup": {
-      "title": "Backup & Restore"
+      "title": "data backup and recovery",
+      "backup": {
+        "content": "All user data within the application will be backed up in JSON format, and the backup files will be saved locally or sent to other applications. We currently do not support backing up image data.",
+        "label": "backup data"
+      },
+      "popup": {
+        "title": "Share backup data"
+      },
+      "restore": {
+        "content": "Restore the backup data saved locally to the application, and overwrite the existing data when restoring the data. Currently, image data recovery is not supported.",
+        "label": "Restore Data",
+        "success": {
+          "content": "Data import successful, please log in again",
+          "label": "recovery was successful",
+          "reLogin": "Log in again"
+        }
+      }
+    },
+    "menu": {
+      "backup": {
+        "label": "data backup and recovery"
+      },
+      "exit": {
+        "exchange": {
+          "label": "Switch accounts"
+        },
+        "exit": {
+          "label": "exit"
+        }
+      },
+      "settings": {
+        "general": {
+          "label": "General Setup"
+        },
+        "permission": {
+          "label": "System permissions"
+        },
+        "title": {
+          "label": "set up"
+        }
+      }
+    },
+    "title": "my",
+    "welcome": {
+      "label": "hello world"
     }
   },
   "component": {
@@ -54,7 +98,13 @@
       "placeholder": "Please choose",
       "icon": {
         "unSelected": "○",
-        "selected": "✔"
+        "selected": "✔",
+        "remove": "×"
+      },
+      "add": {
+        "button": {
+          "label": "+Add new option"
+        }
       }
     }
   },
@@ -147,9 +197,15 @@
     },
     "confirm": {
       "label": "Confirm"
+    },
+    "goto": {
+      "icon": ">"
+    },
+    "required": {
+      "icon": "*"
     }
   },
   "trainTicket": {
-    "title": "Travel Ticket"
+    "title": "Travel ticket holder"
   }
 }

@@ -161,6 +161,12 @@ export const expireReminderSlice = createSlice({
         cat => cat.categoryID !== action.payload
       );
     },
+    restoreExpireReminderAction: (state, action: PayloadAction<any>) => {
+      if (action.payload) {
+        state.goodsList = action.payload.goodsList;
+        state.categoriesList = action.payload.categoriesList;
+      }
+    },
   },
 });
 
@@ -176,6 +182,7 @@ export const {
   addCategoryAction,
   updateCategoryAction,
   removeCategoryAction,
+  restoreExpireReminderAction,
 } = expireReminderSlice.actions;
 
 export default expireReminderSlice.reducer;

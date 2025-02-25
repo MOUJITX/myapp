@@ -1619,6 +1619,16 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-documents/picker@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.npmmirror.com/@react-native-documents/picker/-/picker-10.1.0.tgz#466600813b69eda3799a7225433b85466d2cc740"
+  integrity sha1-RmYAgTtp7aN5mnIlQzuFRm0sx0A=
+
+"@react-native-documents/viewer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@react-native-documents/viewer/-/viewer-1.0.0.tgz#98810b210e15054b58cc81f7f41da2ec985df41c"
+  integrity sha1-mIELIQ4VBUtYzIH39B2i7Jhd9Bw=
+
 "@react-native-masked-view/masked-view@^0.3.2":
   version "0.3.2"
   resolved "https://registry.npmmirror.com/@react-native-masked-view/masked-view/-/masked-view-0.3.2.tgz#7064533a573e3539ec912f59c1f457371bf49dd9"

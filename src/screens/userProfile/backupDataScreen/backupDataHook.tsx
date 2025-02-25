@@ -1,12 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/type';
 import { selectAll } from '../../../store/userProfile/userProfile.selectors';
+import {
+  restoreAction,
+  userLogoutAction,
+} from '../../../store/userProfile/userProfile.redux';
+import { navigateAction } from '../../../store/navigation/navigation.redux';
 
 type Input = {
   allStateData: RootState;
 };
 
-type Output = {};
+type Output = {
+  restoreData: (data: string) => void;
+  logout: () => void;
+};
 
 type BackupDataHook = {
   input: Input;
@@ -18,7 +26,23 @@ export const useBackupDataHook = (): BackupDataHook => {
     allStateData: useSelector(selectAll),
   };
 
-  const output: Output = {};
+  const dispatch = useDispatch();
+
+  const output: Output = {
+    restoreData: (data: string) => {
+      dispatch(restoreAction(data));
+    },
+
+    logout: () => {
+      dispatch(userLogoutAction(''));
+      dispatch(
+        navigateAction({
+          screen: 'WelcomeScreen',
+          replace: true,
+        })
+      );
+    },
+  };
 
   return {
     input,

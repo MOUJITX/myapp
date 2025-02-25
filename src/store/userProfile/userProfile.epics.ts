@@ -1,20 +1,26 @@
 import { filter, from, mergeMap, of } from 'rxjs';
 import {
+  restoreAction,
   userAddInfoAction,
   userAddLoginHistoryAction,
   userLoginAction,
   userLoginFailureAction,
   userLoginSuccessAction,
   userLogoutAction,
+  userRestoreInfoAction,
 } from './userProfile.redux';
 import { randomUUID } from '../../utils/utils';
 import { combineEpics, Epic } from 'redux-observable';
-import { AnyAction } from 'redux';
+import { AnyAction, UnknownAction } from 'redux';
 import { RootState } from '../type';
 import { LoginPayload } from './userProfile.type';
 import { selectUserInfoByUsername } from './userProfile.selectors';
 import { navigateAction } from '../navigation/navigation.redux';
-import { initCategoryAction } from '../expireReminder/expireReminder.redux';
+import {
+  initCategoryAction,
+  restoreExpireReminderAction,
+} from '../expireReminder/expireReminder.redux';
+import { ticketCardRestoreAction } from '../ticketCard/ticketCard.redux';
 
 export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 
@@ -104,10 +110,33 @@ const userAddInfoEpic: UserProfileEpic = action$ =>
     mergeMap(action => of(initCategoryAction(action.payload.uuid)))
   );
 
+const restoreEpic: UserProfileEpic = action$ =>
+  action$.pipe(
+    filter(restoreAction.match),
+    mergeMap(action => {
+      const toJSON = JSON.parse(action.payload);
+      const actionList: UnknownAction[] = [];
+
+      if (toJSON.userProfile) {
+        actionList.push(userRestoreInfoAction(toJSON.userProfile));
+      }
+
+      if (toJSON.expireReminder) {
+        actionList.push(restoreExpireReminderAction(toJSON.expireReminder));
+      }
+
+      if (toJSON.ticketCard) {
+        actionList.push(ticketCardRestoreAction(toJSON.ticketCard));
+      }
+      return of(...actionList);
+    })
+  );
+
 export const userProfileEpics = combineEpics(
   userLoginEpic,
   userLoginSuccessEpic,
   userLoginFailureEpic,
   userLogoutEpic,
-  userAddInfoEpic
+  userAddInfoEpic,
+  restoreEpic
 );

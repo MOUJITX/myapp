@@ -18,7 +18,7 @@ export default (props: Props) => {
   const [visible, setVisible] = useState(false);
 
   const handleOpenCamera = () => {
-    console.log('Open Camera');
+    // console.log('Open Camera');
     setVisible(true);
   };
 
@@ -42,12 +42,12 @@ export default (props: Props) => {
           <View>
             <ScanCamera
               onCodeScanSuccess={value => {
-                console.log('Scan Success', value);
+                // console.log('Scan Success', value);
                 setVisible(false);
                 props.onSuccess(value);
               }}
               onCodeScanFailed={error => {
-                console.log('Scan Failed', error);
+                console.error('Scan Failed', error);
                 setVisible(false);
               }}
               codeType={props.codeType}

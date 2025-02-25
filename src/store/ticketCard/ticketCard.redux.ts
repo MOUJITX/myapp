@@ -73,16 +73,12 @@ export const ticketCardSlice = createSlice({
         item => item.uuid !== action.payload
       );
     },
-    // trainTicketsUpdateAction: (state, action: PayloadAction<TrainTicket>) => {
-    //   state.trainTickets = state.trainTickets.map(item => {
-    //     if (item.uuid === action.payload.uuid) {
-    //       return {
-    //         ...action.payload,
-    //       };
-    //     }
-    //     return item;
-    //   });
-    // },
+    ticketCardRestoreAction: (state, action: PayloadAction<any>) => {
+      if (action.payload) {
+        state.trainSelect = action.payload.trainSelect;
+        state.trainTickets = action.payload.trainTickets;
+      }
+    },
   },
 });
 
@@ -92,6 +88,7 @@ export const {
   trainSelectUpdateAction,
   trainTicketsSubmitAction,
   trainTicketsRemoveAction,
+  ticketCardRestoreAction,
 } = ticketCardSlice.actions;
 
 export default ticketCardSlice.reducer;

@@ -94,7 +94,7 @@ export const TicketCardAddScreen = (props: Props) => {
   );
 
   const handleValueChange = (key: keyof TrainTicket, value: any) => {
-    console.log('key:', key, '; value:', value);
+    // console.log('key:', key, '; value:', value);
     if (key === 'startStation' || key === 'endStation') {
       const newTrainTicket = {
         ...trainTicket,

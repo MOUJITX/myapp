@@ -48,7 +48,7 @@ export default (props: Props) => {
     }
 
     if (key === 'isUsed') {
-      console.log(value);
+      // console.log(value);
       newGoodItemCell = {
         ...newGoodItemCell,
         isUsed: !value,
