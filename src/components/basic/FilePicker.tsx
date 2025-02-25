@@ -18,7 +18,7 @@ export default (props: Props) => {
         allowMultiSelection: false,
         type: props.fileTypes,
       });
-    //   console.log(res);
+      //   console.log(res);
       if (res.uri) {
         const fileContent = await RNFS.readFile(res.uri, 'utf8');
         props.onFileRead && props.onFileRead(fileContent);
