@@ -45,6 +45,15 @@ App
 └── ...
 ``` -->
 
+# Package
+
+```bash
+# dev
+com.moujitx.myapp.dev
+# prod
+com.moujitx.myapp
+```
+
 # Start
 
 ```bash
@@ -58,3 +67,53 @@ yarn start
 yarn android # For Android
 yarn ios     # For iOS
 ```
+
+# Release
+
+## For Android
+
+Step 0: general release key
+
+```bash
+keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
+
+Step 1: Edit android/gradle.properties
+
+```bash
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+MYAPP_RELEASE_STORE_PASSWORD=yourpassword
+MYAPP_RELEASE_KEY_PASSWORD=yourpassword
+```
+
+Step 2: Edit android/app/build.gradle
+
+```java
+android {
+    // ... existing code ...
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
+    buildTypes {
+        release {
+            // ... existing code ...
+            signingConfig signingConfigs.release
+        }
+    }
+}
+// ... existing code ...
+```
+
+Step 3: Build APK
+
+```bash
+yarn release
+```
+
+Step 4: Find APK in android/app/build/outputs/apk/release/app-release.apk
