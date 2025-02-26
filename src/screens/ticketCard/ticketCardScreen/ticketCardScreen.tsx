@@ -77,8 +77,8 @@ const TicketCardAnim = ({
   });
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
-      <Animated.View style={[cardStyle]}>
+    <Animated.View style={[cardStyle]}>
+      <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
         <TicketCard ticket={ticket} />
         {isOpen && ticket.uuid === topCard && (
           <View style={styles.buttons}>
@@ -98,8 +98,8 @@ const TicketCardAnim = ({
             />
           </View>
         )}
-      </Animated.View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
