@@ -67,9 +67,7 @@ export default (props: Props) => {
     >
       <ScrollView
         contentContainerStyle={[
-          isKeyboardShow
-            ? [styles.container, props.style, styles.scrollViewKeyboardShow]
-            : undefined,
+          isKeyboardShow ? [styles.scrollViewKeyboardShow] : undefined,
           styles.container,
           props.style,
         ]}
@@ -92,5 +90,5 @@ const styles = StyleSheet.create({
   },
   flex: { flex: 1 },
   bottom: { height: commonStyles.spacings.large2X },
-  scrollViewKeyboardShow: { paddingBottom: 100 },
+  scrollViewKeyboardShow: { paddingBottom: commonStyles.spacings.large4X },
 });

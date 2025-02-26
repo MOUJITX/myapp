@@ -73,6 +73,7 @@ const spacings = {
   largeX: 24,
   large2X: 32,
   large3X: 40,
+  large4X: 48,
 };
 
 const lineHeight = {
