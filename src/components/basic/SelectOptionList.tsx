@@ -149,14 +149,18 @@ export default (props: Props) => {
                   : t('component.selectList.icon.unSelected')
               }
               rightIcon={
-                props.editable && !item.isDefault
+                props.editable && !item.isDefault && props.value !== item.value
                   ? t('component.selectList.icon.remove')
                   : ''
               }
               label={item.label}
               onPress={() => handleSelect(item)}
               onRightPress={() => {
-                if (props.editable && !item.isDefault) {
+                if (
+                  props.editable &&
+                  !item.isDefault &&
+                  props.value !== item.value
+                ) {
                   handleDeleteCategory(item.value);
                 }
               }}

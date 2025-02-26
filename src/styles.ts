@@ -49,6 +49,7 @@ const fontSize = {
   large2X: 20,
   large3X: 24,
   large4X: 32,
+  large5X: 40,
 };
 
 const imageSize = {

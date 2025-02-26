@@ -35,7 +35,7 @@ export default (props: Props) => {
           textColor="primary"
           onTextPress={openSelectScreenBottomSheet}
           value={
-            props.value
+            props.value && valueToLabel(props.value)
               ? valueToLabel(props.value)
               : (props.placeholder ?? t('component.selectList.placeholder'))
           }

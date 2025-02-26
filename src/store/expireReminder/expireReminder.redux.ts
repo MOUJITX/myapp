@@ -106,6 +106,12 @@ export const expireReminderSlice = createSlice({
           isDefault: true,
         },
         {
+          categoryID: 'default',
+          label: t('expireReminder.category.label.default'),
+          createUser: action.payload,
+          isDefault: true,
+        },
+        {
           categoryID: 'medicine',
           label: t('expireReminder.category.label.medicine'),
           createUser: action.payload,
@@ -114,12 +120,6 @@ export const expireReminderSlice = createSlice({
         {
           categoryID: 'food',
           label: t('expireReminder.category.label.food'),
-          createUser: action.payload,
-          isDefault: false,
-        },
-        {
-          categoryID: 'default',
-          label: t('expireReminder.category.label.default'),
           createUser: action.payload,
           isDefault: false,
         },
