@@ -22,6 +22,7 @@ import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import { t } from 'i18next';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
+import TextInputCustom from '../../../components/basic/TextInputCustom';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -120,10 +121,10 @@ export const ExpireReminderAddScreen = (props: Props) => {
             radius
             onValueChange={value => setImgs(value)}
           />
-          <TextInput
+          <TextInputCustom
             inline
             label={t('expireReminder.add.goodCode.label')}
-            type="number"
+            keyboardType="number"
             value={uniCode}
             onValueChange={value => setUniCode(value)}
             placeholder={t('expireReminder.add.goodCode.placeholder')}

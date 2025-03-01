@@ -181,6 +181,7 @@ export const TicketCardAddScreen = (props: Props) => {
           label="车次"
           value={trainTicket.trainNumber}
           onValueChange={value => handleValueChange('trainNumber', value)}
+          autoCapitalize="characters"
         />
         <TextInput
           inline
@@ -256,6 +257,7 @@ export const TicketCardAddScreen = (props: Props) => {
           inline
           label="座位号"
           value={trainTicket.seat.seatNumber}
+          autoCapitalize="characters"
           onValueChange={value =>
             handleValueChange('seat', {
               ...trainTicket.seat,
@@ -297,12 +299,14 @@ export const TicketCardAddScreen = (props: Props) => {
           inline
           label="红色编号"
           value={trainTicket.ticketRedNumber}
+          autoCapitalize="characters"
           onValueChange={value => handleValueChange('ticketRedNumber', value)}
         />
         <TextInput
           inline
           label="黑色编号"
           value={trainTicket.ticketBlackNumber}
+          autoCapitalize="characters"
           onValueChange={value => handleValueChange('ticketBlackNumber', value)}
         />
         <TextInput
