@@ -22,6 +22,7 @@ import {
 } from './types';
 import { randomUUID } from '../../../utils/utils';
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
+import TextInputCustom from '../../../components/basic/TextInputCustom';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -176,16 +177,17 @@ export const TicketCardAddScreen = (props: Props) => {
           value={trainTicket.dateTime}
           onValueChange={value => handleValueChange('dateTime', value)}
         />
-        <TextInput
+        <TextInputCustom
           inline
           label="车次"
           value={trainTicket.trainNumber}
           onValueChange={value => handleValueChange('trainNumber', value)}
-          autoCapitalize="characters"
+          keyboardType="trainNumber"
         />
-        <TextInput
+        <TextInputCustom
           inline
           label="票价"
+          keyboardType="decimal"
           value={trainTicket.trainPay.toString()}
           onValueChange={value => handleValueChange('trainPay', value)}
           left={() => renderText('￥')}
@@ -253,11 +255,11 @@ export const TicketCardAddScreen = (props: Props) => {
           value={trainTicket.seat.carNumber}
           selectList={TrainTicketCardCarNumber}
         />
-        <TextInput
+        <TextInputCustom
           inline
           label="座位号"
           value={trainTicket.seat.seatNumber}
-          autoCapitalize="characters"
+          keyboardType="siteNumber"
           onValueChange={value =>
             handleValueChange('seat', {
               ...trainTicket.seat,

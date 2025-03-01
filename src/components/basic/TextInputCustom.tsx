@@ -145,7 +145,7 @@ export default (props: Props) => {
         onRequestClose={handleKeyboardClose}
         animationType="slide"
       >
-        {/* <View style={styles.modal} onTouchEnd={handleKeyboardClose} /> */}
+        <View style={styles.modal} onTouchEnd={handleKeyboardClose} />
         <View style={styles.keyboard}>
           {keyButtons(props.keyboardType).map((row, i) => (
             <View key={`row-${i}`} style={styles.keyboardRow}>
@@ -165,8 +165,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   modal: {
-    width: '100%',
-    height: '100%',
+    ...StyleSheet.absoluteFillObject,
   },
   keyboard: {
     position: 'absolute',
