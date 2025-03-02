@@ -5,7 +5,6 @@ import { commonStyles } from '../styles';
 import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
 import { t } from 'i18next';
 import { Text } from 'react-native';
-import { commonHeaderOptions } from './AppNavigation';
 import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
 import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/ticketCardScreen';
 
@@ -33,7 +32,6 @@ export default () => {
           title: t('expireReminder.title'),
           headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '📅' }),
-          ...commonHeaderOptions,
         }}
       />
       <BottomTab.Screen
@@ -43,7 +41,6 @@ export default () => {
           title: t('trainTicket.title'),
           headerTitleAlign: 'center',
           tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '💳' }),
-          ...commonHeaderOptions,
         }}
       />
       <BottomTab.Screen

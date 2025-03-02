@@ -18,8 +18,6 @@ type Input = {
 
 type Output = {
   logout: () => void;
-  gotoPage2: () => void;
-  gotoPage3: () => void;
 };
 
 type DebugHook = {
@@ -48,8 +46,6 @@ export const useDebugHook = (): DebugHook => {
         })
       );
     },
-    gotoPage2: () => dispatch(navigateAction({ screen: 'PageB' })),
-    gotoPage3: () => dispatch(navigateAction({ screen: 'PageC' })),
   };
 
   return {

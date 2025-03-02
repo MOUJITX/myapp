@@ -5,7 +5,8 @@ export type AppNavigationList = {
   PageC: {
     initMsg: String;
   };
-  DebugScreen: undefined;
+  DeviceInfo: undefined;
+  StateData: undefined;
 
   BottomTab: undefined;
   ExpireReminderScreen: undefined;

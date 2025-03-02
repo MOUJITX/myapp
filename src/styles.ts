@@ -137,3 +137,7 @@ export const commonStyles = {
   shadow,
   buttonSize,
 };
+
+export const flex1 = {
+  flex: 1,
+};

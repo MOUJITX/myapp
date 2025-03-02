@@ -5,19 +5,17 @@ import CellGroup from '../../components/basic/CellGroup';
 import TextLabel from '../../components/basic/TextLabel';
 import { languageCode, languageTag } from '../../i18n/i18n';
 import HoverButton from '../../components/basic/HoverButton';
-import Button from '../../components/basic/Button';
+import { flex1 } from '../../styles';
 
-export const DebugScreen = () => {
+export const DeviceInfo = () => {
   const {
-    input: { isLogin, loginUser, loginUsername, allState, envInfo },
-    output: { logout, gotoPage2, gotoPage3 },
+    input: { isLogin, loginUser, loginUsername, envInfo },
+    output: { logout },
   } = useDebugHook();
 
   return (
-    <View>
+    <View style={flex1}>
       <ScrollView>
-        <Button label="goto page2" type="primary" onPress={gotoPage2} />
-        <Button label="goto page3" type="primary" onPress={gotoPage3} />
         <CellGroup>
           <TextLabel label="os" value={envInfo.os} inline />
           <TextLabel label="version" value={envInfo.osVersion} inline />
@@ -44,7 +42,6 @@ export const DebugScreen = () => {
               <TextLabel label="username" value={loginUsername} inline />
             </>
           )}
-          <TextLabel label="stateTree" value={allState} />
         </CellGroup>
       </ScrollView>
       {isLogin && <HoverButton onPress={logout} label="[=" />}

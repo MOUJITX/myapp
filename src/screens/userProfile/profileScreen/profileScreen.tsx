@@ -9,7 +9,14 @@ import { t } from 'i18next';
 export default () => {
   const {
     input: {},
-    output: { logout, gotoBackupScreen },
+    output: {
+      logout,
+      gotoBackupScreen,
+      gotoDeviceInfoScreen,
+      gotoStateDataScreen,
+      gotoPage2,
+      gotoPage3,
+    },
   } = useProfileHook();
   return (
     <ScrollView>
@@ -32,6 +39,23 @@ export default () => {
           onPress={logout}
         />
       </CellGroup>
+      {__DEV__ && (
+        <CellGroup title="debug">
+          <CellButton
+            label={'DeviceInfo Screen'}
+            onPress={gotoDeviceInfoScreen}
+          />
+          <Divider />
+          <CellButton
+            label={'StateData Screen'}
+            onPress={gotoStateDataScreen}
+          />
+          <Divider />
+          <CellButton label={'Test Screen B'} onPress={gotoPage2} />
+          <Divider />
+          <CellButton label={'Test Screen C'} onPress={gotoPage3} />
+        </CellGroup>
+      )}
     </ScrollView>
   );
 };

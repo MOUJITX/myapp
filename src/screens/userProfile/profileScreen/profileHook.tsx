@@ -8,6 +8,10 @@ type Input = {};
 type Output = {
   logout: () => void;
   gotoBackupScreen: () => void;
+  gotoDeviceInfoScreen: () => void;
+  gotoStateDataScreen: () => void;
+  gotoPage2: () => void;
+  gotoPage3: () => void;
 };
 
 type ProfileHook = {
@@ -33,6 +37,12 @@ export const useProfileHook = (): ProfileHook => {
     },
     gotoBackupScreen: () =>
       dispatch(navigateAction({ screen: 'BackupDataScreen' })),
+    gotoDeviceInfoScreen: () =>
+      dispatch(navigateAction({ screen: 'DeviceInfo' })),
+    gotoStateDataScreen: () =>
+      dispatch(navigateAction({ screen: 'StateData' })),
+    gotoPage2: () => dispatch(navigateAction({ screen: 'PageB' })),
+    gotoPage3: () => dispatch(navigateAction({ screen: 'PageC' })),
   };
 
   return {
