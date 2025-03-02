@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Cell, { Props as CellProps } from './Cell';
 import { t } from 'i18next';
+import { randomString } from '../../utils/utils';
 
 export type KeyboardType =
   | 'number'
@@ -110,6 +111,7 @@ export default (props: Props) => {
 
   const renderKeyboardButton = (key: string, rowNumber: number) => (
     <TouchableOpacity
+      key={randomString()}
       style={[
         styles.keyButton,
         {
@@ -144,6 +146,7 @@ export default (props: Props) => {
         transparent
         onRequestClose={handleKeyboardClose}
         animationType="slide"
+        presentationStyle="overFullScreen"
       >
         <View style={styles.modal} onTouchEnd={handleKeyboardClose} />
         <View style={styles.keyboard}>
