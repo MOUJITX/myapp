@@ -1962,6 +1962,11 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/base-64@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@types/base-64/-/base-64-1.0.2.tgz#f7bc80d242306f20c57f076d79d1efe2d31032ca"
+  integrity sha512-uPgKMmM9fmn7I+Zi6YBqctOye4SlJsHKcisjHIMWpb2YKZRc36GpKyNuQ03JcT+oNXg1m7Uv4wU94EVltn8/cw==
+
 "@types/graceful-fs@^4.1.3":
   version "4.1.9"
   resolved "https://registry.npmmirror.com/@types/graceful-fs/-/graceful-fs-4.1.9.tgz#2a06bc0f68a20ab37b3e36aa238be6abdf49e8b4"
@@ -5922,6 +5927,11 @@ react-native-gesture-handler@^2.22.0:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
+
+react-native-hmac@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmmirror.com/react-native-hmac/-/react-native-hmac-0.1.1.tgz#8bd5cb7d6a108b96deba78b96fc21179ca79022a"
+  integrity sha512-lelBCwpb2kEFgcf7uY/xzNX099vW918Low6F57+iXTuuDB2S/R5GWwtaGbc0FsSAyPo9pqAuC8ZtLiXWlHesqQ==
 
 react-native-image-picker@^7.2.3:
   version "7.2.3"
