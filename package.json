@@ -13,7 +13,8 @@
     "buildClean": "rm -rf android/.gradle android/app/build android/app/.cxx",
     "buildKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
     "build": "yarn buildClean && cd android && ./gradlew clean && ./gradlew assembleRelease",
-    "release": "release-it"
+    "release": "release-it",
+    "rab": "yarn release && yarn build"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.6",
