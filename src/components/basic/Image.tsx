@@ -19,7 +19,7 @@ export interface Props {
 export default (props: Props) => {
   const [visible, setVisible] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
-  const [uri, setUri] = useState<string>('');
+  const [uri, setUri] = useState<string>();
 
   const handlePress = () => {
     if (props.onPress) {
@@ -31,24 +31,25 @@ export default (props: Props) => {
 
   useEffect(() => {
     const localURI = localFileFolder + props.img;
-    RNFS.exists(localURI)
-      .then(exist => {
-        setUri(exist ? localURI : ossDomain + props.img);
-      })
-      .catch(e => {
-        console.error('check file exist error', e);
-      });
+    props.img &&
+      RNFS.exists(localURI)
+        .then(exist => {
+          setUri(exist ? localURI : ossDomain + props.img);
+        })
+        .catch(e => {
+          console.error('check file exist error', e);
+        });
   }, [props.img]);
 
   return (
     <>
       <TouchableOpacity
         onPress={handlePress}
-        disabled={!props.preview || !props.img}
+        disabled={!props.preview || !uri}
         onLongPress={() => props.onRemove && setDeleteConfirm(true)}
       >
         <Image
-          source={{ uri }}
+          source={uri ? { uri } : undefined}
           style={{
             width: commonStyles.imageSize[props.size],
             height: commonStyles.imageSize[props.size],
@@ -80,7 +81,7 @@ export default (props: Props) => {
           style={styles.modalBackdrop}
         >
           <Image
-            source={{ uri: props.img }}
+            source={uri ? { uri } : undefined}
             style={[styles.fullScreenImage]}
             resizeMode="contain"
           />
