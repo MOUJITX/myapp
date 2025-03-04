@@ -1,37 +1,38 @@
-import { base64SafeEncode } from './base64';
-import { hmacSHA1 } from 'react-native-hmac';
+import { base64SafeEncode, base64ToUrlSafe, hmacSha1Base64 } from './encoder';
 
-const accessKey = 'ac6g1GmKe43O_7ZBF26jdts61pEN6wUofL3MK603';
-const secretKey = 'Px8m-84T1lmLuV0gkdhGzmjz7dYBdB7mb9GyvlqE';
-const bucket = 'moujitx-cloud';
-const fileName = 'testFile.jpg';
-
-// https://upload.qiniup.com/
-
-export const generalUploadToken = async () => {
-  const putPolicy = {
-    scope: `${bucket}:${fileName}`,
-    deadline: Math.ceil(new Date().getTime() / 1000) + 3600,
-    returnBody: JSON.stringify({
-      name: '$(fname)',
-      size: '$(fsize)',
-      w: '$(imageInfo.width)',
-      h: '$(imageInfo.height)',
-      hash: '$(etag)',
-    }),
+interface PutPolicy {
+  scope: {
+    bucket: string;
+    key: string;
   };
-  const putPolicyStr = JSON.stringify(putPolicy);
-  const encodedPutPolicy = base64SafeEncode(putPolicyStr);
-  let uploadToken = '';
-  await hmacSHA1(encodedPutPolicy, secretKey).then(sign => {
-    const encodedSign = base64SafeEncode(sign);
-    uploadToken = accessKey + ':' + encodedSign + ':' + encodedPutPolicy;
-    console.log('uploadToken', uploadToken);
-  });
-  return uploadToken;
+  expires?: number;
+  returnBody?: string;
+}
+
+const getFlags = (putPolicy: PutPolicy) => {
+  const scope = `${putPolicy.scope.bucket}:${putPolicy.scope.key}`;
+  const deadline =
+    (putPolicy.expires ? putPolicy.expires : 300) +
+    Math.floor(Date.now() / 1000);
+  const returnBody = putPolicy.returnBody;
+
+  return {
+    scope,
+    deadline,
+    returnBody,
+  };
 };
 
-export const OSS = () => {
-  const token = generalUploadToken();
-  console.log('token', token);
+export const ossToken = (
+  AK: string,
+  SK: string,
+  bucket: string,
+  key: string
+) => {
+  const flags = getFlags({ scope: { bucket, key } });
+  const encodedFlags = base64SafeEncode(JSON.stringify(flags));
+  const encoded = hmacSha1Base64(encodedFlags, SK);
+  const encodedSign = base64ToUrlSafe(encoded);
+  const uploadToken = AK + ':' + encodedSign + ':' + encodedFlags;
+  return uploadToken;
 };

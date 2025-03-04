@@ -119,6 +119,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
             imgs={imgs}
             size={'large'}
             radius
+            upload
             onValueChange={value => setImgs(value)}
           />
           <TextInputCustom
