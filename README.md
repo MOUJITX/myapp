@@ -5,11 +5,6 @@ This is a React Native project by MOUJITX.
 - React Native
 - Redux
 
-# Version
-
-- 0.0.1 init project
-- 0.1.20241224 add first page
-
 # Todo
 
 - [x] INIT main page
