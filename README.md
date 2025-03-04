@@ -68,24 +68,24 @@ yarn android # For Android
 yarn ios     # For iOS
 ```
 
-# Release
+# Build APP
 
 ## For Android
 
-Step 0: clean history release
+Step 0: clean history build
 
 ```bash
 rm -rf android/.gradle android/app/build android/app/.cxx
 # Also
-yarn releaseClean
+yarn buildClean
 ```
 
-Step 1: general release key
+Step 1: general build key
 
 ```bash
 keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 # Also
-yarn releaseKey
+yarn buildKey
 ```
 
 Step 2: Edit android/gradle.properties
@@ -123,7 +123,7 @@ android {
 Step 4: Build APK
 
 ```bash
-yarn release
+yarn build
 ```
 
 Step 5: Find APK in android/app/build/outputs/apk/release/app-release.apk

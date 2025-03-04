@@ -10,9 +10,10 @@
     "test": "jest",
     "prettier": "prettier --list-different --write 'src/**/*.{ts,tsx,json}'",
     "pod": "cd ios && pod install",
-    "releaseClean": "rm -rf android/.gradle android/app/build android/app/.cxx",
-    "releaseKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
-    "release": "yarn releaseClean && cd android && ./gradlew clean && ./gradlew assembleRelease"
+    "buildClean": "rm -rf android/.gradle android/app/build android/app/.cxx",
+    "buildKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
+    "build": "yarn buildClean && cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "release": "release-it"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.6",
@@ -27,6 +28,7 @@
     "@react-navigation/native-stack": "^7.2.0",
     "@react-navigation/stack": "^7.1.1",
     "@reduxjs/toolkit": "^2.5.0",
+    "@release-it/conventional-changelog": "^10.0.0",
     "i18next": "^24.2.1",
     "prettier": "^3.4.2",
     "react": "18.3.1",
@@ -50,6 +52,7 @@
     "redux": "^5.0.1",
     "redux-observable": "^3.0.0-rc.2",
     "redux-persist": "^6.0.0",
+    "release-it": "^18.1.2",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
