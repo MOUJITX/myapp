@@ -50,5 +50,5 @@ const get = (url: string, params: any): Promise<IResponse> =>
     params: params,
   });
 
-const post = (url: string, params: any): Promise<IResponse> =>
+const post = (url: string, params: any): Promise<any> =>
   instance.post(url, params);

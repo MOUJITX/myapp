@@ -6,6 +6,8 @@ export const ossSecretKey = 'Px8m-84T1lmLuV0gkdhGzmjz7dYBdB7mb9GyvlqE';
 
 export const ossBucket = 'moujitx-cloud';
 
+export const ossFolder = 'app-myapp';
+
 export const tokenJSON = {
   accessKey: 'ac6g1GmKe43O_7ZBF26jdts61pEN6wUofL3MK603',
   secretKey: 'Px8m-84T1lmLuV0gkdhGzmjz7dYBdB7mb9GyvlqE',
