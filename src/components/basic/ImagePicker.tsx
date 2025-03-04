@@ -60,10 +60,9 @@ const ImagePicker = (props: Props) => {
     RNFS.copyFile(imgUri, path)
       .then(() => {
         // console.log('Image saved to', path, imgUri);
-        const savePath = 'file://' + path;
-        props.onImageChange(savePath);
+        props.onImageChange('file://' + path);
         bottomSheetRef.current?.closeBottomSheet();
-        props.upload && uploadImageToOSS(imageName, savePath);
+        props.upload && uploadImageToOSS(imageName, imgUri);
       })
       .catch(_err => {
         // console.log('Error saving image', err);
@@ -111,18 +110,23 @@ const ImagePicker = (props: Props) => {
   const uploadImageToOSS = async (fileName: string, filePath: string) => {
     try {
       const token = ossToken(ossAccessKey, ossSecretKey, ossBucket, fileName);
+      console.log('Upload params:', { fileName, filePath, token });
 
       const formData = new FormData();
       formData.append('key', fileName);
       formData.append('token', token);
       formData.append('file', {
-        uri: filePath,
+        uri: filePath.replace('file://', ''),
+        name: fileName,
+        type: 'image/jpeg',
       });
 
+      console.log('FormData:', formData);
       const response = await request('post', '', formData);
       console.log('Upload success:', response);
-    } catch (error) {
-      console.error('Upload failed:', error);
+    } catch (error: any) {
+      console.error('Upload failed:', error.message);
+      console.error('Error details:', error.response?.data || error);
     }
   };
 

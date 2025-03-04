@@ -10,12 +10,21 @@ export interface IResponse {
 
 const instance = axios.create({
   baseURL: ossUploadURL,
-  timeout: 10 * 1000,
+  timeout: 30 * 1000,
 });
 
 instance.interceptors.request.use(async config => {
   // const token = await getStorage('token');
   // config.headers.Authorization = `Bearer ${token}`;
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type'];
+  }
+  console.log('Request config:', {
+    url: config.url,
+    method: config.method,
+    headers: config.headers,
+    data: config.data instanceof FormData ? 'FormData' : config.data,
+  });
   return config;
 });
 
@@ -24,11 +33,15 @@ instance.interceptors.response.use(
     if (response.status === 200) {
       return response.data;
     } else {
-      console.warn('response', response.status, response);
+      console.warn('Response status not 200:', response.status, response);
     }
   },
   error => {
-    console.error('response error', error);
+    console.error('Response error details:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+    });
     return Promise.reject(error);
   }
 );
@@ -51,4 +64,4 @@ const get = (url: string, params: any): Promise<IResponse> =>
   });
 
 const post = (url: string, params: any): Promise<any> =>
-  instance.post(url, params);
+  instance.post(ossUploadURL, params);
