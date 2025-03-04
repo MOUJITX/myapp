@@ -13,6 +13,7 @@ import Divider from './Divider';
 import { commonStyles } from '../../styles';
 import { t } from 'i18next';
 import { ossUpload } from '../../utils/oss';
+import { localFileFolder } from '../../environment';
 
 interface Props {
   children: React.ReactNode;
@@ -61,25 +62,22 @@ const ImagePicker = (props: Props) => {
   const saveImage = (img: ImageAsset) => {
     const imageName = randomUUID();
     const imgUri = img.uri;
-    const path = `${RNFS.DocumentDirectoryPath}/${imageName}`;
-    const fullPath = 'file://' + path;
     console.log('img', img);
 
     imgUri &&
-      RNFS.copyFile(imgUri, path)
+      RNFS.copyFile(imgUri, localFileFolder + imageName)
         .then(() => {
-          // console.log('Image saved to', path, imgUri);
-          props.onImageChange(fullPath);
+          props.onImageChange(imageName);
           bottomSheetRef.current?.closeBottomSheet();
           props.upload &&
             ossUpload(imageName, imgUri, img.type)
               .then(() => {
                 console.warn('upload success');
-                props.onUploadSuccess && props.onUploadSuccess(fullPath);
+                props.onUploadSuccess && props.onUploadSuccess(imageName);
               })
               .catch(err => {
                 console.warn('upload error', err);
-                props.onUploadFailed && props.onUploadFailed(fullPath);
+                props.onUploadFailed && props.onUploadFailed(imageName);
               });
         })
         .catch(_err => {
