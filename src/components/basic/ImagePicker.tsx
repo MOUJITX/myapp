@@ -10,6 +10,7 @@ import { commonStyles } from '../../styles';
 import { t } from 'i18next';
 import { ossAccessKey, ossBucket, ossSecretKey } from '../../environment';
 import { ossToken } from '../../utils/oss';
+import { request } from '../../utils/requestOSS';
 
 interface Props {
   children: React.ReactNode;
@@ -54,13 +55,15 @@ const ImagePicker = (props: Props) => {
   const bottomSheetRef = useRef<BottomSheetRef>(null);
 
   const saveImage = (imgUri: string) => {
-    const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
+    const imageName = randomUUID();
+    const path = `${RNFS.DocumentDirectoryPath}/${imageName}`;
     RNFS.copyFile(imgUri, path)
       .then(() => {
         // console.log('Image saved to', path, imgUri);
-        props.onImageChange('file://' + path);
+        const savePath = 'file://' + path;
+        props.onImageChange(savePath);
         bottomSheetRef.current?.closeBottomSheet();
-        props.upload && uploadImageToOSS('123456.jpg');
+        props.upload && uploadImageToOSS(imageName, savePath);
       })
       .catch(_err => {
         // console.log('Error saving image', err);
@@ -105,9 +108,22 @@ const ImagePicker = (props: Props) => {
     props.source === 'mixed' && bottomSheetRef.current?.openBottomSheet();
   };
 
-  const uploadImageToOSS = (fileName: string) => {
-    const token = ossToken(ossAccessKey, ossSecretKey, ossBucket, fileName);
-    console.log('token', token);
+  const uploadImageToOSS = async (fileName: string, filePath: string) => {
+    try {
+      const token = ossToken(ossAccessKey, ossSecretKey, ossBucket, fileName);
+
+      const formData = new FormData();
+      formData.append('key', fileName);
+      formData.append('token', token);
+      formData.append('file', {
+        uri: filePath,
+      });
+
+      const response = await request('post', '', formData);
+      console.log('Upload success:', response);
+    } catch (error) {
+      console.error('Upload failed:', error);
+    }
   };
 
   return (
