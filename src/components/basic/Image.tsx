@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import { Image, TouchableOpacity, Modal, StyleSheet, View } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 import Popup from './Popup';
 import { t } from 'i18next';
@@ -11,6 +11,7 @@ export interface Props {
   onPress?: () => void;
   preview?: boolean;
   onRemove?: () => void;
+  isWaiting?: boolean;
 }
 
 export default (props: Props) => {
@@ -40,6 +41,18 @@ export default (props: Props) => {
             borderRadius: props.radius ? commonStyles.radius.medium : undefined,
           }}
         />
+        {props.isWaiting && (
+          <View
+            style={[
+              styles.waitingMask,
+              {
+                borderRadius: props.radius
+                  ? commonStyles.radius.medium
+                  : undefined,
+              },
+            ]}
+          />
+        )}
       </TouchableOpacity>
 
       <Modal
@@ -67,7 +80,10 @@ export default (props: Props) => {
         buttons={[
           {
             label: t('common.confirm.label'),
-            onPress: () => props.onRemove && props.onRemove(),
+            onPress: () => {
+              props.onRemove && props.onRemove();
+              setDeleteConfirm(false);
+            },
             type: 'danger',
           },
           {
@@ -90,5 +106,13 @@ const styles = StyleSheet.create({
   fullScreenImage: {
     width: '100%',
     height: '100%',
+  },
+  waitingMask: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

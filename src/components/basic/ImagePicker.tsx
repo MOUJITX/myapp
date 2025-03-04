@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import {
+  launchImageLibrary,
+  launchCamera,
+  Asset as ImageAsset,
+} from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { randomUUID } from '../../utils/utils';
 import CellGroup from './CellGroup';
@@ -8,15 +12,15 @@ import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import Divider from './Divider';
 import { commonStyles } from '../../styles';
 import { t } from 'i18next';
-import { ossAccessKey, ossBucket, ossSecretKey } from '../../environment';
-import { ossToken } from '../../utils/oss';
-import { request } from '../../utils/requestOSS';
+import { ossUpload } from '../../utils/oss';
 
 interface Props {
   children: React.ReactNode;
   source: 'camera' | 'library' | 'mixed';
   upload?: boolean;
   onImageChange: (imgUri: string) => void;
+  onUploadSuccess?: (imgUri: string) => void;
+  onUploadFailed?: (imgUri: string) => void;
 }
 
 const SelectSource = ({
@@ -54,19 +58,33 @@ const SelectSource = ({
 const ImagePicker = (props: Props) => {
   const bottomSheetRef = useRef<BottomSheetRef>(null);
 
-  const saveImage = (imgUri: string) => {
+  const saveImage = (img: ImageAsset) => {
     const imageName = randomUUID();
+    const imgUri = img.uri;
     const path = `${RNFS.DocumentDirectoryPath}/${imageName}`;
-    RNFS.copyFile(imgUri, path)
-      .then(() => {
-        // console.log('Image saved to', path, imgUri);
-        props.onImageChange('file://' + path);
-        bottomSheetRef.current?.closeBottomSheet();
-        props.upload && uploadImageToOSS(imageName, imgUri);
-      })
-      .catch(_err => {
-        // console.log('Error saving image', err);
-      });
+    const fullPath = 'file://' + path;
+    console.log('img', img);
+
+    imgUri &&
+      RNFS.copyFile(imgUri, path)
+        .then(() => {
+          // console.log('Image saved to', path, imgUri);
+          props.onImageChange(fullPath);
+          bottomSheetRef.current?.closeBottomSheet();
+          props.upload &&
+            ossUpload(imageName, imgUri, img.type)
+              .then(() => {
+                console.warn('upload success');
+                props.onUploadSuccess && props.onUploadSuccess(fullPath);
+              })
+              .catch(err => {
+                console.warn('upload error', err);
+                props.onUploadFailed && props.onUploadFailed(fullPath);
+              });
+        })
+        .catch(_err => {
+          // console.log('Error saving image', err);
+        });
   };
 
   const handleChooseImage = () => {
@@ -78,8 +96,8 @@ const ImagePicker = (props: Props) => {
       } else {
         const imgAsset = response.assets?.[0];
         // console.log('imgAsset', imgAsset);
-        if (imgAsset?.uri) {
-          saveImage(imgAsset.uri);
+        if (imgAsset) {
+          saveImage(imgAsset);
         }
       }
     });
@@ -94,8 +112,8 @@ const ImagePicker = (props: Props) => {
       } else {
         const imgAsset = response.assets?.[0];
         // console.log('imgAsset', imgAsset);
-        if (imgAsset?.uri) {
-          saveImage(imgAsset.uri);
+        if (imgAsset) {
+          saveImage(imgAsset);
         }
       }
     });
@@ -105,29 +123,6 @@ const ImagePicker = (props: Props) => {
     props.source === 'camera' && handleTakePhoto();
     props.source === 'library' && handleChooseImage();
     props.source === 'mixed' && bottomSheetRef.current?.openBottomSheet();
-  };
-
-  const uploadImageToOSS = async (fileName: string, filePath: string) => {
-    try {
-      const token = ossToken(ossAccessKey, ossSecretKey, ossBucket, fileName);
-      console.log('Upload params:', { fileName, filePath, token });
-
-      const formData = new FormData();
-      formData.append('key', fileName);
-      formData.append('token', token);
-      formData.append('file', {
-        uri: filePath.replace('file://', ''),
-        name: fileName,
-        type: 'image/jpeg',
-      });
-
-      console.log('FormData:', formData);
-      const response = await request('post', '', formData);
-      console.log('Upload success:', response);
-    } catch (error: any) {
-      console.error('Upload failed:', error.message);
-      console.error('Error details:', error.response?.data || error);
-    }
   };
 
   return (
