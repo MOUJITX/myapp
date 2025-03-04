@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Image, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, TouchableOpacity, Modal, StyleSheet, View } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 import Popup from './Popup';
 import { t } from 'i18next';
+import { localFileFolder, ossDomain } from '../../environment';
+import RNFS from 'react-native-fs';
 
 export interface Props {
   img: string;
@@ -11,11 +13,13 @@ export interface Props {
   onPress?: () => void;
   preview?: boolean;
   onRemove?: () => void;
+  isWaiting?: boolean;
 }
 
 export default (props: Props) => {
   const [visible, setVisible] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [uri, setUri] = useState<string>();
 
   const handlePress = () => {
     if (props.onPress) {
@@ -25,21 +29,45 @@ export default (props: Props) => {
     }
   };
 
+  useEffect(() => {
+    const localURI = localFileFolder + props.img;
+    props.img &&
+      RNFS.exists(localURI)
+        .then(exist => {
+          setUri(exist ? localURI : ossDomain + props.img);
+        })
+        .catch(e => {
+          console.error('check file exist error', e);
+        });
+  }, [props.img]);
+
   return (
     <>
       <TouchableOpacity
         onPress={handlePress}
-        disabled={!props.preview || !props.img}
+        disabled={!props.preview || !uri}
         onLongPress={() => props.onRemove && setDeleteConfirm(true)}
       >
         <Image
-          source={{ uri: props.img }}
+          source={uri ? { uri } : undefined}
           style={{
             width: commonStyles.imageSize[props.size],
             height: commonStyles.imageSize[props.size],
             borderRadius: props.radius ? commonStyles.radius.medium : undefined,
           }}
         />
+        {props.isWaiting && (
+          <View
+            style={[
+              styles.waitingMask,
+              {
+                borderRadius: props.radius
+                  ? commonStyles.radius.medium
+                  : undefined,
+              },
+            ]}
+          />
+        )}
       </TouchableOpacity>
 
       <Modal
@@ -53,7 +81,7 @@ export default (props: Props) => {
           style={styles.modalBackdrop}
         >
           <Image
-            source={{ uri: props.img }}
+            source={uri ? { uri } : undefined}
             style={[styles.fullScreenImage]}
             resizeMode="contain"
           />
@@ -67,7 +95,10 @@ export default (props: Props) => {
         buttons={[
           {
             label: t('common.confirm.label'),
-            onPress: () => props.onRemove && props.onRemove(),
+            onPress: () => {
+              props.onRemove && props.onRemove();
+              setDeleteConfirm(false);
+            },
             type: 'danger',
           },
           {
@@ -90,5 +121,13 @@ const styles = StyleSheet.create({
   fullScreenImage: {
     width: '100%',
     height: '100%',
+  },
+  waitingMask: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

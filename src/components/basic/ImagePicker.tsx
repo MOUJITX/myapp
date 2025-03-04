@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import {
+  launchImageLibrary,
+  launchCamera,
+  Asset as ImageAsset,
+} from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { randomUUID } from '../../utils/utils';
 import CellGroup from './CellGroup';
@@ -8,11 +12,16 @@ import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import Divider from './Divider';
 import { commonStyles } from '../../styles';
 import { t } from 'i18next';
+import { ossUpload } from '../../utils/oss';
+import { localFileFolder } from '../../environment';
 
 interface Props {
   children: React.ReactNode;
   source: 'camera' | 'library' | 'mixed';
+  upload?: boolean;
   onImageChange: (imgUri: string) => void;
+  onUploadSuccess?: (imgUri: string) => void;
+  onUploadFailed?: (imgUri: string) => void;
 }
 
 const SelectSource = ({
@@ -50,17 +59,30 @@ const SelectSource = ({
 const ImagePicker = (props: Props) => {
   const bottomSheetRef = useRef<BottomSheetRef>(null);
 
-  const saveImage = (imgUri: string) => {
-    const path = `${RNFS.DocumentDirectoryPath}/${randomUUID()}`;
-    RNFS.copyFile(imgUri, path)
-      .then(() => {
-        // console.log('Image saved to', path, imgUri);
-        props.onImageChange('file://' + path);
-        bottomSheetRef.current?.closeBottomSheet();
-      })
-      .catch(_err => {
-        // console.log('Error saving image', err);
-      });
+  const saveImage = (img: ImageAsset) => {
+    const imageName = randomUUID();
+    const imgUri = img.uri;
+    console.log('img', img);
+
+    imgUri &&
+      RNFS.copyFile(imgUri, localFileFolder + imageName)
+        .then(() => {
+          props.onImageChange(imageName);
+          bottomSheetRef.current?.closeBottomSheet();
+          props.upload &&
+            ossUpload(imageName, imgUri, img.type)
+              .then(() => {
+                console.warn('upload success');
+                props.onUploadSuccess && props.onUploadSuccess(imageName);
+              })
+              .catch(err => {
+                console.warn('upload error', err);
+                props.onUploadFailed && props.onUploadFailed(imageName);
+              });
+        })
+        .catch(_err => {
+          // console.log('Error saving image', err);
+        });
   };
 
   const handleChooseImage = () => {
@@ -72,8 +94,8 @@ const ImagePicker = (props: Props) => {
       } else {
         const imgAsset = response.assets?.[0];
         // console.log('imgAsset', imgAsset);
-        if (imgAsset?.uri) {
-          saveImage(imgAsset.uri);
+        if (imgAsset) {
+          saveImage(imgAsset);
         }
       }
     });
@@ -88,8 +110,8 @@ const ImagePicker = (props: Props) => {
       } else {
         const imgAsset = response.assets?.[0];
         // console.log('imgAsset', imgAsset);
-        if (imgAsset?.uri) {
-          saveImage(imgAsset.uri);
+        if (imgAsset) {
+          saveImage(imgAsset);
         }
       }
     });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Image from './Image';
 import { commonStyles, ImageSize } from '../../styles';
@@ -9,10 +9,13 @@ interface Props {
   size: ImageSize;
   radius?: boolean;
   disabled?: boolean;
+  upload?: boolean;
   onValueChange?: (imgs: string[]) => void;
 }
 
 export default (props: Props) => {
+  const [waitingImgs, setWaitingImgs] = useState<string[]>([]);
+
   return (
     <View style={styles(props).container}>
       {props.imgs.map((img, index) => (
@@ -25,19 +28,29 @@ export default (props: Props) => {
           onRemove={() => {
             props.onValueChange?.(props.imgs.filter((_, i) => i !== index));
           }}
+          isWaiting={waitingImgs.includes(img)}
         />
       ))}
       {!props.disabled && (
         <ImagePicker
+          upload={props.upload}
           children={
             <View style={styles(props).addButton}>
               <Text style={styles(props).addButtonText}>+</Text>
             </View>
           }
           source={'mixed'}
-          onImageChange={newImg =>
-            props.onValueChange?.([...props.imgs, newImg])
+          onImageChange={newImg => {
+            props.onValueChange?.([...props.imgs, newImg]);
+            props.upload && setWaitingImgs([...waitingImgs, newImg]);
+          }}
+          onUploadSuccess={img =>
+            props.upload && setWaitingImgs(waitingImgs.filter(i => i !== img))
           }
+          onUploadFailed={img => {
+            props.onValueChange?.(props.imgs.filter(i => i !== img));
+            props.upload && setWaitingImgs(waitingImgs.filter(i => i !== img));
+          }}
         />
       )}
     </View>
