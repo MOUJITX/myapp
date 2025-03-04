@@ -9,6 +9,7 @@ interface Props {
   size: ImageSize;
   radius?: boolean;
   disabled?: boolean;
+  upload?: boolean;
   onValueChange?: (imgs: string[]) => void;
 }
 
@@ -29,6 +30,7 @@ export default (props: Props) => {
       ))}
       {!props.disabled && (
         <ImagePicker
+          upload={props.upload}
           children={
             <View style={styles(props).addButton}>
               <Text style={styles(props).addButtonText}>+</Text>

@@ -8,10 +8,13 @@ import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import Divider from './Divider';
 import { commonStyles } from '../../styles';
 import { t } from 'i18next';
+import { ossAccessKey, ossBucket, ossSecretKey } from '../../environment';
+import { ossToken } from '../../utils/oss';
 
 interface Props {
   children: React.ReactNode;
   source: 'camera' | 'library' | 'mixed';
+  upload?: boolean;
   onImageChange: (imgUri: string) => void;
 }
 
@@ -57,6 +60,7 @@ const ImagePicker = (props: Props) => {
         // console.log('Image saved to', path, imgUri);
         props.onImageChange('file://' + path);
         bottomSheetRef.current?.closeBottomSheet();
+        props.upload && uploadImageToOSS('123456.jpg');
       })
       .catch(_err => {
         // console.log('Error saving image', err);
@@ -99,6 +103,11 @@ const ImagePicker = (props: Props) => {
     props.source === 'camera' && handleTakePhoto();
     props.source === 'library' && handleChooseImage();
     props.source === 'mixed' && bottomSheetRef.current?.openBottomSheet();
+  };
+
+  const uploadImageToOSS = (fileName: string) => {
+    const token = ossToken(ossAccessKey, ossSecretKey, ossBucket, fileName);
+    console.log('token', token);
   };
 
   return (
