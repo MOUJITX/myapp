@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, TouchableOpacity, Modal, StyleSheet, View } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 import Popup from './Popup';
 import { t } from 'i18next';
+import { localFileFolder, ossDomain } from '../../environment';
+import RNFS from 'react-native-fs';
 
 export interface Props {
   img: string;
@@ -17,6 +19,7 @@ export interface Props {
 export default (props: Props) => {
   const [visible, setVisible] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [uri, setUri] = useState<string>('');
 
   const handlePress = () => {
     if (props.onPress) {
@@ -26,6 +29,17 @@ export default (props: Props) => {
     }
   };
 
+  useEffect(() => {
+    const localURI = localFileFolder + props.img;
+    RNFS.exists(localURI)
+      .then(exist => {
+        setUri(exist ? localURI : ossDomain + props.img);
+      })
+      .catch(e => {
+        console.error('check file exist error', e);
+      });
+  }, [props.img]);
+
   return (
     <>
       <TouchableOpacity
@@ -34,7 +48,7 @@ export default (props: Props) => {
         onLongPress={() => props.onRemove && setDeleteConfirm(true)}
       >
         <Image
-          source={{ uri: props.img }}
+          source={{ uri }}
           style={{
             width: commonStyles.imageSize[props.size],
             height: commonStyles.imageSize[props.size],
