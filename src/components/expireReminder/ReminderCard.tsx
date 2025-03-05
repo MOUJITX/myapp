@@ -119,6 +119,7 @@ export default (props: Props) => {
               numberOfLines={2}
               ellipsizeMode="tail"
             >
+              {props.good.brand?.brand && `[${props.good.brand?.brand}]`}
               {props.good.title}
             </Text>
             <InfoRow
