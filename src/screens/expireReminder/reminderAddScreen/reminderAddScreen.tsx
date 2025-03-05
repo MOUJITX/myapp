@@ -108,16 +108,18 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const handleUnicodeChange = (value: string) => {
     setUniCode(value);
     if (value.length === 13) {
-      request('get', pubApiUrl_barcode(value + 1)).then((res: any) => {
+      request('get', pubApiUrl_barcode(value)).then((res: any) => {
+        // console.log('res', res);
         if (res.code === 1) {
-          const resDate: {
+          const resData: {
             goodsName: string;
             brand: string;
             supplier: string;
           } = res.data;
-          !title && setTitle(resDate.goodsName);
-          !brand.brand && setBrand({ ...brand, brand: resDate.brand });
-          !brand.producer && setBrand({ ...brand, producer: resDate.supplier });
+          // console.log('resDate', resData);
+          !title && setTitle(resData.goodsName);
+          !brand.brand && setBrand({ ...brand, brand: resData.brand });
+          !brand.producer && setBrand({ ...brand, producer: resData.supplier });
         }
       });
     }
