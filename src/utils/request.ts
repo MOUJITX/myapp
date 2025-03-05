@@ -10,7 +10,7 @@ instance.interceptors.request.use(async config => {
 
 instance.interceptors.response.use(
   response => {
-    console.warn('response', response);
+    // console.warn('response', response);
     return response.data;
   },
   error => {

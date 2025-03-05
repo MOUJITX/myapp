@@ -72,11 +72,11 @@ const ImagePicker = (props: Props) => {
           props.upload &&
             ossUpload(imageName, imgUri, img.type)
               .then(() => {
-                console.warn('upload success');
+                // console.warn('upload success');
                 props.onUploadSuccess && props.onUploadSuccess(imageName);
               })
               .catch(err => {
-                console.warn('upload error', err);
+                console.error('upload error', err);
                 props.onUploadFailed && props.onUploadFailed(imageName);
               });
         })

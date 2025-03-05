@@ -25,6 +25,8 @@ import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
 import CustomFormLabel from '../../../components/basic/CustomFormLabel';
+import { request } from '../../../utils/request';
+import { pubApiUrl_barcode } from '../../../environment';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -103,11 +105,26 @@ export const ExpireReminderAddScreen = (props: Props) => {
     props.bottomSheetRef.current?.closeBottomSheet();
   };
 
+  const handleUnicodeChange = (value: string) => {
+    setUniCode(value);
+    if (value.length === 13) {
+      request('get', pubApiUrl_barcode(value + 1)).then((res: any) => {
+        if (res.code === 1) {
+          const resDate: {
+            goodsName: string;
+            brand: string;
+            supplier: string;
+          } = res.data;
+          !title && setTitle(resDate.goodsName);
+          !brand.brand && setBrand({ ...brand, brand: resDate.brand });
+          !brand.producer && setBrand({ ...brand, producer: resDate.supplier });
+        }
+      });
+    }
+  };
+
   const renderCameraScanButton = () => (
-    <ScanCameraButton
-      codeType={'ean-13'}
-      onSuccess={value => setUniCode(value)}
-    />
+    <ScanCameraButton codeType={'ean-13'} onSuccess={handleUnicodeChange} />
   );
 
   return (
@@ -131,7 +148,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
             label={t('expireReminder.add.goodCode.label')}
             keyboardType="number"
             value={uniCode}
-            onValueChange={value => setUniCode(value)}
+            onValueChange={handleUnicodeChange}
             placeholder={t('expireReminder.add.goodCode.placeholder')}
             right={renderCameraScanButton}
           />
