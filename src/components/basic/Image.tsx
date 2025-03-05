@@ -30,15 +30,19 @@ export default (props: Props) => {
   };
 
   useEffect(() => {
-    const localURI = localFileFolder + props.img;
-    props.img &&
+    if (props.img) {
+      const localURI = localFileFolder + props.img;
       RNFS.exists(localURI)
         .then(exist => {
           setUri(exist ? localURI : ossDomain + props.img);
         })
         .catch(e => {
           console.error('check file exist error', e);
+          setUri(undefined);
         });
+    } else {
+      setUri(undefined);
+    }
   }, [props.img]);
 
   return (
