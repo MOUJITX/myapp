@@ -118,8 +118,16 @@ export const ExpireReminderAddScreen = (props: Props) => {
           } = res.data;
           // console.log('resDate', resData);
           !title && setTitle(resData.goodsName);
-          !brand.brand && setBrand({ ...brand, brand: resData.brand });
-          !brand.producer && setBrand({ ...brand, producer: resData.supplier });
+          if (!brand || (!brand.brand && !brand.producer)) {
+            setBrand({
+              brand: resData.brand,
+              producer: resData.supplier,
+            });
+          } else {
+            !brand.brand && setBrand({ ...brand, brand: resData.brand });
+            !brand.producer &&
+              setBrand({ ...brand, producer: resData.supplier });
+          }
         }
       });
     }
