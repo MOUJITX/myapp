@@ -8,7 +8,7 @@ export const ossSecretKey = 'Px8m-84T1lmLuV0gkdhGzmjz7dYBdB7mb9GyvlqE';
 
 export const ossBucket = 'moujitx-cloud';
 
-export const ossFolder = 'app-myapp';
+export const ossFolder = __DEV__ ? 'app-myapp-dev' : 'app-myapp';
 
 export const ossDomain = `https://cloudfiles.moujitx.cn/${ossFolder}/`;
 
