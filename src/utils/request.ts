@@ -1,30 +1,17 @@
 import axios from 'axios';
 
-export interface IResponse {
-  code: number | string;
-  data: any;
-  message: string;
-  total: number;
-}
-
 const instance = axios.create({
-  baseURL: 'http://114.55.245.145:20222/api',
   timeout: 10 * 1000,
 });
 
 instance.interceptors.request.use(async config => {
-  // const token = await getStorage('token');
-  // config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
 instance.interceptors.response.use(
   response => {
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      console.warn('response', response.status, response);
-    }
+    console.warn('response', response);
+    return response.data;
   },
   error => {
     console.error('response error', error);
@@ -33,10 +20,10 @@ instance.interceptors.response.use(
 );
 
 export const request = async (
-  method: string,
+  method: 'get' | 'post',
   url: string,
-  params: any
-): Promise<IResponse> => {
+  params?: any
+) => {
   if (method === 'get') {
     return await get(url, params);
   } else {
@@ -44,10 +31,6 @@ export const request = async (
   }
 };
 
-const get = (url: string, params: any): Promise<IResponse> =>
-  instance.get(url, {
-    params: params,
-  });
+const get = (url: string, params: any) => instance.get(url, params);
 
-const post = (url: string, params: any): Promise<IResponse> =>
-  instance.post(url, params);
+const post = (url: string, params: any) => instance.post(url, params);

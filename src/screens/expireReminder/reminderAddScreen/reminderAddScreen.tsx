@@ -8,6 +8,7 @@ import SpacingView from '../../../components/basic/SpacingView';
 import ImageRow from '../../../components/basic/ImageRow';
 import {
   Good,
+  GoodBrand,
   GoodItem,
 } from '../../../store/expireReminder/expireReminder.type';
 import {
@@ -23,6 +24,7 @@ import { t } from 'i18next';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
+import CustomFormLabel from '../../../components/basic/CustomFormLabel';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -43,6 +45,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const [category, setCategory] = useState<string>(
     props.good?.type ?? 'default'
   );
+  const [brand, setBrand] = useState<GoodBrand>(props.good?.brand ?? {});
   const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);
 
   const initItem: GoodItem = {
@@ -91,6 +94,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
       uniqueCode: uniCode ?? randomStringNumber(),
       imgs,
       type: category,
+      brand,
       detail: {},
       items,
       createTime: props.good?.createTime ?? new Date(),
@@ -142,6 +146,27 @@ export const ExpireReminderAddScreen = (props: Props) => {
             selected={category}
             onSelect={setCategory}
             hideAll
+          />
+          <CustomFormLabel
+            label="品牌"
+            inline
+            formFields={[
+              {
+                key: 'brand',
+                label: '品牌',
+                type: 'text',
+                inline: true,
+              },
+              {
+                key: 'producer',
+                label: '厂商',
+                type: 'text',
+                inline: true,
+              },
+            ]}
+            formValue={brand}
+            valueLabel={brand.brand ? brand.brand : brand.producer}
+            onValueChange={value => setBrand(value)}
           />
         </CellGroup>
         {items.map((item, index) => (

@@ -21,12 +21,18 @@ export interface GoodItem {
   createTime: Date;
 }
 
+export interface GoodBrand {
+  brand?: string;
+  producer?: string;
+}
+
 export interface Good {
   goodID: string;
   title: string;
   uniqueCode: string;
   imgs: string[];
   type: string;
+  brand?: GoodBrand;
   detail: {
     dosage?: string;
     frequency?: string;
