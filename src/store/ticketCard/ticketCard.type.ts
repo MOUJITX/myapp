@@ -9,6 +9,7 @@ export interface TrainStation {
 export interface TrainSeat {
   carNumber: string;
   seatNumber: string;
+  seatBed?: string;
   seatType: string;
 }
 

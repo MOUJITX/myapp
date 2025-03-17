@@ -7,7 +7,7 @@ import Cell from './Cell';
 
 interface Props extends CellProps {
   selectItems: SelectItem[];
-  value: string;
+  value?: string;
   onValueChange?: (value?: string) => void;
   onItemChange?: (item?: SelectItem) => void;
 }

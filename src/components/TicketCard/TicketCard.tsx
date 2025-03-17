@@ -168,6 +168,10 @@ export default (props: Props) => {
               label={stringFormat(props.ticket.seat.seatNumber, 'upAll')}
               style={styles(baseWidth).trainDateText}
             />
+            <TextSingleLine
+              label={props.ticket.seat.seatBed}
+              style={styles(baseWidth).trainDateText}
+            />
           </View>
         </View>
         <View
@@ -303,7 +307,7 @@ const styles = (baseWidth: number, cardRatio?: number) =>
     },
     trainSeatNumber: {
       width: '32%',
-      gap: '22%',
+      gap: '12%',
     },
     trainDateText: {
       fontSize: autoFontSize(18, baseWidth),

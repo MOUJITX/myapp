@@ -17,6 +17,7 @@ import { useTicketCardAddHook } from './ticketCardAddHook';
 import {
   carsSkipSeatNumber,
   carsSkipSeatType,
+  seatsBed,
   TrainTicketCardCarNumber,
   TrainTicketCardInfos,
   TrainTicketCardSeatType,
@@ -310,18 +311,37 @@ export const TicketCardAddScreen = (props: Props) => {
           selectList={TrainTicketCardCarNumber}
         />
         {!carsSkipSeatNumber.includes(trainTicket.seat.carNumber) && (
-          <TextInputCustom
-            inline
-            label="座位号"
-            value={trainTicket.seat.seatNumber}
-            keyboardType="siteNumber"
-            onValueChange={value =>
-              handleValueChange('seat', {
-                ...trainTicket.seat,
-                seatNumber: value,
-              })
-            }
-          />
+          <>
+            <TextInputCustom
+              inline
+              label="座位号"
+              value={trainTicket.seat.seatNumber}
+              keyboardType="siteNumber"
+              onValueChange={value =>
+                handleValueChange('seat', {
+                  ...trainTicket.seat,
+                  seatNumber: value,
+                })
+              }
+            />
+            {seatsBed.includes(trainTicket.seat.seatType) && (
+              <SelectButtons
+                inline
+                label="铺位"
+                selectItems={['上铺', '中铺', '下铺'].map(item => ({
+                  label: item,
+                  value: item,
+                }))}
+                value={trainTicket.seat.seatBed}
+                onValueChange={value =>
+                  handleValueChange('seat', {
+                    ...trainTicket.seat,
+                    seatBed: value,
+                  })
+                }
+              />
+            )}
+          </>
         )}
       </CellGroup>
 

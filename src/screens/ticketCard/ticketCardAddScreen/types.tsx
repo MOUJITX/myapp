@@ -15,6 +15,20 @@ const cardTips: string[] = [
   '欢度国庆 祝福祖国,中国铁路祝您旅途愉快',
 ];
 
+export const seatsBed: string[] = [
+  '高级动卧',
+  '动卧',
+  '新空调硬卧',
+  '新空调软卧',
+  '新空调高级软卧',
+  '硬卧',
+  '软卧',
+  '高级软卧',
+  '一等卧',
+  '二等卧',
+  '一人软包',
+];
+
 const seats: string[] = [
   '无座',
   '商务座',
@@ -22,26 +36,16 @@ const seats: string[] = [
   '优选一等座',
   '一等座',
   '二等座',
-  '高级动卧',
-  '动卧',
   '新空调硬座',
   '新空调软座',
-  '新空调硬卧',
-  '新空调软卧',
-  '新空调高级软卧',
   '硬座',
   '软座',
-  '硬卧',
-  '软卧',
-  '高级软卧',
-  '一等卧',
-  '二等卧',
   '一等软座',
   '二等软座',
-  '一人软包',
   '硬卧代硬座',
   '卧代一等座',
   '卧代二等座',
+  ...seatsBed,
 ];
 
 export const carsSkipSeatType: string[] = ['不对号入座'];
@@ -49,8 +53,8 @@ export const carsSkipSeatNumber: string[] = [...carsSkipSeatType, '无座'];
 
 const cars: string[] = [
   ...carsSkipSeatNumber,
-  ...Array.from({ length: 20 }, (_, i) => `${i < 9 ? '0' : ''}${i + 1}车`),
-  ...Array.from({ length: 8 }, (_, i) => `加${i + 1}车`),
+  ...Array.from({ length: 20 }, (_, i) => `${i < 9 ? '0' : ''}${i + 1}`),
+  ...Array.from({ length: 8 }, (_, i) => `加${i + 1}`),
 ];
 
 export const TrainTicketCardInfos: SelectItem[] = cardInfos.map(item => ({
@@ -70,5 +74,5 @@ export const TrainTicketCardSeatType: SelectItem[] = seats.map(item => ({
 
 export const TrainTicketCardCarNumber: SelectItem[] = cars.map(item => ({
   value: item,
-  label: item,
+  label: carsSkipSeatNumber.includes(item) ? item : `${item}车`,
 }));
