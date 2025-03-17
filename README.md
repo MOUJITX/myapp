@@ -146,7 +146,11 @@ yarn release --preRelease rc
 
 ## Release and Build
 
+### For Android
+
 ```bash
-# For Android
+# Upgrade patch version and build
+yarn release && yarn build
+# Also
 yarn rab
 ```
