@@ -13,6 +13,7 @@ const color = {
   green: '#4CAF50',
   greenLight: '#4CAF5015',
   blue: '#1989fa',
+  blueLight: '#1989fa15',
   orange: '#ff976a',
   orangeDark: '#ed6a0c',
   orangeLight: '#fffbe8',
@@ -37,6 +38,7 @@ const backgroundColor = {
   backDropOpacity: 0.6,
   backDropWithOpacity: color.gray8 + '60',
   success: color.greenLight,
+  info: color.gray4,
 };
 
 const fontSize = {

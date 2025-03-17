@@ -16,6 +16,7 @@ import {
 } from '../../store/ticketCard/ticketCard.type';
 import { formatDate } from '../../utils/datetime';
 import { stringFormat } from '../../utils/utils';
+import { commonStyles } from '../../styles';
 
 interface Props {
   ticket: TrainTicket;
@@ -59,6 +60,8 @@ const formatPassengerInfo = (info: TrainPassengerInfo) => {
 
 export default (props: Props) => {
   const [baseWidth, setBaseWidth] = useState<number>(300);
+  const cardRatio = 800 / 534;
+  // const cardRatio = props.ticket.paperType === 'red' ? 800 / 534 : 2126 / 1559;
 
   const onLayout = (event: LayoutChangeEvent) => {
     setBaseWidth(event.nativeEvent.layout.width);
@@ -66,9 +69,13 @@ export default (props: Props) => {
 
   return (
     <ImageBackground
-      source={require('../../assets/img/trainTicket2.jpg')}
-      style={styles(baseWidth).container}
-      resizeMode="contain"
+      source={
+        props.ticket.paperType === 'red'
+          ? require('../../assets/img/redTicket.webp')
+          : require('../../assets/img/blueTicket.webp')
+      }
+      style={styles(baseWidth, cardRatio).container}
+      resizeMode="cover"
     >
       <View style={styles(baseWidth).cardInfo} onLayout={onLayout}>
         <View
@@ -110,11 +117,11 @@ export default (props: Props) => {
           ]}
         >
           <TextSingleLine
-            label={stringFormat(props.ticket.startStation.code, 'upFirst')}
+            label={stringFormat(props.ticket.startStation.code, 'upFirstOnly')}
             style={styles(baseWidth).stationEN}
           />
           <TextSingleLine
-            label={stringFormat(props.ticket.endStation.code, 'upFirst')}
+            label={stringFormat(props.ticket.endStation.code, 'upFirstOnly')}
             style={styles(baseWidth).stationEN}
           />
         </View>
@@ -221,15 +228,16 @@ export default (props: Props) => {
   );
 };
 
-const styles = (baseWidth: number) =>
+const styles = (baseWidth: number, cardRatio?: number) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      aspectRatio: 1077 / 666,
-      // aspectRatio: 2782 / 1755,
+      aspectRatio: cardRatio,
       alignItems: 'center',
       borderRadius: autoFontSize(12),
       overflow: 'hidden',
+      backgroundColor: 'white',
+      ...commonStyles.shadow,
     },
     cardInfo: {
       width: '90%',
@@ -256,34 +264,32 @@ const styles = (baseWidth: number) =>
     stationArea: {
       top: '2%',
       height: '13%',
+      justifyContent: 'space-between',
     },
     stationStart: {
-      left: '5%',
-      width: '23%',
+      width: '40%',
     },
     stationEnd: {
-      left: '26%',
-      width: '23%',
+      width: '40%',
     },
     stationCN: {
       fontSize: autoFontSize(29, baseWidth),
       textAlign: 'center',
     },
     trainNumber: {
+      position: 'absolute',
       top: '9%',
-      left: '18%',
-      width: '18%',
+      left: '38%',
+      width: '25%',
       fontSize: autoFontSize(26, baseWidth),
       textAlign: 'center',
     },
 
     stationENArea: {
-      width: '89%',
-      left: '5%',
       justifyContent: 'space-between',
     },
     stationEN: {
-      width: '30%',
+      width: '40%',
       fontSize: autoFontSize(17, baseWidth),
       textAlign: 'center',
     },

@@ -8,6 +8,7 @@ export enum ButtonShapeType {
   Default = 'default',
   Circle = 'circle',
   Square = 'square',
+  NoRadius = 'noRadius',
 }
 
 export interface Props {
@@ -39,15 +40,16 @@ const styles = (props: Props) =>
       backgroundColor: props.plain
         ? commonStyles.color.alpha0
         : commonStyles.statusColor[props.type ?? 'default'],
-      // marginVertical: commonStyles.spacings.small,
       paddingHorizontal:
-        props.shape === 'default' || !props.shape
+        props.shape === 'default' || props.shape === 'noRadius' || !props.shape
           ? commonStyles.spacings.small
           : undefined,
       borderRadius:
-        props.shape === 'circle'
-          ? commonStyles.radius.circle
-          : commonStyles.radius[props.size === 'small' ? 'small' : 'medium'],
+        props.shape === 'noRadius'
+          ? 0
+          : props.shape === 'circle'
+            ? commonStyles.radius.circle
+            : commonStyles.radius[props.size === 'small' ? 'small' : 'medium'],
       height:
         commonStyles.buttonSize[props.size ?? 'medium'] * (props.sizeX ?? 1),
       width:

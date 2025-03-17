@@ -6,11 +6,12 @@ import Button from './Button';
 import { t } from 'i18next';
 import { useComponentMount } from '../../utils/componentMount';
 import Switch from './Switch';
+import TextInputCustom from './TextInputCustom';
 
 export interface CustomFormField {
   key: string;
   label: string;
-  type?: 'text' | 'switch';
+  type?: 'text' | 'idCard' | 'switch';
   inline?: boolean;
   placeholder?: string;
 }
@@ -72,6 +73,21 @@ export default (props: Props) => {
                 inline={field.inline}
                 label={field.label}
                 value={customForm?.[field.key]}
+                onValueChange={value =>
+                  handleCustomFieldUpdate(field.key, value)
+                }
+              />
+            );
+          }
+
+          if (field.type === 'idCard') {
+            return (
+              <TextInputCustom
+                key={index}
+                inline={field.inline}
+                label={field.label}
+                value={customForm?.[field.key]}
+                keyboardType={'idCard'}
                 onValueChange={value =>
                   handleCustomFieldUpdate(field.key, value)
                 }

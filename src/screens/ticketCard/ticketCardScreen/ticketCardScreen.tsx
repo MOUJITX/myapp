@@ -13,12 +13,12 @@ import BottomSheet, {
 } from '../../../components/basic/BottomSheet';
 import SpacingView from '../../../components/basic/SpacingView';
 import HoverButton from '../../../components/basic/HoverButton';
-import { TicketCardAddScreen } from '../ticketCardAddScreen.tsx/ticketCardAddScreen';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 import { useTicketCardHook } from './ticketCardHook';
 import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import { t } from 'i18next';
 import { commonStyles } from '../../../styles';
+import { TicketCardAddScreen } from '../ticketCardAddScreen/ticketCardAddScreen';
 
 const TicketCardAnim = ({
   index,

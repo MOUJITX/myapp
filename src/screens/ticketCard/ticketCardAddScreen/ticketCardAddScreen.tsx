@@ -15,6 +15,8 @@ import {
 import SelectList from '../../../components/basic/SelectList';
 import { useTicketCardAddHook } from './ticketCardAddHook';
 import {
+  carsSkipSeatNumber,
+  carsSkipSeatType,
   TrainTicketCardCarNumber,
   TrainTicketCardInfos,
   TrainTicketCardSeatType,
@@ -23,6 +25,7 @@ import {
 import { randomUUID } from '../../../utils/utils';
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
+import SelectButtons from '../../../components/basic/SelectButtons';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -232,41 +235,94 @@ export const TicketCardAddScreen = (props: Props) => {
             handleValueChange('mark', setMark(TrainMark.Discount, value))
           }
         />
+
+        <Switch
+          inline
+          label="折扣"
+          value={trainTicket.mark.includes(TrainMark.Disc)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Disc, value))
+          }
+        />
+        <Switch
+          inline
+          label="现金"
+          value={trainTicket.mark.includes(TrainMark.Cash)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Cash, value))
+          }
+        />
+        <Switch
+          inline
+          label="孩童"
+          value={trainTicket.mark.includes(TrainMark.Child)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Child, value))
+          }
+        />
+        <Switch
+          inline
+          label="微信支付"
+          value={trainTicket.mark.includes(TrainMark.WeChat)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.WeChat, value))
+          }
+        />
+        <Switch
+          inline
+          label="支付宝"
+          value={trainTicket.mark.includes(TrainMark.Alipay)}
+          onValueChange={value =>
+            handleValueChange('mark', setMark(TrainMark.Alipay, value))
+          }
+        />
       </CellGroup>
 
       <CellGroup card title="座位">
-        <SelectList
-          inline
-          label="席别"
-          valueIsLabel
-          onValueChange={value =>
-            handleValueChange('seat', { ...trainTicket.seat, seatType: value })
-          }
-          value={trainTicket.seat.seatType}
-          selectList={TrainTicketCardSeatType}
-        />
+        {!carsSkipSeatType.includes(trainTicket.seat.carNumber) && (
+          <SelectList
+            inline
+            label="席别"
+            valueIsLabel
+            onValueChange={value =>
+              handleValueChange('seat', {
+                ...trainTicket.seat,
+                seatType: value,
+              })
+            }
+            value={trainTicket.seat.seatType}
+            selectList={TrainTicketCardSeatType}
+          />
+        )}
         <SelectList
           inline
           label="车厢号"
           valueIsLabel
           onValueChange={value =>
-            handleValueChange('seat', { ...trainTicket.seat, carNumber: value })
+            handleValueChange('seat', {
+              ...trainTicket.seat,
+              carNumber: value,
+              ...(carsSkipSeatNumber.includes(value) && { seatNumber: '' }),
+              ...(carsSkipSeatType.includes(value) && { seatType: '' }),
+            })
           }
           value={trainTicket.seat.carNumber}
           selectList={TrainTicketCardCarNumber}
         />
-        <TextInputCustom
-          inline
-          label="座位号"
-          value={trainTicket.seat.seatNumber}
-          keyboardType="siteNumber"
-          onValueChange={value =>
-            handleValueChange('seat', {
-              ...trainTicket.seat,
-              seatNumber: value,
-            })
-          }
-        />
+        {!carsSkipSeatNumber.includes(trainTicket.seat.carNumber) && (
+          <TextInputCustom
+            inline
+            label="座位号"
+            value={trainTicket.seat.seatNumber}
+            keyboardType="siteNumber"
+            onValueChange={value =>
+              handleValueChange('seat', {
+                ...trainTicket.seat,
+                seatNumber: value,
+              })
+            }
+          />
+        )}
       </CellGroup>
 
       <CellGroup card title="乘客信息">
@@ -289,7 +345,7 @@ export const TicketCardAddScreen = (props: Props) => {
           customFormSetting={{
             fields: [
               { label: '姓名', key: 'name', type: 'text' },
-              { label: '身份证', key: 'idCard', type: 'text' },
+              { label: '身份证', key: 'idCard', type: 'idCard' },
             ],
             label: '$name($idCard)',
           }}
@@ -297,6 +353,16 @@ export const TicketCardAddScreen = (props: Props) => {
       </CellGroup>
 
       <CellGroup card title="更多">
+        <SelectButtons
+          inline
+          label="票纸"
+          selectItems={[
+            { label: '红票', value: 'red' },
+            { label: '蓝票', value: 'blue' },
+          ]}
+          value={trainTicket.paperType ?? 'blue'}
+          onValueChange={value => handleValueChange('paperType', value)}
+        />
         <TextInput
           inline
           label="红色编号"

@@ -16,6 +16,11 @@ export enum TrainMark {
   Student = '学',
   Discount = '惠',
   Online = '网',
+  Cash = '现',
+  Disc = '折',
+  Child = '孩',
+  Alipay = '支',
+  WeChat = '微',
 }
 
 export interface TrainPassengerInfo {
@@ -40,6 +45,7 @@ export interface TrainTicket {
   qrCode: string;
   cardInfo: string;
   cardTip: string;
+  paperType?: 'blue' | 'red';
   createTime: Date;
   createUser: string;
 }

@@ -76,6 +76,7 @@ export default (props: Props) => {
     }
     if (type === 'siteNumber') {
       return [
+        ['无座'],
         ['A', '1', '2', '3'],
         ['B', '4', '5', '6'],
         ['C', '7', '8', '9'],
