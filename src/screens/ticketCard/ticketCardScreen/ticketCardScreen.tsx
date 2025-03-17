@@ -11,7 +11,9 @@ import TicketCard from '../../../components/TicketCard/TicketCard';
 import BottomSheet, {
   BottomSheetRef,
 } from '../../../components/basic/BottomSheet';
-import SpacingView from '../../../components/basic/SpacingView';
+import SpacingView, {
+  SpacingViewRef,
+} from '../../../components/basic/SpacingView';
 import HoverButton from '../../../components/basic/HoverButton';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 import { useTicketCardHook } from './ticketCardHook';
@@ -112,15 +114,20 @@ export const TicketCardScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState<string>();
   const [trainTicket, setTrainTicket] = useState<TrainTicket>();
+  // const [scrollPosition, setScrollPosition] = useState(0);
 
   const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
+
+  const ticketCardListRef = useRef<SpacingViewRef>(null);
 
   const handleCardPress = (uuid: string) => {
     if (isOpen) {
       setIsOpen(false);
+      // ticketCardListRef.current?.scrollTo(0);
     } else {
       setIsOpen(true);
       setTopCard(uuid);
+      ticketCardListRef.current?.scrollTo(0);
     }
   };
 
@@ -137,7 +144,7 @@ export const TicketCardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SpacingView>
+      <SpacingView ref={ticketCardListRef} notAutoEnd>
         {trainTickets.map((ticket, index) => (
           <TicketCardAnim
             key={index}

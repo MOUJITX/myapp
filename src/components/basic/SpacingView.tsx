@@ -1,4 +1,12 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  ReactNode,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -20,7 +28,14 @@ interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
-export default (props: Props) => {
+export interface SpacingViewRef {
+  scrollTo: (position: number) => void;
+}
+
+const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
+  props,
+  ref
+) => {
   const [isKeyboardShow, SetIsKeyboardShow] = useState(false);
 
   useEffect(() => {
@@ -55,6 +70,17 @@ export default (props: Props) => {
       ScrollViewRef.current?.scrollToEnd({ animated: true });
     }
   };
+
+  const handleScrollTo = (position: number) => {
+    ScrollViewRef.current?.scrollTo({ y: position, animated: true });
+  };
+
+  useImperativeHandle(
+    ref,
+    (): SpacingViewRef => ({
+      scrollTo: handleScrollTo,
+    })
+  );
 
   return props.notScroll ? (
     <View style={[styles.container, styles.flex, props.style]}>
@@ -92,3 +118,5 @@ const styles = StyleSheet.create({
   bottom: { height: commonStyles.spacings.large2X },
   scrollViewKeyboardShow: { paddingBottom: commonStyles.spacings.large4X },
 });
+
+export default forwardRef<SpacingViewRef, Props>(SpacingView);
