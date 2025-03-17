@@ -112,7 +112,13 @@ export default (props: Props) => {
     <TouchableOpacity onPress={props.onPress} activeOpacity={0.5}>
       <CellGroup card>
         <View style={styles.main}>
-          <Image img={props.good.imgs[0]} size={'medium'} radius preview />
+          <Image
+            img={props.good.imgs[0]}
+            size={'medium'}
+            radius
+            preview
+            folder="goods"
+          />
           <View style={styles.mainDetail}>
             <Text
               style={styles.titleLabel}
