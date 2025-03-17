@@ -63,7 +63,7 @@ yarn android # For Android
 yarn ios     # For iOS
 ```
 
-# Build APP
+# Build
 
 ## For Android
 
@@ -122,3 +122,31 @@ yarn build
 ```
 
 Step 5: Find APK in android/app/build/outputs/apk/release/app-release.apk
+
+# Release
+
+## Release Only
+
+X.Y.Z means {major}.{minor}.{patch}
+
+```bash
+# Upgrade major versions
+yarn release major
+# Upgrade minor version
+yarn release minor
+# Upgrade patch version
+yarn release patch # or
+yarn release
+
+# Upgrade pre-release version
+yarn release --preRelease alpha
+yarn release --preRelease beta
+yarn release --preRelease rc
+```
+
+## Release and Build
+
+```bash
+# For Android
+yarn rab
+```
