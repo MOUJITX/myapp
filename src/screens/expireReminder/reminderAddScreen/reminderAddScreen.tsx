@@ -152,6 +152,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
             radius
             upload
             onValueChange={value => setImgs(value)}
+            folder={'goods'}
           />
           <TextInputCustom
             inline

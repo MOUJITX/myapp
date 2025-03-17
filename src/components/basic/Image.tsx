@@ -14,6 +14,7 @@ export interface Props {
   preview?: boolean;
   onRemove?: () => void;
   isWaiting?: boolean;
+  folder?: string;
 }
 
 export default (props: Props) => {
@@ -34,7 +35,11 @@ export default (props: Props) => {
       const localURI = localFileFolder + props.img;
       RNFS.exists(localURI)
         .then(exist => {
-          setUri(exist ? localURI : ossDomain + props.img);
+          setUri(
+            exist
+              ? localURI
+              : ossDomain + `${props.folder ?? 'default'}` + '/' + props.img
+          );
         })
         .catch(e => {
           console.error('check file exist error', e);
@@ -43,7 +48,7 @@ export default (props: Props) => {
     } else {
       setUri(undefined);
     }
-  }, [props.img]);
+  }, [props.folder, props.img]);
 
   return (
     <>

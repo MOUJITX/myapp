@@ -19,6 +19,7 @@ interface Props {
   children: React.ReactNode;
   source: 'camera' | 'library' | 'mixed';
   upload?: boolean;
+  folder?: string;
   onImageChange: (imgUri: string) => void;
   onUploadSuccess?: (imgUri: string) => void;
   onUploadFailed?: (imgUri: string) => void;
@@ -70,7 +71,7 @@ const ImagePicker = (props: Props) => {
           props.onImageChange(imageName);
           bottomSheetRef.current?.closeBottomSheet();
           props.upload &&
-            ossUpload(imageName, imgUri, img.type)
+            ossUpload(imageName, imgUri, img.type, props.folder)
               .then(() => {
                 // console.warn('upload success');
                 props.onUploadSuccess && props.onUploadSuccess(imageName);

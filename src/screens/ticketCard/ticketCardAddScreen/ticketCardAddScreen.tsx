@@ -27,6 +27,8 @@ import { randomUUID } from '../../../utils/utils';
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
 import SelectButtons from '../../../components/basic/SelectButtons';
+import ImageRow from '../../../components/basic/ImageRow';
+import Cell from '../../../components/basic/Cell';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
@@ -417,6 +419,16 @@ export const TicketCardAddScreen = (props: Props) => {
           value={trainTicket.cardTip}
           selectList={TrainTicketCardTips}
         />
+        <Cell label="图片">
+          <ImageRow
+            imgs={trainTicket.images ?? []}
+            size={'large'}
+            radius
+            upload
+            onValueChange={value => handleValueChange('images', value)}
+            folder={'trainTickets'}
+          />
+        </Cell>
       </CellGroup>
       <Button
         label="保存"

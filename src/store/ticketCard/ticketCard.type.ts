@@ -47,6 +47,7 @@ export interface TrainTicket {
   cardInfo: string;
   cardTip: string;
   paperType?: 'blue' | 'red';
+  images?: string[];
   createTime: Date;
   createUser: string;
 }

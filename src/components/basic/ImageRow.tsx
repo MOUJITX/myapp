@@ -10,6 +10,7 @@ interface Props {
   radius?: boolean;
   disabled?: boolean;
   upload?: boolean;
+  folder?: string;
   onValueChange?: (imgs: string[]) => void;
 }
 
@@ -29,6 +30,7 @@ export default (props: Props) => {
             props.onValueChange?.(props.imgs.filter((_, i) => i !== index));
           }}
           isWaiting={waitingImgs.includes(img)}
+          folder={props.folder}
         />
       ))}
       {!props.disabled && (
@@ -40,6 +42,7 @@ export default (props: Props) => {
             </View>
           }
           source={'mixed'}
+          folder={props.folder}
           onImageChange={newImg => {
             props.onValueChange?.([...props.imgs, newImg]);
             props.upload && setWaitingImgs([...waitingImgs, newImg]);

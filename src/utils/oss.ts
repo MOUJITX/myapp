@@ -43,7 +43,8 @@ const ossToken = (AK: string, SK: string, bucket: string, key: string) => {
 export const ossUpload = async (
   fileName: string,
   filePath: string,
-  fileType?: string
+  fileType?: string,
+  fileFolder?: string
 ) => {
   const file = {
     uri: filePath,
@@ -51,7 +52,8 @@ export const ossUpload = async (
     name: fileName,
   };
 
-  const filePathName = ossFolder + '/' + fileName;
+  const filePathName =
+    ossFolder + '/' + `${fileFolder ?? 'default'}` + '/' + fileName;
 
   const formData = new FormData();
   formData.append('file', file);
