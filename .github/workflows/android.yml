@@ -1,0 +1,66 @@
+name: Android CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 设置Java环境
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 安装Node.js和Yarn
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      # 安装项目依赖
+      - name: Install dependencies
+        run: |
+          yarn install
+          echo "yarn.lock" >> .gitignore
+          sudo apt-get install -y libc6-dev-i386 android-sdk
+
+      # 配置Android环境
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      # 构建APK
+      - name: Build APK
+        run: |
+          cd android
+          ./gradlew assembleRelease
+          cd ..
+
+      # APK签名（需要配置secrets）
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/apk/release
+          # signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          # alias: ${{ secrets.KEYSTORE_ALIAS }}
+          # keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          # keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      # 发布到GitHub Releases（需要创建release）
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: android/app/build/outputs/apk/release/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
