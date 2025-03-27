@@ -61,8 +61,4 @@ jobs:
 
       # 发布到GitHub Releases（需要创建release）
       - name: Upload Release Asset
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "*.apk"
-          token: ${{ github.token }}
-          generateReleaseNotes: true
+        uses: softprops/action-gh-release@v2.2.1
