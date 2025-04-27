@@ -43,7 +43,8 @@ jobs:
           ./gradlew assembleRelease
           cd ..
 
-      - run: ls /usr/local/lib/android/sdk/build-tools
+      - name: Check Build Tools Version
+        run: ls /usr/local/lib/android/sdk/build-tools
 
       # APK签名（需要配置secrets）
       - name: Sign APK
@@ -55,17 +56,11 @@ jobs:
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: '30.0.2'
+          BUILD_TOOLS_VERSION: '36.0.0'
 
       # 发布到GitHub Releases（需要创建release）
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2.2.1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: android/app/build/outputs/apk/release/app-release.apk
-          asset_name: app-release.apk
-          asset_content_type: application/vnd.android.package-archive
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
