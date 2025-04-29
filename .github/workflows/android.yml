@@ -25,6 +25,15 @@ jobs:
         with:
           node-version: 23.x
 
+      - name: Create env file
+        run: |
+          echo "OSS_ACCESS_KEY=${{ secrets.OSS_ACCESS_KEY }}" >> .env
+          echo "OSS_SECRET_KEY=${{ secrets.OSS_SECRET_KEY }}" >> .env
+          echo "OSS_BUCKET=${{ secrets.OSS_BUCKET }}" >> .env
+          echo "PUB_API_APP_ID=${{ secrets.PUB_API_APP_ID }}" >> .env
+          echo "PUB_API_APP_SECRET=${{ secrets.PUB_API_APP_SECRET }}" >> .env
+        shell: bash
+
       # 安装项目依赖
       - name: Install dependencies
         run: |
