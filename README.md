@@ -154,3 +154,15 @@ yarn release && yarn build
 # Also
 yarn rab
 ```
+
+# environment
+
+```bash
+# .env
+OSS_ACCESS_KEY=${OSS_ACCESS_KEY}
+OSS_SECRET_KEY=${OSS_SECRET_KEY}
+OSS_BUCKET=${OSS_BUCKET}
+
+PUB_API_APP_ID=${PUB_API_APP_ID}
+PUB_API_APP_SECRET=${PUB_API_APP_SECRET}
+```
