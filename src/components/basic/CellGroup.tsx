@@ -24,8 +24,7 @@ export default (props: Props) => {
           props.shadow ? commonStyles.shadow : undefined,
           props.style,
         ]}
-        onTouchEnd={props.onPress}
-      >
+        onTouchEnd={props.onPress}>
         {props.header}
         {props.children}
       </View>

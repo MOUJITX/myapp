@@ -44,7 +44,7 @@ export const ossUpload = async (
   fileName: string,
   filePath: string,
   fileType?: string,
-  fileFolder?: string
+  fileFolder?: string,
 ) => {
   const file = {
     uri: filePath,
@@ -60,7 +60,7 @@ export const ossUpload = async (
   formData.append('key', filePathName);
   formData.append(
     'token',
-    ossToken(ossAccessKey, ossSecretKey, ossBucket, filePathName)
+    ossToken(ossAccessKey, ossSecretKey, ossBucket, filePathName),
   );
 
   const config = {

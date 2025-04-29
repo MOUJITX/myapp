@@ -28,7 +28,7 @@ export const useReminderCategoryHook = (): ReminderCategoryHook => {
   const input: Input = {
     allCategories: useSelector(selectAllGoodCategory),
     allCategoriesHideAll: useSelector(selectAllGoodCategory).filter(
-      c => c.categoryID !== 'all'
+      c => c.categoryID !== 'all',
     ),
   };
 

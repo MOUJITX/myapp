@@ -37,7 +37,7 @@ const RenderButtons = (
   progress: SharedValue<number>,
   buttonProps: swipeActionProps[],
   { shape, size, plain, onPressItem }: Props,
-  swipeableInstance: SwipeableMethods
+  swipeableInstance: SwipeableMethods,
 ) => {
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: progress.value,
@@ -91,8 +91,7 @@ export default (props: Props) => {
         props.leftButton &&
         RenderButtons(progress, props.leftButton, props, swipeableRef.current!)
       }
-      animationOptions={{ useNativeDriver: true }}
-    >
+      animationOptions={{ useNativeDriver: true }}>
       <View>{props.children}</View>
     </Swipeable>
   );

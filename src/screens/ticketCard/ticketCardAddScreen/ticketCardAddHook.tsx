@@ -28,7 +28,7 @@ type Output = {
   quickSelectItemAdd: (key: keyof TrainQuickSelect, item: SelectItem) => void;
   quickSelectItemUpdate: (
     key: keyof TrainQuickSelect,
-    item: SelectItem
+    item: SelectItem,
   ) => void;
   trainTicketSubmit: (ticket: TrainTicket) => void;
 };
@@ -45,7 +45,7 @@ export const useTicketCardAddHook = (): TicketCardAddHook => {
     quickSelectStations: useSelector(selectTrainQuickSelectItems('stations')),
     quickSelectChecks: useSelector(selectTrainQuickSelectItems('checks')),
     quickSelectPassengers: useSelector(
-      selectTrainQuickSelectItemsWithLoginUser('passengers')
+      selectTrainQuickSelectItemsWithLoginUser('passengers'),
     ),
     createUser: createUser ?? '',
   };
@@ -61,7 +61,7 @@ export const useTicketCardAddHook = (): TicketCardAddHook => {
             ...item,
             createUser,
           },
-        })
+        }),
       ),
     quickSelectItemRemove: (key, id) =>
       dispatch(trainSelectRemoveAction({ key, value: id })),

@@ -8,7 +8,7 @@ export const randomUUID = () => UUIDv4();
 
 export const stringFormat = (
   label: string,
-  type: 'lowAll' | 'upAll' | 'upFirst' | 'upFirstOnly'
+  type: 'lowAll' | 'upAll' | 'upFirst' | 'upFirstOnly',
 ) => {
   if (type === 'lowAll') {
     return label.toLowerCase();

@@ -19,10 +19,10 @@ export const expireReminderSlice = createSlice({
   reducers: {
     addGoodAction: (
       state,
-      action: PayloadAction<{ good: Good; loginUser?: string }>
+      action: PayloadAction<{ good: Good; loginUser?: string }>,
     ) => {
       const goodIndex = state.goodsList.findIndex(
-        g => g.goodID === action.payload.good.goodID
+        g => g.goodID === action.payload.good.goodID,
       );
 
       if (goodIndex !== -1) {
@@ -34,7 +34,7 @@ export const expireReminderSlice = createSlice({
         const good = state.goodsList.find(
           g =>
             g.uniqueCode === action.payload.good.uniqueCode &&
-            g.createUser === action.payload.loginUser
+            g.createUser === action.payload.loginUser,
         );
         if (good) {
           good.items.push(...action.payload.good.items);
@@ -48,25 +48,25 @@ export const expireReminderSlice = createSlice({
     },
     removeGoodAction: (state, action: PayloadAction<string>) => {
       state.goodsList = state.goodsList.filter(
-        good => good.goodID !== action.payload
+        good => good.goodID !== action.payload,
       );
     },
     removeGoodItemAction: (
       state,
-      action: PayloadAction<{ goodID: string; itemID: string }>
+      action: PayloadAction<{ goodID: string; itemID: string }>,
     ) => {
       const good = state.goodsList.find(
-        g => g.goodID === action.payload.goodID
+        g => g.goodID === action.payload.goodID,
       );
       if (good) {
         good.items = good.items.filter(
-          item => item.itemID !== action.payload.itemID
+          item => item.itemID !== action.payload.itemID,
         );
       }
     },
     updateGoodAction: (state, action: PayloadAction<Good>) => {
       const index = state.goodsList.findIndex(
-        good => good.goodID === action.payload.goodID
+        good => good.goodID === action.payload.goodID,
       );
       if (index !== -1) {
         state.goodsList[index] = action.payload;
@@ -74,14 +74,14 @@ export const expireReminderSlice = createSlice({
     },
     updateGoodItemAction: (
       state,
-      action: PayloadAction<{ goodID: string; item: GoodItem }>
+      action: PayloadAction<{ goodID: string; item: GoodItem }>,
     ) => {
       const good = state.goodsList.find(
-        g => g.goodID === action.payload.goodID
+        g => g.goodID === action.payload.goodID,
       );
       if (good) {
         const index = good.items.findIndex(
-          item => item.itemID === action.payload.item.itemID
+          item => item.itemID === action.payload.item.itemID,
         );
         if (index !== -1) {
           good.items[index] = action.payload.item;
@@ -131,7 +131,7 @@ export const expireReminderSlice = createSlice({
       action: PayloadAction<{
         label: string;
         createUser: string;
-      }>
+      }>,
     ) => {
       state.categoriesList.push({
         ...action.payload,
@@ -144,10 +144,10 @@ export const expireReminderSlice = createSlice({
       action: PayloadAction<{
         categoryID: string;
         newLabel: string;
-      }>
+      }>,
     ) => {
       const index = state.categoriesList.findIndex(
-        category => category.categoryID === action.payload.categoryID
+        category => category.categoryID === action.payload.categoryID,
       );
       if (index !== -1) {
         state.categoriesList[index] = {
@@ -158,7 +158,7 @@ export const expireReminderSlice = createSlice({
     },
     removeCategoryAction: (state, action: PayloadAction<string>) => {
       state.categoriesList = state.categoriesList.filter(
-        cat => cat.categoryID !== action.payload
+        cat => cat.categoryID !== action.payload,
       );
     },
     restoreExpireReminderAction: (state, action: PayloadAction<any>) => {

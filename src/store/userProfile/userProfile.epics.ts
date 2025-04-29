@@ -49,7 +49,7 @@ const preCheck = (loginPayload: LoginPayload, state: RootState) => {
 const userLoginEpic: UserProfileEpic = (action$, state$) =>
   action$.pipe(
     filter(userLoginAction.match),
-    mergeMap(action => from(preCheck(action.payload, state$.value)))
+    mergeMap(action => from(preCheck(action.payload, state$.value))),
   );
 
 const userLoginSuccessEpic: UserProfileEpic = action$ =>
@@ -67,9 +67,9 @@ const userLoginSuccessEpic: UserProfileEpic = action$ =>
           actionType: 'login',
           isSuccess: true,
           isManual: true,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
 const userLoginFailureEpic: UserProfileEpic = action$ =>
@@ -83,9 +83,9 @@ const userLoginFailureEpic: UserProfileEpic = action$ =>
           actionType: 'login',
           isSuccess: false,
           isManual: true,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
 const userLogoutEpic: UserProfileEpic = action$ =>
@@ -99,15 +99,15 @@ const userLogoutEpic: UserProfileEpic = action$ =>
           actionType: 'logout',
           isSuccess: true,
           isManual: true,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
 const userAddInfoEpic: UserProfileEpic = action$ =>
   action$.pipe(
     filter(userAddInfoAction.match),
-    mergeMap(action => of(initCategoryAction(action.payload.uuid)))
+    mergeMap(action => of(initCategoryAction(action.payload.uuid))),
   );
 
 const restoreEpic: UserProfileEpic = action$ =>
@@ -129,7 +129,7 @@ const restoreEpic: UserProfileEpic = action$ =>
         actionList.push(ticketCardRestoreAction(toJSON.ticketCard));
       }
       return of(...actionList);
-    })
+    }),
   );
 
 export const userProfileEpics = combineEpics(
@@ -138,5 +138,5 @@ export const userProfileEpics = combineEpics(
   userLoginFailureEpic,
   userLogoutEpic,
   userAddInfoEpic,
-  restoreEpic
+  restoreEpic,
 );

@@ -99,11 +99,11 @@ export default (props: Props) => {
       cursorPos === 0
         ? setInputValue(inputValue)
         : setInputValue(
-            inputValue.slice(0, cursorPos - 1) + inputValue.slice(cursorPos)
+            inputValue.slice(0, cursorPos - 1) + inputValue.slice(cursorPos),
           );
     } else {
       setInputValue(
-        inputValue.slice(0, cursorPos) + key + inputValue.slice(cursorPos)
+        inputValue.slice(0, cursorPos) + key + inputValue.slice(cursorPos),
       );
       textInputRef.current?.setSelection(cursorPos + 1, cursorPos + 1);
     }
@@ -118,8 +118,7 @@ export default (props: Props) => {
           width: Dimensions.get('window').width / rowNumber - 2,
         },
       ]}
-      onPress={() => key && handlePress(key)}
-    >
+      onPress={() => key && handlePress(key)}>
       <Text style={styles.keyText}>{key}</Text>
     </TouchableOpacity>
   );
@@ -146,8 +145,7 @@ export default (props: Props) => {
         transparent
         onRequestClose={handleKeyboardClose}
         animationType="slide"
-        presentationStyle="overFullScreen"
-      >
+        presentationStyle="overFullScreen">
         <View style={styles.modal} onTouchEnd={handleKeyboardClose} />
         <View style={styles.keyboard}>
           {keyButtons(props.keyboardType).map((row, i) => (

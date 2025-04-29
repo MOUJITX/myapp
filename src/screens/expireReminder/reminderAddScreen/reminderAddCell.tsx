@@ -68,8 +68,7 @@ export default (props: Props) => {
           onDelete={props.onDelete}
           onCopy={props.onCopy}
         />
-      }
-    >
+      }>
       <DatetimePicker
         inline
         label={t('expireReminder.add.productionDate.label')}

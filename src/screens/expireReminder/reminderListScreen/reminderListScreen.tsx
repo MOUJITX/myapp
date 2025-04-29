@@ -27,7 +27,7 @@ export const ExpireReminderListScreen = () => {
   const [good, setGood] = useState<Good>();
   const [selectCategory, setSelectCategory] = useState<string>('all');
   const [reminderList, setReminderList] = useState<Good[]>(
-    allExpireReminderList
+    allExpireReminderList,
   );
 
   const openAddReminderBottomSheet = () => {

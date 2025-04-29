@@ -44,7 +44,7 @@ export const useWelcomeHook = (): WelcomeHook => {
             actionType: 'login',
             isSuccess: true,
             isManual: false,
-          })
+          }),
         );
     },
   };

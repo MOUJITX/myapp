@@ -8,7 +8,7 @@ export const selectLoginUserUUID = (state: RootState) =>
 
 export const selectLoginUserInfo = (state: RootState) =>
   state.userProfile.userInfos.find(
-    userInfo => userInfo.uuid === state.userProfile.loginUser
+    userInfo => userInfo.uuid === state.userProfile.loginUser,
   );
 
 export const selectAll = (state: RootState) => state;

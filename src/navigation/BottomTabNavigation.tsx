@@ -23,8 +23,7 @@ export default () => {
           paddingBottom: 4,
           height: 60,
         },
-      }}
-    >
+      }}>
       <BottomTab.Screen
         name="ExpireReminderScreen"
         component={ExpireReminderListScreen}

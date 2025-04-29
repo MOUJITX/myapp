@@ -75,12 +75,10 @@ export default (props: Props) => {
           : require('../../assets/img/blueTicket.webp')
       }
       style={styles(baseWidth, cardRatio).container}
-      resizeMode="cover"
-    >
+      resizeMode="cover">
       <View style={styles(baseWidth).cardInfo} onLayout={onLayout}>
         <View
-          style={[styles(baseWidth).areaCommon, styles(baseWidth).headArea]}
-        >
+          style={[styles(baseWidth).areaCommon, styles(baseWidth).headArea]}>
           <TextSingleLine
             label={stringFormat(props.ticket.ticketRedNumber, 'upAll')}
             style={styles(baseWidth).cardNumber}
@@ -91,8 +89,7 @@ export default (props: Props) => {
           />
         </View>
         <View
-          style={[styles(baseWidth).areaCommon, styles(baseWidth).stationArea]}
-        >
+          style={[styles(baseWidth).areaCommon, styles(baseWidth).stationArea]}>
           <View style={styles(baseWidth).stationStart}>
             <TextSingleLine
               label={props.ticket.startStation.name}
@@ -114,8 +111,7 @@ export default (props: Props) => {
           style={[
             styles(baseWidth).areaCommon,
             styles(baseWidth).stationENArea,
-          ]}
-        >
+          ]}>
           <TextSingleLine
             label={stringFormat(props.ticket.startStation.code, 'upFirstOnly')}
             style={styles(baseWidth).stationEN}
@@ -129,14 +125,12 @@ export default (props: Props) => {
           style={[
             styles(baseWidth).areaCommon,
             styles(baseWidth).trainDateArea,
-          ]}
-        >
+          ]}>
           <View
             style={[
               styles(baseWidth).areaCommon,
               styles(baseWidth).trainDateTime,
-            ]}
-          >
+            ]}>
             <TextSingleLine
               label={formatDate(props.ticket.dateTime, 'year')}
               style={styles(baseWidth).trainDateText}
@@ -158,8 +152,7 @@ export default (props: Props) => {
             style={[
               styles(baseWidth).areaCommon,
               styles(baseWidth).trainSeatNumber,
-            ]}
-          >
+            ]}>
             <TextSingleLine
               label={props.ticket.seat.carNumber}
               style={styles(baseWidth).trainDateText}
@@ -175,8 +168,10 @@ export default (props: Props) => {
           </View>
         </View>
         <View
-          style={[styles(baseWidth).areaCommon, styles(baseWidth).trainPayArea]}
-        >
+          style={[
+            styles(baseWidth).areaCommon,
+            styles(baseWidth).trainPayArea,
+          ]}>
           <TextSingleLine
             label={props.ticket.trainPay}
             style={[styles(baseWidth).trainPay]}

@@ -30,12 +30,12 @@ export default (props: Props) => {
 
   const replaceFormLabel = (
     formData: Record<string, string>,
-    label?: string
+    label?: string,
   ) => {
     if (label) {
       const newFormLabel = label.replace(
         /\$(\w+)/g,
-        (_, key) => formData[key] || ''
+        (_, key) => formData[key] || '',
       );
       setFormLabel(newFormLabel);
       props.onFormLabelChange && props.onFormLabelChange(newFormLabel);
@@ -56,7 +56,7 @@ export default (props: Props) => {
         acc[cur.key] = props.form?.[cur.key] ?? '';
         return acc;
       },
-      {} as Record<string, string>
+      {} as Record<string, string>,
     );
     setCustomForm(initCustomForm);
     replaceFormLabel(initCustomForm, props.formLabel);

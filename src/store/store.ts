@@ -21,7 +21,7 @@ export const rootReducer = combineReducers({
 export const rootEpic: any = combineEpics(
   userProfileEpics,
   navigationEpics,
-  expireReminderEpics
+  expireReminderEpics,
 );
 
 const persistConfig = {

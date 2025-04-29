@@ -29,7 +29,7 @@ export const ticketCardSlice = createSlice({
       action: PayloadAction<{
         key: keyof TrainQuickSelect;
         item: SelectItemWithUser;
-      }>
+      }>,
     ) => {
       state.trainSelect[action.payload.key].push({
         ...action.payload.item,
@@ -38,7 +38,7 @@ export const ticketCardSlice = createSlice({
     },
     trainSelectRemoveAction: (
       state,
-      action: PayloadAction<{ key: keyof TrainQuickSelect; value: string }>
+      action: PayloadAction<{ key: keyof TrainQuickSelect; value: string }>,
     ) => {
       state.trainSelect[action.payload.key] = state.trainSelect[
         action.payload.key
@@ -49,7 +49,7 @@ export const ticketCardSlice = createSlice({
       action: PayloadAction<{
         key: keyof TrainQuickSelect;
         item: SelectItemWithUser;
-      }>
+      }>,
     ) => {
       state.trainSelect[action.payload.key] = state.trainSelect[
         action.payload.key
@@ -64,13 +64,13 @@ export const ticketCardSlice = createSlice({
     },
     trainTicketsSubmitAction: (state, action: PayloadAction<TrainTicket>) => {
       state.trainTickets = state.trainTickets.filter(
-        item => item.uuid !== action.payload.uuid
+        item => item.uuid !== action.payload.uuid,
       );
       state.trainTickets.push(action.payload);
     },
     trainTicketsRemoveAction: (state, action: PayloadAction<string>) => {
       state.trainTickets = state.trainTickets.filter(
-        item => item.uuid !== action.payload
+        item => item.uuid !== action.payload,
       );
     },
     ticketCardRestoreAction: (state, action: PayloadAction<any>) => {

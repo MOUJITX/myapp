@@ -38,7 +38,7 @@ export default (props: Props) => {
           setUri(
             exist
               ? localURI
-              : ossDomain + `${props.folder ?? 'default'}` + '/' + props.img
+              : ossDomain + `${props.folder ?? 'default'}` + '/' + props.img,
           );
         })
         .catch(e => {
@@ -55,8 +55,7 @@ export default (props: Props) => {
       <TouchableOpacity
         onPress={handlePress}
         disabled={!props.preview || !uri}
-        onLongPress={() => props.onRemove && setDeleteConfirm(true)}
-      >
+        onLongPress={() => props.onRemove && setDeleteConfirm(true)}>
         <Image
           source={uri ? { uri } : undefined}
           style={{
@@ -83,12 +82,10 @@ export default (props: Props) => {
         transparent
         statusBarTranslucent
         visible={visible}
-        onRequestClose={() => setVisible(false)}
-      >
+        onRequestClose={() => setVisible(false)}>
         <TouchableOpacity
           onPress={() => setVisible(false)}
-          style={styles.modalBackdrop}
-        >
+          style={styles.modalBackdrop}>
           <Image
             source={uri ? { uri } : undefined}
             style={[styles.fullScreenImage]}

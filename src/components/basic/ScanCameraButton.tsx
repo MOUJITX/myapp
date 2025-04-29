@@ -36,8 +36,7 @@ export default (props: Props) => {
         transparent
         statusBarTranslucent
         visible={visible}
-        onRequestClose={() => setVisible(false)}
-      >
+        onRequestClose={() => setVisible(false)}>
         <TouchableWithoutFeedback style={styles.modalBackdrop}>
           <View>
             <ScanCamera

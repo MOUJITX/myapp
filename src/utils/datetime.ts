@@ -1,7 +1,7 @@
 export const calculateDays = (
   beforeDay?: Date,
   afterDay?: Date,
-  abs?: boolean
+  abs?: boolean,
 ) => {
   if (!beforeDay || !afterDay) {
     return 0;
@@ -26,7 +26,7 @@ export const formatDate = (
     | 'minute'
     | 'second'
     | 'hh:mm'
-    | 'timestamp'
+    | 'timestamp',
 ) => {
   const dateObj = new Date(date);
 

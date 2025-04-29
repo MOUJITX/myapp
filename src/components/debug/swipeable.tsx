@@ -65,8 +65,7 @@ function LegacyLeftAction(prog: any, drag: any) {
         {
           transform: [{ translateX: trans }],
         },
-      ]}
-    >
+      ]}>
       Text
     </Animated.Text>
   );
@@ -89,8 +88,7 @@ function LegacyRightAction(prog: any, drag: any) {
         {
           transform: [{ translateX: trans }],
         },
-      ]}
-    >
+      ]}>
       Text
     </Animated.Text>
   );
@@ -112,8 +110,7 @@ export default function Example() {
             onPress={() => {
               reanimatedRef.current!.openLeft();
               legacyRef.current?.openLeft();
-            }}
-          >
+            }}>
             <Text>open left</Text>
           </Pressable>
           <Pressable
@@ -121,8 +118,7 @@ export default function Example() {
             onPress={() => {
               reanimatedRef.current!.close();
               legacyRef.current!.close();
-            }}
-          >
+            }}>
             <Text>close</Text>
           </Pressable>
           <Pressable
@@ -130,8 +126,7 @@ export default function Example() {
             onPress={() => {
               reanimatedRef.current!.reset();
               legacyRef.current!.reset();
-            }}
-          >
+            }}>
             <Text>reset</Text>
           </Pressable>
           <Pressable
@@ -139,8 +134,7 @@ export default function Example() {
             onPress={() => {
               reanimatedRef.current!.openRight();
               legacyRef.current!.openRight();
-            }}
-          >
+            }}>
             <Text>open right</Text>
           </Pressable>
         </View>
@@ -156,8 +150,7 @@ export default function Example() {
         enableTrackpadTwoFingerGesture
         rightThreshold={40}
         renderLeftActions={LeftAction}
-        renderRightActions={RightAction}
-      >
+        renderRightActions={RightAction}>
         <Text>[Reanimated] Swipe me!</Text>
       </ReanimatedSwipeable>
 
@@ -171,8 +164,7 @@ export default function Example() {
         enableTrackpadTwoFingerGesture
         rightThreshold={40}
         renderLeftActions={LegacyLeftAction}
-        renderRightActions={LegacyRightAction}
-      >
+        renderRightActions={LegacyRightAction}>
         <Text>[Legacy] Swipe me!</Text>
       </Swipeable>
 

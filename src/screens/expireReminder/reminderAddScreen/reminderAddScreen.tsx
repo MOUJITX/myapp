@@ -42,10 +42,10 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const [title, setTitle] = useState<string | undefined>(props.good?.title);
   const [imgs, setImgs] = useState<string[]>(props.good?.imgs ?? []);
   const [uniCode, setUniCode] = useState<string | undefined>(
-    props.good?.uniqueCode
+    props.good?.uniqueCode,
   );
   const [category, setCategory] = useState<string>(
-    props.good?.type ?? 'default'
+    props.good?.type ?? 'default',
   );
   const [brand, setBrand] = useState<GoodBrand>(props.good?.brand ?? {});
   const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);

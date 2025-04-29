@@ -24,15 +24,15 @@ export default (props: Props) => {
             style={[
               styles.buttons,
               props.buttonsInline ? styles.buttonsRow : styles.buttonsCol,
-            ]}
-          >
+            ]}>
             {props.buttons.map((button, index) => (
               <React.Fragment key={index}>
                 <TouchableOpacity onPress={button.onPress}>
                   <View style={styles.button}>
                     <Text
-                      style={[{ color: commonStyles.statusColor[button.type] }]}
-                    >
+                      style={[
+                        { color: commonStyles.statusColor[button.type] },
+                      ]}>
                       {button.label}
                     </Text>
                   </View>

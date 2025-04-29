@@ -123,8 +123,7 @@ export default (props: Props) => {
             <Text
               style={styles.titleLabel}
               numberOfLines={2}
-              ellipsizeMode="tail"
-            >
+              ellipsizeMode="tail">
               {props.good.brand?.brand && `[${props.good.brand?.brand}]`}
               {props.good.title}
             </Text>

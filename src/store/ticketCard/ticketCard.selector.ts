@@ -4,21 +4,21 @@ import { TrainQuickSelect } from './ticketCard.type';
 import { formatDate } from '../../utils/datetime';
 
 export const selectTrainQuickSelectItemsWithLoginUser = (
-  selectKey: keyof TrainQuickSelect
+  selectKey: keyof TrainQuickSelect,
 ) =>
   createSelector(
     (state: RootState) => state.ticketCard.trainSelect[selectKey],
     (state: RootState) => state.userProfile.loginUser,
     (trainSelect, loginUser) =>
-      trainSelect.filter(t => t.createUser === loginUser)
+      trainSelect.filter(t => t.createUser === loginUser),
   );
 
 export const selectTrainQuickSelectItems = (
-  selectKey: keyof TrainQuickSelect
+  selectKey: keyof TrainQuickSelect,
 ) =>
   createSelector(
     (state: RootState) => state.ticketCard.trainSelect[selectKey],
-    trainSelect => trainSelect.filter(t => t.value !== '')
+    trainSelect => trainSelect.filter(t => t.value !== ''),
   );
 
 export const selectTrainTickets = createSelector(
@@ -30,6 +30,6 @@ export const selectTrainTickets = createSelector(
       .sort(
         (a, b) =>
           (formatDate(b.dateTime, 'timestamp') as number) -
-          (formatDate(a.dateTime, 'timestamp') as number)
-      )
+          (formatDate(a.dateTime, 'timestamp') as number),
+      ),
 );

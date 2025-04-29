@@ -94,7 +94,7 @@ export default (props: Props) => {
 
   const renderCustomFieldEditBottomSheet = (
     fields: CustomFormField[],
-    handleAction: (selectItem: SelectItem) => void
+    handleAction: (selectItem: SelectItem) => void,
   ) => {
     const handleValueChange = (form: any) => {
       const newSelectItem: SelectItem = {
@@ -212,7 +212,7 @@ export default (props: Props) => {
       {props.customFormSetting &&
         renderCustomFieldEditBottomSheet(
           props.customFormSetting.fields,
-          isAdding ? handleAddSelectItem : handleUpdateSelectItem
+          isAdding ? handleAddSelectItem : handleUpdateSelectItem,
         )}
     </CellGroup>
   );

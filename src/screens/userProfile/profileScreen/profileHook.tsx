@@ -32,7 +32,7 @@ export const useProfileHook = (): ProfileHook => {
         navigateAction({
           screen: 'WelcomeScreen',
           replace: true,
-        })
+        }),
       );
     },
     gotoBackupScreen: () =>

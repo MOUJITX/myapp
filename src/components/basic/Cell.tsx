@@ -24,8 +24,7 @@ export default (props: Props) => {
         style={[
           styles.editContainer,
           props.inline && styles.editContainerInline,
-        ]}
-      >
+        ]}>
         {props.label && (
           <View style={styles.label}>
             {props.label && (
@@ -33,8 +32,7 @@ export default (props: Props) => {
                 style={[
                   styles.labelText,
                   props.labelSize && commonStyles.textSize[props.labelSize],
-                ]}
-              >
+                ]}>
                 {props.label}
               </Text>
             )}
@@ -48,15 +46,13 @@ export default (props: Props) => {
             styles.cellEdit,
             props.inline && styles.cellEditInline,
             !props.label && styles.cellEditNoLabel,
-          ]}
-        >
+          ]}>
           {props.left && props.left()}
           <View
             style={[
               styles.cellChildren,
               !props.inline && styles.cellChildrenInline,
-            ]}
-          >
+            ]}>
             {props.children}
           </View>
           {props.right && props.right()}
@@ -69,8 +65,7 @@ export default (props: Props) => {
             style={[
               styles.infoText,
               { color: commonStyles.textColor[props.infoType ?? 'info'] },
-            ]}
-          >
+            ]}>
             {props.info}
           </Text>
         </>

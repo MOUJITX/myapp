@@ -15,7 +15,7 @@ const initialState: UserProfileState = {
 
 const filterUserInfoByUUID = (
   userList: UserInfo[],
-  uuid: string
+  uuid: string,
 ): UserInfo | undefined => userList.find(userInfo => userInfo.uuid === uuid);
 
 // const filterUserInfoByUsername = (

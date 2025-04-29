@@ -36,7 +36,7 @@ export const ReminderCategoryScreen = (props: Props) => {
     <SelectList
       {...props}
       selectList={transformCategory(
-        props.hideAll ? allCategoriesHideAll : allCategories
+        props.hideAll ? allCategoriesHideAll : allCategories,
       )}
       value={props.selected}
       onValueChange={props.onSelect}

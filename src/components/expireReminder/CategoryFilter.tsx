@@ -18,22 +18,19 @@ export default (props: Props) => {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollRow}
-      >
+        contentContainerStyle={styles.scrollRow}>
         {props.data.map((item, index) => {
           const isSelected = item.categoryID === props.selectedValue;
           return (
             <TouchableOpacity
               key={index}
               onPress={() => props.onSelect(item.categoryID)}
-              style={styles.button}
-            >
+              style={styles.button}>
               <Text
                 style={[
                   styles.text,
                   isSelected ? styles.selectedText : styles.defaultText,
-                ]}
-              >
+                ]}>
                 {item.label}
               </Text>
               {isSelected && <View style={styles.underline} />}

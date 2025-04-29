@@ -21,7 +21,7 @@ const navigationEpic: NavigationEpic = action$ =>
           : navigationRef.current.navigate(screen, params);
       }
       return { type: 'NAVIGATION_COMPLETE' };
-    })
+    }),
   );
 
 const goBackEpic: NavigationEpic = action$ =>
@@ -32,7 +32,7 @@ const goBackEpic: NavigationEpic = action$ =>
         navigationRef.current.goBack();
       }
       return { type: 'GO_BACK_COMPLETE' };
-    })
+    }),
   );
 
 export const navigationEpics = combineEpics(navigationEpic, goBackEpic);

@@ -32,8 +32,7 @@ export default (props: Props) => {
       {...props}
       onPressItem={item}
       onSwipeableClose={handleSwipeableClose}
-      onSwipeableOpen={handleSwipeableOpen}
-    >
+      onSwipeableOpen={handleSwipeableOpen}>
       {props.renderItem && props.renderItem({ item })}
     </SwipeRow>
   );

@@ -12,7 +12,7 @@ const addGoodEpic: ExpireRemindersEpic = action$ =>
     mergeMap(() => {
       // console.log('addGoodEpic');
       return of();
-    })
+    }),
   );
 
 export const expireReminderEpics = combineEpics(addGoodEpic);

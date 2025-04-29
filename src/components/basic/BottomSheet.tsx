@@ -29,7 +29,7 @@ export interface BottomSheetRef {
 
 const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
   props,
-  ref
+  ref,
 ) => {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +59,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
     (): BottomSheetRef => ({
       openBottomSheet,
       closeBottomSheet,
-    })
+    }),
   );
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
 
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
-      backAction
+      backAction,
     );
 
     return () => backHandler.remove(); // 清理事件监听器
@@ -92,8 +92,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
       android_keyboardInputMode="adjustResize"
       topInset={top}
       enableHandlePanningGesture={true}
-      enablePanDownToClose={false}
-    >
+      enablePanDownToClose={false}>
       <BottomSheetView style={styles(isOpen).contentContainer}>
         {!props.hideHeader && (
           <View style={styles(isOpen).header}>
@@ -103,8 +102,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
             {props.headerRight && (
               <Text
                 onPress={props.headerRight?.onPress}
-                style={styles(isOpen).headerLabel}
-              >
+                style={styles(isOpen).headerLabel}>
                 {props.headerRight.label}
               </Text>
             )}

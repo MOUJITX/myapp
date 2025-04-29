@@ -16,13 +16,13 @@ instance.interceptors.response.use(
   error => {
     console.error('response error', error);
     return Promise.reject(error);
-  }
+  },
 );
 
 export const request = async (
   method: 'get' | 'post',
   url: string,
-  params?: any
+  params?: any,
 ) => {
   if (method === 'get') {
     return await get(url, params);

@@ -39,7 +39,7 @@ export const useBackupDataHook = (): BackupDataHook => {
         navigateAction({
           screen: 'WelcomeScreen',
           replace: true,
-        })
+        }),
       );
     },
   };

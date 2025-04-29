@@ -43,7 +43,7 @@ export const useDebugHook = (): DebugHook => {
         navigateAction({
           screen: 'WelcomeScreen',
           replace: true,
-        })
+        }),
       );
     },
   };

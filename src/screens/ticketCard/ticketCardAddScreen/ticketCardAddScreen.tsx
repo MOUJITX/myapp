@@ -97,7 +97,7 @@ export const TicketCardAddScreen = (props: Props) => {
   };
 
   const [trainTicket, setTrainTicket] = useState<TrainTicket>(
-    props.ticket ?? initTrainTicket
+    props.ticket ?? initTrainTicket,
   );
 
   const handleValueChange = (key: keyof TrainTicket, value: any) => {

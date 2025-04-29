@@ -34,7 +34,7 @@ export interface SpacingViewRef {
 
 const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
   props,
-  ref
+  ref,
 ) => {
   const [isKeyboardShow, SetIsKeyboardShow] = useState(false);
 
@@ -79,7 +79,7 @@ const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
     ref,
     (): SpacingViewRef => ({
       scrollTo: handleScrollTo,
-    })
+    }),
   );
 
   return props.notScroll ? (
@@ -89,8 +89,7 @@ const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
   ) : (
     <KeyboardAvoidingView
       behavior={envInfo.isIOS ? 'padding' : 'height'}
-      style={styles.flex}
-    >
+      style={styles.flex}>
       <ScrollView
         contentContainerStyle={[
           isKeyboardShow ? [styles.scrollViewKeyboardShow] : undefined,
@@ -100,8 +99,7 @@ const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
         keyboardShouldPersistTaps="handled"
         onScroll={handleScroll}
         onContentSizeChange={handleScrollSizeChange}
-        ref={ScrollViewRef}
-      >
+        ref={ScrollViewRef}>
         {props.children}
         <View style={styles.bottom} />
       </ScrollView>
