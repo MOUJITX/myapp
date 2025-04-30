@@ -27,12 +27,15 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "OSS_ACCESS_KEY=${{ secrets.OSS_ACCESS_KEY }}" >> .env
+          echo "OSS_ACCESS_KEY=${{ secrets.OSS_ACCESS_KEY }}" > .env
           echo "OSS_SECRET_KEY=${{ secrets.OSS_SECRET_KEY }}" >> .env
           echo "OSS_BUCKET=${{ secrets.OSS_BUCKET }}" >> .env
           echo "PUB_API_APP_ID=${{ secrets.PUB_API_APP_ID }}" >> .env
           echo "PUB_API_APP_SECRET=${{ secrets.PUB_API_APP_SECRET }}" >> .env
         shell: bash
+
+      - name: Try to print env
+        run: cat .env
 
       # 安装项目依赖
       - name: Install dependencies
