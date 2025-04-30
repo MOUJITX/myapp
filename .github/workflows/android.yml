@@ -12,14 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 设置Java环境
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # 安装Node.js和Yarn
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -34,33 +32,19 @@ jobs:
           echo "PUB_API_APP_SECRET=${{ secrets.PUB_API_APP_SECRET }}" >> .env
         shell: bash
 
-      - name: Try to print env
-        run: cat .env
-
-      # 安装项目依赖
       - name: Install dependencies
         run: |
           yarn install
-          echo "yarn.lock" >> .gitignore
           sudo apt-get install -y libc6-dev-i386 android-sdk
 
-      # 配置Android环境
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-      # 构建APK
       - name: Build APK
         run: |
           cd android
           ./gradlew assembleRelease
-          cd ..
-          echo "APK files:"
-          ls android/app/build/outputs/apk/release/
 
-      - name: Check Build Tools Version
-        run: ls /usr/local/lib/android/sdk/build-tools
-
-      # APK签名（需要配置secrets）
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         with:
@@ -72,7 +56,6 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: '36.0.0'
 
-      # 发布到GitHub Releases（需要创建release）
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2.2.1
         with:
@@ -80,4 +63,4 @@ jobs:
           release_name: Release ${{ github.ref }}
           files: android/app/build/outputs/apk/release/*.apk
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
