@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.3.6-beta.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.5...v0.3.6-beta.0) (2025-04-30)
+
 ## [0.3.5](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.5-beta.1...v0.3.5) (2025-04-30)
 
 ## [0.3.5-beta.1](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.5-beta.0...v0.3.5-beta.1) (2025-04-29)
