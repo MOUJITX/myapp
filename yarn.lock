@@ -2465,6 +2465,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest@^30.0.0":
+  version "30.0.0"
+  resolved "https://registry.npmmirror.com/@types/jest/-/jest-30.0.0.tgz#5e85ae568006712e4ad66f25433e9bdac8801f1d"
+  integrity sha1-XoWuVoAGcS5K1m8lQz6b2siAHx0=
+  dependencies:
+    expect "^30.0.0"
+    pretty-format "^30.0.0"
+
 "@types/json-schema@^7.0.15", "@types/json-schema@^7.0.9":
   version "7.0.15"
   resolved "https://registry.npmmirror.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
@@ -4577,7 +4585,7 @@ exit-x@^0.2.2:
   resolved "https://registry.npmmirror.com/exit-x/-/exit-x-0.2.2.tgz#1f9052de3b8d99a696b10dad5bced9bdd5c3aa64"
   integrity sha1-H5BS3juNmaaWsQ2tW87ZvdXDqmQ=
 
-expect@30.0.0:
+expect@30.0.0, expect@^30.0.0:
   version "30.0.0"
   resolved "https://registry.npmmirror.com/expect/-/expect-30.0.0.tgz#460dfda282e0a8de8302aabee951dba7e79a5a53"
   integrity sha1-Rg39ooLgqN6DAqq+6VHbp+eaWlM=
@@ -7274,7 +7282,7 @@ prettier@^3.5.3:
   resolved "https://registry.npmmirror.com/prettier/-/prettier-3.5.3.tgz#4fc2ce0d657e7a02e602549f053b239cb7dfe1b5"
   integrity sha1-T8LODWV+egLmAlSfBTsjnLff4bU=
 
-pretty-format@30.0.0:
+pretty-format@30.0.0, pretty-format@^30.0.0:
   version "30.0.0"
   resolved "https://registry.npmmirror.com/pretty-format/-/pretty-format-30.0.0.tgz#a3137bed442af87eadea2c427a1b201189e590a4"
   integrity sha1-oxN77UQq+H6t6ixCehsgEYnlkKQ=
