@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity, Modal, StyleSheet, View } from 'react-native';
+import { Image, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { commonStyles, ImageSize } from '../../styles';
 import Popup from './Popup';
 import { t } from 'i18next';

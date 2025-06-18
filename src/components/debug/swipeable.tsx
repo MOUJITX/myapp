@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import { Text, Animated, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import {
-  Swipeable,
   GestureHandlerRootView,
   Pressable,
+  Swipeable,
 } from 'react-native-gesture-handler';
 import ReanimatedSwipeable, {
   SwipeableMethods,

@@ -52,8 +52,7 @@ export const ossUpload = async (
     name: fileName,
   };
 
-  const filePathName =
-    ossFolder + '/' + `${fileFolder ?? 'default'}` + '/' + fileName;
+  const filePathName = `${ossFolder}/${fileFolder ?? 'default'}/${fileName}`;
 
   const formData = new FormData();
   formData.append('file', file);

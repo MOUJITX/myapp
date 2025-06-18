@@ -9,7 +9,6 @@ import SpacingView from '../../../components/basic/SpacingView';
 
 export const LoginScreen = () => {
   const {
-    input: {},
     output: { handleLogin },
   } = useLoginHook();
 

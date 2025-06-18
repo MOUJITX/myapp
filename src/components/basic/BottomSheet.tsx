@@ -1,12 +1,12 @@
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
-  useEffect,
 } from 'react';
-import { StyleSheet, View, BackHandler, Keyboard, Text } from 'react-native';
+import { BackHandler, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { commonStyles } from '../../styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

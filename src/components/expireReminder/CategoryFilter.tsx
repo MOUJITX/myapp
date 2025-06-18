@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { GoodCategory } from '../../store/expireReminder/expireReminder.type';

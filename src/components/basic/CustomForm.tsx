@@ -108,6 +108,8 @@ export default (props: Props) => {
               />
             );
           }
+
+          return <></>;
         })}
       </CellGroup>
       <Button

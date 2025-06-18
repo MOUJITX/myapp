@@ -3,8 +3,8 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import TicketCard from '../../../components/TicketCard/TicketCard';

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Camera,
-  useCodeScanner,
-  useCameraPermission,
-  useCameraDevice,
   CodeType,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
 } from 'react-native-vision-camera';
 import HoverButton from './HoverButton';
 import Popup from './Popup';

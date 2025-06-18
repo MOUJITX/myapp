@@ -35,7 +35,6 @@ interface Props {
 
 export const ExpireReminderAddScreen = (props: Props) => {
   const {
-    input: {},
     output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
@@ -60,7 +59,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
   };
 
   useComponentMount(() => {
-    items.length === 0 ? setItems([initItem]) : undefined;
+    items.length === 0 && setItems([initItem]);
   });
 
   const handleAdd = (index: number) => {

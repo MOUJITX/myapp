@@ -8,7 +8,6 @@ import { t } from 'i18next';
 
 export default () => {
   const {
-    input: {},
     output: {
       logout,
       gotoBackupScreen,

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
-  launchImageLibrary,
-  launchCamera,
   Asset as ImageAsset,
+  launchCamera,
+  launchImageLibrary,
 } from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { randomUUID } from '../../utils/utils';
