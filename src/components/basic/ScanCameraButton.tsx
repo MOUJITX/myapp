@@ -10,7 +10,6 @@ import { CodeType } from 'react-native-vision-camera';
 import Button, { ButtonShapeType } from './Button';
 import ScanCamera from './ScanCamera';
 
-
 interface Props {
   onSuccess: (value: string) => void;
   codeType: CodeType;

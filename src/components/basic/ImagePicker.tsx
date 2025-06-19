@@ -17,7 +17,6 @@ import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import CellGroup from './CellGroup';
 import Divider from './Divider';
 
-
 interface Props {
   children: React.ReactNode;
   source: 'camera' | 'library' | 'mixed';

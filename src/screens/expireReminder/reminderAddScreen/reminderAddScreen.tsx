@@ -30,7 +30,6 @@ import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCatego
 import ReminderAddCell from './reminderAddCell';
 import { useExpireReminderAddHook } from './reminderAddHook';
 
-
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;
   good?: Good;

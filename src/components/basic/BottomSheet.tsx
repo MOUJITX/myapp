@@ -13,7 +13,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { commonStyles } from '../../styles';
 
-
 interface Props {
   children: React.ReactNode;
   autoSize?: boolean;

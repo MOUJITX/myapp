@@ -7,7 +7,6 @@ import Button, { ButtonShapeType } from './Button';
 import { Props as CellProps } from './Cell';
 import Cell from './Cell';
 
-
 interface Props extends CellProps {
   value?: number;
   placeholder?: string;

@@ -24,7 +24,6 @@ import {
 import { selectUserInfoByUsername } from './userProfile.selectors';
 import { LoginPayload } from './userProfile.type';
 
-
 export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 
 const preCheck = (loginPayload: LoginPayload, state: RootState) => {

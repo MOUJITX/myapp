@@ -12,8 +12,6 @@ import CustomForm, { CustomFormField } from './CustomForm';
 import Divider from './Divider';
 import TextInput from './TextInput';
 
-
-
 export interface SelectItem {
   value: string;
   label: string;

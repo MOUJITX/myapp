@@ -7,7 +7,6 @@ import { statusType } from '../../types';
 import { Props as CellProps } from './Cell';
 import Cell from './Cell';
 
-
 export interface Props extends CellProps {
   value?: string;
   textColor?: statusType;

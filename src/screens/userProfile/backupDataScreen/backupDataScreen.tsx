@@ -10,10 +10,7 @@ import Popup from '../../../components/basic/Popup';
 import SpacingView from '../../../components/basic/SpacingView';
 import TextLabel from '../../../components/basic/TextLabel';
 
-
 import { useBackupDataHook } from './backupDataHook';
-
-
 
 export const BackupDataScreen = () => {
   const {

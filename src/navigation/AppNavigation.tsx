@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { t } from 'i18next';
 import React from 'react';
 
-
 import { DeviceInfo } from '../screens/debug/deviceInfo';
 import { PageB } from '../screens/debug/page2';
 import { PageC } from '../screens/debug/page3';
