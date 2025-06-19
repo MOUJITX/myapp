@@ -12,8 +12,9 @@ This is a React Native project by MOUJITX.
 - [ ] RECORD id/credit/... card
 - [x] RECORD food shelf life
 - [x] RECORD medicine shelf life
+- [ ] RECORD object to calculate daily value
 
-# issue
+# Known Issues
 
 - [x] Some components under the bottom navigation bar after setting the statusBar to translucent.
 - [x] Go back gesture can't be used in the bottomSheet to close it.
@@ -49,7 +50,9 @@ com.moujitx.myapp.dev
 com.moujitx.myapp
 ```
 
-# Start
+# Development
+
+## Start
 
 ```bash
 # Step 0: Install dependencies
@@ -61,6 +64,16 @@ yarn start
 # Step 2: Start Application
 yarn android # For Android
 yarn ios     # For iOS
+```
+
+## Prettier & EsLint
+
+```bash
+# Check prettier and try fix it
+yarn prettier
+
+# Check eslint and try fix it
+yarn lint
 ```
 
 # Build
@@ -125,7 +138,7 @@ Step 5: Find APK in android/app/build/outputs/apk/release/app-release.apk
 
 # Release
 
-## Release Only
+## Release and Build in Github
 
 X.Y.Z means {major}.{minor}.{patch}
 
@@ -144,7 +157,7 @@ yarn release --preRelease beta
 yarn release --preRelease rc
 ```
 
-## Release and Build
+## Release and Local Build
 
 ### For Android
 
@@ -155,7 +168,7 @@ yarn release && yarn build
 yarn rab
 ```
 
-# environment
+# Environment
 
 ```bash
 # .env
