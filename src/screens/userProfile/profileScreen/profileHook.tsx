@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import { navigateAction } from '../../../store/navigation/navigation.redux';
 import { userLogoutAction } from '../../../store/userProfile/userProfile.redux';
 import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
-import { navigateAction } from '../../../store/navigation/navigation.redux';
 
 type Input = {};
 

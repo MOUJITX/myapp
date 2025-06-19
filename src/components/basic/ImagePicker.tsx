@@ -1,19 +1,21 @@
-import React, { useRef } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import {
-  launchImageLibrary,
-  launchCamera,
-  Asset as ImageAsset,
-} from 'react-native-image-picker';
-import RNFS from 'react-native-fs';
-import { randomUUID } from '../../utils/utils';
-import CellGroup from './CellGroup';
-import BottomSheet, { BottomSheetRef } from './BottomSheet';
-import Divider from './Divider';
-import { commonStyles } from '../../styles';
 import { t } from 'i18next';
-import { ossUpload } from '../../utils/oss';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import RNFS from 'react-native-fs';
+import {
+  Asset as ImageAsset,
+  launchCamera,
+  launchImageLibrary,
+} from 'react-native-image-picker';
+
 import { localFileFolder } from '../../environment';
+import { commonStyles } from '../../styles';
+import { ossUpload } from '../../utils/oss';
+import { randomUUID } from '../../utils/utils';
+
+import BottomSheet, { BottomSheetRef } from './BottomSheet';
+import CellGroup from './CellGroup';
+import Divider from './Divider';
 
 interface Props {
   children: React.ReactNode;
@@ -144,20 +146,20 @@ const ImagePicker = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  selectButton: {
-    alignItems: 'center',
-    fontSize: 20,
-    borderWidth: 1,
-    borderColor: commonStyles.color.alpha0,
-  },
   breakLine: {
     height: commonStyles.spacings.smallX,
   },
-  text: {
-    fontSize: commonStyles.fontSize.large,
-  },
   cancelText: {
     color: commonStyles.color.red,
+  },
+  selectButton: {
+    alignItems: 'center',
+    borderColor: commonStyles.color.alpha0,
+    borderWidth: 1,
+    fontSize: 20,
+  },
+  text: {
+    fontSize: commonStyles.fontSize.large,
   },
 });
 

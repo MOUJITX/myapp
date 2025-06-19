@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import SwipeRow, { swipeRowConfig } from './SwipeRow';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
+
+import SwipeRow, { swipeRowConfig } from './SwipeRow';
 
 export interface Props extends swipeRowConfig {
   renderItem?: ({ item }: { item: any }) => React.ReactNode;

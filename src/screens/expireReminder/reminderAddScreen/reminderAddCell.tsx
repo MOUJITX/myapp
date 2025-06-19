@@ -1,12 +1,14 @@
+import { t } from 'i18next';
 import React from 'react';
+
 import CellGroup from '../../../components/basic/CellGroup';
 import DatetimePicker from '../../../components/basic/DatetimePicker';
-import ReminderAddCellHeader from './reminderAddCellHeader';
-import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
 import NumberInput from '../../../components/basic/NumberInput';
-import { calculateDays } from '../../../utils/datetime';
-import { t } from 'i18next';
 import Switch from '../../../components/basic/Switch';
+import { GoodItem } from '../../../store/expireReminder/expireReminder.type';
+import { calculateDays } from '../../../utils/datetime';
+
+import ReminderAddCellHeader from './reminderAddCellHeader';
 
 interface Props {
   itemNum: number;

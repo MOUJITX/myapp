@@ -1,10 +1,12 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { useDebugHook } from './debugHook';
+
 import CellGroup from '../../components/basic/CellGroup';
-import TextLabel from '../../components/basic/TextLabel';
 import HoverButton from '../../components/basic/HoverButton';
+import TextLabel from '../../components/basic/TextLabel';
 import { flex1 } from '../../styles';
+
+import { useDebugHook } from './debugHook';
 
 export const StateData = () => {
   const {

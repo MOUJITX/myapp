@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity, Modal, StyleSheet, View } from 'react-native';
-import { commonStyles, ImageSize } from '../../styles';
-import Popup from './Popup';
 import { t } from 'i18next';
-import { localFileFolder, ossDomain } from '../../environment';
+import React, { useEffect, useState } from 'react';
+import { Image, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
+
+import { localFileFolder, ossDomain } from '../../environment';
+import { commonStyles, ImageSize } from '../../styles';
+
+import Popup from './Popup';
 
 export interface Props {
   img: string;
@@ -38,7 +40,7 @@ export default (props: Props) => {
           setUri(
             exist
               ? localURI
-              : ossDomain + `${props.folder ?? 'default'}` + '/' + props.img,
+              : `${ossDomain}${props.folder ?? 'default'}/${props.img}`,
           );
         })
         .catch(e => {
@@ -88,7 +90,7 @@ export default (props: Props) => {
           style={styles.modalBackdrop}>
           <Image
             source={uri ? { uri } : undefined}
-            style={[styles.fullScreenImage]}
+            style={styles.fullScreenImage}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -119,21 +121,21 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
+  fullScreenImage: {
+    height: '100%',
+    width: '100%',
+  },
   modalBackdrop: {
+    alignItems: 'center',
     backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fullScreenImage: {
-    width: '100%',
-    height: '100%',
   },
   waitingMask: {
+    alignItems: 'center',
+    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
+    height: '100%',
+    justifyContent: 'center',
     position: 'absolute',
     width: '100%',
-    height: '100%',
-    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

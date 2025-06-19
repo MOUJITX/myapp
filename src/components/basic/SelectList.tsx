@@ -1,12 +1,13 @@
+import { t } from 'i18next';
 import React, { ReactNode, useRef } from 'react';
 import { View } from 'react-native';
-import TextLabel from './TextLabel';
-import { Props as TextLabelProps } from './TextLabel';
-import { SelectOptionListProps } from './SelectOptionList';
+
 import BottomSheet, { BottomSheetRef } from './BottomSheet';
+import { SelectOptionListProps } from './SelectOptionList';
 import SelectOptionList from './SelectOptionList';
-import { t } from 'i18next';
 import SpacingView from './SpacingView';
+import { Props as TextLabelProps } from './TextLabel';
+import TextLabel from './TextLabel';
 
 export interface Props extends TextLabelProps, SelectOptionListProps {
   placeholder?: string;

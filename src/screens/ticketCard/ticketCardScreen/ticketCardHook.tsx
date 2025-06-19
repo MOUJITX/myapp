@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
-import { selectTrainTickets } from '../../../store/ticketCard/ticketCard.selector';
+
 import { trainTicketsRemoveAction } from '../../../store/ticketCard/ticketCard.redux';
+import { selectTrainTickets } from '../../../store/ticketCard/ticketCard.selector';
+import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 
 type Input = {
   trainTickets: TrainTicket[];

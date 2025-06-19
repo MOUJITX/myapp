@@ -1,15 +1,17 @@
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AppNavigationList } from './AppNavigationList';
-import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
-import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
 import { t } from 'i18next';
-import BottomTabNavigation from './BottomTabNavigation';
-import { BackupDataScreen } from '../screens/userProfile/backupDataScreen/backupDataScreen';
+import React from 'react';
+
 import { DeviceInfo } from '../screens/debug/deviceInfo';
-import { StateData } from '../screens/debug/stateData';
 import { PageB } from '../screens/debug/page2';
 import { PageC } from '../screens/debug/page3';
+import { StateData } from '../screens/debug/stateData';
+import { BackupDataScreen } from '../screens/userProfile/backupDataScreen/backupDataScreen';
+import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
+import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
+
+import { AppNavigationList } from './AppNavigationList';
+import BottomTabNavigation from './BottomTabNavigation';
 
 export const AppNavigation = () => {
   const RootStack = createNativeStackNavigator<AppNavigationList>();

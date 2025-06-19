@@ -1,26 +1,28 @@
+import { t } from 'i18next';
 import React, { useRef, useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import TicketCard from '../../../components/TicketCard/TicketCard';
+
 import BottomSheet, {
   BottomSheetRef,
 } from '../../../components/basic/BottomSheet';
+import Button, { ButtonShapeType } from '../../../components/basic/Button';
+import HoverButton from '../../../components/basic/HoverButton';
 import SpacingView, {
   SpacingViewRef,
 } from '../../../components/basic/SpacingView';
-import HoverButton from '../../../components/basic/HoverButton';
+import TicketCard from '../../../components/TicketCard/TicketCard';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
-import { useTicketCardHook } from './ticketCardHook';
-import Button, { ButtonShapeType } from '../../../components/basic/Button';
-import { t } from 'i18next';
 import { commonStyles } from '../../../styles';
 import { TicketCardAddScreen } from '../ticketCardAddScreen/ticketCardAddScreen';
+
+import { useTicketCardHook } from './ticketCardHook';
 
 const TicketCardAnim = ({
   index,
@@ -79,7 +81,7 @@ const TicketCardAnim = ({
   });
 
   return (
-    <Animated.View style={[cardStyle]}>
+    <Animated.View style={cardStyle}>
       <TouchableOpacity onPress={onPress} activeOpacity={isOpen ? 1 : 0.8}>
         <TicketCard ticket={ticket} />
         {isOpen && ticket.uuid === topCard && (
@@ -173,11 +175,11 @@ export const TicketCardScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
   buttons: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
     paddingTop: commonStyles.spacings.medium,
   },
+  container: { flex: 1 },
 });

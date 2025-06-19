@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { t } from 'i18next';
+
+import { randomUUID } from '../../utils/utils';
+
 import {
   ExpireReminderState,
   Good,
   GoodCategory,
   GoodItem,
 } from './expireReminder.type';
-import { randomUUID } from '../../utils/utils';
-import { t } from 'i18next';
 
 const initialState: ExpireReminderState = {
   goodsList: [],

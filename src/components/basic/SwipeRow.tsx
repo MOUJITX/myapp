@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ButtonSize, commonStyles } from '../../styles';
-import Button, { ButtonShapeType } from './Button';
 import Swipeable, {
   SwipeableMethods,
 } from 'react-native-gesture-handler/ReanimatedSwipeable';
@@ -9,7 +7,11 @@ import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+
+import { ButtonSize, commonStyles } from '../../styles';
 import { statusType } from '../../types';
+
+import Button, { ButtonShapeType } from './Button';
 
 export interface swipeActionProps {
   label?: string;
@@ -99,10 +101,10 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   rightAction: {
-    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     gap: commonStyles.spacings.small,
+    justifyContent: 'center',
     paddingHorizontal: commonStyles.spacings.small,
   },
 });

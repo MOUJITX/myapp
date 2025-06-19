@@ -1,10 +1,11 @@
+import { t } from 'i18next';
 import React, { useRef } from 'react';
-import CustomForm, { CustomFormField } from './CustomForm';
 import { View } from 'react-native';
+
+import BottomSheet, { BottomSheetRef } from './BottomSheet';
+import CustomForm, { CustomFormField } from './CustomForm';
 import TextLabel from './TextLabel';
 import { Props as TextLabelProps } from './TextLabel';
-import { t } from 'i18next';
-import BottomSheet, { BottomSheetRef } from './BottomSheet';
 
 interface Props extends TextLabelProps {
   placeholder?: string;

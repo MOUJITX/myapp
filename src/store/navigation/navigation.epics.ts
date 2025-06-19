@@ -1,9 +1,11 @@
-import { filter, map } from 'rxjs';
-import { combineEpics, Epic } from 'redux-observable';
 import { AnyAction } from 'redux';
-import { goBackAction, navigateAction } from './navigation.redux';
-import { RootState } from '../type';
+import { combineEpics, Epic } from 'redux-observable';
+import { filter, map } from 'rxjs';
+
 import { navigationRef } from '../../navigation/AppNavigationRef';
+import { RootState } from '../type';
+
+import { goBackAction, navigateAction } from './navigation.redux';
 
 export type NavigationEpic = Epic<AnyAction, AnyAction, RootState, void>;
 

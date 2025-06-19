@@ -1,10 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectTrainQuickSelectItems,
-  selectTrainQuickSelectItemsWithLoginUser,
-} from '../../../store/ticketCard/ticketCard.selector';
+
 import { SelectItem } from '../../../components/basic/SelectOptionList';
-import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
 import {
   trainSelectAddAction,
   trainSelectRemoveAction,
@@ -12,9 +8,14 @@ import {
   trainTicketsSubmitAction,
 } from '../../../store/ticketCard/ticketCard.redux';
 import {
+  selectTrainQuickSelectItems,
+  selectTrainQuickSelectItemsWithLoginUser,
+} from '../../../store/ticketCard/ticketCard.selector';
+import {
   TrainQuickSelect,
   TrainTicket,
 } from '../../../store/ticketCard/ticketCard.type';
+import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
 
 type Input = {
   quickSelectStations: SelectItem[];

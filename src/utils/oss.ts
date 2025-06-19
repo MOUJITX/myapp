@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { base64SafeEncode, base64ToUrlSafe, hmacSha1Base64 } from './encoder';
+
 import {
   ossAccessKey,
   ossBucket,
@@ -7,6 +7,8 @@ import {
   ossSecretKey,
   ossUploadURL,
 } from '../environment';
+
+import { base64SafeEncode, base64ToUrlSafe, hmacSha1Base64 } from './encoder';
 
 interface PutPolicy {
   scope: {
@@ -52,8 +54,7 @@ export const ossUpload = async (
     name: fileName,
   };
 
-  const filePathName =
-    ossFolder + '/' + `${fileFolder ?? 'default'}` + '/' + fileName;
+  const filePathName = `${ossFolder}/${fileFolder ?? 'default'}/${fileName}`;
 
   const formData = new FormData();
   formData.append('file', file);

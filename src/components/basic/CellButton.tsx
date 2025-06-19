@@ -1,8 +1,10 @@
+import { t } from 'i18next';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Cell from './Cell';
+
 import { commonStyles } from '../../styles';
-import { t } from 'i18next';
+
+import Cell from './Cell';
 
 interface Props {
   label: string;
@@ -37,31 +39,31 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   buttonRow: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     width: '100%',
   },
-  textRow: {
-    gap: commonStyles.spacings.smallX,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexShrink: 1,
+  directIcon: {
+    color: commonStyles.color.gray6,
+    fontSize: commonStyles.fontSize.largeX,
+    textAlign: 'right',
+    width: commonStyles.spacings.large,
   },
   leftIcon: {
     width: commonStyles.spacings.large,
   },
   text: {
     color: commonStyles.textColor.default,
-    fontSize: commonStyles.fontSize.large,
     flexShrink: 1,
+    fontSize: commonStyles.fontSize.large,
     gap: 5,
   },
-  directIcon: {
-    color: commonStyles.color.gray6,
-    fontSize: commonStyles.fontSize.largeX,
-    width: commonStyles.spacings.large,
-    textAlign: 'right',
+  textRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexShrink: 1,
+    gap: commonStyles.spacings.smallX,
+    justifyContent: 'flex-start',
   },
 });

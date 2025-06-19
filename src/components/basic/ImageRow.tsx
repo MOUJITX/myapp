@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Image from './Image';
+
 import { commonStyles, ImageSize } from '../../styles';
+
+import Image from './Image';
 import ImagePicker from './ImagePicker';
 
 interface Props {
@@ -62,25 +64,25 @@ export default (props: Props) => {
 
 const styles = (props: Props) =>
   StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      gap: commonStyles.spacings.smallX,
-      flexWrap: 'wrap',
-    },
     addButton: {
-      width: commonStyles.imageSize[props.size],
-      height: commonStyles.imageSize[props.size],
-      borderRadius: props.radius ? commonStyles.radius.medium : undefined,
-      backgroundColor: commonStyles.color.gray2,
-      borderWidth: 1,
-      borderColor: commonStyles.color.gray4,
-      borderStyle: 'dashed',
       alignItems: 'center',
+      backgroundColor: commonStyles.color.gray2,
+      borderColor: commonStyles.color.gray4,
+      borderRadius: props.radius ? commonStyles.radius.medium : undefined,
+      borderStyle: 'dashed',
+      borderWidth: 1,
+      height: commonStyles.imageSize[props.size],
       justifyContent: 'center',
+      width: commonStyles.imageSize[props.size],
     },
     addButtonText: {
-      fontSize: commonStyles.fontSize.large4X,
       color: commonStyles.color.gray6,
+      fontSize: commonStyles.fontSize.large4X,
       fontWeight: '300',
+    },
+    container: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: commonStyles.spacings.smallX,
     },
   });

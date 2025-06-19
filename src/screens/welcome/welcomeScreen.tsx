@@ -1,7 +1,8 @@
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import { useWelcomeHook } from './welcomeHook';
-import { t } from 'i18next';
 
 export const WelcomeScreen = () => {
   const {
@@ -28,8 +29,8 @@ export const WelcomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
   },
 });

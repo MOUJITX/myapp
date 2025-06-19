@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Props as CellProps } from './Cell';
+
 import Button, { ButtonShapeType } from '../../components/basic/Button';
-import { SelectItem } from './SelectOptionList';
+
+import { Props as CellProps } from './Cell';
 import Cell from './Cell';
+import { SelectItem } from './SelectOptionList';
 
 interface Props extends CellProps {
   selectItems: SelectItem[];

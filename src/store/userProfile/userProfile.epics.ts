@@ -1,4 +1,16 @@
+import { AnyAction, UnknownAction } from 'redux';
+import { combineEpics, Epic } from 'redux-observable';
 import { filter, from, mergeMap, of } from 'rxjs';
+
+import { randomUUID } from '../../utils/utils';
+import {
+  initCategoryAction,
+  restoreExpireReminderAction,
+} from '../expireReminder/expireReminder.redux';
+import { navigateAction } from '../navigation/navigation.redux';
+import { ticketCardRestoreAction } from '../ticketCard/ticketCard.redux';
+import { RootState } from '../type';
+
 import {
   restoreAction,
   userAddInfoAction,
@@ -9,18 +21,8 @@ import {
   userLogoutAction,
   userRestoreInfoAction,
 } from './userProfile.redux';
-import { randomUUID } from '../../utils/utils';
-import { combineEpics, Epic } from 'redux-observable';
-import { AnyAction, UnknownAction } from 'redux';
-import { RootState } from '../type';
-import { LoginPayload } from './userProfile.type';
 import { selectUserInfoByUsername } from './userProfile.selectors';
-import { navigateAction } from '../navigation/navigation.redux';
-import {
-  initCategoryAction,
-  restoreExpireReminderAction,
-} from '../expireReminder/expireReminder.redux';
-import { ticketCardRestoreAction } from '../ticketCard/ticketCard.redux';
+import { LoginPayload } from './userProfile.type';
 
 export type UserProfileEpic = Epic<AnyAction, AnyAction, RootState, void>;
 

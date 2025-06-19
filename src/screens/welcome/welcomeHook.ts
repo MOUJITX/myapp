@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AppNavigationList } from '../../navigation/AppNavigationList';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { AppNavigationList } from '../../navigation/AppNavigationList';
+import { userAddLoginHistoryAction } from '../../store/userProfile/userProfile.redux';
 import {
   selectIsUserLogin,
   selectLoginUserInfo,
 } from '../../store/userProfile/userProfile.selectors';
-import { userAddLoginHistoryAction } from '../../store/userProfile/userProfile.redux';
 
 type Input = {
   isLogin: boolean;

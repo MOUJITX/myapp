@@ -1,8 +1,9 @@
-import React from 'react';
-import { Props as CellProps } from './Cell';
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
-import Cell from './Cell';
 import { t } from 'i18next';
+import React from 'react';
+import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+
+import { Props as CellProps } from './Cell';
+import Cell from './Cell';
 
 interface Props extends CellProps, TextInputProps {
   value?: string;
@@ -42,8 +43,8 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   textInput: {
-    padding: 0,
-    margin: 0,
     flexShrink: 1,
+    margin: 0,
+    padding: 0,
   },
 });

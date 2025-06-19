@@ -1,9 +1,11 @@
+import { t } from 'i18next';
 import React, { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import { commonStyles, TextSize } from '../../styles';
 import { statusType } from '../../types';
+
 import Divider from './Divider';
-import { t } from 'i18next';
 
 export interface Props {
   label?: string;
@@ -75,45 +77,6 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  editContainer: {
-    // minHeight: 40,
-  },
-  editContainerInline: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  label: {
-    width: '30%',
-    minHeight: 40,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  required: {
-    color: commonStyles.color.red,
-  },
-  labelText: {
-    fontSize: commonStyles.fontSize.medium,
-    color: commonStyles.textColor.default,
-  },
-  cellEdit: {
-    flexShrink: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: commonStyles.spacings.smallX,
-    width: '100%',
-  },
-  cellEditNoLabel: {
-    minHeight: 40,
-  },
-  cellEditInline: {
-    justifyContent: 'flex-end',
-  },
   cellChildren: {
     flexShrink: 1,
     justifyContent: 'flex-start',
@@ -121,7 +84,46 @@ const styles = StyleSheet.create({
   cellChildrenInline: {
     flex: 1,
   },
+  cellEdit: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexShrink: 1,
+    gap: commonStyles.spacings.smallX,
+    width: '100%',
+  },
+  cellEditInline: {
+    justifyContent: 'flex-end',
+  },
+  cellEditNoLabel: {
+    minHeight: 40,
+  },
+  container: {
+    width: '100%',
+  },
+  editContainer: {
+    // minHeight: 40,
+  },
+  editContainerInline: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   infoText: {
     fontSize: commonStyles.fontSize.small,
+  },
+  label: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    minHeight: 40,
+    width: '30%',
+  },
+  labelText: {
+    color: commonStyles.textColor.default,
+    fontSize: commonStyles.fontSize.medium,
+  },
+  required: {
+    color: commonStyles.color.red,
   },
 });

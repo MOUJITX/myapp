@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { Text, Animated, StyleSheet, View } from 'react-native';
-
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import {
-  Swipeable,
   GestureHandlerRootView,
   Pressable,
+  Swipeable,
 } from 'react-native-gesture-handler';
 import ReanimatedSwipeable, {
   SwipeableMethods,
@@ -174,31 +173,31 @@ export default function Example() {
 }
 
 const styles = StyleSheet.create({
-  leftAction: { width: 50, height: 50, backgroundColor: 'crimson' },
-  rightAction: { width: 50, height: 50, backgroundColor: 'purple' },
-  separator: {
-    width: '100%',
-    borderTopWidth: 1,
-  },
-  swipeable: {
-    height: 50,
-    backgroundColor: 'papayawhip',
-    alignItems: 'center',
-  },
-  controlPanelWrapper: {
-    backgroundColor: 'papayawhip',
-    alignItems: 'center',
-  },
-  controlPanel: {
-    backgroundColor: 'papayawhip',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
   control: {
+    alignItems: 'center',
+    borderWidth: StyleSheet.hairlineWidth,
     flex: 1,
     height: 40,
-    borderWidth: StyleSheet.hairlineWidth,
-    alignItems: 'center',
     justifyContent: 'center',
+  },
+  controlPanel: {
+    alignItems: 'center',
+    backgroundColor: 'papayawhip',
+    flexDirection: 'row',
+  },
+  controlPanelWrapper: {
+    alignItems: 'center',
+    backgroundColor: 'papayawhip',
+  },
+  leftAction: { backgroundColor: 'crimson', height: 50, width: 50 },
+  rightAction: { backgroundColor: 'purple', height: 50, width: 50 },
+  separator: {
+    borderTopWidth: 1,
+    width: '100%',
+  },
+  swipeable: {
+    alignItems: 'center',
+    backgroundColor: 'papayawhip',
+    height: 50,
   },
 });

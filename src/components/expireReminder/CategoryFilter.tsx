@@ -1,9 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
-import { commonStyles } from '../../styles';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { GoodCategory } from '../../store/expireReminder/expireReminder.type';
+
 import { ReminderCategoryScreen } from '../../screens/expireReminder/reminderCategoryScreen/reminderCategoryScreen';
+import { GoodCategory } from '../../store/expireReminder/expireReminder.type';
+import { commonStyles } from '../../styles';
 
 interface Props {
   data: GoodCategory[];
@@ -51,39 +52,39 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingBottom: commonStyles.spacings.small,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  scrollRow: {
-    gap: commonStyles.spacings.small,
-    alignItems: 'baseline',
-  },
   button: {
     alignItems: 'center',
   },
-  text: {
-    fontWeight: 'bold',
-    paddingHorizontal: commonStyles.spacings.small3X,
-  },
-  selectedText: {
-    color: commonStyles.textColor.default,
-    fontSize: commonStyles.fontSize.large3X,
+  container: {
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    paddingBottom: commonStyles.spacings.small,
   },
   defaultText: {
     color: commonStyles.textColor.info,
     fontSize: commonStyles.fontSize.largeX,
   },
-  underline: {
-    height: 4,
-    backgroundColor: commonStyles.color.green,
-    width: '100%',
-    borderRadius: commonStyles.radius.medium,
-    marginTop: -6,
-    zIndex: -1,
-  },
   moreButton: {
     marginLeft: 5,
+  },
+  scrollRow: {
+    alignItems: 'baseline',
+    gap: commonStyles.spacings.small,
+  },
+  selectedText: {
+    color: commonStyles.textColor.default,
+    fontSize: commonStyles.fontSize.large3X,
+  },
+  text: {
+    fontWeight: 'bold',
+    paddingHorizontal: commonStyles.spacings.small3X,
+  },
+  underline: {
+    backgroundColor: commonStyles.color.green,
+    borderRadius: commonStyles.radius.medium,
+    height: 4,
+    marginTop: -6,
+    width: '100%',
+    zIndex: -1,
   },
 });

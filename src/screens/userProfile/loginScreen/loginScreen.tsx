@@ -1,15 +1,16 @@
+import { t } from 'i18next';
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-import { useLoginHook } from './loginHook';
-import TextInput from '../../../components/basic/TextInput';
-import CellGroup from '../../../components/basic/CellGroup';
+
 import Button from '../../../components/basic/Button';
-import { t } from 'i18next';
+import CellGroup from '../../../components/basic/CellGroup';
 import SpacingView from '../../../components/basic/SpacingView';
+import TextInput from '../../../components/basic/TextInput';
+
+import { useLoginHook } from './loginHook';
 
 export const LoginScreen = () => {
   const {
-    input: {},
     output: { handleLogin },
   } = useLoginHook();
 

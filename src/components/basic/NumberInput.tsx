@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Props as CellProps } from './Cell';
 import { StyleSheet, TextInput, View } from 'react-native';
-import Cell from './Cell';
-import Button, { ButtonShapeType } from './Button';
+
 import { commonStyles } from '../../styles';
+
+import Button, { ButtonShapeType } from './Button';
+import { Props as CellProps } from './Cell';
+import Cell from './Cell';
 
 interface Props extends CellProps {
   value?: number;
@@ -91,20 +93,20 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  quickValue: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: commonStyles.spacings.smallX,
     justifyContent: 'flex-end',
   },
   textInput: {
     marginHorizontal: commonStyles.spacings.smallX,
     minWidth: 25,
     textAlign: 'center',
-  },
-  quickValue: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    flexWrap: 'wrap',
-    gap: commonStyles.spacings.smallX,
   },
 });

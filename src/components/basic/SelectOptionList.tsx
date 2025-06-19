@@ -1,14 +1,16 @@
+import { t } from 'i18next';
 import React, { RefObject, useRef, useState } from 'react';
-import CellGroup from './CellGroup';
-import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import { StyleSheet, View } from 'react-native';
+
+import { randomUUID } from '../../utils/utils';
+
+import BottomSheet, { BottomSheetRef } from './BottomSheet';
+import Button from './Button';
+import CellButton from './CellButton';
+import CellGroup from './CellGroup';
+import CustomForm, { CustomFormField } from './CustomForm';
 import Divider from './Divider';
 import TextInput from './TextInput';
-import Button from './Button';
-import { t } from 'i18next';
-import CellButton from './CellButton';
-import { randomUUID } from '../../utils/utils';
-import CustomForm, { CustomFormField } from './CustomForm';
 
 export interface SelectItem {
   value: string;

@@ -1,16 +1,17 @@
+import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
+import { t } from 'i18next';
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
-  useEffect,
 } from 'react';
-import { StyleSheet, View, BackHandler, Keyboard, Text } from 'react-native';
-import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
-import { commonStyles } from '../../styles';
+import { BackHandler, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { t } from 'i18next';
+
+import { commonStyles } from '../../styles';
 
 interface Props {
   children: React.ReactNode;
@@ -116,6 +117,13 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
 
 const styles = (isOpen: boolean) =>
   StyleSheet.create({
+    backdrop: {
+      backgroundColor: commonStyles.backgroundColor.backDrop,
+      height: '100%',
+      opacity: isOpen ? commonStyles.backgroundColor.backDropOpacity : 0,
+      position: 'absolute',
+      width: '100%',
+    },
     bottomSheetBackground: {
       backgroundColor: commonStyles.color.gray2,
     },
@@ -123,25 +131,18 @@ const styles = (isOpen: boolean) =>
       flex: 1,
     },
     header: {
+      alignItems: 'center',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
 
-      paddingHorizontal: commonStyles.spacings.medium,
       marginVertical: -commonStyles.spacings.smallX,
-    },
-    headerLabel: {
-      fontSize: commonStyles.fontSize.large5X,
-      color: commonStyles.color.blue,
-      fontWeight: '200',
+      paddingHorizontal: commonStyles.spacings.medium,
     },
 
-    backdrop: {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      backgroundColor: commonStyles.backgroundColor.backDrop,
-      opacity: isOpen ? commonStyles.backgroundColor.backDropOpacity : 0,
+    headerLabel: {
+      color: commonStyles.color.blue,
+      fontSize: commonStyles.fontSize.large5X,
+      fontWeight: '200',
     },
   });
 
