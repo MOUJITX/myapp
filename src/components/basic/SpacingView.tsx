@@ -17,8 +17,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { commonStyles } from '../../styles';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { commonStyles } from '../../styles';
 import { envInfo } from '../../utils/envInfo';
 
 interface Props {
@@ -108,12 +109,12 @@ const SpacingView: ForwardRefRenderFunction<SpacingViewRef, Props> = (
 };
 
 const styles = StyleSheet.create({
+  bottom: { height: commonStyles.spacings.large2X },
   container: {
-    paddingHorizontal: commonStyles.spacings.medium,
     marginTop: commonStyles.spacings.smallX,
+    paddingHorizontal: commonStyles.spacings.medium,
   },
   flex: { flex: 1 },
-  bottom: { height: commonStyles.spacings.large2X },
   scrollViewKeyboardShow: { paddingBottom: commonStyles.spacings.large4X },
 });
 

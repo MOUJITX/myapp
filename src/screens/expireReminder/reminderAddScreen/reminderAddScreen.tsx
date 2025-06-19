@@ -1,32 +1,35 @@
+import { t } from 'i18next';
 import React, { RefObject, useState } from 'react';
 import { View } from 'react-native';
-import CellGroup from '../../../components/basic/CellGroup';
-import TextInput from '../../../components/basic/TextInput';
-import TextLabel from '../../../components/basic/TextLabel';
+
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import Button from '../../../components/basic/Button';
-import SpacingView from '../../../components/basic/SpacingView';
+import CellGroup from '../../../components/basic/CellGroup';
+import CustomFormLabel from '../../../components/basic/CustomFormLabel';
 import ImageRow from '../../../components/basic/ImageRow';
+import ScanCameraButton from '../../../components/basic/ScanCameraButton';
+import SpacingView from '../../../components/basic/SpacingView';
+import TextInput from '../../../components/basic/TextInput';
+import TextInputCustom from '../../../components/basic/TextInputCustom';
+import TextLabel from '../../../components/basic/TextLabel';
+import { pubApiUrl_barcode } from '../../../environment';
 import {
   Good,
   GoodBrand,
   GoodItem,
 } from '../../../store/expireReminder/expireReminder.type';
+import { useComponentMount } from '../../../utils/componentMount';
+import { request } from '../../../utils/request';
 import {
   randomString,
   randomStringNumber,
   randomUUID,
 } from '../../../utils/utils';
-import ReminderAddCell from './reminderAddCell';
-import { useComponentMount } from '../../../utils/componentMount';
-import { useExpireReminderAddHook } from './reminderAddHook';
-import { BottomSheetRef } from '../../../components/basic/BottomSheet';
-import { t } from 'i18next';
-import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCategoryScreen';
-import TextInputCustom from '../../../components/basic/TextInputCustom';
-import CustomFormLabel from '../../../components/basic/CustomFormLabel';
-import { request } from '../../../utils/request';
-import { pubApiUrl_barcode } from '../../../environment';
+
+import ReminderAddCell from './reminderAddCell';
+import { useExpireReminderAddHook } from './reminderAddHook';
+
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;

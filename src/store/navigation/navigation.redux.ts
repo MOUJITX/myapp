@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppNavigationList } from '../../navigation/AppNavigationList';
 
 export type NavigatePayload = {

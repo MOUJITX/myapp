@@ -1,18 +1,26 @@
 import React, { RefObject, useState } from 'react';
-import CellGroup from '../../../components/basic/CellGroup';
-import SpacingView from '../../../components/basic/SpacingView';
-import TextInput from '../../../components/basic/TextInput';
-import TicketCard from '../../../components/TicketCard/TicketCard';
 import { Text } from 'react-native';
-import DatetimePicker from '../../../components/basic/DatetimePicker';
-import Switch from '../../../components/basic/Switch';
+
+import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import Button from '../../../components/basic/Button';
+import Cell from '../../../components/basic/Cell';
+import CellGroup from '../../../components/basic/CellGroup';
+import DatetimePicker from '../../../components/basic/DatetimePicker';
+import ImageRow from '../../../components/basic/ImageRow';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
+import SelectButtons from '../../../components/basic/SelectButtons';
+import SelectList from '../../../components/basic/SelectList';
+import SpacingView from '../../../components/basic/SpacingView';
+import Switch from '../../../components/basic/Switch';
+import TextInput from '../../../components/basic/TextInput';
+import TextInputCustom from '../../../components/basic/TextInputCustom';
+import TicketCard from '../../../components/TicketCard/TicketCard';
 import {
   TrainMark,
   TrainTicket,
 } from '../../../store/ticketCard/ticketCard.type';
-import SelectList from '../../../components/basic/SelectList';
+import { randomUUID } from '../../../utils/utils';
+
 import { useTicketCardAddHook } from './ticketCardAddHook';
 import {
   carsSkipSeatNumber,
@@ -23,12 +31,6 @@ import {
   TrainTicketCardSeatType,
   TrainTicketCardTips,
 } from './types';
-import { randomUUID } from '../../../utils/utils';
-import { BottomSheetRef } from '../../../components/basic/BottomSheet';
-import TextInputCustom from '../../../components/basic/TextInputCustom';
-import SelectButtons from '../../../components/basic/SelectButtons';
-import ImageRow from '../../../components/basic/ImageRow';
-import Cell from '../../../components/basic/Cell';
 
 interface Props {
   bottomSheetRef: RefObject<BottomSheetRef>;

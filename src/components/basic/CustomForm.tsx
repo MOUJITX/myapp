@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import SpacingView from './SpacingView';
-import CellGroup from './CellGroup';
-import TextInput from './TextInput';
-import Button from './Button';
 import { t } from 'i18next';
+import React, { useState } from 'react';
+
 import { useComponentMount } from '../../utils/componentMount';
+
+import Button from './Button';
+import CellGroup from './CellGroup';
+import SpacingView from './SpacingView';
 import Switch from './Switch';
+import TextInput from './TextInput';
 import TextInputCustom from './TextInputCustom';
 
 export interface CustomFormField {

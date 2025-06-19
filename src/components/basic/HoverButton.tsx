@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { commonStyles } from '../../styles';
+
 import Button, { ButtonShapeType } from './Button';
 
 interface Props {
@@ -25,8 +27,8 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    bottom: commonStyles.spacings.large3X,
     position: 'absolute',
     right: commonStyles.spacings.large2X,
-    bottom: commonStyles.spacings.large3X,
   },
 });

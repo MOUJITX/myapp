@@ -1,10 +1,12 @@
 import React from 'react';
-import { useReminderCategoryHook } from './reminderCategoryHook';
-import SelectList from '../../../components/basic/SelectList';
+
 import Button, { ButtonShapeType } from '../../../components/basic/Button';
-import { GoodCategory } from '../../../store/expireReminder/expireReminder.type';
+import SelectList from '../../../components/basic/SelectList';
 import { SelectItem } from '../../../components/basic/SelectOptionList';
 import { Props as TextLabelProps } from '../../../components/basic/TextLabel';
+import { GoodCategory } from '../../../store/expireReminder/expireReminder.type';
+
+import { useReminderCategoryHook } from './reminderCategoryHook';
 
 interface Props extends TextLabelProps {
   hideAll?: boolean;

@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
-import { RootState } from '../type';
-import { TrainQuickSelect } from './ticketCard.type';
+
 import { formatDate } from '../../utils/datetime';
+import { RootState } from '../type';
+
+import { TrainQuickSelect } from './ticketCard.type';
 
 export const selectTrainQuickSelectItemsWithLoginUser = (
   selectKey: keyof TrainQuickSelect,

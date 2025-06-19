@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ['react-app' /* 'plugin:react-native/all', 'prettier' */],
-  plugins: ['react-native' /* 'prettier' */],
+  extends: ['react-app', 'prettier' /* 'plugin:react-native/all' */],
+  plugins: ['react-native', 'prettier'],
   rules: {
     'import/no-anonymous-default-export': [
       'warn',
@@ -20,41 +20,30 @@ module.exports = {
         ignoreCase: true,
       },
     ],
-    // 'import/order': [
-    //   'warn',
-    //   {
-    //     groups: ['builtin', ['external', 'internal'], ['parent']],
-    //     pathGroups: [
-    //       {
-    //         pattern: './**',
-    //         group: 'parent',
-    //         position: 'after',
-    //       },
-    //     ],
-    //     distinctGroup: false,
-    //     alphabetize: {
-    //       order: 'asc',
-    //       caseInsensitive: true,
-    //     },
-    //     'newlines-between': 'always',
-    //   },
-    // ],
-    // 'space-before-function-paren': [
-    //   'error',
-    //   {
-    //     anonymous: 'always',
-    //     named: 'never',
-    //     asyncArrow: 'always',
-    //   },
-    // ],
-    // 'react-native/no-raw-text': [
-    //   'error',
-    //   {
-    //     skip: ['Bold', 'LabeledText'],
-    //   },
-    // ],
-    // 'react-native/sort-styles': 'error',
-    // 'no-unexpected-multiline': 'off',
-    // 'arrow-parens': ['error', 'as-needed'],
+    /* Not Allow: <View>123</View> */
+    'react-native/no-raw-text': 'warn',
+    'import/order': [
+      'warn',
+      {
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        'newlines-between': 'always',
+      },
+    ],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always',
+      },
+    ],
+    'react-native/sort-styles': 'warn',
+    'no-unexpected-multiline': 'warn',
+    'arrow-parens': ['warn', 'as-needed'],
+    /* Not Allow: style={[styles.trainSeatType]} */
+    'react-native/no-single-element-style-arrays': 'warn',
   },
 };

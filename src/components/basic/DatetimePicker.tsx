@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Props as CellProps } from './Cell';
-import { Keyboard, Platform, StyleSheet, Text } from 'react-native';
-import Cell from './Cell';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import { commonStyles } from '../../styles';
+import React, { useEffect, useState } from 'react';
+import { Keyboard, Platform, StyleSheet, Text } from 'react-native';
+
 import { languageTag } from '../../i18n/i18n';
+import { commonStyles } from '../../styles';
+
+import { Props as CellProps } from './Cell';
+import Cell from './Cell';
+
 
 interface Props extends CellProps {
   value?: Date;

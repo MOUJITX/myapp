@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useRef } from 'react';
 import { useState } from 'react';
 import {
@@ -10,9 +11,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Cell, { Props as CellProps } from './Cell';
-import { t } from 'i18next';
+
 import { randomString } from '../../utils/utils';
+
+import Cell, { Props as CellProps } from './Cell';
 
 export type KeyboardType =
   | 'number'
@@ -160,39 +162,39 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  textInput: {
-    padding: 0,
-    margin: 0,
-    flexShrink: 1,
+  keyButton: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    height: 50,
+    justifyContent: 'center',
+    marginBottom: 2,
+    textAlign: 'center',
   },
-  modal: {
-    ...StyleSheet.absoluteFillObject,
+  keyText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   keyboard: {
-    position: 'absolute',
-    paddingVertical: 20,
-    width: '100%',
-    bottom: 0,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ddd',
+    bottom: 0,
+    justifyContent: 'center',
+    paddingVertical: 20,
+    position: 'absolute',
+    width: '100%',
   },
   keyboardRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
-  keyButton: {
-    height: 50,
-    backgroundColor: 'white',
-    marginBottom: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    borderRadius: 5,
+  modal: {
+    ...StyleSheet.absoluteFillObject,
   },
-  keyText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  textInput: {
+    flexShrink: 1,
+    margin: 0,
+    padding: 0,
   },
 });

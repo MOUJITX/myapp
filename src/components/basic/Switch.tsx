@@ -1,6 +1,7 @@
 import React from 'react';
-import { Props as CellProps } from './Cell';
 import { StyleSheet, Switch, View } from 'react-native';
+
+import { Props as CellProps } from './Cell';
 import Cell from './Cell';
 
 interface Props extends CellProps {
@@ -20,8 +21,8 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'flex-start',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
   },
 });

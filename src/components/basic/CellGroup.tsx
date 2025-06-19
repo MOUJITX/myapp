@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
+
 import { commonStyles } from '../../styles';
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 
 export default (props: Props) => {
   return (
-    <View style={[props.noSpacing ? undefined : styles.groupSpace]}>
+    <View style={props.noSpacing ? undefined : styles.groupSpace}>
       {props.title && <Text style={styles.titleText}>{props.title}</Text>}
       <View
         style={[
@@ -33,11 +34,8 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  titleText: {
-    fontSize: commonStyles.fontSize.large,
-    paddingBottom: commonStyles.spacings.small2X,
-    color: commonStyles.color.gray7,
-    paddingHorizontal: commonStyles.spacings.medium,
+  card: {
+    borderRadius: commonStyles.radius.medium,
   },
   cellGroup: {
     backgroundColor: commonStyles.color.white,
@@ -47,7 +45,10 @@ const styles = StyleSheet.create({
   groupSpace: {
     marginVertical: commonStyles.spacings.smallX,
   },
-  card: {
-    borderRadius: commonStyles.radius.medium,
+  titleText: {
+    color: commonStyles.color.gray7,
+    fontSize: commonStyles.fontSize.large,
+    paddingBottom: commonStyles.spacings.small2X,
+    paddingHorizontal: commonStyles.spacings.medium,
   },
 });

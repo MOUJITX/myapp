@@ -1,15 +1,16 @@
+import { t } from 'i18next';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import CellGroup from '../basic/CellGroup';
-import Image from '../basic/Image';
-import { t } from 'i18next';
-import Divider from '../basic/Divider';
-import { commonStyles } from '../../styles';
+
 import {
   ExpiryStatus,
   Good,
 } from '../../store/expireReminder/expireReminder.type';
+import { commonStyles } from '../../styles';
 import { calculateDays } from '../../utils/datetime';
+import CellGroup from '../basic/CellGroup';
+import Divider from '../basic/Divider';
+import Image from '../basic/Image';
 
 interface Props {
   good: Good;
@@ -158,55 +159,20 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  mainDetail: {
-    flex: 1,
-    marginLeft: commonStyles.spacings.small,
-  },
-  titleLabel: {
-    ...commonStyles.textSize.h3,
-    fontWeight: 'bold',
-  },
-  infoRow: {
-    flexDirection: 'row',
-    marginTop: commonStyles.spacings.smallX,
-    flexWrap: 'wrap',
-    gap: commonStyles.spacings.small,
-  },
-  infoText: {
-    fontSize: commonStyles.fontSize.small,
-    color: commonStyles.color.gray8,
-  },
   bottomInfo: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     paddingVertical: commonStyles.spacings.small2X,
   },
-  leftBottomInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: commonStyles.spacings.smallX,
-  },
-  statusContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: commonStyles.spacings.small2X,
-  },
-  statusText: {
-    fontSize: commonStyles.fontSize.medium,
+  dateText: {
+    color: commonStyles.color.gray6,
+    fontSize: commonStyles.fontSize.small,
+    fontWeight: '500',
   },
   daysLeftContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     gap: commonStyles.spacings.small2X,
   },
   daysNumber: {
@@ -216,9 +182,44 @@ const styles = StyleSheet.create({
   daysText: {
     fontSize: commonStyles.fontSize.small,
   },
-  dateText: {
+  infoRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: commonStyles.spacings.small,
+    marginTop: commonStyles.spacings.smallX,
+  },
+  infoText: {
+    color: commonStyles.color.gray8,
     fontSize: commonStyles.fontSize.small,
-    color: commonStyles.color.gray6,
-    fontWeight: '500',
+  },
+  leftBottomInfo: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: commonStyles.spacings.smallX,
+  },
+  main: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  mainDetail: {
+    flex: 1,
+    marginLeft: commonStyles.spacings.small,
+  },
+  statusContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  statusDot: {
+    borderRadius: 4,
+    height: 8,
+    marginRight: commonStyles.spacings.small2X,
+    width: 8,
+  },
+  statusText: {
+    fontSize: commonStyles.fontSize.medium,
+  },
+  titleLabel: {
+    ...commonStyles.textSize.h3,
+    fontWeight: 'bold',
   },
 });

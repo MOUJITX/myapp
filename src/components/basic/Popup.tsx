@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { commonStyles } from '../../styles';
 import { statusType } from '../../types';
 
@@ -30,9 +31,7 @@ export default (props: Props) => {
                 <TouchableOpacity onPress={button.onPress}>
                   <View style={styles.button}>
                     <Text
-                      style={[
-                        { color: commonStyles.statusColor[button.type] },
-                      ]}>
+                      style={{ color: commonStyles.statusColor[button.type] }}>
                       {button.label}
                     </Text>
                   </View>
@@ -58,59 +57,59 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   backDrop: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: commonStyles.backgroundColor.backDropWithOpacity,
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
   },
-  popup: {
-    width: '80%',
-    backgroundColor: commonStyles.color.white,
-    borderRadius: commonStyles.radius.medium,
+  breakLine: {
+    backgroundColor: commonStyles.color.gray3,
   },
-  msg: {
-    padding: commonStyles.spacings.large,
+  breakLineCol: {
+    height: 1,
+    width: '100%',
   },
-  title: {
-    color: commonStyles.textColor.default,
-    textAlign: 'center',
-    fontSize: commonStyles.fontSize.largeX,
-    paddingTop: commonStyles.spacings.small,
-    fontWeight: '800',
+  breakLineRow: {
+    width: 1,
   },
-  content: {
-    color: commonStyles.textColor.info,
-    textAlign: 'center',
-    fontSize: commonStyles.fontSize.largeX,
-    paddingVertical: commonStyles.spacings.small,
-    lineHeight: commonStyles.lineHeight.large2X,
+  button: {
+    padding: commonStyles.spacings.medium,
   },
 
   buttons: {
-    borderTopWidth: 1,
     borderColor: commonStyles.color.gray3,
+    borderTopWidth: 1,
+  },
+  buttonsCol: {
+    alignItems: 'center',
   },
   buttonsRow: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  buttonsCol: {
-    alignItems: 'center',
+
+  content: {
+    color: commonStyles.textColor.info,
+    fontSize: commonStyles.fontSize.largeX,
+    lineHeight: commonStyles.lineHeight.large2X,
+    paddingVertical: commonStyles.spacings.small,
+    textAlign: 'center',
   },
 
-  button: {
-    padding: commonStyles.spacings.medium,
+  msg: {
+    padding: commonStyles.spacings.large,
   },
-
-  breakLine: {
-    backgroundColor: commonStyles.color.gray3,
+  popup: {
+    backgroundColor: commonStyles.color.white,
+    borderRadius: commonStyles.radius.medium,
+    width: '80%',
   },
-  breakLineRow: {
-    width: 1,
-  },
-  breakLineCol: {
-    height: 1,
-    width: '100%',
+  title: {
+    color: commonStyles.textColor.default,
+    fontSize: commonStyles.fontSize.largeX,
+    fontWeight: '800',
+    paddingTop: commonStyles.spacings.small,
+    textAlign: 'center',
   },
 });

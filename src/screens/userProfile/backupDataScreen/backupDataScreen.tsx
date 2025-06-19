@@ -1,14 +1,19 @@
+import { types } from '@react-native-documents/picker';
+import { t } from 'i18next';
 import React, { useState } from 'react';
-import SpacingView from '../../../components/basic/SpacingView';
-import CellGroup from '../../../components/basic/CellGroup';
-import TextLabel from '../../../components/basic/TextLabel';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
-import { useBackupDataHook } from './backupDataHook';
-import { t } from 'i18next';
-import Popup from '../../../components/basic/Popup';
+
+import CellGroup from '../../../components/basic/CellGroup';
 import FilePicker from '../../../components/basic/FilePicker';
-import { types } from '@react-native-documents/picker';
+import Popup from '../../../components/basic/Popup';
+import SpacingView from '../../../components/basic/SpacingView';
+import TextLabel from '../../../components/basic/TextLabel';
+
+
+import { useBackupDataHook } from './backupDataHook';
+
+
 
 export const BackupDataScreen = () => {
   const {

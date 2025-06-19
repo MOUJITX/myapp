@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import { Text } from 'react-native';
+
+import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import { commonStyles } from '../../../styles';
 
 interface Props {
@@ -46,17 +47,17 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: commonStyles.spacings.small,
+  },
   container: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   label: {
     fontSize: commonStyles.fontSize.large2X,
     fontWeight: 'bold',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    gap: commonStyles.spacings.small,
   },
 });

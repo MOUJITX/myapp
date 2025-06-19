@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { LoginPayload } from '../../../store/userProfile/userProfile.type';
+
 import { userLoginAction } from '../../../store/userProfile/userProfile.redux';
+import { LoginPayload } from '../../../store/userProfile/userProfile.type';
 
 type Input = {};
 

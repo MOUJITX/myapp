@@ -1,9 +1,12 @@
 import React from 'react';
-import { Props as CellProps } from './Cell';
 import { StyleSheet, Text } from 'react-native';
-import Cell from './Cell';
-import { statusType } from '../../types';
+
 import { commonStyles } from '../../styles';
+import { statusType } from '../../types';
+
+import { Props as CellProps } from './Cell';
+import Cell from './Cell';
+
 
 export interface Props extends CellProps {
   value?: string;

@@ -1,12 +1,14 @@
-import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppNavigationList } from './AppNavigationList';
-import { commonStyles } from '../styles';
-import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
 import { t } from 'i18next';
+import React from 'react';
 import { Text } from 'react-native';
-import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
+
+import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
 import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/ticketCardScreen';
+import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
+import { commonStyles } from '../styles';
+
+import { AppNavigationList } from './AppNavigationList';
 
 export default () => {
   const BottomTab = createBottomTabNavigator<AppNavigationList>();

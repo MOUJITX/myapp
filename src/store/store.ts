@@ -1,15 +1,16 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
-import { RootState } from './type';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { persistReducer, persistStore } from 'redux-persist';
+
+import { expireReminderEpics } from './expireReminder/expireReminder.epics';
+import expireReminderRedux from './expireReminder/expireReminder.redux';
+import { navigationEpics } from './navigation/navigation.epics';
+import navigationRedux from './navigation/navigation.redux';
+import ticketCardRedux from './ticketCard/ticketCard.redux';
+import { RootState } from './type';
 import { userProfileEpics } from './userProfile/userProfile.epics';
 import userProfileRedux from './userProfile/userProfile.redux';
-import navigationRedux from './navigation/navigation.redux';
-import { navigationEpics } from './navigation/navigation.epics';
-import expireReminderRedux from './expireReminder/expireReminder.redux';
-import { expireReminderEpics } from './expireReminder/expireReminder.epics';
-import ticketCardRedux from './ticketCard/ticketCard.redux';
 
 export const rootReducer = combineReducers({
   userProfile: userProfileRedux,

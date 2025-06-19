@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  View,
-  ImageBackground, // 新增图片背景组件
-  Text,
-  StyleProp,
-  TextStyle,
+  ImageBackground,
   LayoutChangeEvent,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
 } from 'react-native';
-import { autoFontSize } from '../../utils/autoSize';
 import QRCode from 'react-native-qrcode-svg';
+
 import {
   TrainPassengerInfo,
   TrainTicket,
 } from '../../store/ticketCard/ticketCard.type';
+import { commonStyles } from '../../styles';
+import { autoFontSize } from '../../utils/autoSize';
 import { formatDate } from '../../utils/datetime';
 import { stringFormat } from '../../utils/utils';
-import { commonStyles } from '../../styles';
 
 interface Props {
   ticket: TrainTicket;
@@ -174,24 +175,24 @@ export default (props: Props) => {
           ]}>
           <TextSingleLine
             label={props.ticket.trainPay}
-            style={[styles(baseWidth).trainPay]}
+            style={styles(baseWidth).trainPay}
           />
-          <View style={[styles(baseWidth).trainMark]}>
+          <View style={styles(baseWidth).trainMark}>
             {props.ticket.mark.map((mark, index) => (
               <View style={styles(baseWidth).markCircle} key={index}>
                 <TextSingleLine
                   label={mark}
-                  style={[styles(baseWidth).trainMarkText]}
+                  style={styles(baseWidth).trainMarkText}
                 />
               </View>
             ))}
           </View>
           <TextSingleLine
             label={props.ticket.seat.seatType}
-            style={[styles(baseWidth).trainSeatType]}
+            style={styles(baseWidth).trainSeatType}
           />
         </View>
-        <View style={[styles(baseWidth).trainInfoArea]}>
+        <View style={styles(baseWidth).trainInfoArea}>
           <TextDoubleLines
             label={props.ticket.cardInfo}
             style={styles(baseWidth).trainInfoText}
@@ -229,117 +230,106 @@ export default (props: Props) => {
 
 const styles = (baseWidth: number, cardRatio?: number) =>
   StyleSheet.create({
-    container: {
-      width: '100%',
-      aspectRatio: cardRatio,
-      alignItems: 'center',
-      borderRadius: autoFontSize(12),
-      overflow: 'hidden',
-      backgroundColor: 'white',
-      ...commonStyles.shadow,
-    },
-    cardInfo: {
-      width: '90%',
-      height: '100%',
+    QRcodeArea: {
+      left: '79%',
+      position: 'absolute',
+      top: '61%',
     },
     areaCommon: {
       flexDirection: 'row',
     },
+    cardCodeArea: {
+      fontSize: autoFontSize(16, baseWidth),
+      top: '5.5%',
+    },
 
-    headArea: {
-      top: '3%',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+    cardInfo: {
+      height: '100%',
+      width: '90%',
     },
     cardNumber: {
-      left: '2%',
-      fontSize: autoFontSize(22, baseWidth),
       color: 'red',
+      fontSize: autoFontSize(22, baseWidth),
+      left: '2%',
+    },
+    cardTipArea: {
+      alignItems: 'center',
+      borderStyle: 'dashed',
+      borderWidth: 1,
+      height: '14%',
+      justifyContent: 'center',
+      left: '5%',
+      width: '64%',
+    },
+
+    cardTipText: {
+      fontSize: autoFontSize(15, baseWidth),
     },
     checkWindow: {
       fontSize: autoFontSize(19, baseWidth),
     },
+    container: {
+      alignItems: 'center',
+      aspectRatio: cardRatio,
+      backgroundColor: 'white',
+      borderRadius: autoFontSize(12),
+      overflow: 'hidden',
+      width: '100%',
+      ...commonStyles.shadow,
+    },
+    headArea: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      top: '3%',
+    },
+    markCircle: {
+      alignItems: 'center',
+      borderRadius: 50,
+      borderWidth: 1,
+      height: autoFontSize(20, baseWidth),
+      justifyContent: 'center',
+      overflow: 'hidden',
+      width: autoFontSize(20, baseWidth),
+    },
 
+    passengerArea: {
+      fontSize: autoFontSize(20, baseWidth),
+    },
     stationArea: {
-      top: '2%',
       height: '13%',
       justifyContent: 'space-between',
+      top: '2%',
     },
-    stationStart: {
-      width: '40%',
-    },
-    stationEnd: {
-      width: '40%',
-    },
+
     stationCN: {
       fontSize: autoFontSize(29, baseWidth),
       textAlign: 'center',
     },
-    trainNumber: {
-      position: 'absolute',
-      top: '9%',
-      left: '38%',
-      width: '25%',
-      fontSize: autoFontSize(26, baseWidth),
+    stationEN: {
+      fontSize: autoFontSize(17, baseWidth),
       textAlign: 'center',
+      width: '40%',
     },
-
     stationENArea: {
       justifyContent: 'space-between',
     },
-    stationEN: {
+    stationEnd: {
       width: '40%',
-      fontSize: autoFontSize(17, baseWidth),
-      textAlign: 'center',
     },
 
+    stationStart: {
+      width: '40%',
+    },
     trainDateArea: {
       justifyContent: 'space-between',
       top: '-1%',
     },
-    trainDateTime: {
-      gap: '9.5%',
-    },
-    trainSeatNumber: {
-      width: '32%',
-      gap: '12%',
-    },
     trainDateText: {
       fontSize: autoFontSize(18, baseWidth),
     },
-
-    trainPayArea: {
-      top: '-1%',
-      height: '7%',
+    trainDateTime: {
+      gap: '9.5%',
     },
-    trainPay: {
-      left: '4%',
-      fontSize: autoFontSize(19, baseWidth),
-    },
-    trainMark: {
-      position: 'absolute',
-      left: '40.5%',
-      flexDirection: 'row',
-      gap: '3%',
-    },
-    markCircle: {
-      borderWidth: 1,
-      borderRadius: 50,
-      width: autoFontSize(20, baseWidth),
-      height: autoFontSize(20, baseWidth),
-      justifyContent: 'center',
-      alignItems: 'center',
-      overflow: 'hidden',
-    },
-    trainMarkText: {
-      fontSize: autoFontSize(16, baseWidth),
-    },
-    trainSeatType: {
-      position: 'absolute',
-      left: '79%',
-      fontSize: autoFontSize(17, baseWidth),
-    },
-
     trainInfoArea: {
       height: '17%',
     },
@@ -347,31 +337,42 @@ const styles = (baseWidth: number, cardRatio?: number) =>
       fontSize: autoFontSize(17, baseWidth),
     },
 
-    passengerArea: {
-      fontSize: autoFontSize(20, baseWidth),
-    },
-
-    cardTipArea: {
-      borderWidth: 1,
-      borderStyle: 'dashed',
-      width: '64%',
-      left: '5%',
-      height: '14%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    cardTipText: {
-      fontSize: autoFontSize(15, baseWidth),
-    },
-
-    QRcodeArea: {
+    trainMark: {
+      flexDirection: 'row',
+      gap: '3%',
+      left: '40.5%',
       position: 'absolute',
-      top: '61%',
-      left: '79%',
+    },
+    trainMarkText: {
+      fontSize: autoFontSize(16, baseWidth),
     },
 
-    cardCodeArea: {
-      top: '5.5%',
-      fontSize: autoFontSize(16, baseWidth),
+    trainNumber: {
+      fontSize: autoFontSize(26, baseWidth),
+      left: '38%',
+      position: 'absolute',
+      textAlign: 'center',
+      top: '9%',
+      width: '25%',
+    },
+
+    trainPay: {
+      fontSize: autoFontSize(19, baseWidth),
+      left: '4%',
+    },
+    trainPayArea: {
+      height: '7%',
+      top: '-1%',
+    },
+
+    trainSeatNumber: {
+      gap: '12%',
+      width: '32%',
+    },
+
+    trainSeatType: {
+      fontSize: autoFontSize(17, baseWidth),
+      left: '79%',
+      position: 'absolute',
     },
   });

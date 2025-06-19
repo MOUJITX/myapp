@@ -1,7 +1,9 @@
 import { AnyAction } from 'redux';
 import { combineEpics, Epic } from 'redux-observable';
-import { RootState } from '../type';
 import { filter, mergeMap, of } from 'rxjs';
+
+import { RootState } from '../type';
+
 import { addGoodAction } from './expireReminder.redux';
 
 export type ExpireRemindersEpic = Epic<AnyAction, AnyAction, RootState, void>;

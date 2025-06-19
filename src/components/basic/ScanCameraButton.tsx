@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import Button, { ButtonShapeType } from './Button';
 import {
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import ScanCamera from './ScanCamera';
 import { CodeType } from 'react-native-vision-camera';
+
+import Button, { ButtonShapeType } from './Button';
+import ScanCamera from './ScanCamera';
+
 
 interface Props {
   onSuccess: (value: string) => void;
@@ -60,7 +62,7 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   modalBackdrop: {
-    width: '100%',
     height: '100%',
+    width: '100%',
   },
 });

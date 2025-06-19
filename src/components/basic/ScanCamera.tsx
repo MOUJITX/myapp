@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
@@ -7,9 +8,9 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
+
 import HoverButton from './HoverButton';
 import Popup from './Popup';
-import { t } from 'i18next';
 
 export enum CodeScanFailedType {
   NO_PERMISSION = 'NO_PERMISSION',
@@ -106,7 +107,7 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   camera: {
-    width: '100%',
     height: '100%',
+    width: '100%',
   },
 });

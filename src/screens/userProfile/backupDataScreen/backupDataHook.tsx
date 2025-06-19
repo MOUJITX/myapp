@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import { navigateAction } from '../../../store/navigation/navigation.redux';
 import { RootState } from '../../../store/type';
-import { selectAll } from '../../../store/userProfile/userProfile.selectors';
 import {
   restoreAction,
   userLogoutAction,
 } from '../../../store/userProfile/userProfile.redux';
-import { navigateAction } from '../../../store/navigation/navigation.redux';
+import { selectAll } from '../../../store/userProfile/userProfile.selectors';
 
 type Input = {
   allStateData: RootState;

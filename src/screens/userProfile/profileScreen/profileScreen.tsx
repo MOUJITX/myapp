@@ -1,10 +1,12 @@
+import { t } from 'i18next';
 import React from 'react';
 import { ScrollView } from 'react-native';
+
+import CellButton from '../../../components/basic/CellButton';
 import CellGroup from '../../../components/basic/CellGroup';
 import Divider from '../../../components/basic/Divider';
-import CellButton from '../../../components/basic/CellButton';
+
 import { useProfileHook } from './profileHook';
-import { t } from 'i18next';
 
 export default () => {
   const {
