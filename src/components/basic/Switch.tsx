@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Switch, View } from 'react-native';
 
 import { Props as CellProps } from './Cell';

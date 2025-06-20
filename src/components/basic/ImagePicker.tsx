@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
 import {

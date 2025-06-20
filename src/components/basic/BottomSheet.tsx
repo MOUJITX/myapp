@@ -1,6 +1,6 @@
-import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
+import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { t } from 'i18next';
-import React, {
+import {
   forwardRef,
   ForwardRefRenderFunction,
   useEffect,
@@ -83,7 +83,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
   return (
     <BottomSheetModal
       ref={bottomSheetRef}
-      snapPoints={props.autoSize ? undefined : ['100%']}
+      snapPoints={['100%']}
       backgroundStyle={styles(isOpen).bottomSheetBackground}
       backdropComponent={backdrop}
       enableDynamicSizing={props.autoSize ?? false}
@@ -94,7 +94,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
       topInset={top}
       enableHandlePanningGesture={true}
       enablePanDownToClose={false}>
-      <BottomSheetView style={styles(isOpen).contentContainer}>
+      <BottomSheetScrollView style={styles(isOpen).contentContainer}>
         {!props.hideHeader && (
           <View style={styles(isOpen).header}>
             <Text onPress={closeBottomSheet} style={styles(isOpen).headerLabel}>
@@ -110,7 +110,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
           </View>
         )}
         {props.children}
-      </BottomSheetView>
+      </BottomSheetScrollView>
     </BottomSheetModal>
   );
 };

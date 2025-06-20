@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import RNFS from 'react-native-fs';
 

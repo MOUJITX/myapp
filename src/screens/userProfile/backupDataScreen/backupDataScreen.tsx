@@ -1,6 +1,6 @@
 import { types } from '@react-native-documents/picker';
 import { t } from 'i18next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 

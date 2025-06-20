@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import {
   GestureHandlerRootView,

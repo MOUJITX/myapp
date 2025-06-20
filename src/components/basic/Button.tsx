@@ -1,5 +1,4 @@
 import { t } from 'i18next';
-import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import { ButtonSize, commonStyles } from '../../styles';

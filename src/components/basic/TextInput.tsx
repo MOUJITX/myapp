@@ -1,5 +1,4 @@
 import { t } from 'i18next';
-import React from 'react';
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 
 import { Props as CellProps } from './Cell';

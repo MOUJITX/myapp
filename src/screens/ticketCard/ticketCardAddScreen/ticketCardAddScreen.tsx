@@ -1,4 +1,4 @@
-import React, { RefObject, useState } from 'react';
+import { RefObject, useState } from 'react';
 import { Text } from 'react-native';
 
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
@@ -33,7 +33,7 @@ import {
 } from './types';
 
 interface Props {
-  bottomSheetRef: RefObject<BottomSheetRef>;
+  bottomSheetRef: RefObject<BottomSheetRef | null>;
   ticket?: TrainTicket;
 }
 

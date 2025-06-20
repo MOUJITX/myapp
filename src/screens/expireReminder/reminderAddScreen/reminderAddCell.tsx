@@ -1,5 +1,4 @@
 import { t } from 'i18next';
-import React from 'react';
 
 import CellGroup from '../../../components/basic/CellGroup';
 import DatetimePicker from '../../../components/basic/DatetimePicker';

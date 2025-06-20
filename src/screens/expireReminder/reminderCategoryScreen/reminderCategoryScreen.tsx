@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import SelectList from '../../../components/basic/SelectList';
 import { SelectItem } from '../../../components/basic/SelectOptionList';

@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { commonStyles, TextSize } from '../../styles';
@@ -28,7 +28,7 @@ export default (props: Props) => {
           props.inline && styles.editContainerInline,
         ]}>
         {props.label && (
-          <View style={styles.label}>
+          <View style={[styles.label, !props.inline && styles.labelFullWidth]}>
             {props.label && (
               <Text
                 style={[
@@ -118,6 +118,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     minHeight: 40,
     width: '30%',
+  },
+  labelFullWidth: {
+    width: '100%',
   },
   labelText: {
     color: commonStyles.textColor.default,

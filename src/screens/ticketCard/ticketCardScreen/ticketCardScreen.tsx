@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';

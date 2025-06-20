@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { View } from 'react-native';
 
 import BottomSheet, { BottomSheetRef } from './BottomSheet';

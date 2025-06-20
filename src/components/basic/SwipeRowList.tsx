@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
+import { useRef } from 'react';
+import { StyleSheet } from 'react-native';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 
 import SwipeRow, { swipeRowConfig } from './SwipeRow';
 
 export interface Props extends swipeRowConfig {
   renderItem?: ({ item }: { item: any }) => React.ReactNode;
-  data?: ArrayLike<any>;
+  data?: readonly any[];
 }
 
 export default (props: Props) => {
@@ -39,7 +40,7 @@ export default (props: Props) => {
   );
 
   return (
-    <FlatList
+    <FlashList
       style={styles.container}
       data={props.data}
       renderItem={renderSwipeRow}

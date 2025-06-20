@@ -163,6 +163,16 @@
       },
       "used": {
         "label": "存余"
+      },
+      "brand": {
+        "name": {
+          "label": "品牌"
+        },
+        "factory": {},
+        "label": "品牌",
+        "producer": {
+          "label": "厂商"
+        }
       }
     },
     "category": {

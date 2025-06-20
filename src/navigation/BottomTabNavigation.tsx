@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { t } from 'i18next';
-import React from 'react';
 import { Text } from 'react-native';
 
 import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
@@ -25,6 +24,7 @@ export default () => {
           paddingBottom: 4,
           height: 60,
         },
+        animation: 'shift',
       }}>
       <BottomTab.Screen
         name="ExpireReminderScreen"
@@ -32,7 +32,8 @@ export default () => {
         options={{
           title: t('expireReminder.title'),
           headerTitleAlign: 'center',
-          tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '📅' }),
+          tabBarIcon: ({ color }: { color: string }) =>
+            tabBarIcon({ color, icon: '📅' }),
         }}
       />
       <BottomTab.Screen
@@ -41,7 +42,8 @@ export default () => {
         options={{
           title: t('trainTicket.title'),
           headerTitleAlign: 'center',
-          tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '💳' }),
+          tabBarIcon: ({ color }: { color: string }) =>
+            tabBarIcon({ color, icon: '💳' }),
         }}
       />
       <BottomTab.Screen
@@ -50,7 +52,8 @@ export default () => {
         options={{
           title: t('userProfile.title'),
           headerTitleAlign: 'center',
-          tabBarIcon: ({ color }) => tabBarIcon({ color, icon: '👤' }),
+          tabBarIcon: ({ color }: { color: string }) =>
+            tabBarIcon({ color, icon: '👤' }),
         }}
       />
     </BottomTab.Navigator>

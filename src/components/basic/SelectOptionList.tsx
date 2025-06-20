@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { RefObject, useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { randomUUID } from '../../utils/utils';
@@ -33,7 +33,7 @@ export interface SelectOptionListProps {
 }
 
 export interface Props extends SelectOptionListProps {
-  bottomSheetRef: RefObject<BottomSheetRef>;
+  bottomSheetRef: RefObject<BottomSheetRef | null>;
 }
 
 export default (props: Props) => {

@@ -1,5 +1,4 @@
 import { t } from 'i18next';
-import React from 'react';
 import { ScrollView } from 'react-native';
 
 import CellButton from '../../../components/basic/CellButton';

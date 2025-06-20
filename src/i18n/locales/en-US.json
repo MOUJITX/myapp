@@ -22,10 +22,10 @@
       }
     },
     "backup": {
-      "title": "data backup and recovery",
+      "title": "Backup and recovery",
       "backup": {
         "content": "All user data within the application will be backed up in JSON format, and the backup files will be saved locally or sent to other applications. We currently do not support backing up image data.",
-        "label": "backup data"
+        "label": "Backup Data"
       },
       "popup": {
         "title": "Share backup data"
@@ -42,14 +42,14 @@
     },
     "menu": {
       "backup": {
-        "label": "data backup and recovery"
+        "label": "Backup and recovery"
       },
       "exit": {
         "exchange": {
           "label": "Switch accounts"
         },
         "exit": {
-          "label": "exit"
+          "label": "Exit"
         }
       },
       "settings": {
@@ -64,7 +64,7 @@
         }
       }
     },
-    "title": "my",
+    "title": "My Settings",
     "welcome": {
       "label": "hello world"
     }
@@ -163,6 +163,15 @@
       },
       "used": {
         "label": "In Use"
+      },
+      "brand": {
+        "label": "Brand",
+        "name": {
+          "label": "Brand"
+        },
+        "producer": {
+          "label": "Producer"
+        }
       }
     },
     "category": {
@@ -206,6 +215,6 @@
     }
   },
   "trainTicket": {
-    "title": "Travel ticket holder"
+    "title": "Travel Tickets"
   }
 }

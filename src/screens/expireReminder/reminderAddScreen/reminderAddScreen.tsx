@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { RefObject, useState } from 'react';
+import { RefObject, useState } from 'react';
 import { View } from 'react-native';
 
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
@@ -31,7 +31,7 @@ import ReminderAddCell from './reminderAddCell';
 import { useExpireReminderAddHook } from './reminderAddHook';
 
 interface Props {
-  bottomSheetRef: RefObject<BottomSheetRef>;
+  bottomSheetRef: RefObject<BottomSheetRef | null>;
   good?: Good;
 }
 
@@ -177,18 +177,18 @@ export const ExpireReminderAddScreen = (props: Props) => {
             hideAll
           />
           <CustomFormLabel
-            label="品牌"
+            label={t('expireReminder.add.brand.label')}
             inline
             formFields={[
               {
                 key: 'brand',
-                label: '品牌',
+                label: t('expireReminder.add.brand.name.label'),
                 type: 'text',
                 inline: true,
               },
               {
                 key: 'producer',
-                label: '厂商',
+                label: t('expireReminder.add.brand.producer.label'),
                 type: 'text',
                 inline: true,
               },

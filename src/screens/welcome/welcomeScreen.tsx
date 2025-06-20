@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { useWelcomeHook } from './welcomeHook';
