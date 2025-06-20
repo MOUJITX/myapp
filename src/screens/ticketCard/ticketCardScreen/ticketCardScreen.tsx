@@ -23,6 +23,7 @@ import { commonStyles } from '../../../styles';
 import { TicketCardAddScreen } from '../ticketCardAddScreen/ticketCardAddScreen';
 
 import { useTicketCardHook } from './ticketCardHook';
+import { FlashList } from '@shopify/flash-list';
 
 const TicketCardAnim = ({
   index,
@@ -147,6 +148,22 @@ export const TicketCardScreen = () => {
   return (
     <View style={styles.container}>
       <SpacingView ref={ticketCardListRef} notAutoEnd>
+        {/* <FlashList
+          data={trainTickets}
+          renderItem={({ item, index }) => (
+            <TicketCardAnim
+              key={index}
+              index={index}
+              ticket={item}
+              onPress={() => handleCardPress(item.uuid)}
+              isOpen={isOpen}
+              topCard={topCard}
+              topCardIndex={trainTickets.findIndex(tt => tt.uuid === topCard)}
+              removeAction={handleRemoveAction}
+              editAction={handleEditAction}
+            />
+          )}
+        /> */}
         {trainTickets.map((ticket, index) => (
           <TicketCardAnim
             key={index}
