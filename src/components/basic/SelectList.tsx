@@ -42,7 +42,9 @@ export default (props: Props) => {
         />
       )}
 
-      <BottomSheet ref={SelectBottomSheetRef} autoSize={!props.editable}>
+      <BottomSheet
+        ref={SelectBottomSheetRef}
+        autoSize={!props.editable || !!props.customFormSetting}>
         <SelectOptionList bottomSheetRef={SelectBottomSheetRef} {...props} />
       </BottomSheet>
     </View>
