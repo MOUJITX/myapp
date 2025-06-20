@@ -8092,8 +8092,7 @@ react-native-screens@~4.11.1:
 
 react-native-share@^12.1.0:
   version "12.1.0"
-  resolved "https://registry.npmmirror.com/react-native-share/-/react-native-share-12.1.0.tgz#19b404b6ce1ba170cc075134629bdb23045f64ea"
-  integrity sha1-GbQEts4boXDMB1E0YpvbIwRfZOo=
+  resolved "https://registry.npmjs.org/react-native-share/-/react-native-share-12.1.0.tgz"
 
 react-native-svg@^15.12.0:
   version "15.12.0"
