@@ -1,3 +1,4 @@
+// import { FlashList } from '@shopify/flash-list';
 import { t } from 'i18next';
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
@@ -23,7 +24,6 @@ import { commonStyles } from '../../../styles';
 import { TicketCardAddScreen } from '../ticketCardAddScreen/ticketCardAddScreen';
 
 import { useTicketCardHook } from './ticketCardHook';
-import { FlashList } from '@shopify/flash-list';
 
 const TicketCardAnim = ({
   index,
