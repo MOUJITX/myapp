@@ -1,6 +1,6 @@
 {
   "name": "myApp",
-  "version": "0.3.6-beta.2",
+  "version": "0.3.6-beta.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android && adb shell am start -n com.moujitx.myapp.dev/com.moujitx.myapp.MainActivity",
