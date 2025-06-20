@@ -8,7 +8,6 @@ import CellGroup from '../../../components/basic/CellGroup';
 import CustomFormLabel from '../../../components/basic/CustomFormLabel';
 import ImageRow from '../../../components/basic/ImageRow';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
-import SpacingView from '../../../components/basic/SpacingView';
 import TextInput from '../../../components/basic/TextInput';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
 import TextLabel from '../../../components/basic/TextLabel';
@@ -139,82 +138,80 @@ export const ExpireReminderAddScreen = (props: Props) => {
   );
 
   return (
-    <SpacingView>
-      <View>
-        <CellGroup card>
-          <TextInput
-            value={title}
-            onValueChange={value => setTitle(value)}
-            placeholder={t('expireReminder.add.name.placeholder')}
-          />
-          <ImageRow
-            imgs={imgs}
-            size={'large'}
-            radius
-            upload
-            onValueChange={value => setImgs(value)}
-            folder={'goods'}
-          />
-          <TextInputCustom
-            inline
-            label={t('expireReminder.add.goodCode.label')}
-            keyboardType="number"
-            value={uniCode}
-            onValueChange={handleUnicodeChange}
-            placeholder={t('expireReminder.add.goodCode.placeholder')}
-            right={renderCameraScanButton}
-          />
-          <TextLabel
-            inline
-            label={t('expireReminder.add.goodNumber.label')}
-            value={items.length.toString()}
-          />
-          <ReminderCategoryScreen
-            inline
-            label={t('expireReminder.add.category.label')}
-            selected={category}
-            onSelect={setCategory}
-            hideAll
-          />
-          <CustomFormLabel
-            label={t('expireReminder.add.brand.label')}
-            inline
-            formFields={[
-              {
-                key: 'brand',
-                label: t('expireReminder.add.brand.name.label'),
-                type: 'text',
-                inline: true,
-              },
-              {
-                key: 'producer',
-                label: t('expireReminder.add.brand.producer.label'),
-                type: 'text',
-                inline: true,
-              },
-            ]}
-            formValue={brand}
-            valueLabel={brand.brand ? brand.brand : brand.producer}
-            onValueChange={value => setBrand(value)}
-          />
-        </CellGroup>
-        {items.map((item, index) => (
-          <ReminderAddCell
-            item={item}
-            itemNum={index}
-            onAdd={() => handleAdd(index)}
-            onCopy={() => handleCopy(index)}
-            onDelete={() => handleDelete(index)}
-            onValueChange={value => handleValueChange(index, value)}
-            key={index}
-          />
-        ))}
-        <Button
-          type="primary"
-          label={t('common.save.label')}
-          onPress={handleSubmitGoodCheck}
+    <View>
+      <CellGroup card>
+        <TextInput
+          value={title}
+          onValueChange={value => setTitle(value)}
+          placeholder={t('expireReminder.add.name.placeholder')}
         />
-      </View>
-    </SpacingView>
+        <ImageRow
+          imgs={imgs}
+          size={'large'}
+          radius
+          upload
+          onValueChange={value => setImgs(value)}
+          folder={'goods'}
+        />
+        <TextInputCustom
+          inline
+          label={t('expireReminder.add.goodCode.label')}
+          keyboardType="number"
+          value={uniCode}
+          onValueChange={handleUnicodeChange}
+          placeholder={t('expireReminder.add.goodCode.placeholder')}
+          right={renderCameraScanButton}
+        />
+        <TextLabel
+          inline
+          label={t('expireReminder.add.goodNumber.label')}
+          value={items.length.toString()}
+        />
+        <ReminderCategoryScreen
+          inline
+          label={t('expireReminder.add.category.label')}
+          selected={category}
+          onSelect={setCategory}
+          hideAll
+        />
+        <CustomFormLabel
+          label={t('expireReminder.add.brand.label')}
+          inline
+          formFields={[
+            {
+              key: 'brand',
+              label: t('expireReminder.add.brand.name.label'),
+              type: 'text',
+              inline: true,
+            },
+            {
+              key: 'producer',
+              label: t('expireReminder.add.brand.producer.label'),
+              type: 'text',
+              inline: true,
+            },
+          ]}
+          formValue={brand}
+          valueLabel={brand.brand ? brand.brand : brand.producer}
+          onValueChange={value => setBrand(value)}
+        />
+      </CellGroup>
+      {items.map((item, index) => (
+        <ReminderAddCell
+          item={item}
+          itemNum={index}
+          onAdd={() => handleAdd(index)}
+          onCopy={() => handleCopy(index)}
+          onDelete={() => handleDelete(index)}
+          onValueChange={value => handleValueChange(index, value)}
+          key={index}
+        />
+      ))}
+      <Button
+        type="primary"
+        label={t('common.save.label')}
+        onPress={handleSubmitGoodCheck}
+      />
+    </View>
   );
 };

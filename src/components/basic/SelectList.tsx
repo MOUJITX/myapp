@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import BottomSheet, { BottomSheetRef } from './BottomSheet';
 import { SelectOptionListProps } from './SelectOptionList';
 import SelectOptionList from './SelectOptionList';
-import SpacingView from './SpacingView';
 import { Props as TextLabelProps } from './TextLabel';
 import TextLabel from './TextLabel';
 
@@ -44,9 +43,7 @@ export default (props: Props) => {
       )}
 
       <BottomSheet ref={SelectBottomSheetRef} autoSize={!props.editable}>
-        <SpacingView>
-          <SelectOptionList bottomSheetRef={SelectBottomSheetRef} {...props} />
-        </SpacingView>
+        <SelectOptionList bottomSheetRef={SelectBottomSheetRef} {...props} />
       </BottomSheet>
     </View>
   );

@@ -1,11 +1,11 @@
 import { t } from 'i18next';
 import { useState } from 'react';
+import { View } from 'react-native';
 
 import { useComponentMount } from '../../utils/componentMount';
 
 import Button from './Button';
 import CellGroup from './CellGroup';
-import SpacingView from './SpacingView';
 import Switch from './Switch';
 import TextInput from './TextInput';
 import TextInputCustom from './TextInputCustom';
@@ -65,7 +65,7 @@ export default (props: Props) => {
   });
 
   return (
-    <SpacingView>
+    <View>
       <CellGroup card title={formLabel}>
         {props.fields.map((field, index) => {
           if (field.type === 'text') {
@@ -121,6 +121,6 @@ export default (props: Props) => {
           props.onValueChange && props.onValueChange(customForm);
         }}
       />
-    </SpacingView>
+    </View>
   );
 };

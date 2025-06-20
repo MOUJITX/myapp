@@ -13,6 +13,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { commonStyles } from '../../styles';
 
+import SpacingView from './SpacingView';
+
 interface Props {
   children: React.ReactNode;
   autoSize?: boolean;
@@ -83,7 +85,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
   return (
     <BottomSheetModal
       ref={bottomSheetRef}
-      snapPoints={['100%']}
+      snapPoints={props.autoSize ? undefined : ['100%']}
       backgroundStyle={styles(isOpen).bottomSheetBackground}
       backdropComponent={backdrop}
       enableDynamicSizing={props.autoSize ?? false}
@@ -109,7 +111,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
             )}
           </View>
         )}
-        {props.children}
+        <SpacingView notScroll>{props.children}</SpacingView>
       </BottomSheetScrollView>
     </BottomSheetModal>
   );

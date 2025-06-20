@@ -1,5 +1,5 @@
 import { RefObject, useState } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import Button from '../../../components/basic/Button';
@@ -10,7 +10,6 @@ import ImageRow from '../../../components/basic/ImageRow';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
 import SelectButtons from '../../../components/basic/SelectButtons';
 import SelectList from '../../../components/basic/SelectList';
-import SpacingView from '../../../components/basic/SpacingView';
 import Switch from '../../../components/basic/Switch';
 import TextInput from '../../../components/basic/TextInput';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
@@ -131,7 +130,7 @@ export const TicketCardAddScreen = (props: Props) => {
   };
 
   return (
-    <SpacingView>
+    <View>
       <TicketCard ticket={trainTicket} />
       <CellGroup card title="基础">
         <SelectList
@@ -440,6 +439,6 @@ export const TicketCardAddScreen = (props: Props) => {
           props.bottomSheetRef.current?.closeBottomSheet();
         }}
       />
-    </SpacingView>
+    </View>
   );
 };
