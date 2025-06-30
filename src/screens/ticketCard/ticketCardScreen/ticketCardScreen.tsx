@@ -1,8 +1,8 @@
 // import { FlashList } from '@shopify/flash-list';
 import { t } from 'i18next';
-import { useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -117,7 +117,8 @@ export const TicketCardScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState<string>();
   const [trainTicket, setTrainTicket] = useState<TrainTicket>();
-  // const [scrollPosition, setScrollPosition] = useState(0);
+  const [trainTicketsList, setTrainTicketsList] = useState<TrainTicket[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
@@ -126,7 +127,7 @@ export const TicketCardScreen = () => {
   const handleCardPress = (uuid: string) => {
     if (isOpen) {
       setIsOpen(false);
-      // ticketCardListRef.current?.scrollTo(0);
+      ticketCardListRef.current?.scrollTo(0);
     } else {
       setIsOpen(true);
       setTopCard(uuid);
@@ -145,49 +146,50 @@ export const TicketCardScreen = () => {
     AddScreenBottomSheetRef.current?.openBottomSheet();
   };
 
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setTrainTicketsList(trainTickets);
+      setIsLoading(false);
+    }, 0);
+  }, [trainTickets]);
+
   return (
-    <View style={styles.container}>
-      <SpacingView ref={ticketCardListRef} notAutoEnd>
-        {/* <FlashList
-          data={trainTickets}
-          renderItem={({ item, index }) => (
-            <TicketCardAnim
-              key={index}
-              index={index}
-              ticket={item}
-              onPress={() => handleCardPress(item.uuid)}
-              isOpen={isOpen}
-              topCard={topCard}
-              topCardIndex={trainTickets.findIndex(tt => tt.uuid === topCard)}
-              removeAction={handleRemoveAction}
-              editAction={handleEditAction}
+    <>
+      {isLoading ? (
+        <View style={[styles.container, styles.containerCenter]}>
+          <Text>{t('common.loading.label')}</Text>
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <SpacingView ref={ticketCardListRef} notAutoEnd>
+            {trainTicketsList.map((ticket, index) => (
+              <TicketCardAnim
+                key={index}
+                index={index}
+                ticket={ticket}
+                onPress={() => handleCardPress(ticket.uuid)}
+                isOpen={isOpen}
+                topCard={topCard}
+                topCardIndex={trainTicketsList.findIndex(
+                  tt => tt.uuid === topCard,
+                )}
+                removeAction={handleRemoveAction}
+                editAction={handleEditAction}
+              />
+            ))}
+          </SpacingView>
+
+          <HoverButton label="+" onPress={() => handleEditAction(undefined)} />
+
+          <BottomSheet ref={AddScreenBottomSheetRef}>
+            <TicketCardAddScreen
+              bottomSheetRef={AddScreenBottomSheetRef}
+              ticket={trainTicket}
             />
-          )}
-        /> */}
-        {trainTickets.map((ticket, index) => (
-          <TicketCardAnim
-            key={index}
-            index={index}
-            ticket={ticket}
-            onPress={() => handleCardPress(ticket.uuid)}
-            isOpen={isOpen}
-            topCard={topCard}
-            topCardIndex={trainTickets.findIndex(tt => tt.uuid === topCard)}
-            removeAction={handleRemoveAction}
-            editAction={handleEditAction}
-          />
-        ))}
-      </SpacingView>
-
-      <HoverButton label="+" onPress={() => handleEditAction(undefined)} />
-
-      <BottomSheet ref={AddScreenBottomSheetRef}>
-        <TicketCardAddScreen
-          bottomSheetRef={AddScreenBottomSheetRef}
-          ticket={trainTicket}
-        />
-      </BottomSheet>
-    </View>
+          </BottomSheet>
+        </View>
+      )}
+    </>
   );
 };
 
@@ -199,4 +201,5 @@ const styles = StyleSheet.create({
     paddingTop: commonStyles.spacings.medium,
   },
   container: { flex: 1 },
+  containerCenter: { alignItems: 'center', justifyContent: 'center' },
 });

@@ -213,6 +213,9 @@
     },
     "goto": {
       "icon": ">"
+    },
+    "loading": {
+      "label": "加载中……"
     }
   },
   "trainTicket": {
