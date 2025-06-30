@@ -19,7 +19,7 @@ interface Props {
 const getDaysUntilExpiry = (expireDate: Date) =>
   calculateDays(new Date(), new Date(expireDate));
 
-const getExpiryStatus = (expireDate: Date, isUsed: boolean) => {
+export const getExpiryStatus = (expireDate: Date, isUsed: boolean) => {
   if (isUsed) {
     return ExpiryStatus.Used;
   }

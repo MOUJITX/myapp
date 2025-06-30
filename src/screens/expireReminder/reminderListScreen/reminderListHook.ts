@@ -12,7 +12,6 @@ import {
 
 type Input = {
   allExpireReminderList: Good[];
-  categoryExpireReminderList: (category: string) => Good[];
   allGoodCategoriesList: GoodCategory[];
 };
 
@@ -30,8 +29,6 @@ export const useExpireReminderListHook = (): ExpireReminderListHook => {
 
   const input: Input = {
     allExpireReminderList,
-    categoryExpireReminderList: (category: string) =>
-      allExpireReminderList.filter(g => g.type === category),
     allGoodCategoriesList: useSelector(selectAllGoodCategory),
   };
 

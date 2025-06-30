@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { ButtonSize, commonStyles } from '../../styles';
 import { statusType } from '../../types';
@@ -20,14 +20,24 @@ export interface Props {
   onPress?: () => void;
   shape?: ButtonShapeType;
   shadow?: boolean;
+  leftIcon?: string;
+  rightIcon?: string;
 }
 
 export default (props: Props) => {
   return (
     <TouchableOpacity style={styles(props).container} onPress={props.onPress}>
-      <Text style={styles(props).label}>
-        {props.label ?? t('component.button.label')}
-      </Text>
+      <View style={styles(props).labelContainer}>
+        {props.leftIcon && (
+          <Text style={styles(props).label}>{props.leftIcon}</Text>
+        )}
+        <Text style={styles(props).label}>
+          {props.label ?? t('component.button.label')}
+        </Text>
+        {props.rightIcon && (
+          <Text style={styles(props).label}>{props.rightIcon}</Text>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -66,6 +76,10 @@ const styles = (props: Props) =>
         : commonStyles.color.white,
       fontSize:
         commonStyles.fontSize[props.size === 'large' ? 'largeX' : 'medium'],
+    },
+    labelContainer: {
+      flexDirection: 'row',
+      gap: commonStyles.spacings.smallX,
       textAlign: 'center',
     },
   });

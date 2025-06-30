@@ -113,7 +113,7 @@
   },
   "expireReminder": {
     "status": {
-      "expired": "Expired ",
+      "expired": "Expired",
       "valid": "Valid",
       "daysLeft": "days left",
       "dayLeft": "day left",

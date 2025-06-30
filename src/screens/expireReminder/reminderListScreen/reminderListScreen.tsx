@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -9,25 +10,29 @@ import HoverButton from '../../../components/basic/HoverButton';
 import SpacingView from '../../../components/basic/SpacingView';
 import SwipeRowList from '../../../components/basic/SwipeRowList';
 import CategoryFilter from '../../../components/expireReminder/CategoryFilter';
-import ReminderCard from '../../../components/expireReminder/ReminderCard';
-import { Good } from '../../../store/expireReminder/expireReminder.type';
+import ExpiryStatusFilter from '../../../components/expireReminder/ExpiryStatusFilter';
+import ReminderCard, {
+  getExpiryStatus,
+} from '../../../components/expireReminder/ReminderCard';
+import {
+  ExpiryStatus,
+  Good,
+  GoodItem,
+} from '../../../store/expireReminder/expireReminder.type';
 import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
 
 import { useExpireReminderListHook } from './reminderListHook';
 
 export const ExpireReminderListScreen = () => {
   const {
-    input: {
-      allExpireReminderList,
-      allGoodCategoriesList,
-      categoryExpireReminderList,
-    },
+    input: { allExpireReminderList, allGoodCategoriesList },
     output: { handleRemoveGood },
   } = useExpireReminderListHook();
 
   const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
   const [good, setGood] = useState<Good>();
   const [selectCategory, setSelectCategory] = useState<string>('all');
+  const [selectExpiryStatus, setSelectExpiryStatus] = useState<string>();
   const [reminderList, setReminderList] = useState<Good[]>(
     allExpireReminderList,
   );
@@ -49,21 +54,46 @@ export const ExpireReminderListScreen = () => {
     );
   };
 
-  const handleSelectCategory = (category: string) => {
-    setSelectCategory(category);
-    if (category === 'all') {
+  const filterReminderList = (category: string, status?: string) => {
+    const filterItems = (items: GoodItem[]) =>
+      items.filter(
+        item => getExpiryStatus(item.expireDate!, item.isUsed) === status,
+      );
+
+    const filterGoods = (goods: Good[]) =>
+      goods
+        .map(good => ({ ...good, items: filterItems(good.items) }))
+        .filter(good => good.items.length > 0);
+
+    if (category === 'all' && !status) {
       setReminderList(allExpireReminderList);
+    } else if (category === 'all') {
+      setReminderList(filterGoods(allExpireReminderList));
+    } else if (!status) {
+      setReminderList(
+        allExpireReminderList.filter(good => good.type === category),
+      );
     } else {
-      setReminderList(categoryExpireReminderList(category));
+      setReminderList(
+        filterGoods(allExpireReminderList).filter(
+          good => good.type === category,
+        ),
+      );
     }
   };
 
+  const handleSelectCategory = (category: string) => {
+    setSelectCategory(category);
+    filterReminderList(category, selectExpiryStatus);
+  };
+
+  const handleSelectExpireStatus = (status?: string) => {
+    setSelectExpiryStatus(status);
+    filterReminderList(selectCategory, status);
+  };
+
   useEffect(() => {
-    if (selectCategory === 'all') {
-      setReminderList(allExpireReminderList);
-    } else {
-      setReminderList(categoryExpireReminderList(selectCategory));
-    }
+    filterReminderList(selectCategory, selectExpiryStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allExpireReminderList]);
 
@@ -75,6 +105,14 @@ export const ExpireReminderListScreen = () => {
           selectedValue={selectCategory}
           onSelect={handleSelectCategory}
           showMoreButton
+        />
+        <ExpiryStatusFilter
+          filters={Object.values(ExpiryStatus).map(status => ({
+            label: t(`expireReminder.status.${status}`),
+            filter: status,
+          }))}
+          onFilter={handleSelectExpireStatus}
+          selected={selectExpiryStatus}
         />
         <SwipeRowList
           renderItem={renderGoodItem}

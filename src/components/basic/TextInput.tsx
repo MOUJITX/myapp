@@ -1,6 +1,8 @@
 import { t } from 'i18next';
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 
+import { commonStyles } from '../../styles';
+
 import { Props as CellProps } from './Cell';
 import Cell from './Cell';
 
@@ -30,6 +32,7 @@ export default (props: Props) => {
         multiline={!!props.textLines && props.textLines > 1}
         numberOfLines={props.textLines}
         placeholder={props.placeholder ?? t('component.textInput.placeholder')}
+        placeholderTextColor={commonStyles.textColor.info}
         value={props.value}
         onChangeText={handleTextInput}
         keyboardType={props.type === 'number' ? 'numeric' : 'default'}
@@ -42,6 +45,7 @@ export default (props: Props) => {
 
 const styles = StyleSheet.create({
   textInput: {
+    color: commonStyles.textColor.default,
     flexShrink: 1,
     margin: 0,
     padding: 0,
