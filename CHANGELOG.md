@@ -1,5 +1,13 @@
 # Changelog
 
+# [0.4.0-beta.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.6-beta.6...v0.4.0-beta.0) (2025-06-30)
+
+
+### Features
+
+* Add loading state and optimize i18n settings ([642effe](https://gitee.com/moujitx/com.moujitx.myapp/commits/642effe1b7256b284b98a7962406e26c1e6ed0e1))
+* Add RNFlashList, enhance Button, TextInput, and ExpiryStatusFilter ([ca3fbf5](https://gitee.com/moujitx/com.moujitx.myapp/commits/ca3fbf59ce0df55de65ca2f86d0f7457450a1251))
+
 ## [0.3.6-beta.6](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.6-beta.5...v0.3.6-beta.6) (2025-06-20)
 
 ## [0.3.6-beta.5](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.6-beta.4...v0.3.6-beta.5) (2025-06-20)
