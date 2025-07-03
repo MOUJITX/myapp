@@ -36,9 +36,11 @@ interface Props {
 
 export const ExpireReminderAddScreen = (props: Props) => {
   const {
+    input: { existGood },
     output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
+  const [goodID, setGoodID] = useState<string | undefined>(props.good?.goodID);
   const [title, setTitle] = useState<string | undefined>(props.good?.title);
   const [imgs, setImgs] = useState<string[]>(props.good?.imgs ?? []);
   const [uniCode, setUniCode] = useState<string | undefined>(
@@ -91,7 +93,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
 
   const handleSubmitGoodCheck = () => {
     handleSubmitGood({
-      goodID: props.good?.goodID ?? randomUUID(),
+      goodID: goodID ?? randomUUID(),
       title: title ?? randomString(),
       uniqueCode: uniCode ?? randomStringNumber(),
       imgs,
@@ -108,28 +110,38 @@ export const ExpireReminderAddScreen = (props: Props) => {
   const handleUnicodeChange = (value: string) => {
     setUniCode(value);
     if (value.length === 13) {
-      request('get', pubApiUrl_barcode(value)).then((res: any) => {
-        // console.log('res', res);
-        if (res.code === 1) {
-          const resData: {
-            goodsName: string;
-            brand: string;
-            supplier: string;
-          } = res.data;
-          // console.log('resDate', resData);
-          !title && setTitle(resData.goodsName);
-          if (!brand || (!brand.brand && !brand.producer)) {
-            setBrand({
-              brand: resData.brand,
-              producer: resData.supplier,
-            });
-          } else {
-            !brand.brand && setBrand({ ...brand, brand: resData.brand });
-            !brand.producer &&
-              setBrand({ ...brand, producer: resData.supplier });
+      const sameGood = existGood(value);
+      if (sameGood) {
+        setGoodID(sameGood.goodID);
+        setTitle(sameGood.title);
+        setImgs(sameGood.imgs);
+        setCategory(sameGood.type);
+        setBrand(sameGood.brand ?? {});
+        setItems(sameGood.items);
+      } else {
+        request('get', pubApiUrl_barcode(value)).then((res: any) => {
+          // console.log('res', res);
+          if (res.code === 1) {
+            const resData: {
+              goodsName: string;
+              brand: string;
+              supplier: string;
+            } = res.data;
+            // console.log('resDate', resData);
+            !title && setTitle(resData.goodsName);
+            if (!brand || (!brand.brand && !brand.producer)) {
+              setBrand({
+                brand: resData.brand,
+                producer: resData.supplier,
+              });
+            } else {
+              !brand.brand && setBrand({ ...brand, brand: resData.brand });
+              !brand.producer &&
+                setBrand({ ...brand, producer: resData.supplier });
+            }
           }
-        }
-      });
+        });
+      }
     }
   };
 
