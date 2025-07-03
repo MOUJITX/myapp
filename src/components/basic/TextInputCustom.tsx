@@ -91,12 +91,24 @@ export default (props: Props) => {
   };
 
   const handleKeyboardOpen = () => {
-    setKeyboardVisible(true);
+    console.log('open');
+    if (systemKeyboard) {
+      setKeyboardVisible(false);
+    } else {
+      setKeyboardVisible(true);
+    }
   };
 
   const handleKeyboardClose = () => {
     setKeyboardVisible(false);
+    setSystemKeyboard(false);
     Keyboard.dismiss();
+  };
+
+  const handleUseSystemKeyboard = () => {
+    setSystemKeyboard(true);
+    setKeyboardVisible(false);
+    textInputRef.current?.focus();
   };
 
   const handlePress = (key: string) => {
@@ -162,7 +174,7 @@ export default (props: Props) => {
         onFocus={handleKeyboardOpen}
         onPressOut={handleKeyboardOpen}
         onBlur={handleKeyboardClose}
-        showSoftInputOnFocus={false}
+        showSoftInputOnFocus={systemKeyboard}
         onSelectionChange={({ nativeEvent: { selection } }) =>
           setCursorPos(selection.start)
         }
@@ -179,7 +191,7 @@ export default (props: Props) => {
         <View style={styles.keyboard}>
           <View style={styles.keyboardRow}>
             <View style={styles.keyboardControlRow}>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={handleUseSystemKeyboard}>
                 <Text style={styles.keyboardControlLabel}>
                   {t('component.textInputCustom.systemKeyboard.label')}
                 </Text>
