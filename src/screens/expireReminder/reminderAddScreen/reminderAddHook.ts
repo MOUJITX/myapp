@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addGoodAction } from '../../../store/expireReminder/expireReminder.redux';
-import {
-  selectAllExpireReminder,
-} from '../../../store/expireReminder/expireReminder.selectors';
+import { selectAllExpireReminder } from '../../../store/expireReminder/expireReminder.selectors';
 import { Good } from '../../../store/expireReminder/expireReminder.type';
 import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
 

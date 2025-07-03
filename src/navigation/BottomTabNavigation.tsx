@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { t } from 'i18next';
 import { Text } from 'react-native';
 
+import AssetListScreen from '../screens/assetManagement/assetListScreen/assetListScreen';
 import { ExpireReminderListScreen } from '../screens/expireReminder/reminderListScreen/reminderListScreen';
 import { TicketCardScreen } from '../screens/ticketCard/ticketCardScreen/ticketCardScreen';
 import profileScreen from '../screens/userProfile/profileScreen/profileScreen';
@@ -44,6 +45,16 @@ export default () => {
           headerTitleAlign: 'center',
           tabBarIcon: ({ color }: { color: string }) =>
             tabBarIcon({ color, icon: '💳' }),
+        }}
+      />
+      <BottomTab.Screen
+        name="AssetListScreen"
+        component={AssetListScreen}
+        options={{
+          title: t('assetManagement.title'),
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }: { color: string }) =>
+            tabBarIcon({ color, icon: '📦' }),
         }}
       />
       <BottomTab.Screen

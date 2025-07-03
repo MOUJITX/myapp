@@ -243,5 +243,8 @@
   },
   "trainTicket": {
     "title": "旅行票夹"
+  },
+  "assetManagement": {
+    "title": "资产管理"
   }
 }

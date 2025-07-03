@@ -242,5 +242,8 @@
   },
   "trainTicket": {
     "title": "Travel Tickets"
+  },
+  "assetManagement": {
+    "title": "Asset Management"
   }
 }

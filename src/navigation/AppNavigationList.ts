@@ -11,6 +11,7 @@ export type AppNavigationList = {
   BottomTab: undefined;
   ExpireReminderScreen: undefined;
   TicketCardScreen: undefined;
+  AssetListScreen: undefined;
   ProfileScreen: undefined;
   BackupDataScreen: undefined;
 };
