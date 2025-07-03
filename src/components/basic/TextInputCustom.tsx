@@ -178,6 +178,7 @@ export default (props: Props) => {
         onSelectionChange={({ nativeEvent: { selection } }) =>
           setCursorPos(selection.start)
         }
+        onChangeText={setInputValue}
       />
 
       <Modal
