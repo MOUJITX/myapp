@@ -137,32 +137,32 @@
     "title": "Expire Reminder",
     "add": {
       "expireDate": {
-        "label": "Valid until"
+        "label": "Expire"
       },
       "goodCode": {
         "label": "Barcode",
         "placeholder": "Please enter barcode"
       },
       "goodNumber": {
-        "label": "Quantity"
+        "label": "Total"
       },
       "lifeDays": {
         "label": "Life (days)",
-        "oneYear": "One year",
-        "twoYear": "Two years",
-        "threeYear": "Three years"
+        "oneYear": "1Y",
+        "twoYear": "2Y",
+        "threeYear": "3Y"
       },
       "name": {
         "placeholder": "Please enter the product name"
       },
       "productionDate": {
-        "label": "Date of production"
+        "label": "Manufacture"
       },
       "category": {
         "label": "Category"
       },
       "used": {
-        "label": "In Use"
+        "label": "Using"
       },
       "brand": {
         "label": "Brand",
@@ -188,6 +188,14 @@
         "default": "☄️ Default",
         "food": "🍜 Food",
         "medicine": "💊 Medicine"
+      }
+    },
+    "more": {
+      "showMore": {
+        "label": "Display remaining {{number}} items"
+      },
+      "hide": {
+        "label": "Retract"
       }
     }
   },

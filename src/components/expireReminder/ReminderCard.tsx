@@ -1,9 +1,11 @@
 import { t } from 'i18next';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import {
   ExpiryStatus,
   Good,
+  GoodItem,
 } from '../../store/expireReminder/expireReminder.type';
 import { commonStyles } from '../../styles';
 import { calculateDays } from '../../utils/datetime';
@@ -108,6 +110,17 @@ const StatusIndicator = ({
 };
 
 export default (props: Props) => {
+  const DEFAULT_ITEMS_LENGTH = 3;
+  const [items, setItems] = useState<GoodItem[]>([]);
+
+  const shortItems = (items: GoodItem[]) => {
+    return items.slice(0, DEFAULT_ITEMS_LENGTH);
+  };
+
+  useEffect(() => {
+    setItems(shortItems(props.good.items));
+  }, [props.good.items]);
+
   return (
     <TouchableOpacity onPress={props.onPress} activeOpacity={0.5}>
       <CellGroup card>
@@ -135,7 +148,7 @@ export default (props: Props) => {
           </View>
         </View>
         <Divider />
-        {props.good.items.map((item, index) => (
+        {items.map((item, index) => (
           <View style={styles.bottomInfo} key={index}>
             {item.expireDate && (
               <>
@@ -152,6 +165,23 @@ export default (props: Props) => {
             )}
           </View>
         ))}
+        {items.length < props.good.items.length && (
+          <TouchableOpacity onPressOut={() => setItems(props.good.items)}>
+            <Text style={styles.showMoreText}>
+              {t('expireReminder.more.showMore.label', {
+                number: props.good.items.length - items.length,
+              })}
+            </Text>
+          </TouchableOpacity>
+        )}
+        {items.length > DEFAULT_ITEMS_LENGTH && (
+          <TouchableOpacity
+            onPressOut={() => setItems(shortItems(props.good.items))}>
+            <Text style={styles.showMoreText}>
+              {t('expireReminder.more.hide.label')}
+            </Text>
+          </TouchableOpacity>
+        )}
       </CellGroup>
     </TouchableOpacity>
   );
@@ -203,6 +233,12 @@ const styles = StyleSheet.create({
   mainDetail: {
     flex: 1,
     marginLeft: commonStyles.spacings.small,
+  },
+  showMoreText: {
+    color: commonStyles.textColor.info,
+    fontSize: commonStyles.fontSize.small,
+    paddingTop: commonStyles.spacings.smallX,
+    textAlign: 'center',
   },
   statusContainer: {
     alignItems: 'center',

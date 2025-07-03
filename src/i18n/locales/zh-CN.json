@@ -190,6 +190,14 @@
         "medicine": "💊药品",
         "default": "☄️默认"
       }
+    },
+    "more": {
+      "showMore": {
+        "label": "显示剩余 {{number}} 项"
+      },
+      "hide": {
+        "label": "收起"
+      }
     }
   },
   "common": {
