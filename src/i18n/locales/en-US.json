@@ -106,6 +106,17 @@
           "label": "+Add new option"
         }
       }
+    },
+    "textInputCustom": {
+      "paste": {
+        "label": "Paste"
+      },
+      "copy": {
+        "label": "Copy"
+      },
+      "systemKeyboard": {
+        "label": "System Keyboard"
+      }
     }
   },
   "debug": {
@@ -223,6 +234,10 @@
     },
     "loading": {
       "label": "Loading..."
+    },
+    "delete": {
+      "label": "Delete",
+      "icon": "⌫"
     }
   },
   "trainTicket": {

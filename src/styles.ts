@@ -66,6 +66,7 @@ const imageSize = {
 export type ImageSize = keyof typeof imageSize;
 
 const spacings = {
+  none: 0,
   small3X: 2,
   small2X: 4,
   smallX: 8,

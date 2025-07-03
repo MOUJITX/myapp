@@ -1,3 +1,4 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import { t } from 'i18next';
 import { useRef } from 'react';
 import { useState } from 'react';
@@ -12,6 +13,7 @@ import {
   View,
 } from 'react-native';
 
+import { commonStyles } from '../../styles';
 import { randomString } from '../../utils/utils';
 
 import Cell, { Props as CellProps } from './Cell';
@@ -26,18 +28,19 @@ export type KeyboardType =
 interface Props extends CellProps {
   keyboardType: KeyboardType;
   value?: string;
-  closeLabel?: string;
+  deleteLabel?: string;
   placeholder?: string;
   onValueChange?: (value: string) => void;
 }
 
 export default (props: Props) => {
+  const [systemKeyboard, setSystemKeyboard] = useState<boolean>(false);
   const [keyboardVisible, setKeyboardVisible] = useState<boolean>(false);
   const inputValue = props.value ?? '';
   const [cursorPos, setCursorPos] = useState<number>(0);
   const textInputRef = useRef<TextInput>(null);
 
-  const CLOSE = props.closeLabel ?? '⌫';
+  const DELETE = props.deleteLabel ?? t('common.delete.icon');
 
   const setInputValue = (value: string) => {
     props.onValueChange?.(value);
@@ -49,7 +52,7 @@ export default (props: Props) => {
         ['1', '2', '3'],
         ['4', '5', '6'],
         ['7', '8', '9'],
-        ['', '0', CLOSE],
+        ['', '0', DELETE],
       ];
     }
     if (type === 'decimal') {
@@ -57,7 +60,7 @@ export default (props: Props) => {
         ['1', '2', '3'],
         ['4', '5', '6'],
         ['7', '8', '9'],
-        ['.', '0', CLOSE],
+        ['.', '0', DELETE],
       ];
     }
     if (type === 'idCard') {
@@ -65,7 +68,7 @@ export default (props: Props) => {
         ['1', '2', '3'],
         ['4', '5', '6'],
         ['7', '8', '9'],
-        ['X', '0', CLOSE],
+        ['X', '0', DELETE],
       ];
     }
     if (type === 'trainNumber') {
@@ -73,7 +76,7 @@ export default (props: Props) => {
         ['G', 'D', '1', '2', '3'],
         ['C', 'K', '4', '5', '6'],
         ['L', 'T', '7', '8', '9'],
-        ['Z', 'Y', 'S', '0', CLOSE],
+        ['Z', 'Y', 'S', '0', DELETE],
       ];
     }
     if (type === 'siteNumber') {
@@ -81,7 +84,7 @@ export default (props: Props) => {
         ['无座', 'A', '1', '2', '3'],
         ['上', 'B', '4', '5', '6'],
         ['中', 'C', '7', '8', '9'],
-        ['下', 'D', 'F', '0', CLOSE],
+        ['下', 'D', 'F', '0', DELETE],
       ];
     }
     return [];
@@ -97,7 +100,7 @@ export default (props: Props) => {
   };
 
   const handlePress = (key: string) => {
-    if (key === CLOSE) {
+    if (key === DELETE) {
       cursorPos === 0
         ? setInputValue(inputValue)
         : setInputValue(
@@ -111,19 +114,43 @@ export default (props: Props) => {
     }
   };
 
-  const renderKeyboardButton = (key: string, rowNumber: number) => (
-    <TouchableOpacity
-      key={randomString()}
-      style={[
-        styles.keyButton,
-        {
+  const handleLongPress = (key: string) => {
+    if (key === DELETE) {
+      setInputValue('');
+    }
+  };
+
+  const renderKeyboardButton = (key: string, rowNumber: number) =>
+    key ? (
+      <TouchableOpacity
+        key={key + randomString()}
+        style={[
+          styles.keyButton,
+          {
+            width: Dimensions.get('window').width / rowNumber - 2,
+          },
+        ]}
+        onPress={() => key && handlePress(key)}
+        onLongPress={() => key && handleLongPress(key)}>
+        <Text style={styles.keyText}>{key}</Text>
+      </TouchableOpacity>
+    ) : (
+      <View
+        key={key + randomString()}
+        style={{
           width: Dimensions.get('window').width / rowNumber - 2,
-        },
-      ]}
-      onPress={() => key && handlePress(key)}>
-      <Text style={styles.keyText}>{key}</Text>
-    </TouchableOpacity>
-  );
+        }}
+      />
+    );
+
+  const copyOrPaste = async (type: 'copy' | 'paste') => {
+    if (type === 'copy') {
+      Clipboard.setString(inputValue);
+    } else {
+      const text = await Clipboard.getString();
+      handlePress(text);
+    }
+  };
 
   return (
     <Cell {...props}>
@@ -150,6 +177,27 @@ export default (props: Props) => {
         presentationStyle="overFullScreen">
         <View style={styles.modal} onTouchEnd={handleKeyboardClose} />
         <View style={styles.keyboard}>
+          <View style={styles.keyboardRow}>
+            <View style={styles.keyboardControlRow}>
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={styles.keyboardControlLabel}>
+                  {t('component.textInputCustom.systemKeyboard.label')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.keyboardControlRow}>
+              <TouchableOpacity onPress={() => copyOrPaste('copy')}>
+                <Text style={styles.keyboardControlLabel}>
+                  {t('component.textInputCustom.copy.label')}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => copyOrPaste('paste')}>
+                <Text style={styles.keyboardControlLabel}>
+                  {t('component.textInputCustom.paste.label')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
           {keyButtons(props.keyboardType).map((row, i) => (
             <View key={`row-${i}`} style={styles.keyboardRow}>
               {row.map(key => renderKeyboardButton(key, row.length))}
@@ -164,25 +212,33 @@ export default (props: Props) => {
 const styles = StyleSheet.create({
   keyButton: {
     alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
+    backgroundColor: commonStyles.color.white,
+    borderRadius: commonStyles.radius.small,
     height: 50,
     justifyContent: 'center',
-    marginBottom: 2,
+    marginBottom: commonStyles.spacings.small3X,
     textAlign: 'center',
   },
   keyText: {
-    fontSize: 20,
+    ...commonStyles.textSize.h2,
     fontWeight: 'bold',
   },
   keyboard: {
     alignItems: 'center',
-    backgroundColor: '#ddd',
-    bottom: 0,
+    backgroundColor: commonStyles.backgroundColor.info,
+    bottom: commonStyles.spacings.none,
     justifyContent: 'center',
-    paddingVertical: 20,
+    paddingBottom: commonStyles.spacings.large,
     position: 'absolute',
     width: '100%',
+  },
+  keyboardControlLabel: {
+    color: commonStyles.textColor.primary,
+    paddingHorizontal: commonStyles.spacings.medium,
+  },
+  keyboardControlRow: {
+    flexDirection: 'row',
+    paddingVertical: commonStyles.spacings.small,
   },
   keyboardRow: {
     flexDirection: 'row',
@@ -194,7 +250,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flexShrink: 1,
-    margin: 0,
-    padding: 0,
+    margin: commonStyles.spacings.none,
+    padding: commonStyles.spacings.none,
   },
 });

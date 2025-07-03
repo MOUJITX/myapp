@@ -106,6 +106,17 @@
           "label": "+ 添加新选项"
         }
       }
+    },
+    "textInputCustom": {
+      "paste": {
+        "label": "粘贴"
+      },
+      "copy": {
+        "label": "复制"
+      },
+      "systemKeyboard": {
+        "label": "系统键盘"
+      }
     }
   },
   "debug": {
@@ -224,6 +235,10 @@
     },
     "loading": {
       "label": "加载中……"
+    },
+    "delete": {
+      "label": "删除",
+      "icon": "⌫"
     }
   },
   "trainTicket": {
