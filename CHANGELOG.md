@@ -1,5 +1,16 @@
 # Changelog
 
+# [0.4.0-beta.1](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.0...v0.4.0-beta.1) (2025-07-03)
+
+
+### Features
+
+* Add clipboard support and enhance TextInputCustom ([8812b92](https://gitee.com/moujitx/com.moujitx.myapp/commits/8812b92e18b036eea1d3527e04d5b74af5d58205))
+* Add onChangeText handler to TextInputCustom ([db3869c](https://gitee.com/moujitx/com.moujitx.myapp/commits/db3869c892c88efc471d3374ed338a6651927bc5))
+* Add show/hide items in ReminderCard, update i18n labels ([2d8052d](https://gitee.com/moujitx/com.moujitx.myapp/commits/2d8052d0f559dd9d98465e1e6a1330b2d18eaf6c))
+* Add system keyboard toggle in TextInputCustom ([095cf89](https://gitee.com/moujitx/com.moujitx.myapp/commits/095cf89af6e285b7029b25864be46bd96294e1b3))
+* Enhance reminder add screen with existGood check ([68ebcb8](https://gitee.com/moujitx/com.moujitx.myapp/commits/68ebcb8cb8fe0c8d66b1e8e344fbc95c968d5d9d))
+
 # [0.4.0-beta.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.3.6-beta.6...v0.4.0-beta.0) (2025-06-30)
 
 
