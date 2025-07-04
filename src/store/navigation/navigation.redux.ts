@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppNavigationList } from '../../navigation/AppNavigationList';
 
 export type NavigatePayload = {
-  screen: keyof AppNavigationList;
-  params?: any;
-  replace?: boolean;
-};
+  [K in keyof AppNavigationList]: {
+    screen: K;
+    params?: AppNavigationList[K];
+    replace?: boolean;
+  };
+}[keyof AppNavigationList];
 
 const navigationSlice = createSlice({
   name: 'navigation',

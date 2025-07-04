@@ -239,6 +239,9 @@
     "delete": {
       "label": "删除",
       "icon": "⌫"
+    },
+    "edit": {
+      "label": "编辑"
     }
   },
   "trainTicket": {

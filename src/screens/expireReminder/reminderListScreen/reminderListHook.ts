@@ -9,6 +9,7 @@ import {
   Good,
   GoodCategory,
 } from '../../../store/expireReminder/expireReminder.type';
+import { navigateAction } from '../../../store/navigation/navigation.redux';
 
 type Input = {
   allExpireReminderList: Good[];
@@ -17,6 +18,7 @@ type Input = {
 
 type Output = {
   handleRemoveGood: (good: string) => void;
+  gotoReminderAddScreen: (good?: Good) => void;
 };
 
 type ExpireReminderListHook = {
@@ -35,9 +37,14 @@ export const useExpireReminderListHook = (): ExpireReminderListHook => {
   const dispatch = useDispatch();
 
   const output: Output = {
-    handleRemoveGood: (goodID: string) => {
-      dispatch(removeGoodAction(goodID));
-    },
+    handleRemoveGood: (goodID: string) => dispatch(removeGoodAction(goodID)),
+    gotoReminderAddScreen: (good?: Good) =>
+      dispatch(
+        navigateAction({
+          screen: 'ExpireReminderAddScreen',
+          params: { good },
+        }),
+      ),
   };
   return {
     input,

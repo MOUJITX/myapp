@@ -1,10 +1,7 @@
 import { t } from 'i18next';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import BottomSheet, {
-  BottomSheetRef,
-} from '../../../components/basic/BottomSheet';
 import { ButtonShapeType } from '../../../components/basic/Button';
 import HoverButton from '../../../components/basic/HoverButton';
 import SpacingView from '../../../components/basic/SpacingView';
@@ -19,38 +16,24 @@ import {
   Good,
   GoodItem,
 } from '../../../store/expireReminder/expireReminder.type';
-import { ExpireReminderAddScreen } from '../reminderAddScreen/reminderAddScreen';
 
 import { useExpireReminderListHook } from './reminderListHook';
 
 export const ExpireReminderListScreen = () => {
   const {
     input: { allExpireReminderList, allGoodCategoriesList },
-    output: { handleRemoveGood },
+    output: { handleRemoveGood, gotoReminderAddScreen },
   } = useExpireReminderListHook();
 
-  const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
-  const [good, setGood] = useState<Good>();
   const [selectCategory, setSelectCategory] = useState<string>('all');
   const [selectExpiryStatus, setSelectExpiryStatus] = useState<string>();
   const [reminderList, setReminderList] = useState<Good[]>(
     allExpireReminderList,
   );
 
-  const openAddReminderBottomSheet = () => {
-    setGood(undefined);
-    AddScreenBottomSheetRef.current?.openBottomSheet();
-  };
-
   const renderGoodItem = ({ item }: { item: Good }) => {
     return (
-      <ReminderCard
-        good={item}
-        onPress={() => {
-          setGood(item);
-          AddScreenBottomSheetRef.current?.openBottomSheet();
-        }}
-      />
+      <ReminderCard good={item} onPress={() => gotoReminderAddScreen(item)} />
     );
   };
 
@@ -129,14 +112,7 @@ export const ExpireReminderListScreen = () => {
         />
       </SpacingView>
 
-      <HoverButton onPress={openAddReminderBottomSheet} label="+" />
-
-      <BottomSheet ref={AddScreenBottomSheetRef}>
-        <ExpireReminderAddScreen
-          bottomSheetRef={AddScreenBottomSheetRef}
-          good={good}
-        />
-      </BottomSheet>
+      <HoverButton onPress={() => gotoReminderAddScreen()} label="+" />
     </View>
   );
 };

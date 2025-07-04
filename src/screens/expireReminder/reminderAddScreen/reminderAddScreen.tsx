@@ -1,17 +1,18 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { t } from 'i18next';
-import { RefObject, useState } from 'react';
-import { View } from 'react-native';
+import { useState } from 'react';
 
-import { BottomSheetRef } from '../../../components/basic/BottomSheet';
 import Button from '../../../components/basic/Button';
 import CellGroup from '../../../components/basic/CellGroup';
 import CustomFormLabel from '../../../components/basic/CustomFormLabel';
 import ImageRow from '../../../components/basic/ImageRow';
 import ScanCameraButton from '../../../components/basic/ScanCameraButton';
+import SpacingView from '../../../components/basic/SpacingView';
 import TextInput from '../../../components/basic/TextInput';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
 import TextLabel from '../../../components/basic/TextLabel';
 import { pubApiUrl_barcode } from '../../../environment';
+import { RouteProp } from '../../../navigation/AppNavigationList';
 import {
   Good,
   GoodBrand,
@@ -29,28 +30,40 @@ import { ReminderCategoryScreen } from '../reminderCategoryScreen/reminderCatego
 import ReminderAddCell from './reminderAddCell';
 import { useExpireReminderAddHook } from './reminderAddHook';
 
-interface Props {
-  bottomSheetRef: RefObject<BottomSheetRef | null>;
+export interface ReminderAddScreenProps {
   good?: Good;
 }
 
-export const ExpireReminderAddScreen = (props: Props) => {
+export const ExpireReminderAddScreen = () => {
+  const { good }: ReminderAddScreenProps =
+    useRoute<RouteProp<'ExpireReminderAdd'>>().params;
+
+  const navigation = useNavigation();
+  useComponentMount(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          label={t('common.save.label')}
+          type="primary"
+          text
+          onPress={handleSubmitGoodCheck}
+        />
+      ),
+    });
+  });
+
   const {
     input: { existGood },
     output: { handleSubmitGood },
   } = useExpireReminderAddHook();
 
-  const [goodID, setGoodID] = useState<string | undefined>(props.good?.goodID);
-  const [title, setTitle] = useState<string | undefined>(props.good?.title);
-  const [imgs, setImgs] = useState<string[]>(props.good?.imgs ?? []);
-  const [uniCode, setUniCode] = useState<string | undefined>(
-    props.good?.uniqueCode,
-  );
-  const [category, setCategory] = useState<string>(
-    props.good?.type ?? 'default',
-  );
-  const [brand, setBrand] = useState<GoodBrand>(props.good?.brand ?? {});
-  const [items, setItems] = useState<GoodItem[]>(props.good?.items ?? []);
+  const [goodID, setGoodID] = useState<string | undefined>(good?.goodID);
+  const [title, setTitle] = useState<string | undefined>(good?.title);
+  const [imgs, setImgs] = useState<string[]>(good?.imgs ?? []);
+  const [uniCode, setUniCode] = useState<string | undefined>(good?.uniqueCode);
+  const [category, setCategory] = useState<string>(good?.type ?? 'default');
+  const [brand, setBrand] = useState<GoodBrand>(good?.brand ?? {});
+  const [items, setItems] = useState<GoodItem[]>(good?.items ?? []);
 
   const initItem: GoodItem = {
     itemID: randomUUID(),
@@ -101,10 +114,8 @@ export const ExpireReminderAddScreen = (props: Props) => {
       brand,
       detail: {},
       items,
-      createTime: props.good?.createTime ?? new Date(),
+      createTime: good?.createTime ?? new Date(),
     });
-
-    props.bottomSheetRef.current?.closeBottomSheet();
   };
 
   const handleUnicodeChange = (value: string) => {
@@ -150,7 +161,7 @@ export const ExpireReminderAddScreen = (props: Props) => {
   );
 
   return (
-    <View>
+    <SpacingView>
       <CellGroup card>
         <TextInput
           value={title}
@@ -219,11 +230,6 @@ export const ExpireReminderAddScreen = (props: Props) => {
           key={index}
         />
       ))}
-      <Button
-        type="primary"
-        label={t('common.save.label')}
-        onPress={handleSubmitGoodCheck}
-      />
-    </View>
+    </SpacingView>
   );
 };

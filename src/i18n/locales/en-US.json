@@ -238,6 +238,9 @@
     "delete": {
       "label": "Delete",
       "icon": "⌫"
+    },
+    "edit": {
+      "label": "Edit"
     }
   },
   "trainTicket": {
