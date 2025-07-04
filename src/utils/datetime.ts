@@ -16,6 +16,8 @@ export const calculateDays = (
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
 
+const addZero = (num: number) => (num < 10 ? `0${num}` : num);
+
 export const formatDate = (
   date: Date,
   section:
@@ -26,48 +28,27 @@ export const formatDate = (
     | 'minute'
     | 'second'
     | 'hh:mm'
+    | 'yyyy-MM-dd'
     | 'timestamp',
 ) => {
   const dateObj = new Date(date);
+  const year = dateObj.getFullYear();
+  const month = addZero(dateObj.getMonth() + 1);
+  const day = addZero(dateObj.getDate());
+  const hour = addZero(dateObj.getHours());
+  const minute = addZero(dateObj.getMinutes());
+  const second = addZero(dateObj.getSeconds());
+  const timestamp = dateObj.getTime();
 
-  if (section === 'year') {
-    return dateObj.getFullYear();
-  }
-
-  if (section === 'month') {
-    const month = dateObj.getMonth() + 1;
-    return month < 10 ? `0${month}` : `${month}`;
-  }
-
-  if (section === 'day') {
-    const day = dateObj.getDate();
-    return day < 10 ? `0${day}` : `${day}`;
-  }
-
-  if (section === 'hour') {
-    const hour = dateObj.getHours();
-    return hour < 10 ? `0${hour}` : `${hour}`;
-  }
-
-  if (section === 'minute') {
-    const minute = dateObj.getMinutes();
-    return minute < 10 ? `0${minute}` : `${minute}`;
-  }
-
-  if (section === 'second') {
-    const second = dateObj.getSeconds();
-    return second < 10 ? `0${second}` : `${second}`;
-  }
-
-  if (section === 'hh:mm') {
-    const hour = dateObj.getHours();
-    const minute = dateObj.getMinutes();
-    return `${hour < 10 ? `0${hour}` : `${hour}`}:${minute < 10 ? `0${minute}` : `${minute}`}`;
-  }
-
-  if (section === 'timestamp') {
-    return dateObj.getTime();
-  }
+  if (section === 'year') return year;
+  if (section === 'month') return month;
+  if (section === 'day') return day;
+  if (section === 'hour') return hour;
+  if (section === 'minute') return minute;
+  if (section === 'second') return second;
+  if (section === 'hh:mm') return `${hour}:${minute}`;
+  if (section === 'yyyy-MM-dd') return `${year}-${month}-${day}`;
+  if (section === 'timestamp') return timestamp;
 
   return 0;
 };
