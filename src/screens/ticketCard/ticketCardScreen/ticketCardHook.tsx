@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { navigateAction } from '../../../store/navigation/navigation.redux';
 import { trainTicketsRemoveAction } from '../../../store/ticketCard/ticketCard.redux';
 import { selectTrainTickets } from '../../../store/ticketCard/ticketCard.selector';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
@@ -10,6 +11,7 @@ type Input = {
 
 type Output = {
   trainTicketRemove: (id: string) => void;
+  gotoTicketAddScreen: (ticket?: TrainTicket) => void;
 };
 
 type TicketCardHook = {
@@ -25,9 +27,14 @@ export const useTicketCardHook = (): TicketCardHook => {
   const dispatch = useDispatch();
 
   const output: Output = {
-    trainTicketRemove: (id: string) => {
-      dispatch(trainTicketsRemoveAction(id));
-    },
+    trainTicketRemove: (id: string) => dispatch(trainTicketsRemoveAction(id)),
+    gotoTicketAddScreen: (ticket?: TrainTicket) =>
+      dispatch(
+        navigateAction({
+          screen: 'TicketCardAddScreen',
+          params: { ticket },
+        }),
+      ),
   };
 
   return {

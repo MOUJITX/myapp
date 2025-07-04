@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SelectItem } from '../../../components/basic/SelectOptionList';
+import { goBackAction } from '../../../store/navigation/navigation.redux';
 import {
   trainSelectAddAction,
   trainSelectRemoveAction,
@@ -68,7 +69,10 @@ export const useTicketCardAddHook = (): TicketCardAddHook => {
       dispatch(trainSelectRemoveAction({ key, value: id })),
     quickSelectItemUpdate: (key, item) =>
       dispatch(trainSelectUpdateAction({ key, item })),
-    trainTicketSubmit: ticket => dispatch(trainTicketsSubmitAction(ticket)),
+    trainTicketSubmit: ticket => {
+      dispatch(trainTicketsSubmitAction(ticket));
+      dispatch(goBackAction());
+    },
   };
 
   return {

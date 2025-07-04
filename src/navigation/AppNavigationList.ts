@@ -1,3 +1,8 @@
+import { StackScreenProps } from '@react-navigation/stack';
+
+import { ReminderAddScreenProps } from '../screens/expireReminder/reminderAddScreen/reminderAddScreen';
+import { TicketCardAddScreenProps } from '../screens/ticketCard/ticketCardAddScreen/ticketCardAddScreen';
+
 export type AppNavigationList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
@@ -10,8 +15,15 @@ export type AppNavigationList = {
 
   BottomTab: undefined;
   ExpireReminderScreen: undefined;
+  ExpireReminderAddScreen: ReminderAddScreenProps;
+
   TicketCardScreen: undefined;
+  TicketCardAddScreen: TicketCardAddScreenProps;
+
   AssetListScreen: undefined;
   ProfileScreen: undefined;
   BackupDataScreen: undefined;
 };
+
+export type RouteProp<SCREEN extends keyof AppNavigationList> =
+  StackScreenProps<AppNavigationList, SCREEN>;

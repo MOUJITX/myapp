@@ -239,10 +239,87 @@
     "delete": {
       "label": "删除",
       "icon": "⌫"
+    },
+    "edit": {
+      "label": "编辑"
+    },
+    "add": {
+      "icon": "+"
     }
   },
   "trainTicket": {
-    "title": "旅行票夹"
+    "title": "旅行票夹",
+    "add": {
+      "section": {
+        "basic": "基础",
+        "seat": "座位",
+        "passenger": "乘客信息",
+        "more": "更多"
+      },
+      "station": {
+        "suffix": "站",
+        "startStation": "出发站",
+        "name": "站名",
+        "code": "拼写",
+        "arriveStation": "到达站",
+        "display": "$name($code)"
+      },
+      "dateTime": {
+        "start": "出发日期",
+        "arrive": "出发时间"
+      },
+      "train": {
+        "number": "车次",
+        "fare": {
+          "label": "票价",
+          "unit": {
+            "CNY": {
+              "code": "￥",
+              "name": "元"
+            }
+          }
+        },
+        "seatType": "席别",
+        "car": "车厢号",
+        "seat": "座位号",
+        "seatBed": {
+          "title": "铺位",
+          "upper": "上铺",
+          "middle": "中铺",
+          "lower": "下铺"
+        }
+      },
+      "checkIn": "检票",
+      "mark": {
+        "title": "标识",
+        "online": "网售",
+        "student": "学生",
+        "discount": "优惠",
+        "disc": "折扣",
+        "cash": "现金",
+        "child": "孩童",
+        "weChat": "微信支付",
+        "alipay": "支付宝"
+      },
+      "passenger": {
+        "title": "乘客信息",
+        "name": "姓名",
+        "idCard": "身份证"
+      },
+      "paper": {
+        "type": {
+          "name": "票纸",
+          "red": "红票",
+          "blue": "蓝票"
+        },
+        "redNumber": "红色编号",
+        "blackNumber": "黑色编号",
+        "qrCode": "二维码信息",
+        "cardInfo": "凭证提示",
+        "cardTip": "温馨提示",
+        "image": "图片"
+      }
+    }
   },
   "assetManagement": {
     "title": "资产管理"

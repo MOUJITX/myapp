@@ -5,6 +5,8 @@ import { DeviceInfo } from '../screens/debug/deviceInfo';
 import { PageB } from '../screens/debug/page2';
 import { PageC } from '../screens/debug/page3';
 import { StateData } from '../screens/debug/stateData';
+import { ExpireReminderAddScreen } from '../screens/expireReminder/reminderAddScreen/reminderAddScreen';
+import { TicketCardAddScreen } from '../screens/ticketCard/ticketCardAddScreen/ticketCardAddScreen';
 import { BackupDataScreen } from '../screens/userProfile/backupDataScreen/backupDataScreen';
 import { LoginScreen } from '../screens/userProfile/loginScreen/loginScreen';
 import { WelcomeScreen } from '../screens/welcome/welcomeScreen';
@@ -35,6 +37,20 @@ export const AppNavigation = () => {
         component={BottomTabNavigation}
         options={{
           headerShown: false,
+        }}
+      />
+      <RootStack.Screen
+        name="ExpireReminderAddScreen"
+        component={ExpireReminderAddScreen}
+        options={{
+          title: t('common.edit.label'),
+        }}
+      />
+      <RootStack.Screen
+        name="TicketCardAddScreen"
+        component={TicketCardAddScreen}
+        options={{
+          title: t('common.edit.label'),
         }}
       />
       <RootStack.Screen name="PageB" component={PageB} />

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addGoodAction } from '../../../store/expireReminder/expireReminder.redux';
 import { selectAllExpireReminder } from '../../../store/expireReminder/expireReminder.selectors';
 import { Good } from '../../../store/expireReminder/expireReminder.type';
+import { goBackAction } from '../../../store/navigation/navigation.redux';
 import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
 
 type Input = {
@@ -29,7 +30,10 @@ export const useExpireReminderAddHook = (): ExpireReminderAddHook => {
       allGoods.find(g => g.uniqueCode === uniCode),
   };
   const output: Output = {
-    handleSubmitGood: good => dispatch(addGoodAction({ good, loginUser })),
+    handleSubmitGood: good => {
+      dispatch(addGoodAction({ good, loginUser }));
+      dispatch(goBackAction());
+    },
   };
 
   return {

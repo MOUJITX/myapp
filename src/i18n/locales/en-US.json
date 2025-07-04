@@ -238,10 +238,87 @@
     "delete": {
       "label": "Delete",
       "icon": "⌫"
+    },
+    "edit": {
+      "label": "Edit"
+    },
+    "add": {
+      "icon": "+"
     }
   },
   "trainTicket": {
-    "title": "Travel Tickets"
+    "title": "Travel Tickets",
+    "add": {
+      "checkIn": "Check In",
+      "dateTime": {
+        "arrive": "Departure Time",
+        "start": "Departure Time"
+      },
+      "mark": {
+        "alipay": "Alipay",
+        "cash": "Cash",
+        "child": "Child",
+        "disc": "Discount",
+        "discount": "Discount",
+        "online": "Online",
+        "student": "Student",
+        "title": "Sign",
+        "weChat": "WeChat"
+      },
+      "paper": {
+        "blackNumber": "Black Number",
+        "cardInfo": "Infomations",
+        "cardTip": "Tips",
+        "image": "Picture",
+        "qrCode": "QR Code",
+        "redNumber": "Red Number",
+        "type": {
+          "blue": "Blue",
+          "name": "Paper Type",
+          "red": "Red"
+        }
+      },
+      "passenger": {
+        "idCard": "ID Number",
+        "name": "Full Name",
+        "title": "Passenger"
+      },
+      "section": {
+        "basic": "Basic Information",
+        "more": "More",
+        "passenger": "Passenger Information",
+        "seat": "Seat Information"
+      },
+      "station": {
+        "arriveStation": "Arrive",
+        "code": "Code",
+        "name": "Name",
+        "startStation": "Departure",
+        "suffix": "Station",
+        "display": "$code($name)"
+      },
+      "train": {
+        "car": "Car Number",
+        "fare": {
+          "label": "Fare",
+          "unit": {
+            "CNY": {
+              "code": "￥",
+              "name": "CNY"
+            }
+          }
+        },
+        "number": "Train Number",
+        "seat": "Seat Number",
+        "seatBed": {
+          "lower": "Bottom",
+          "middle": "Middle",
+          "title": "Bunk",
+          "upper": "Top"
+        },
+        "seatType": "Seat Type"
+      }
+    }
   },
   "assetManagement": {
     "title": "Asset Management"
