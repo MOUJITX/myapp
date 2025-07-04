@@ -15,4 +15,11 @@
         "Swipeable"
     ],
     "java.configuration.updateBuildConfiguration": "automatic",
+    "i18n-ally.extract.ignoredByFiles": {
+        "src/screens/ticketCard/ticketCardAddScreen/ticketCardAddScreen.tsx": [
+            "上铺",
+            "中铺",
+            "下铺"
+        ]
+    },
 }

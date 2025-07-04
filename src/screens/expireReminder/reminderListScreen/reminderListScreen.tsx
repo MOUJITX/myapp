@@ -112,7 +112,10 @@ export const ExpireReminderListScreen = () => {
         />
       </SpacingView>
 
-      <HoverButton onPress={() => gotoReminderAddScreen()} label="+" />
+      <HoverButton
+        onPress={() => gotoReminderAddScreen()}
+        label={t('common.add.icon')}
+      />
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { t } from 'i18next';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Button from '../../../components/basic/Button';
 import CellGroup from '../../../components/basic/CellGroup';
@@ -35,22 +35,9 @@ export interface ReminderAddScreenProps {
 }
 
 export const ExpireReminderAddScreen = () => {
+  const navigation = useNavigation();
   const { good }: ReminderAddScreenProps =
     useRoute<RouteProp<'ExpireReminderAdd'>>().params;
-
-  const navigation = useNavigation();
-  useComponentMount(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          label={t('common.save.label')}
-          type="primary"
-          text
-          onPress={handleSubmitGoodCheck}
-        />
-      ),
-    });
-  });
 
   const {
     input: { existGood },
@@ -104,7 +91,7 @@ export const ExpireReminderAddScreen = () => {
     setItems(newItems);
   };
 
-  const handleSubmitGoodCheck = () => {
+  const handleSubmitGoodCheck = useCallback(() => {
     handleSubmitGood({
       goodID: goodID ?? randomUUID(),
       title: title ?? randomString(),
@@ -116,7 +103,30 @@ export const ExpireReminderAddScreen = () => {
       items,
       createTime: good?.createTime ?? new Date(),
     });
-  };
+  }, [
+    brand,
+    category,
+    good?.createTime,
+    goodID,
+    handleSubmitGood,
+    imgs,
+    items,
+    title,
+    uniCode,
+  ]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          label={t('common.save.label')}
+          type="primary"
+          text
+          onPress={handleSubmitGoodCheck}
+        />
+      ),
+    });
+  }, [handleSubmitGoodCheck, navigation]);
 
   const handleUnicodeChange = (value: string) => {
     setUniCode(value);

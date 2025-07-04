@@ -10,9 +10,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import BottomSheet, {
-  BottomSheetRef,
-} from '../../../components/basic/BottomSheet';
 import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import HoverButton from '../../../components/basic/HoverButton';
 import SpacingView, {
@@ -21,7 +18,6 @@ import SpacingView, {
 import TicketCard from '../../../components/TicketCard/TicketCard';
 import { TrainTicket } from '../../../store/ticketCard/ticketCard.type';
 import { commonStyles } from '../../../styles';
-import { TicketCardAddScreen } from '../ticketCardAddScreen/ticketCardAddScreen';
 
 import { useTicketCardHook } from './ticketCardHook';
 
@@ -111,16 +107,13 @@ const TicketCardAnim = ({
 export const TicketCardScreen = () => {
   const {
     input: { trainTickets },
-    output: { trainTicketRemove },
+    output: { trainTicketRemove, gotoTicketAddScreen },
   } = useTicketCardHook();
 
   const [isOpen, setIsOpen] = useState(false);
   const [topCard, setTopCard] = useState<string>();
-  const [trainTicket, setTrainTicket] = useState<TrainTicket>();
   const [trainTicketsList, setTrainTicketsList] = useState<TrainTicket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const AddScreenBottomSheetRef = useRef<BottomSheetRef>(null);
 
   const ticketCardListRef = useRef<SpacingViewRef>(null);
 
@@ -139,11 +132,6 @@ export const TicketCardScreen = () => {
     trainTicketRemove(id);
     setIsOpen(false);
     setTopCard(undefined);
-  };
-
-  const handleEditAction = (ticket?: TrainTicket) => {
-    setTrainTicket(ticket);
-    AddScreenBottomSheetRef.current?.openBottomSheet();
   };
 
   useLayoutEffect(() => {
@@ -174,19 +162,15 @@ export const TicketCardScreen = () => {
                   tt => tt.uuid === topCard,
                 )}
                 removeAction={handleRemoveAction}
-                editAction={handleEditAction}
+                editAction={() => gotoTicketAddScreen(ticket)}
               />
             ))}
           </SpacingView>
 
-          <HoverButton label="+" onPress={() => handleEditAction(undefined)} />
-
-          <BottomSheet ref={AddScreenBottomSheetRef}>
-            <TicketCardAddScreen
-              bottomSheetRef={AddScreenBottomSheetRef}
-              ticket={trainTicket}
-            />
-          </BottomSheet>
+          <HoverButton
+            label={t('common.add.icon')}
+            onPress={() => gotoTicketAddScreen()}
+          />
         </View>
       )}
     </>
