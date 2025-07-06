@@ -40,6 +40,11 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
+      - name: Generate React Native Codegen Files
+        run: |
+          cd android
+          ./gradlew generateCodegenArtifactsFromSchema
+
       - name: Build APK
         run: |
           cd android
