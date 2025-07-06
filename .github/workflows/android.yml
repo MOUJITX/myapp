@@ -21,7 +21,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 23.5.0
+          node-version: 22.x
 
       - name: Create env file
         run: |
@@ -35,23 +35,15 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
-          sudo apt-get update
-          sudo apt-get install -y libc6-dev-i386 build-essential file
+          sudo apt-get install -y libc6-dev-i386 android-sdk
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Setup NDK
-        run: |
-          yes | sdkmanager --install "ndk;21.4.7075529" "cmake;3.18.1"
-          echo "ANDROID_NDK=$ANDROID_SDK_ROOT/ndk/21.4.7075529" >> $GITHUB_ENV
-
       - name: Build APK
         run: |
           cd android
-          ./gradlew assembleRelease --info
-        env:
-          ANDROID_NDK_HOME: ${{ env.ANDROID_NDK }}
+          ./gradlew assembleRelease
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
