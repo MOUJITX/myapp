@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.4.0-beta.2](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.1...v0.4.0-beta.2) (2025-07-06)
+
+
+### Features
+
+* Add Asset Management module with navigation and screen ([f74036c](https://gitee.com/moujitx/com.moujitx.myapp/commits/f74036ca423b6ff6534a7e27ce3d7393bb74e6cd))
+
 # [0.4.0-beta.1](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.0...v0.4.0-beta.1) (2025-07-03)
 
 
