@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.4.0-beta.3](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.2...v0.4.0-beta.3) (2025-07-06)
+
+
+### Features
+
+* Update Android CI workflow with NDK setup and build improvements ([759db9d](https://gitee.com/moujitx/com.moujitx.myapp/commits/759db9de77e81de706f1f671bf0945d5a9633f64))
+
 # [0.4.0-beta.2](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.1...v0.4.0-beta.2) (2025-07-06)
 
 
