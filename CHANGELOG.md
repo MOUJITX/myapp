@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.4.0-beta.7](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.6...v0.4.0-beta.7) (2025-07-06)
+
+
+### Features
+
+* Add React Native Codegen generation step to Android CI workflow ([63448e0](https://gitee.com/moujitx/com.moujitx.myapp/commits/63448e032fd4c6134f275951d400c8bf89937be5))
+
 # [0.4.0-beta.6](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.5...v0.4.0-beta.6) (2025-07-06)
 
 # [0.4.0-beta.5](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.4...v0.4.0-beta.5) (2025-07-06)
