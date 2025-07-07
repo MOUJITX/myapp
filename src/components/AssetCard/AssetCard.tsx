@@ -9,7 +9,7 @@ import { calculateDays } from '../../utils/datetime';
 import { randomString } from '../../utils/utils';
 import CellGroup from '../basic/CellGroup';
 import Image from '../basic/Image';
-import Tag from '../basic/Tag';
+import Tag, { TagShapeType } from '../basic/Tag';
 
 interface Props {
   asset: Asset;
@@ -108,7 +108,9 @@ const AssetCard = (props: Props) => {
             <Tag
               label={asset.using ? '服役中' : '已退役'}
               size={'small'}
+              sizeX={0.7}
               type={asset.using ? 'success' : 'info'}
+              shape={TagShapeType.NoRadius}
             />
             <Text
               style={styles.titleLabel}
@@ -129,12 +131,34 @@ const AssetCard = (props: Props) => {
             </Text>
           )}
         </View>
-        <View style={styles.informationRight}>
+        <View
+          style={[
+            styles.informationRight,
+            !asset.using && styles.grayBackground,
+          ]}>
           <View style={styles.totalTitle}>
-            <Text style={styles.totalTitleLabel}>{calculateUsedDays()}</Text>
-            <Text style={styles.totalSubtitleLabel}>天</Text>
+            <Text
+              style={[
+                styles.totalTitleLabel,
+                !asset.using && styles.grayLabel,
+              ]}>
+              {calculateUsedDays()}
+            </Text>
+            <Text
+              style={[
+                styles.totalSubtitleLabel,
+                !asset.using && styles.grayLabel,
+              ]}>
+              天
+            </Text>
           </View>
-          <Text style={styles.totalSubtitleLabel}>使用天数</Text>
+          <Text
+            style={[
+              styles.totalSubtitleLabel,
+              !asset.using && styles.grayLabel,
+            ]}>
+            使用天数
+          </Text>
         </View>
       </View>
     </CellGroup>
@@ -147,6 +171,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: commonStyles.spacings.smallX,
   },
+  grayBackground: {
+    backgroundColor: commonStyles.statusColor.info,
+  },
+  grayLabel: { color: commonStyles.color.white },
   infoLabel: {
     color: commonStyles.textColor.info,
     fontSize: commonStyles.fontSize.small,

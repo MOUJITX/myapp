@@ -1,7 +1,8 @@
 import { t } from 'i18next';
-import { Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import AssetCard from '../../../components/AssetCard/AssetCard';
+import HoverButton from '../../../components/basic/HoverButton';
 import SpacingView from '../../../components/basic/SpacingView';
 import { Asset } from '../../../store/assetManagement/assetManagement.type';
 import { randomUUID } from '../../../utils/utils';
@@ -52,13 +53,18 @@ const AssetListScreen = () => {
   };
 
   return (
-    <SpacingView>
-      <Text>{t('assetManagement.title')}</Text>
-      <AssetCard asset={asset} onPress={() => {}} />
-      <AssetCard asset={asset} onPress={() => {}} />
-      <AssetCard asset={asset} onPress={() => {}} />
-    </SpacingView>
+    <View style={styles.container}>
+      <SpacingView>
+        <AssetCard asset={asset} onPress={() => {}} />
+      </SpacingView>
+
+      <HoverButton onPress={() => {}} label={t('common.add.icon')} />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+});
 
 export default AssetListScreen;

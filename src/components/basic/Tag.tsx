@@ -60,7 +60,7 @@ const styles = (props: Props) =>
       justifyContent: 'center',
       paddingHorizontal:
         props.shape === 'default' || props.shape === 'noRadius' || !props.shape
-          ? commonStyles.spacings.smallX
+          ? commonStyles.spacings.smallX * (props.sizeX ?? 1)
           : undefined,
       width:
         props.shape === 'circle' || props.shape === 'square'
@@ -74,7 +74,8 @@ const styles = (props: Props) =>
           ? commonStyles.statusColor[props.type ?? 'default']
           : commonStyles.color.white,
       fontSize:
-        commonStyles.fontSize[props.size === 'large' ? 'largeX' : 'medium'],
+        commonStyles.fontSize[props.size === 'large' ? 'largeX' : 'medium'] *
+        (props.sizeX ?? 1),
     },
     labelContainer: {
       flexDirection: 'row',
