@@ -17,6 +17,7 @@ export interface swipeActionProps {
   label?: string;
   type?: statusType;
   onPress?: (item: any) => void;
+  pressConfirm?: { title?: string; description: string };
 }
 
 export interface swipeRowConfig {

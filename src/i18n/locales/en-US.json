@@ -237,7 +237,11 @@
     },
     "delete": {
       "label": "Delete",
-      "icon": "⌫"
+      "icon": "⌫",
+      "confirm": {
+        "description": "Please confirm if you want to delete it?",
+        "title": "Delete Confirmation"
+      }
     },
     "edit": {
       "label": "Edit"

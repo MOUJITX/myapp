@@ -105,6 +105,10 @@ export const ExpireReminderListScreen = () => {
               label: '-',
               type: 'danger',
               onPress: (item: Good) => handleRemoveGood(item.goodID),
+              pressConfirm: {
+                title: t('common.delete.confirm.title'),
+                description: t('common.delete.confirm.description'),
+              },
             },
           ]}
           shape={ButtonShapeType.Circle}

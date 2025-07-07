@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native';
 
@@ -31,6 +32,10 @@ export default (props: Props) => {
           onPress={props.onDelete}
           size="small"
           shape={ButtonShapeType.Square}
+          pressConfirm={{
+            title: t('common.delete.confirm.title'),
+            description: t('common.delete.confirm.description'),
+          }}
         />
         <Button
           label="C"

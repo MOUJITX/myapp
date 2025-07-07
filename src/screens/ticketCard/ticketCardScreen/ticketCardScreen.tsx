@@ -96,6 +96,10 @@ const TicketCardAnim = ({
               label={t('common.close.icon')}
               type={'danger'}
               onPress={() => removeAction(ticket.uuid)}
+              pressConfirm={{
+                title: t('common.delete.confirm.title'),
+                description: t('common.delete.confirm.description'),
+              }}
             />
           </View>
         )}

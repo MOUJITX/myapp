@@ -238,7 +238,11 @@
     },
     "delete": {
       "label": "删除",
-      "icon": "⌫"
+      "icon": "⌫",
+      "confirm": {
+        "description": "请确认是否删除？",
+        "title": "删除确认"
+      }
     },
     "edit": {
       "label": "编辑"

@@ -1,8 +1,11 @@
 import { t } from 'i18next';
+import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { ButtonSize, commonStyles } from '../../styles';
 import { statusType } from '../../types';
+
+import Popup from './Popup';
 
 export enum ButtonShapeType {
   Default = 'default',
@@ -23,23 +26,63 @@ export interface Props {
   shadow?: boolean;
   leftIcon?: string;
   rightIcon?: string;
+  pressConfirm?: { title?: string; description: string };
 }
 
 export default (props: Props) => {
+  const [showConfirmDialog, setShowConfirmDialog] = useState<boolean>(false);
+
+  const handleButtonPress = () => {
+    if (props.pressConfirm) {
+      setShowConfirmDialog(true);
+      return;
+    }
+
+    props.onPress && props.onPress();
+  };
+
   return (
-    <TouchableOpacity style={styles(props).container} onPress={props.onPress}>
-      <View style={styles(props).labelContainer}>
-        {props.leftIcon && (
-          <Text style={styles(props).label}>{props.leftIcon}</Text>
-        )}
-        <Text style={styles(props).label}>
-          {props.label ?? t('component.button.label')}
-        </Text>
-        {props.rightIcon && (
-          <Text style={styles(props).label}>{props.rightIcon}</Text>
-        )}
-      </View>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity
+        style={styles(props).container}
+        onPress={handleButtonPress}>
+        <View style={styles(props).labelContainer}>
+          {props.leftIcon && (
+            <Text style={styles(props).label}>{props.leftIcon}</Text>
+          )}
+          <Text style={styles(props).label}>
+            {props.label ?? t('component.button.label')}
+          </Text>
+          {props.rightIcon && (
+            <Text style={styles(props).label}>{props.rightIcon}</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+
+      {props.pressConfirm && (
+        <Popup
+          visible={showConfirmDialog}
+          title={props.pressConfirm.title}
+          content={props.pressConfirm.description}
+          buttonsInline
+          buttons={[
+            {
+              label: t('common.cancel.label'),
+              onPress: () => setShowConfirmDialog(false),
+              type: 'default',
+            },
+            {
+              label: t('common.confirm.label'),
+              onPress: () => {
+                props.onPress && props.onPress();
+                setShowConfirmDialog(false);
+              },
+              type: 'danger',
+            },
+          ]}
+        />
+      )}
+    </>
   );
 };
 
