@@ -7,6 +7,8 @@ import SpacingView from '../../../components/basic/SpacingView';
 import { Asset } from '../../../store/assetManagement/assetManagement.type';
 import { randomUUID } from '../../../utils/utils';
 
+import { useAssetListHook } from './assetListHook';
+
 const AssetListScreen = () => {
   const asset: Asset = {
     uuid: randomUUID(),
@@ -52,13 +54,17 @@ const AssetListScreen = () => {
     createUser: 'user01',
   };
 
+  const {
+    output: { gotoAssetAddScreen },
+  } = useAssetListHook();
+
   return (
     <View style={styles.container}>
       <SpacingView>
-        <AssetCard asset={asset} onPress={() => {}} />
+        <AssetCard asset={asset} onPress={() => gotoAssetAddScreen(asset)} />
       </SpacingView>
 
-      <HoverButton onPress={() => {}} label={t('common.add.icon')} />
+      <HoverButton onPress={gotoAssetAddScreen} label={t('common.add.icon')} />
     </View>
   );
 };

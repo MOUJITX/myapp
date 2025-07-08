@@ -26,7 +26,7 @@ export default (props: Props) => {
     setDate(props.value ?? new Date());
   }, [props.value]);
 
-  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+  const onChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShow(false);
     setDate(currentDate);
