@@ -6,7 +6,6 @@ import {
 } from '../../store/assetManagement/assetManagement.type';
 import { commonStyles } from '../../styles';
 import { calculateDays } from '../../utils/datetime';
-import { randomString } from '../../utils/utils';
 import CellGroup from '../basic/CellGroup';
 import Image from '../basic/Image';
 import Tag, { TagShapeType } from '../basic/Tag';
@@ -28,7 +27,9 @@ const AssetCard = (props: Props) => {
     }
 
     if (calAsset.using) {
-      return calculateDays(calAsset.purchasing.date, new Date());
+      console.warn('da', calAsset.purchasing.date);
+      // return calculateDays(calAsset.purchasing.date, new Date());
+      return 0;
     } else {
       return calculateDays(calAsset.purchasing.date, calAsset.deactivateDate);
     }
@@ -117,7 +118,7 @@ const AssetCard = (props: Props) => {
                 style={styles.titleLabel}
                 numberOfLines={1}
                 ellipsizeMode="tail">
-                {randomString()}
+                {asset.name}
               </Text>
             </View>
 

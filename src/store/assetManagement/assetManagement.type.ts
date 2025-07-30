@@ -31,3 +31,7 @@ export interface Warranty {
   overDate?: Date;
   durationDays?: number;
 }
+
+export interface AssetManagementState {
+  assets: Asset[];
+}

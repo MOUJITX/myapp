@@ -7,12 +7,10 @@ export const calculateDays = (
     return 0;
   }
 
-  beforeDay.setHours(0, 0, 0, 0);
-  afterDay.setHours(0, 0, 0, 0);
+  const b = beforeDay.setHours(0, 0, 0, 0);
+  const a = afterDay.setHours(0, 0, 0, 0);
 
-  const diffTime = abs
-    ? Math.abs(afterDay.getTime() - beforeDay.getTime())
-    : afterDay.getTime() - beforeDay.getTime();
+  const diffTime = abs ? Math.abs(a - b) : a - b;
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
 

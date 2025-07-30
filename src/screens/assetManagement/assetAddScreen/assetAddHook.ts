@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { editAssetAction } from '../../../store/assetManagement/assetManagement.redux';
 import { Asset } from '../../../store/assetManagement/assetManagement.type';
 import { goBackAction } from '../../../store/navigation/navigation.redux';
 import { selectLoginUserUUID } from '../../../store/userProfile/userProfile.selectors';
@@ -19,14 +20,15 @@ type AssetAddHook = {
 
 export const useAssetAddHook = (): AssetAddHook => {
   const dispatch = useDispatch();
+  const loginUser = useSelector(selectLoginUserUUID) ?? '';
 
   return {
     input: {
-      createUser: useSelector(selectLoginUserUUID) ?? '',
+      createUser: loginUser,
     },
     output: {
       assetSubmit: (asset: Asset) => {
-        console.log('submit asset', asset);
+        dispatch(editAssetAction({ asset, loginUser }));
         dispatch(goBackAction());
       },
     },

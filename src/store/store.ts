@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { persistReducer, persistStore } from 'redux-persist';
 
+import assetManagementRedux from './assetManagement/assetManagement.redux';
 import { expireReminderEpics } from './expireReminder/expireReminder.epics';
 import expireReminderRedux from './expireReminder/expireReminder.redux';
 import { navigationEpics } from './navigation/navigation.epics';
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   navigation: navigationRedux,
   expireReminder: expireReminderRedux,
   ticketCard: ticketCardRedux,
+  assetManagement: assetManagementRedux,
 });
 
 export const rootEpic: any = combineEpics(
