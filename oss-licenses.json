@@ -1,0 +1,308 @@
+{
+    "@gorhom/bottom-sheet": {
+        "licenses": "MIT",
+        "repository": "https://github.com/gorhom/react-native-bottom-sheet",
+        "licenseFile": "node_modules/@gorhom/bottom-sheet/LICENSE",
+        "licenseUrl": "https://github.com/gorhom/react-native-bottom-sheet/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-native-async-storage/async-storage": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-async-storage/async-storage",
+        "licenseFile": "node_modules/@react-native-async-storage/async-storage/LICENSE",
+        "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-native-clipboard/clipboard": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-clipboard/clipboard",
+        "licenseFile": "node_modules/@react-native-clipboard/clipboard/LICENSE",
+        "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-native-community/datetimepicker": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/datetimepicker",
+        "licenseFile": "node_modules/@react-native-community/datetimepicker/LICENSE.md",
+        "licenseUrl": "https://github.com/react-native-community/datetimepicker/raw/master/LICENSE.md",
+        "parents": "myApp"
+    },
+    "@react-native-documents/picker": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-documents/document-picker",
+        "licenseFile": "node_modules/@react-native-documents/picker/LICENSE.md",
+        "licenseUrl": "https://github.com/react-native-documents/document-picker/raw/master/LICENSE.md",
+        "parents": "myApp"
+    },
+    "@react-native-documents/viewer": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-documents/document-picker",
+        "licenseFile": "node_modules/@react-native-documents/viewer/LICENSE.md",
+        "licenseUrl": "https://github.com/react-native-documents/document-picker/raw/master/LICENSE.md",
+        "parents": "myApp"
+    },
+    "@react-native-masked-view/masked-view": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-masked-view/masked-view",
+        "licenseFile": "node_modules/@react-native-masked-view/masked-view/LICENSE",
+        "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-native/new-app-screen": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react-native",
+        "licenseUrl": "https://github.com/facebook/react-native",
+        "parents": "myApp"
+    },
+    "@react-navigation/bottom-tabs": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseFile": "node_modules/@react-navigation/bottom-tabs/LICENSE",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-navigation/elements": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseFile": "node_modules/@react-navigation/elements/LICENSE",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-navigation/native-stack": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseFile": "node_modules/@react-navigation/native-stack/LICENSE",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-navigation/native": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseFile": "node_modules/@react-navigation/native/LICENSE",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@react-navigation/stack": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseFile": "node_modules/@react-navigation/stack/LICENSE",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@reduxjs/toolkit": {
+        "licenses": "MIT",
+        "repository": "https://github.com/reduxjs/redux-toolkit",
+        "licenseFile": "node_modules/@reduxjs/toolkit/LICENSE",
+        "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@shopify/flash-list": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Shopify/flash-list",
+        "licenseFile": "node_modules/@shopify/flash-list/LICENSE.md",
+        "licenseUrl": "https://github.com/Shopify/flash-list/raw/master/LICENSE.md",
+        "parents": "myApp"
+    },
+    "@types/base-64": {
+        "licenses": "MIT",
+        "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "licenseFile": "node_modules/@types/base-64/LICENSE",
+        "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "@types/crypto-js": {
+        "licenses": "MIT",
+        "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "licenseFile": "node_modules/@types/crypto-js/LICENSE",
+        "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "axios": {
+        "licenses": "MIT",
+        "repository": "https://github.com/axios/axios",
+        "licenseFile": "node_modules/axios/LICENSE",
+        "licenseUrl": "https://github.com/axios/axios/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "crypto-js": {
+        "licenses": "MIT",
+        "repository": "http://github.com/brix/crypto-js",
+        "licenseFile": "node_modules/crypto-js/LICENSE",
+        "licenseUrl": "http://github.com/brix/crypto-js/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "i18next": {
+        "licenses": "MIT",
+        "repository": "https://github.com/i18next/i18next",
+        "licenseFile": "node_modules/i18next/LICENSE",
+        "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "moment": {
+        "licenses": "MIT",
+        "repository": "https://github.com/moment/moment",
+        "licenseFile": "node_modules/moment/LICENSE",
+        "licenseUrl": "https://github.com/moment/moment/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-i18next": {
+        "licenses": "MIT",
+        "repository": "https://github.com/i18next/react-i18next",
+        "licenseFile": "node_modules/react-i18next/LICENSE",
+        "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-config": {
+        "licenses": "MIT",
+        "repository": "https://github.com/luggit/react-native-config",
+        "licenseFile": "node_modules/react-native-config/LICENSE",
+        "licenseUrl": "https://github.com/luggit/react-native-config/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-device-info": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-device-info/react-native-device-info",
+        "licenseFile": "node_modules/react-native-device-info/LICENSE",
+        "licenseUrl": "https://github.com/react-native-device-info/react-native-device-info/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-fs": {
+        "licenses": "MIT",
+        "repository": "https://github.com/itinance/react-native-fs",
+        "licenseFile": "node_modules/react-native-fs/LICENSE",
+        "licenseUrl": "https://github.com/itinance/react-native-fs/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-gesture-handler": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-gesture-handler",
+        "licenseFile": "node_modules/react-native-gesture-handler/LICENSE",
+        "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-image-picker": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-image-picker/react-native-image-picker",
+        "licenseFile": "node_modules/react-native-image-picker/LICENSE.md",
+        "licenseUrl": "https://github.com/react-native-image-picker/react-native-image-picker/raw/master/LICENSE.md",
+        "parents": "myApp"
+    },
+    "react-native-keyboard-aware-scroll-view": {
+        "licenses": "MIT",
+        "repository": "https://github.com/APSL/react-native-keyboard-aware-scroll-view",
+        "licenseFile": "node_modules/react-native-keyboard-aware-scroll-view/LICENSE",
+        "licenseUrl": "https://github.com/APSL/react-native-keyboard-aware-scroll-view/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-linear-gradient": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-linear-gradient/react-native-linear-gradient",
+        "licenseFile": "node_modules/react-native-linear-gradient/LICENSE",
+        "licenseUrl": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-localize": {
+        "licenses": "MIT",
+        "repository": "https://github.com/zoontek/react-native-localize",
+        "licenseFile": "node_modules/react-native-localize/LICENSE",
+        "licenseUrl": "https://github.com/zoontek/react-native-localize/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-qrcode-svg": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Expensify/react-native-qrcode-svg",
+        "licenseFile": "node_modules/react-native-qrcode-svg/LICENSE",
+        "licenseUrl": "https://github.com/Expensify/react-native-qrcode-svg/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-reanimated": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-reanimated",
+        "licenseFile": "node_modules/react-native-reanimated/LICENSE",
+        "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-safe-area-context": {
+        "licenses": "MIT",
+        "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
+        "licenseFile": "node_modules/react-native-safe-area-context/LICENSE",
+        "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-screens": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-screens",
+        "licenseFile": "node_modules/react-native-screens/LICENSE",
+        "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-share": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-share",
+        "licenseFile": "node_modules/react-native-share/LICENSE",
+        "licenseUrl": "https://github.com/react-native-community/react-native-share/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-svg": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-svg",
+        "licenseFile": "node_modules/react-native-svg/LICENSE",
+        "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-native-vision-camera": {
+        "licenses": "MIT",
+        "repository": "https://github.com/mrousavy/react-native-vision-camera",
+        "licenseUrl": "https://github.com/mrousavy/react-native-vision-camera",
+        "parents": "myApp"
+    },
+    "react-native": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react-native",
+        "licenseFile": "node_modules/react-native/LICENSE",
+        "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "react-redux": {
+        "licenses": "MIT",
+        "repository": "github:reduxjs/react-redux",
+        "licenseFile": "node_modules/react-redux/LICENSE.md",
+        "licenseUrl": "github:reduxjs/react-redux",
+        "parents": "myApp"
+    },
+    "react": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseFile": "node_modules/react/LICENSE",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "redux-observable": {
+        "licenses": "MIT",
+        "repository": "https://github.com/redux-observable/redux-observable",
+        "licenseFile": "node_modules/redux-observable/LICENSE",
+        "licenseUrl": "https://github.com/redux-observable/redux-observable/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "redux-persist": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rt2zz/redux-persist",
+        "licenseFile": "node_modules/redux-persist/LICENSE",
+        "licenseUrl": "https://github.com/rt2zz/redux-persist/raw/master/LICENSE",
+        "parents": "myApp"
+    },
+    "redux": {
+        "licenses": "MIT",
+        "repository": "github:reduxjs/redux",
+        "licenseFile": "node_modules/redux/LICENSE.md",
+        "licenseUrl": "github:reduxjs/redux",
+        "parents": "myApp"
+    },
+    "rxjs": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/reactivex/rxjs",
+        "licenseFile": "node_modules/rxjs/LICENSE.txt",
+        "licenseUrl": "https://github.com/reactivex/rxjs/raw/master/LICENSE.txt",
+        "parents": "myApp"
+    }
+}

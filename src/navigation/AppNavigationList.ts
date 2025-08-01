@@ -1,5 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 
+import { AssetAddScreenProps } from '../screens/assetManagement/assetAddScreen/assetAddScreen';
 import { ReminderAddScreenProps } from '../screens/expireReminder/reminderAddScreen/reminderAddScreen';
 import { TicketCardAddScreenProps } from '../screens/ticketCard/ticketCardAddScreen/ticketCardAddScreen';
 
@@ -21,6 +22,8 @@ export type AppNavigationList = {
   TicketCardAddScreen: TicketCardAddScreenProps;
 
   AssetListScreen: undefined;
+  AssetAddScreen: AssetAddScreenProps;
+
   ProfileScreen: undefined;
   BackupDataScreen: undefined;
 };

@@ -1,7 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { t } from 'i18next';
-import { useRef } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   Dimensions,
   Keyboard,
@@ -43,6 +42,25 @@ export default (props: Props) => {
   const DELETE = props.deleteLabel ?? t('common.delete.icon');
 
   const setInputValue = (value: string) => {
+    if (props.keyboardType === 'number') {
+      value = value.replace(/[^0-9]/g, '');
+    }
+
+    if (props.keyboardType === 'decimal') {
+      value = value.replace(/[^0-9.]/g, '');
+
+      if (value.split('.').length > 2) value = value.replace(/\.+$/, '');
+
+      if (value.startsWith('.')) value = '0' + value;
+
+      if (value.startsWith('0') && value.length > 1 && !value.startsWith('0.'))
+        value = value.slice(1);
+    }
+
+    if (props.keyboardType === 'idCard') {
+      value = value.replace(/[^0-9Xx]/g, '').replace('x', 'X');
+    }
+
     props.onValueChange?.(value);
   };
 

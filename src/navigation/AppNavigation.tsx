@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { t } from 'i18next';
 
+import AssetAddScreen from '../screens/assetManagement/assetAddScreen/assetAddScreen';
 import { DeviceInfo } from '../screens/debug/deviceInfo';
 import { PageB } from '../screens/debug/page2';
 import { PageC } from '../screens/debug/page3';
@@ -49,6 +50,13 @@ export const AppNavigation = () => {
       <RootStack.Screen
         name="TicketCardAddScreen"
         component={TicketCardAddScreen}
+        options={{
+          title: t('common.edit.label'),
+        }}
+      />
+      <RootStack.Screen
+        name="AssetAddScreen"
+        component={AssetAddScreen}
         options={{
           title: t('common.edit.label'),
         }}

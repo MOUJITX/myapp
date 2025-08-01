@@ -25,4 +25,6 @@ export const stringFormat = (
   if (type === 'upFirstOnly') {
     return label.charAt(0).toUpperCase() + label.slice(1);
   }
+
+  return '';
 };

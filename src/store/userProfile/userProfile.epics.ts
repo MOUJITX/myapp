@@ -130,6 +130,10 @@ const restoreEpic: UserProfileEpic = action$ =>
       if (toJSON.ticketCard) {
         actionList.push(ticketCardRestoreAction(toJSON.ticketCard));
       }
+
+      if (toJSON.assetManagement) {
+        actionList.push(restoreExpireReminderAction(toJSON.assetManagement));
+      }
       return of(...actionList);
     }),
   );

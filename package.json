@@ -14,7 +14,8 @@
     "buildKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
     "build": "yarn buildClean && cd android && ./gradlew clean && ./gradlew assembleRelease",
     "release": "release-it",
-    "rab": "yarn release && yarn build"
+    "rab": "yarn release && yarn build",
+    "adb": "adb reverse tcp:9090 tcp:9090"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.1.6",
@@ -37,6 +38,7 @@
     "axios": "^1.10.0",
     "crypto-js": "^4.2.0",
     "i18next": "^25.2.1",
+    "moment": "^2.30.1",
     "react": "19.1.0",
     "react-i18next": "^15.5.3",
     "react-native": "0.80.0",
