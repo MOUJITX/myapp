@@ -1,5 +1,18 @@
 # Changelog
 
+# [0.4.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.7...v0.4.0) (2025-08-01)
+
+
+### Features
+
+* Add AssetAddScreen navigation and TouchableOpacity to AssetCard ([34d4b00](https://gitee.com/moujitx/com.moujitx.myapp/commits/34d4b004147b691558329202a9d8fe4b815d498c))
+* Add AssetCard component and refactor Button to use Tag ([bba662f](https://gitee.com/moujitx/com.moujitx.myapp/commits/bba662feb71f8204798d7760147c34414e8a30de))
+* Add confirmation dialog support to Button and SwipeRow components ([f17ea89](https://gitee.com/moujitx/com.moujitx.myapp/commits/f17ea89e7cddb0be58e9050f00c4cbb4cce6c4f0))
+* Add sizeX prop to Tag and enhance AssetCard with gray styling ([df2b72e](https://gitee.com/moujitx/com.moujitx.myapp/commits/df2b72e92129376916ec844dcba6bd9c754668ce))
+* Enhance asset management with swipe actions and input validation ([3a0ba5e](https://gitee.com/moujitx/com.moujitx.myapp/commits/3a0ba5ead81173122107f4e328540dabae6a4a6b))
+* Fix days calculation in AssetCard and implement moment-based datetime handling ([24c005f](https://gitee.com/moujitx/com.moujitx.myapp/commits/24c005f853ccbe2b0ffcc9bba281abd1f229f20d))
+* Reorder imports in AssetAddScreen component ([308b863](https://gitee.com/moujitx/com.moujitx.myapp/commits/308b86328562e976abdc21da8805e085883b9018))
+
 # [0.4.0-beta.7](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.6...v0.4.0-beta.7) (2025-07-06)
 
 
