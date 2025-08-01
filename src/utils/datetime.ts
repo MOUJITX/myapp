@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const calculateDays = (
   beforeDay?: Date,
   afterDay?: Date,
@@ -7,11 +9,9 @@ export const calculateDays = (
     return 0;
   }
 
-  const b = beforeDay.setHours(0, 0, 0, 0);
-  const a = afterDay.setHours(0, 0, 0, 0);
+  const diff = moment(afterDay).diff(beforeDay, 'days');
 
-  const diffTime = abs ? Math.abs(a - b) : a - b;
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return abs ? Math.abs(diff) : diff;
 };
 
 const addZero = (num: number) => (num < 10 ? `0${num}` : num);

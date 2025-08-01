@@ -27,9 +27,7 @@ const AssetCard = (props: Props) => {
     }
 
     if (calAsset.using) {
-      console.warn('da', calAsset.purchasing.date);
-      // return calculateDays(calAsset.purchasing.date, new Date());
-      return 0;
+      return calculateDays(calAsset.purchasing.date, new Date());
     } else {
       return calculateDays(calAsset.purchasing.date, calAsset.deactivateDate);
     }
