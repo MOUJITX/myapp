@@ -3,8 +3,7 @@ import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 
 import { commonStyles } from '../../styles';
 
-import { Props as CellProps } from './Cell';
-import Cell from './Cell';
+import Cell, { Props as CellProps } from './Cell';
 
 interface Props extends CellProps, TextInputProps {
   value?: string;

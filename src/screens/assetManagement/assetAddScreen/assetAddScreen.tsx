@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
 
 import Button from '../../../components/basic/Button';
@@ -17,9 +17,14 @@ import {
   Asset,
   AssetBasic,
 } from '../../../store/assetManagement/assetManagement.type';
+import { calculateDays } from '../../../utils/datetime';
 import { randomUUID } from '../../../utils/utils';
 
 import { useAssetAddHook } from './assetAddHook';
+import AssetCard from '../../../components/AssetCard/AssetCard';
+import BottomSheet, {
+  BottomSheetRef,
+} from '../../../components/basic/BottomSheet';
 
 export interface AssetAddScreenProps {
   asset?: Asset;
@@ -29,6 +34,8 @@ const AssetAddScreen = () => {
   const navigation = useNavigation();
   const { asset }: AssetAddScreenProps =
     useRoute<RouteProp<'AssetAddScreen'>>().params;
+
+  const additionalAssetBottomSheet = useRef<BottomSheetRef>(null);
 
   const {
     input: { createUser },
@@ -68,6 +75,23 @@ const AssetAddScreen = () => {
 
   const [assetData, setAssetData] = useState<Asset>(asset ?? initAsset);
 
+  const handleSubmit = useCallback(() => {
+    const submitAsset: Asset = {
+      ...assetData,
+      purchasing: {
+        ...assetData.purchasing,
+        price: Number(assetData.purchasing.price),
+      },
+    };
+    assetSubmit(submitAsset);
+  }, [assetData, assetSubmit]);
+
+  const handleValueChange = (key: keyof Asset, value: any) => {
+    setAssetData(prev => ({ ...prev, [key]: value }));
+  };
+
+  const renderText = (text: string) => <Text>{text}</Text>;
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -75,18 +99,11 @@ const AssetAddScreen = () => {
           label={t('common.save.label')}
           type="primary"
           text
-          onPress={() => assetSubmit(assetData)}
+          onPress={handleSubmit}
         />
       ),
     });
-  }, [assetData, assetSubmit, navigation]);
-
-  const handleValueChange = (key: keyof Asset, value: any) => {
-    setAssetData(prev => ({ ...prev, [key]: value }));
-    return;
-  };
-
-  const renderText = (text: string) => <Text>{text}</Text>;
+  }, [assetData, handleSubmit, navigation]);
 
   return (
     <SpacingView>
@@ -138,7 +155,7 @@ const AssetAddScreen = () => {
           onValueChange={value =>
             handleValueChange('purchasing', {
               ...assetData.purchasing,
-              price: Number(value),
+              price: value,
             })
           }
           left={() => renderText('￥')}
@@ -189,10 +206,12 @@ const AssetAddScreen = () => {
               'warranty',
               value
                 ? {
-                    ...assetData.warranty,
-                    enabled: value,
+                    enabled: true,
+                    activeDate: new Date(),
+                    overDate: new Date(),
+                    durationDays: 0,
                   }
-                : { ...initAsset.warranty, enabled: value },
+                : initAsset.warranty,
             )
           }
         />
@@ -201,13 +220,17 @@ const AssetAddScreen = () => {
             <DatetimePicker
               inline
               label={'激活时间'}
-              value={assetData.warranty.activeDate}
-              minDate={assetData.purchasing.date}
+              value={assetData.warranty.activeDate ?? assetData.purchasing.date}
               maxDate={asset?.warranty.overDate ?? new Date()}
               onValueChange={value =>
                 handleValueChange('warranty', {
                   ...assetData.warranty,
                   activeDate: value,
+                  durationDays: calculateDays(
+                    value,
+                    assetData.warranty.overDate,
+                    true,
+                  ),
                 })
               }
             />
@@ -221,12 +244,18 @@ const AssetAddScreen = () => {
                 { label: '两年', value: 730 },
                 { label: '三年', value: 1095 },
               ]}
-              onValueChange={value =>
+              onValueChange={value => {
+                const newDate = new Date(
+                  assetData.warranty.activeDate ?? new Date(),
+                );
+                newDate.setDate(newDate.getDate() + (value ?? 0));
+
                 handleValueChange('warranty', {
                   ...assetData.warranty,
                   durationDays: value,
-                })
-              }
+                  overDate: newDate,
+                });
+              }}
             />
             <DatetimePicker
               inline
@@ -237,13 +266,37 @@ const AssetAddScreen = () => {
                 handleValueChange('warranty', {
                   ...assetData.warranty,
                   overDate: value,
+                  durationDays: calculateDays(
+                    value,
+                    assetData.warranty.activeDate,
+                    true,
+                  ),
                 })
               }
             />
           </>
         )}
       </CellGroup>
-      <CellGroup card title={'附加费用'}></CellGroup>
+      <CellGroup card title={'附加费用'}>
+        {assetData.additionalFee.outcome.map((additionalAsset, index) => (
+          <AssetCard
+            key={index}
+            asset={additionalAsset}
+            onPress={() =>
+              additionalAssetBottomSheet.current?.openBottomSheet()
+            }
+          />
+        ))}
+        <Button
+          label={t('common.add.icon')}
+          plain
+          type="primary"
+          onPress={() => additionalAssetBottomSheet.current?.openBottomSheet()}
+        />
+        <BottomSheet ref={additionalAssetBottomSheet}>
+          <Text>1</Text>
+        </BottomSheet>
+      </CellGroup>
       <CellGroup card title={'备注'}>
         <TextInput
           value={assetData.note}

@@ -121,7 +121,6 @@ export const TicketCardAddScreen = () => {
   }, [navigation, trainTicket, trainTicketSubmit]);
 
   const handleValueChange = (key: keyof TrainTicket, value: any) => {
-    // console.log('key:', key, '; value:', value);
     if (key === 'startStation' || key === 'endStation') {
       const newTrainTicket = {
         ...trainTicket,
@@ -137,7 +136,6 @@ export const TicketCardAddScreen = () => {
 
     const newTrainTicket = { ...trainTicket, [key]: value };
     setTrainTicket(newTrainTicket);
-    return;
   };
 
   const setMark = (mark: TrainMark, value: boolean): TrainMark[] => {

@@ -30,6 +30,11 @@ export const assetManagementSlice = createSlice({
         });
       }
     },
+    removeAssetAction: (state, action: PayloadAction<string>) => {
+      state.assets = state.assets.filter(
+        asset => asset.uuid !== action.payload,
+      );
+    },
     restoreAssetManagementAction: (state, action: PayloadAction<any>) => {
       if (action.payload) {
         state.assets = action.payload.assets;
@@ -38,7 +43,10 @@ export const assetManagementSlice = createSlice({
   },
 });
 
-export const { editAssetAction, restoreAssetManagementAction } =
-  assetManagementSlice.actions;
+export const {
+  editAssetAction,
+  removeAssetAction,
+  restoreAssetManagementAction,
+} = assetManagementSlice.actions;
 
 export default assetManagementSlice.reducer;

@@ -3,7 +3,6 @@
   "version": "0.4.0-beta.7",
   "private": true,
   "scripts": {
-    "postinstall": "yarn oss-licenses",
     "android": "react-native run-android && adb shell am start -n com.moujitx.myapp.dev/com.moujitx.myapp.MainActivity",
     "ios": "react-native run-ios",
     "lint": "eslint . --fix",
@@ -15,7 +14,8 @@
     "buildKey": "keytool -genkey -v -keystore android/app/my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
     "build": "yarn buildClean && cd android && ./gradlew clean && ./gradlew assembleRelease",
     "release": "release-it",
-    "rab": "yarn release && yarn build"
+    "rab": "yarn release && yarn build",
+    "adb": "adb reverse tcp:9090 tcp:9090"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.1.6",

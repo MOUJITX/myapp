@@ -11,7 +11,8 @@ import Reanimated, {
 import { ButtonSize, commonStyles } from '../../styles';
 import { statusType } from '../../types';
 
-import Button, { ButtonShapeType } from './Button';
+import Button from './Button';
+import { TagShapeType } from './Tag';
 
 export interface swipeActionProps {
   label?: string;
@@ -23,7 +24,7 @@ export interface swipeActionProps {
 export interface swipeRowConfig {
   leftButton?: swipeActionProps[];
   rightButton?: swipeActionProps[];
-  shape?: ButtonShapeType;
+  shape?: TagShapeType;
   size?: ButtonSize;
   plain?: boolean;
 }

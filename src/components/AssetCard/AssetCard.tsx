@@ -11,7 +11,7 @@ import Image from '../basic/Image';
 import Tag, { TagShapeType } from '../basic/Tag';
 
 interface Props {
-  asset: Asset;
+  asset: Asset | AssetBasic;
   onPress: () => void;
 }
 
@@ -44,50 +44,56 @@ const AssetCard = (props: Props) => {
   };
 
   const calculateTotalPrice = () => {
-    return (
-      asset.additionalFee.outcome.reduce(
-        (prev, curr) => prev + curr.purchasing.price,
-        0,
-      ) + asset.purchasing.price
-    );
+    const additionalTotalPrice =
+      'additionalFee' in asset
+        ? asset.additionalFee.outcome.reduce(
+            (prev, curr) => prev + curr.purchasing.price,
+            0,
+          )
+        : 0;
+
+    return additionalTotalPrice + asset.purchasing.price;
   };
 
   const calculatePerDayPrice = (
     calAsset: AssetBasic,
     deactivateDate?: Date,
   ) => {
+    let usedDays = 0;
+
     if (deactivateDate) {
       if (calAsset.using) {
-        return (
-          calAsset.purchasing.price /
-          calculateUsedDays(calAsset, deactivateDate)
-        );
+        usedDays = calculateUsedDays(calAsset, deactivateDate);
       } else {
         if (calAsset.deactivateDate! > deactivateDate) {
-          return (
-            calAsset.purchasing.price /
-            calculateUsedDays(calAsset, deactivateDate)
-          );
+          usedDays = calculateUsedDays(calAsset, deactivateDate);
         } else {
-          return calAsset.purchasing.price / calculateUsedDays(calAsset);
+          usedDays = calculateUsedDays(calAsset);
         }
       }
     } else {
-      return calAsset.purchasing.price / calculateUsedDays(calAsset);
+      usedDays = calculateUsedDays(calAsset);
     }
+
+    if (usedDays === 0) return calAsset.purchasing.price;
+    return calAsset.purchasing.price / usedDays;
   };
 
   const calculateDailyPrice = () => {
-    const result =
-      asset.additionalFee.outcome.reduce(
-        (prev, curr) =>
-          prev +
-          calculatePerDayPrice(
-            curr,
-            asset.using ? undefined : asset.deactivateDate,
-          ),
-        0,
-      ) + calculatePerDayPrice(asset);
+    const additionalDailyPrice =
+      'additionalFee' in asset
+        ? asset.additionalFee.outcome.reduce(
+            (prev, curr) =>
+              prev +
+              calculatePerDayPrice(
+                curr,
+                asset.using ? undefined : asset.deactivateDate,
+              ),
+            0,
+          )
+        : 0;
+
+    const result = additionalDailyPrice + calculatePerDayPrice(asset);
 
     return result.toFixed(2);
   };
