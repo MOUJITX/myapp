@@ -11,6 +11,7 @@ interface Props {
   header?: ReactNode;
   shadow?: boolean;
   title?: string;
+  gap?: boolean;
   onPress?: () => void;
 }
 
@@ -23,6 +24,7 @@ export default (props: Props) => {
           styles.cellGroup,
           props.card ? styles.card : undefined,
           props.shadow ? commonStyles.shadow : undefined,
+          props.gap ? styles.gap : undefined,
           props.style,
         ]}
         onTouchEnd={props.onPress}>
@@ -41,6 +43,9 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyles.color.white,
     paddingHorizontal: commonStyles.spacings.medium,
     paddingVertical: commonStyles.spacings.small,
+  },
+  gap: {
+    gap: commonStyles.spacings.medium,
   },
   groupSpace: {
     marginVertical: commonStyles.spacings.smallX,

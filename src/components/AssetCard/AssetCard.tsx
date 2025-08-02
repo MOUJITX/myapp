@@ -13,6 +13,7 @@ import Tag, { TagShapeType } from '../basic/Tag';
 interface Props {
   asset: Asset | AssetBasic;
   onPress: () => void;
+  inCard?: boolean;
 }
 
 const AssetCard = (props: Props) => {
@@ -98,76 +99,78 @@ const AssetCard = (props: Props) => {
     return result.toFixed(2);
   };
 
+  const renderContainer = () => (
+    <View style={styles.container}>
+      {asset.imgs.length > 0 && (
+        <Image
+          img={asset.imgs[0]}
+          size={'medium'}
+          radius
+          preview
+          folder="assets"
+        />
+      )}
+      <View style={styles.informationMiddle}>
+        <View style={styles.informationLine}>
+          <Tag
+            label={asset.using ? '服役中' : '已退役'}
+            size={'small'}
+            sizeX={0.7}
+            type={asset.using ? 'success' : 'info'}
+            shape={TagShapeType.NoRadius}
+          />
+          <Text
+            style={styles.titleLabel}
+            numberOfLines={1}
+            ellipsizeMode="tail">
+            {asset.name}
+          </Text>
+        </View>
+
+        <View style={styles.informationLine}>
+          <Text numberOfLines={1}>¥{calculateTotalPrice()}</Text>
+          <Text numberOfLines={1}>¥{calculateDailyPrice()}/天</Text>
+        </View>
+
+        {asset.warranty.enabled && (
+          <Text style={styles.infoLabel} numberOfLines={1}>
+            {renderWarrantyTag()}
+          </Text>
+        )}
+      </View>
+      <View
+        style={[
+          styles.informationRight,
+          !asset.using && styles.grayBackground,
+        ]}>
+        <View style={styles.totalTitle}>
+          <Text
+            style={[styles.totalTitleLabel, !asset.using && styles.grayLabel]}>
+            {calculateUsedDays()}
+          </Text>
+          <Text
+            style={[
+              styles.totalSubtitleLabel,
+              !asset.using && styles.grayLabel,
+            ]}>
+            天
+          </Text>
+        </View>
+        <Text
+          style={[styles.totalSubtitleLabel, !asset.using && styles.grayLabel]}>
+          使用天数
+        </Text>
+      </View>
+    </View>
+  );
+
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={props.onPress}>
-      <CellGroup card>
-        <View style={styles.container}>
-          <Image
-            img={asset.imgs[0]}
-            size={'medium'}
-            radius
-            preview
-            folder="assets"
-          />
-          <View style={styles.informationMiddle}>
-            <View style={styles.informationLine}>
-              <Tag
-                label={asset.using ? '服役中' : '已退役'}
-                size={'small'}
-                sizeX={0.7}
-                type={asset.using ? 'success' : 'info'}
-                shape={TagShapeType.NoRadius}
-              />
-              <Text
-                style={styles.titleLabel}
-                numberOfLines={1}
-                ellipsizeMode="tail">
-                {asset.name}
-              </Text>
-            </View>
-
-            <View style={styles.informationLine}>
-              <Text numberOfLines={1}>¥{calculateTotalPrice()}</Text>
-              <Text numberOfLines={1}>¥{calculateDailyPrice()}/天</Text>
-            </View>
-
-            {asset.warranty.enabled && (
-              <Text style={styles.infoLabel} numberOfLines={1}>
-                {renderWarrantyTag()}
-              </Text>
-            )}
-          </View>
-          <View
-            style={[
-              styles.informationRight,
-              !asset.using && styles.grayBackground,
-            ]}>
-            <View style={styles.totalTitle}>
-              <Text
-                style={[
-                  styles.totalTitleLabel,
-                  !asset.using && styles.grayLabel,
-                ]}>
-                {calculateUsedDays()}
-              </Text>
-              <Text
-                style={[
-                  styles.totalSubtitleLabel,
-                  !asset.using && styles.grayLabel,
-                ]}>
-                天
-              </Text>
-            </View>
-            <Text
-              style={[
-                styles.totalSubtitleLabel,
-                !asset.using && styles.grayLabel,
-              ]}>
-              使用天数
-            </Text>
-          </View>
-        </View>
-      </CellGroup>
+      {props.inCard ? (
+        renderContainer()
+      ) : (
+        <CellGroup card>{renderContainer()}</CellGroup>
+      )}
     </TouchableOpacity>
   );
 };
