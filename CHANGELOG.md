@@ -1,5 +1,17 @@
 # Changelog
 
+# [0.5.0-beta.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.1-beta.0...v0.5.0-beta.0) (2025-08-02)
+
+
+### Bug Fixes
+
+* fix some asset add issues ([1ea6bbb](https://gitee.com/moujitx/com.moujitx.myapp/commits/1ea6bbb51f6316d0a2202ced5badd2cc50f50e2c))
+
+
+### Features
+
+* Refactor AssetAddScreen and enhance AssetCard with inCard prop ([77ab0c6](https://gitee.com/moujitx/com.moujitx.myapp/commits/77ab0c6518bf995ef01d9bcbecc576ff1fe33dfd))
+
 # [0.4.0](https://gitee.com/moujitx/com.moujitx.myapp/compare/v0.4.0-beta.7...v0.4.0) (2025-08-01)
 
 
