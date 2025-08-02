@@ -23,6 +23,7 @@ interface Props {
     label: string;
     onPress: () => void;
   };
+  onClose?: () => void;
 }
 
 export interface BottomSheetRef {
@@ -49,6 +50,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
     bottomSheetRef.current?.dismiss();
     Keyboard.dismiss();
     setIsOpen(false);
+    props.onClose?.();
   };
 
   const backdrop = () => {
@@ -80,6 +82,7 @@ const BottomSheet: ForwardRefRenderFunction<BottomSheetRef, Props> = (
     );
 
     return () => backHandler.remove(); // 清理事件监听器
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
