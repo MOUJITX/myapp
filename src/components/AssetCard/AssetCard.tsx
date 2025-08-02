@@ -167,7 +167,7 @@ const AssetCard = (props: Props) => {
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={props.onPress}>
       {props.inCard ? (
-        renderContainer()
+        <View style={styles.inCardContainer}>{renderContainer()}</View>
       ) : (
         <CellGroup card>{renderContainer()}</CellGroup>
       )}
@@ -185,6 +185,9 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyles.statusColor.info,
   },
   grayLabel: { color: commonStyles.color.white },
+  inCardContainer: {
+    marginBottom: commonStyles.spacings.small,
+  },
   infoLabel: {
     color: commonStyles.textColor.info,
     fontSize: commonStyles.fontSize.small,

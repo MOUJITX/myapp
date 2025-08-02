@@ -6,11 +6,12 @@ import AssetCard from '../../../components/AssetCard/AssetCard';
 import BottomSheet, {
   BottomSheetRef,
 } from '../../../components/basic/BottomSheet';
-import Button from '../../../components/basic/Button';
+import Button, { ButtonShapeType } from '../../../components/basic/Button';
 import CellGroup from '../../../components/basic/CellGroup';
 import DatetimePicker from '../../../components/basic/DatetimePicker';
 import ImageRow from '../../../components/basic/ImageRow';
 import NumberInput from '../../../components/basic/NumberInput';
+import SwipeRowList from '../../../components/basic/SwipeRowList';
 import Switch from '../../../components/basic/Switch';
 import TextInput from '../../../components/basic/TextInput';
 import TextInputCustom from '../../../components/basic/TextInputCustom';
@@ -68,7 +69,7 @@ const AssetAddForm = (props: Props) => {
   const [subAsset, setSubAsset] = useState<AssetBasic>();
 
   const handleValueChange = (key: keyof Asset, value: any) => {
-    const newAsset = { ...assetData, [key]: value };
+    const newAsset: Asset | AssetBasic = { ...assetData, [key]: value };
     setAssetData(newAsset);
     props.onChange?.(newAsset);
   };
@@ -97,6 +98,17 @@ const AssetAddForm = (props: Props) => {
     }
   };
 
+  const renderAdditionItem = ({ item }: { item: Asset }) => (
+    <AssetCard
+      asset={item}
+      onPress={() => {
+        setSubAsset(item);
+        additionRef.current?.openBottomSheet();
+      }}
+      inCard
+    />
+  );
+
   return (
     <>
       <CellGroup card title={'资产数据'}>
@@ -122,10 +134,7 @@ const AssetAddForm = (props: Props) => {
           inline
           label={'使用中'}
           value={assetData.using}
-          onValueChange={value => {
-            handleValueChange('using', value);
-            !value && handleValueChange('deactivateDate', undefined);
-          }}
+          onValueChange={value => handleValueChange('using', value)}
         />
         {!assetData.using && (
           <DatetimePicker
@@ -270,18 +279,29 @@ const AssetAddForm = (props: Props) => {
         )}
       </CellGroup>
       {!props.isAddition && 'additionalFee' in assetData && (
-        <CellGroup card title={'附加费用'} gap>
-          {assetData.additionalFee.outcome.map((addition, index) => (
-            <AssetCard
-              key={index}
-              asset={addition}
-              onPress={() => {
-                setSubAsset(addition);
-                additionRef.current?.openBottomSheet();
-              }}
-              inCard
-            />
-          ))}
+        <CellGroup card title={'附加费用'}>
+          <SwipeRowList
+            renderItem={renderAdditionItem}
+            data={assetData.additionalFee.outcome}
+            shape={ButtonShapeType.Circle}
+            size="large"
+            rightButton={[
+              {
+                label: '-',
+                type: 'danger',
+                onPress: (item: Asset) =>
+                  handleValueChange('additionalFee', {
+                    outcome: assetData.additionalFee.outcome.filter(
+                      addition => addition.uuid !== item.uuid,
+                    ),
+                  }),
+                pressConfirm: {
+                  title: t('common.delete.confirm.title'),
+                  description: t('common.delete.confirm.description'),
+                },
+              },
+            ]}
+          />
           <Button
             label={t('common.add.icon')}
             plain
@@ -292,19 +312,21 @@ const AssetAddForm = (props: Props) => {
           />
           <BottomSheet
             ref={additionRef}
-            headerRight={{
-              label: '+',
-              onPress: () => {
-                subAsset &&
-                  handleValueChange('additionalFee', {
-                    outcome: newOutcome(
-                      assetData.additionalFee.outcome,
-                      subAsset,
-                    ),
-                  });
-                additionRef.current?.closeBottomSheet();
-              },
-            }}
+            headerRight={
+              subAsset && {
+                label: '+',
+                onPress: () => {
+                  subAsset &&
+                    handleValueChange('additionalFee', {
+                      outcome: newOutcome(
+                        assetData.additionalFee.outcome,
+                        subAsset,
+                      ),
+                    });
+                  subAsset && additionRef.current?.closeBottomSheet();
+                },
+              }
+            }
             onClose={() => setSubAsset(undefined)}>
             <AssetAddForm
               createUser={props.createUser}
